@@ -4,6 +4,6 @@
  * Raúl Luján Domenech 50590584Z
  * Iker Sánchez Zaragoza 48825725Z
  * Rubén Calvo Mollón 48781497S
- * Paula
+ * Paula Soriano Muñoz 49740826Z
  * Santiago
- * López Arpa, Raúl 
+ * Raul López Arpa
