@@ -1,5 +1,8 @@
 .w3-teal, .w3-sidebar { 
         background-color: #ff3823 !important; 
+        
+  	position: relative;
+
     }
     .w3-bar-item {
         color: white !important;
@@ -79,4 +82,43 @@
 .title-logo {
     margin-right: 20px; /* Espacio a la derecha de la imagen */
     height: 100px; /* O la altura que desees para tu logo */
+}
+.keyboard-arrow-left-icon-1 {
+	width: 30px;
+	height: 27px;
+	background: #D8D9DB;
+}
+.rectangle-22 {
+	width: 30px;
+	height: 36px;
+	padding: 8px 8px 8px 8px;
+	background: #232323;
+	border-radius: 25px 25px 25px 25px;
+}
+/* Estilos para la flecha de cerrar */
+.flecha-cerrar {
+  /* Otras propiedades existentes */
+  /* Posicionamos el icono a la derecha de la barra lateral */
+  right: 15px;
+}
+
+.flecha-cerrar svg {
+  width: 20px;
+  height: 20px;
+  /* Centramos el SVG vertical y horizontalmente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flecha-cerrar path {
+  fill: white;
+}
+
+.flecha-cerrar circle {
+  fill: black;
+  /* Ajustamos el tamaño para centrar el path */
+  r: 9.5;
+  /* Posicionamos el círculo a la mitad del SVG */
+  transform: translateY(1px);
 }

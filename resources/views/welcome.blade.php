@@ -44,8 +44,10 @@
 
 </div>
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
-    <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
-    <a href="#" class="w3-bar-item w3-button">Noticias</a>
+    <!-- Botón de flecha para cerrar la barra lateral -->
+    <div class="flecha-cerrar" onclick="w3_close()">< </div>
+<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+   <a href="#" class="w3-bar-item w3-button">Noticias</a>
     <a href="#" class="w3-bar-item w3-button">Jugadores</a>
     <a href="#" class="w3-bar-item w3-button">Calendario</a>
     <a href="#" class="w3-bar-item w3-button">Clasificación</a>
@@ -64,6 +66,7 @@
             <h1 class="roboto-flex-title">LALIGA EA SPORTS 2023-24</h1>
         </div>
     </div>
+    @yield('content')
 </div>
 
 <script>
