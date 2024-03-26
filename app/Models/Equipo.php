@@ -39,4 +39,8 @@ class Equipo extends Model
     {
         return $this->belongsToMany(Titulo::class, 'equipo_titulo');
     }
+    public function noticias()
+    {
+        return $this->hasMany(Noticia::class);
+    }
 }

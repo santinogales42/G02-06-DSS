@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             EstJugadorsTableSeeder::class,
             PartidosTableSeeder::class,
             EstPartidosTableSeeder::class,
+            NoticiasTableSeeder::class,
             
             
             
