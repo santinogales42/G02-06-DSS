@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Liga</title>
+    <title>LALIGA EA SPORTS 2023-24</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <!-- Incluir archivo CSS personalizado -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hurricane&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -56,8 +59,9 @@
 <div id="main">
     <div class="w3-teal">
         <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
-        <div class="w3-container">
-            <h1>La Liga</h1>
+        <div class="title-container w3-container">
+            <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo">
+            <h1 class="roboto-flex-title">LALIGA EA SPORTS 2023-24</h1>
         </div>
     </div>
 </div>
