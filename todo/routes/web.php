@@ -14,8 +14,10 @@ use App\Http\Controllers\HomeController; // Importa el HomeController
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('layouts.app');
+});
 
+Route::get('/jugadores', function () {
+    return view('jugadores');
+});
