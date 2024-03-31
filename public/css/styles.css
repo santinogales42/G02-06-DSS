@@ -1,9 +1,14 @@
-.w3-teal, .w3-sidebar { 
+.w3-teal { 
         background-color: #ff3823 !important; 
         
   	position: relative;
 
     }
+    .w3-sidebar {
+     	background-color: #ff3823 !important; 
+            position: relative;
+            
+        }
     .w3-bar-item {
         color: white !important;
         transition: background-color 0.3s ease; /* Agrega una transición suave */
@@ -83,42 +88,51 @@
     margin-right: 20px; /* Espacio a la derecha de la imagen */
     height: 100px; /* O la altura que desees para tu logo */
 }
-.keyboard-arrow-left-icon-1 {
-	width: 30px;
-	height: 27px;
-	background: #D8D9DB;
-}
-.rectangle-22 {
-	width: 30px;
-	height: 36px;
-	padding: 8px 8px 8px 8px;
-	background: #232323;
-	border-radius: 25px 25px 25px 25px;
-}
-/* Estilos para la flecha de cerrar */
-.flecha-cerrar {
-  /* Otras propiedades existentes */
-  /* Posicionamos el icono a la derecha de la barra lateral */
-  right: 15px;
+
+
+
+
+.noticias-1 {
+  width: 132px;
+  height: 31px;
+  color: #EBEBEB;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.3;
+  text-align: left;
 }
 
-.flecha-cerrar svg {
-  width: 20px;
-  height: 20px;
-  /* Centramos el SVG vertical y horizontalmente */
+.rectangle-9 {
+  width: 243px;
+  height: 61px;
+  padding: 8px;
+  background: #00000000;
+  border-color: #EBEBEB;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 17px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.flecha-cerrar path {
-  fill: white;
+.rectangle-button {
+    display: inline-block !important;
+    padding: 10px 20px !important;
+    background-color: #ff3823 !important;
+    color: white !important;
+    font-size: 18px !important;
+    border: none !important;
+    border-radius: 20px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    margin: 4px 2px !important;
+    cursor: pointer !important;
+    transition-duration: 0.4s !important;
 }
 
-.flecha-cerrar circle {
-  fill: black;
-  /* Ajustamos el tamaño para centrar el path */
-  r: 9.5;
-  /* Posicionamos el círculo a la mitad del SVG */
-  transform: translateY(1px);
+.rectangle-button:hover {
+    background-color: white !important;
+    color: #ff3823 !important;
 }
+
