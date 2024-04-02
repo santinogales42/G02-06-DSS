@@ -1436,6 +1436,7 @@
 #53 /home/paula/Documentos/DSS/Práctica/P2/G02-06-DSS/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #54 {main}
 "} 
+<<<<<<< HEAD
 [2024-04-02 12:30:37] local.ERROR: Namespace declaration statement has to be the very first statement or after any declare call in the script {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Namespace declaration statement has to be the very first statement or after any declare call in the script at /home/iker/Escritorio/TETE/front/entregaDSS/G02-06-DSS/app/Http/Controllers/HomeController.php:4)
 [stacktrace]
 #0 {main}
@@ -1833,3 +1834,5 @@
 #50 /home/iker/Escritorio/TETE/front/entregaDSS/G02-06-DSS/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #51 {main}
 "} 
+=======
+>>>>>>> Lujan
