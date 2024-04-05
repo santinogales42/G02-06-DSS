@@ -46,38 +46,26 @@
 
 </div>
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
-    <!-- Botón de flecha para cerrar la barra lateral -->
-    <div class="row">
-        <div class="col-12">
+    
+   
             <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
-        </div>
-    </div>
-    <div class="row">
-    <div class="col-12">
+       
+    
         <a href="#" class="w3-bar-item rectangle-button">Noticias</a>
-    </div>
-</div>
-    <div class="row">
-        <div class="col-12">
+    
+    
             <a href="#" class="w3-bar-item w3-button">Jugadores</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
+        
+    
             <a href="#" class="w3-bar-item w3-button">Calendario</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
+       
+    
             <a href="#" class="w3-bar-item w3-button">Clasificación</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
+        
+    
             <a href="#" class="w3-bar-item w3-button">Favoritos</a>
-        </div>
-    </div>
-    <!-- Enlaces en la parte inferior de la barra lateral -->
+        
+   
     
         
         <div class="bottom-links">

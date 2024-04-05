@@ -8,14 +8,18 @@ use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\ClasificacionController;
 use App\Http\Controllers\FavoritosController;
-
+use App\Http\Controllers\JugadorController;
 
 Route::get('/', [HomeController::class, 'index']);
 
 
-Route::get('/jugadores', [JugadoresController::class, 'index'])->name('jugadores');
+
 Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
 Route::get('/calendario', [CalendarioController::class, 'index'])->name('calendario');
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos');
+Route::get('/jugadores', [JugadoresController::class, 'index']);
+Route::get('/jugadores/{id}', [JugadoresController::class, 'show'])->name('jugadores.show');
+
+
 

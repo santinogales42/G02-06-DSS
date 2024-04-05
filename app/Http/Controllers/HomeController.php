@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Http\Controllers;
@@ -11,7 +10,6 @@ class HomeController extends Controller
     public function index()
     {
         // Retorna la vista que hayas creado, ej. "home.blade.php"
-        return view('layout');
+        return view('welcome');
     }
 }
-

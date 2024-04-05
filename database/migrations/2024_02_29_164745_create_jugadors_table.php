@@ -20,6 +20,9 @@ return new class extends Migration
 	    $table->string('nacionalidad')->default('no tiene');;
 	    $table->integer('edad')->default(0);;
         $table->foreignId('equipo_id')->constrained('equipos')->onDelete('cascade');
+        $table->string('foto')->nullable(); 
+            $table->text('biografia')->nullable(); 
+        
 	    $table->timestamps();
         });
     }
