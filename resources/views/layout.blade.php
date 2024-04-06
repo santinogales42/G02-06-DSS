@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hurricane&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    
 
 </head>
 
@@ -54,7 +55,7 @@
     </div>
     <div class="row">
     <div class="col-12">
-        <a href="#" class="w3-bar-item rectangle-button">Noticias</a>
+        <a href="#" class="w3-bar-item w3-button">Noticias</a>
     </div>
 </div>
     <div class="row">
@@ -90,16 +91,38 @@
         
     
 </div>
+
+
 <div id="main">
-    <div class="w3-teal">
+    <div class="w3-teal" style="display: flex; align-items: center; padding: 0 15px;">
         <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
-        <div class="title-container w3-container">
-            <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo">
-            <h1 class="roboto-flex-title">LALIGA EA SPORTS 2023-24</h1>
+        <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo" style="border: 2px solid red; margin-right: 20px;">
+        <h1 class="roboto-flex-title" style="margin: 0 auto;">LALIGA EA SPORTS 2023-24</h1>
+        @if($isUserLoggedIn)
+        <div class="navbar-text" style="display: flex; align-items: center;">
+            <span>{{ $userName }}</span>
+            <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" style="width: 30px; height: 30px; margin-left: 10px;">
         </div>
+        @else
+        <div class="navbar-text" style="display: flex; align-items: center;">
+            <button type="button" class="btn btn-outline-light ml-auto">Registrarse</button>
+            <button type="button" class="btn btn-light ml-2">Iniciar Sesión</button>
+        </div>
+        @endif
     </div>
-    @yield('content')
+    <div class="content">
+        @yield('content')
+    </div>
 </div>
+
+
+
+
+
+
+
+
+
 
 <script>
     function w3_open() {
@@ -116,6 +139,4 @@
     }
 </script>
 
-</body>
 
-</html>

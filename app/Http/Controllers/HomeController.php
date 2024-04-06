@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    // Método para responder a la ruta "/"
     public function index()
     {
-        // Retorna la vista que hayas creado, ej. "home.blade.php"
-        return view('welcome');
+        // Verifica si el usuario está logueado y obtiene su nombre
+        $isUserLoggedIn = Auth::check();
+        $userName = $isUserLoggedIn ? Auth::user()->nombre : null;
+
+        // Retorna la vista y pasa las variables 'isUserLoggedIn' y 'userName'
+        return view('layout', ['isUserLoggedIn' => $isUserLoggedIn, 'userName' => $userName]);
     }
 }
+
