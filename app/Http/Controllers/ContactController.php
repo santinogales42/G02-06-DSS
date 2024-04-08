@@ -30,7 +30,7 @@ class ContactController extends Controller
         $mensaje = $request->input('mensaje');
 
         // Construir el mensaje completo
-        $mensajeCompleto = "Nombre: $nombre\nCorreo: $correo\nMensaje: $mensaje\n\n";
+        $mensajeCompleto = "Nombre: $nombre\nCorreo: $correo\nMensaje: $mensaje\n";
 
         // Guardar el mensaje en un archivo de texto
         Storage::disk('local')->append('mensajes.txt', $mensajeCompleto);
