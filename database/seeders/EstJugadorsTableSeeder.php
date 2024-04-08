@@ -23,6 +23,13 @@ class EstJugadorsTableSeeder extends Seeder
             'rojas'=>'6',
             'jugador_id'=>'1'
         ]);
+        Est_jugador::insert([
+            'goles'=>'2',
+            'asistencias'=>'1',
+            'amarillas'=>'6',
+            'rojas'=>'10',
+            'jugador_id'=>'2'
+        ]);
         
     }
 }

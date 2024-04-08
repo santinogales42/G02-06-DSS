@@ -17,7 +17,7 @@ class EquiposTableSeeder extends Seeder
     {
         Equipo::insert([
             [
-                'nombre' => 'Equipo A',
+                'nombre' => 'FC BARCELONA',
                 'ganados' => 3,
                 'empatados' => 2,
                 'perdidos' => 1,
@@ -28,7 +28,7 @@ class EquiposTableSeeder extends Seeder
                 'liga_id'=>'1'
             ],
             [
-                'nombre' => 'Equipo B',
+                'nombre' => 'REAL MADRID',
                 'ganados' => 2,
                 'empatados' => 3,
                 'perdidos' => 1,
