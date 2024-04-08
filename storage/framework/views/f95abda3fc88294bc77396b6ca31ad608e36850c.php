@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hurricane&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -44,18 +46,50 @@
 
 </div>
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
-    <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
-    <a href="#" class="w3-bar-item w3-button">Noticias</a>
-    <a href="#" class="w3-bar-item w3-button">Jugadores</a>
-    <a href="#" class="w3-bar-item w3-button">Calendario</a>
-    <a href="#" class="w3-bar-item w3-button">Clasificación</a>
-    <a href="#" class="w3-bar-item w3-button">Favoritos</a>
-    <div class="bottom-links">
-        <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
-        <a href="#" class="w3-bar-item w3-button">Cerrar sesión</a>
+    <!-- Botón de flecha para cerrar la barra lateral -->
+    <div class="row">
+        <div class="col-12">
+            <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-12">
+        <a href="#" class="w3-bar-item rectangle-button">Noticias</a>
     </div>
 </div>
-
+    <div class="row">
+        <div class="col-12">
+            <a href="#" class="w3-bar-item w3-button">Jugadores</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <a href="#" class="w3-bar-item w3-button">Calendario</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <a href="#" class="w3-bar-item w3-button">Clasificación</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <a href="#" class="w3-bar-item w3-button">Favoritos</a>
+        </div>
+    </div>
+    <!-- Enlaces en la parte inferior de la barra lateral -->
+    
+        
+        <div class="bottom-links">
+            <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
+             <a href="#" class="w3-bar-item w3-button">Cerrar sesión</a>
+            </div>
+       
+    
+        
+        
+    
+</div>
 <div id="main">
     <div class="w3-teal">
         <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
@@ -64,6 +98,7 @@
             <h1 class="roboto-flex-title">LALIGA EA SPORTS 2023-24</h1>
         </div>
     </div>
+    <?php echo $__env->yieldContent('content'); ?>
 </div>
 
 <script>
@@ -84,4 +119,4 @@
 </body>
 
 </html>
-<?php /**PATH /home/raul/Escritorio/nuevo/todo/resources/views/welcome.blade.php ENDPATH**/ ?>
+<?php /**PATH /home/iker/Escritorio/TETE/front/entregaDSS/G02-06-DSS/resources/views/layout.blade.php ENDPATH**/ ?>
