@@ -33,6 +33,29 @@
     color: white !important; /* Color del texto (ícono) original */
     transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para ambos, fondo y color del texto */
 }
+/* styles.css */
+.news-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.news-item {
+    margin-bottom: 20px;
+}
+
+.news-item img {
+    width: 100%;
+    height: auto;
+}
+
+.classification-table {
+    margin-top: 20px;
+}
+
+.classification-table table {
+    width: 100%;
+}
+
 
 /* Estilos para el hover del botón de la barra lateral */
 #openNav:hover {

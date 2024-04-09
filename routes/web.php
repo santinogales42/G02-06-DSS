@@ -10,7 +10,8 @@ use App\Http\Controllers\ClasificacionController;
 use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\AdminController;
-Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 
