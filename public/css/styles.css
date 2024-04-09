@@ -58,7 +58,7 @@ color: white !important; /* Establece el color de la fuente a blanco */
     text-align: left; /* Centra el título */
     font-size: 50px; /* Aumenta el tamaño de la fuente */
     margin-top: 1px; /* Ajusta el margen superior según necesites */
-    
+}
 
 /* Estilos para el hover del botón de la barra lateral */
 #openNav {
