@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LALIGA EA SPORTS 2023-24</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('css/styles.css')); ?>">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
 
 <body>
 <div class="banner">
-  <img src="{{ asset('images/tims.png') }}" alt="Banner" usemap="#equiposMap" style="width:100%;">
+  <img src="<?php echo e(asset('images/tims.png')); ?>" alt="Banner" usemap="#equiposMap" style="width:100%;">
   <map name="equiposMap">
     <area shape="rect" coords="0,0,92,47" href="https://www.athletic-club.eus/" alt="AthleticClub" target="_blank">
     <area shape="rect" coords="92,0,184,47" href="https://www.atleticodemadrid.com/" alt="AtleticoMadrid" target="_blank">
@@ -65,7 +65,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <a href="{{ route('calendario') }}" class="w3-bar-item w3-button">Calendario</a>
+            <a href="#" class="w3-bar-item w3-button">Calendario</a>
         </div>
     </div>
     <div class="row">
@@ -96,22 +96,22 @@
 <div id="main">
     <div class="w3-teal" style="display: flex; align-items: center; padding: 0 15px;">
         <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
-        <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo" style="border: 2px solid red; margin-right: 20px;">
+        <img src="<?php echo e(asset('images/ligaicono.png')); ?>" alt="Logo La Liga" class="title-logo" style="border: 2px solid red; margin-right: 20px;">
         <h1 class="roboto-flex-title" style="margin: 0 auto;">LALIGA EA SPORTS 2023-24</h1>
-        @if($isUserLoggedIn)
+        <?php if($isUserLoggedIn): ?>
         <div class="navbar-text" style="display: flex; align-items: center;">
-            <span>{{ $userName }}</span>
-            <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" style="width: 30px; height: 30px; margin-left: 10px;">
+            <span><?php echo e($userName); ?></span>
+            <img src="<?php echo e(asset('images/usuario_r.png')); ?>" alt="Perfil" style="width: 30px; height: 30px; margin-left: 10px;">
         </div>
-        @else
+        <?php else: ?>
         <div class="navbar-text" style="display: flex; align-items: center;">
             <button type="button" class="btn btn-outline-light ml-auto">Registrarse</button>
             <button type="button" class="btn btn-light ml-2">Iniciar Sesión</button>
         </div>
-        @endif
+        <?php endif; ?>
     </div>
     <div class="content">
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
     </div>
 </div>
 
@@ -140,3 +140,4 @@
 </script>
 
 
+<?php /**PATH /home/usuario/Escritorio/DSS/G02-06-DSS/resources/views/layout.blade.php ENDPATH**/ ?>

@@ -1,18 +1,37 @@
 .w3-teal { 
-        background-color: #ff3823 !important; 
-        
+    background-color: #ff3823 !important;   
   	position: relative;
+}
+    
+.w3-sidebar {
+    background-color: #ff3823 !important; 
+        position: relative;
+        
+    }
 
+.w3-bar-item, .rectangle-button {
+font-size: 20px !important; /* Aumenta el tamaño de la fuente */
+padding: 12px 20px !important; /* Ajusta el padding para mejor visualización y clickeabilidad */
+color: white !important; /* Establece el color de la fuente a blanco */
+}
+
+/* Si deseas asegurarte de que todos los enlaces tengan texto blanco, incluido el botón de cerrar, puedes mantener esta regla general. Sin embargo, si el botón de cerrar ya es blanco y deseas mantenerlo así, este cambio no afectará ese estilo. */
+
+/* Para mantener la coherencia, asegúrate de que el estado hover también refleje tu preferencia de diseño */
+.w3-bar-item:hover, .rectangle-button:hover {
+    background-color: white !important;
+    color: #ff3823 !important; /* Asegura que el texto cambie a color contrastante al pasar el mouse */
+}
+
+/* Considera añadir media queries si necesitas ajustar para dispositivos móviles */
+@media (max-width: 600px) {
+    .w3-bar-item, .rectangle-button {
+        font-size: 18px !important; /* Tamaño de fuente más pequeño para pantallas pequeñas */
+        padding: 10px 15px !important; /* Padding reducido para pantallas pequeñas */
+        color: white !important; /* Mantiene el color del texto blanco */
     }
-    .w3-sidebar {
-     	background-color: #ff3823 !important; 
-            position: relative;
-            
-        }
-    .w3-bar-item {
-        color: white !important;
-        transition: background-color 0.3s ease; /* Agrega una transición suave */
-    }
+}
+
     /* Nuevo estilo para el contenedor de la barra lateral */
     #mySidebar {
         display: flex;
@@ -33,14 +52,7 @@
         color: #ff3823 !important; /* Cambia el color del texto para mantener contraste */
     }
     /* Cambia el color del botón al hacer hover y cuando está activo */
-    #openNav:hover, #openNav:focus {
-        color: white !important;
-    }
-    #openNav {
-    background-color: #ff3823; /* Color de fondo original */
-    color: white !important; /* Color del texto (ícono) original */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para ambos, fondo y color del texto */
-}
+   
 
 .w3-container h1 {
     text-align: left; /* Centra el título */
@@ -49,9 +61,16 @@
 }
 
 /* Estilos para el hover del botón de la barra lateral */
+#openNav {
+    background-color: #ff3823; /* Color de fondo original: rojo */
+    color: white !important; /* Color del texto original: blanco */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+
+/* Estilos para el hover del botón de la barra lateral */
 #openNav:hover {
-    background-color: white !important; /* Cambio a fondo blanco */
-    color: #ff3823 !important; /* Cambio el color del texto a rojo */
+    background-color: white !important; /* Fondo blanco al hacer hover */
+    color: #ff3823 !important; /* Texto rojo al hacer hover */
 }
 /* Roboto Flex con peso 400 */
 .roboto-flex-title {
@@ -135,8 +154,6 @@
     background-color: white !important;
     color: #ff3823 !important;
 }
-
-
 .team-primary {
     background-color: #007bff !important;
 }

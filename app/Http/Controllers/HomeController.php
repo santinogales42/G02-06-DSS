@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Noticia; // Corregido para que coincida con el nombre de tu modelo
+use App\Models\Equipo; // Asumiendo que también tienes un modelo Team
 
 class HomeController extends Controller
 {
-    // Método para responder a la ruta "/"
     public function index()
     {
-        // Retorna la vista que hayas creado, ej. "home.blade.php"
-        return view('welcome');
+        $news = Noticia::all(); // Utiliza el modelo Noticia correctamente
+        $classification = Equipo::orderBy('puntos', 'desc')->get(); // Suponiendo un modelo Team
+
+        return view('home', [
+            'news' => $news,
+            'classification' => $classification
+        ]);
     }
 }
+
