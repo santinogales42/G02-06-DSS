@@ -59,3 +59,6 @@ Route::post('/admin/jugadores', [JugadorController::class, 'store'])->name('juga
 // Añade más rutas para las otras entidades de forma similar
 
 Route::get('/adminjugadores', [AdminJugadoresController::class, 'index']);
+Route::post('/adminjugadores/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
+Route::post('/adminjugadores/eliminar-masa', [AdminJugadoresController::class, 'eliminarMasa']);
+Route::post('/adminjugadores/crear', [AdminJugadoresController::class, 'crear']);
