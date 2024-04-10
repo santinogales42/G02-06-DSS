@@ -170,6 +170,7 @@ color: white !important; /* Establece el color de la fuente a blanco */
     background-color: #dc3545 !important;
 }
 
+
 .noticia {
     border: 2px solid #ccc; /* Borde alrededor de cada noticia */
     border-radius: 10px; /* Bordes redondeados */
@@ -193,6 +194,7 @@ color: white !important; /* Establece el color de la fuente a blanco */
     margin-left: 10px; /* Espacio entre la imagen y el contenido */
     width: 280px; /* Ancho de la imagen */
     border-radius: 5px; /* Bordes redondeados */
+
 }
 
 .noticia p {
@@ -207,16 +209,18 @@ color: white !important; /* Establece el color de la fuente a blanco */
 
 .noticia .descripcion {
     text-align: justify; /* Justifica el texto de la descripción */
+
     padding-bottom: 5px; /* Espacio inferior para separar la línea de la descripción */
 }
 
 .noticia-info-extra {
     display: flex; /* Utilizar flexbox */
-    align-items: baseline; /* Alinear los elementos en la línea base */
+    align-items: end; /* Alinear los elementos en la línea base */
+    position: absolute; /* Posicionamiento absoluto */
 }
 
 .noticia-info-extra p {
-    margin-right: 5px; /* Añadir espacio entre el autor y la fecha */
+    display: inline; /* Alinear elementos en la misma línea */
     font-size: 0.8em; /* Tamaño de letra más pequeño */
     color: #888; /* Color gris */
 }
