@@ -10,12 +10,14 @@ use App\Http\Controllers\ClasificacionController;
 use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\JugadorController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {
+    return view('layout');
+});
 
 
 
 Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
-Route::get('/calendario', [CalendarioController::class, 'index'])->name('calendario');
+Route::get('/calendario/{jornada?}', [CalendarioController::class, 'index'])->name('calendario');
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos');
 Route::get('/contacto', 'App\Http\Controllers\ContactController@show')->name('contacto');
