@@ -10,6 +10,7 @@ use App\Http\Controllers\ClasificacionController;
 use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminJugadoresController;
 Route::get('/', [HomeController::class, 'index']);
 
 
@@ -57,3 +58,4 @@ Route::post('/admin/jugadores', [JugadorController::class, 'store'])->name('juga
 
 // Añade más rutas para las otras entidades de forma similar
 
+Route::get('/adminjugadores', [AdminJugadoresController::class, 'index']);

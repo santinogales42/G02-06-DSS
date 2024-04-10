@@ -78,6 +78,13 @@
             <a href="#" class="w3-bar-item w3-button">Favoritos</a>
         </div>
     </div>
+    <div class="w3-dropdown-hover w3-hover-white">
+    <button class="w3-button w3-bar-item w3-hover-white">Admin <i class="fa fa-caret-down w3-hover-white"></i></button>
+    <div class="w3-dropdown-content w3-bar-block ">
+      <a href="#" class="w3-bar-item w3-button w3-red">Jugadores</a>
+      <a href="#" class="w3-bar-item w3-button w3-red">Usuarios</a>
+    </div>
+  </div>
     <!-- Enlaces en la parte inferior de la barra lateral -->
     
         
