@@ -169,3 +169,59 @@ color: white !important; /* Establece el color de la fuente a blanco */
 .team-danger {
     background-color: #dc3545 !important;
 }
+
+.noticia {
+    border: 2px solid #ccc; /* Borde alrededor de cada noticia */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px; /* Espacio interno */
+    margin-bottom: 20px; /* Margen inferior para separar noticias */
+    overflow: hidden; /* Para limpiar el float de la imagen */
+}
+
+.noticia h2 {
+    margin-top: 0; /* Elimina el margen superior del título */
+}
+
+.noticia h2 a{
+    color: red;
+}
+
+.noticia img {
+    float: right; /* Mover la imagen a la derecha */
+    max-height: 100%;
+    float: right; /* Mover la imagen a la derecha */
+    margin-left: 10px; /* Espacio entre la imagen y el contenido */
+    width: 280px; /* Ancho de la imagen */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.noticia p {
+    margin: 0; /* Elimina los márgenes de los párrafos */
+    font-size: 1.1em; /* Tamaño de letra para el contenido de la noticia */
+}
+
+.noticia p:last-child {
+    font-size: 0.8em; /* Tamaño de letra más pequeño para el autor y la fecha */
+    color: #888; /* Color gris para el autor y la fecha */
+}
+
+.noticia .descripcion {
+    text-align: justify; /* Justifica el texto de la descripción */
+    padding-bottom: 5px; /* Espacio inferior para separar la línea de la descripción */
+}
+
+.noticia-info-extra {
+    display: flex; /* Utilizar flexbox */
+    align-items: baseline; /* Alinear los elementos en la línea base */
+}
+
+.noticia-info-extra p {
+    margin-right: 5px; /* Añadir espacio entre el autor y la fecha */
+    font-size: 0.8em; /* Tamaño de letra más pequeño */
+    color: #888; /* Color gris */
+}
+
+.noticia-info-extra .noticia-autor::after {
+    content: " - "; /* Agregar el guion como contenido después del autor */
+}
+
