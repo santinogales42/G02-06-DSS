@@ -64,7 +64,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <a href="#" class="w3-bar-item w3-button">Calendario</a>
+            <a href="{{ route('calendario') }}" class="w3-bar-item w3-button">Calendario</a>
         </div>
     </div>
     <div class="row">
