@@ -62,3 +62,5 @@ Route::get('/adminjugadores', [AdminJugadoresController::class, 'index']);
 Route::post('/adminjugadores/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
 Route::post('/adminjugadores/eliminar-masa', [AdminJugadoresController::class, 'eliminarMasa']);
 Route::post('/adminjugadores/crear', [AdminJugadoresController::class, 'crear']);
+Route::get('/adminjugadores/datos/{id}', [AdminJugadoresController::class, 'getDatos'])->name('jugadores.getDatos');
+Route::post('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');

@@ -25,6 +25,53 @@
         </div>
     </div>
 </div>
+
+<!-- Modal de Edición -->
+<div class="modal fade" id="editJugadorModal" tabindex="-1" aria-labelledby="editJugadorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editJugadorModalLabel">Editar Jugador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario de edición -->
+                <form id="editarJugadorForm">
+                    <input type="hidden" id="edit_jugador_id" name="jugador_id">
+                    <div class="mb-3">
+                        <label for="edit_nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="edit_nombre" name="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_posicion" class="form-label">Posición:</label>
+                        <input type="text" class="form-control" id="edit_posicion" name="posicion">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_nacionalidad" class="form-label">Nacionalidad:</label>
+                        <input type="text" class="form-control" id="edit_nacionalidad" name="nacionalidad">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_edad" class="form-label">Edad:</label>
+                        <input type="number" class="form-control" id="edit_edad" name="edad">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_equipo_id" class="form-label">ID del Equipo:</label>
+                        <input type="number" class="form-control" id="edit_equipo_id" name="equipo_id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_foto" class="form-label">Foto (URL):</label>
+                        <input type="text" class="form-control" id="edit_foto" name="foto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_biografia" class="form-label">Biografía:</label>
+                        <textarea class="form-control" id="edit_biografia" name="biografia"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Actualizar Jugador</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -33,31 +80,36 @@
                     Crear Nuevo Jugador
                 </div>
                 <div class="card-body">
-                    <form id="crearJugadorForm">
-                    <div class="mb-3">
-    <label for="posicion" class="form-label">Posición:</label>
-    <input type="text" class="form-control" id="posicion" name="posicion">
-</div>
-<div class="mb-3">
-    <label for="nacionalidad" class="form-label">Nacionalidad:</label>
-    <input type="text" class="form-control" id="nacionalidad" name="nacionalidad">
-</div>
-<div class="mb-3">
-    <label for="edad" class="form-label">Edad:</label>
-    <input type="number" class="form-control" id="edad" name="edad">
-</div>
-<div class="mb-3">
-    <label for="equipo_id" class="form-label">ID del Equipo:</label>
-    <input type="number" class="form-control" id="equipo_id" name="equipo_id">
-</div>
-<div class="mb-3">
-    <label for="foto" class="form-label">Foto (URL):</label>
-    <input type="text" class="form-control" id="foto" name="foto">
-</div>
-<div class="mb-3">
-    <label for="biografia" class="form-label">Biografía:</label>
-    <textarea class="form-control" id="biografia" name="biografia"></textarea>
-</div>
+<form id="crearJugadorForm">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="posicion" class="form-label">Posición:</label>
+        <input type="text" class="form-control" id="posicion" name="posicion">
+    </div>
+    <div class="mb-3">
+        <label for="nacionalidad" class="form-label">Nacionalidad:</label>
+        <input type="text" class="form-control" id="nacionalidad" name="nacionalidad">
+    </div>
+    <div class="mb-3">
+        <label for="edad" class="form-label">Edad:</label>
+        <input type="number" class="form-control" id="edad" name="edad">
+    </div>
+    <div class="mb-3">
+        <label for="equipo_id" class="form-label">ID del Equipo:</label>
+        <input type="number" class="form-control" id="equipo_id" name="equipo_id">
+    </div>
+    <div class="mb-3">
+        <label for="foto" class="form-label">Foto (URL):</label>
+        <input type="text" class="form-control" id="foto" name="foto">
+    </div>
+    <div class="mb-3">
+        <label for="biografia" class="form-label">Biografía:</label>
+        <textarea class="form-control" id="biografia" name="biografia"></textarea>
+    </div>
 
                         <!-- Añade más campos según necesites -->
                         <button type="submit" class="btn btn-primary">Crear Jugador</button>
@@ -73,7 +125,48 @@
 document.addEventListener('DOMContentLoaded', function() {
     fetchData(); // Carga inicial de datos
 });
+function openEditModal(jugadorId) {
+    fetch(`/adminjugadores/datos/${jugadorId}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP status ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById('edit_jugador_id').value = data.id;
+        document.getElementById('edit_nombre').value = data.nombre || '';
+        document.getElementById('edit_posicion').value = data.posicion || '';
+        document.getElementById('edit_nacionalidad').value = data.nacionalidad || '';
+        document.getElementById('edit_edad').value = data.edad || 0;
+        document.getElementById('edit_equipo_id').value = data.equipo_id || '';
+        document.getElementById('edit_foto').value = data.foto || '';
+        document.getElementById('edit_biografia').value = data.biografia || '';
+        $('#editJugadorModal').modal('show');
+    })
+    .catch(error => console.error('Error:', error));
+}
 
+document.getElementById('editarJugadorForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const jugadorId = document.getElementById('edit_jugador_id').value;
+    const formData = new FormData(this);
+    fetch(`/adminjugadores/actualizar/${jugadorId}`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        $('#editJugadorModal').modal('hide');
+        fetchData(); // Asegúrate de que esta función ya esté definida para recargar los datos
+    })
+    .catch(error => console.error('Error:', error));
+});
 function fetchData(page = 1) {
     console.log("fetchData called for page: " + page); // Agrega esta línea para el diagnóstico
     var search = document.getElementById('search').value;
@@ -90,15 +183,14 @@ function fetchData(page = 1) {
         var tableBody = document.getElementById('jugadores-list');
         tableBody.innerHTML = '';
         data.data.forEach(jugador => {
-        var row = `<tr>
-                    <td><input type="checkbox" class="jugador-checkbox" value="${jugador.id}"></td>
-                    <td>${jugador.id}</td>
-                    <td>${jugador.nombre}</td>
-                    <td>
-                        <a href="/adminjugadores/editar/${jugador.id}" class="btn btn-primary">Editar</a>
-                        <button class="btn btn-danger" onclick="deleteJugador(${jugador.id})">Eliminar</button>
-                    </td>
-               </tr>`;
+    var row = `<tr>
+                <td>${jugador.id}</td>
+                <td>${jugador.nombre}</td>
+                <td>
+                    <button onclick="openEditModal(${jugador.id})" class="btn btn-primary">Editar</button>
+                    <button class="btn btn-danger" onclick="deleteJugador(${jugador.id})">Eliminar</button>
+                </td>
+            </tr>`;
     tableBody.innerHTML += row;
 });
 attachCheckboxEvents(); // Adjuntar eventos a los nuevos checkboxes

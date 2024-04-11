@@ -73,6 +73,28 @@ public function crear(Request $request)
         return response()->json(['message' => 'Error al crear jugador: ' . $e->getMessage()], 500);
     }
 }
+public function getDatos($id)
+{
+    $jugador = Jugador::findOrFail($id);
+    return response()->json($jugador);
+}
+
+public function actualizar(Request $request, $id)
+{
+    $jugador = Jugador::findOrFail($id);
+    $validatedData = $request->validate([
+        'nombre' => 'required|string|max:255',
+        'posicion' => 'string|max:255|nullable',
+        'nacionalidad' => 'string|max:255|nullable',
+        'edad' => 'integer|nullable',
+        'equipo_id' => 'required|exists:equipos,id',
+        'foto' => 'string|nullable',
+        'biografia' => 'string|nullable',
+    ]);
+
+    $jugador->update($validatedData);
+    return response()->json(['message' => 'Jugador actualizado con éxito']);
+}
 
 
 }
