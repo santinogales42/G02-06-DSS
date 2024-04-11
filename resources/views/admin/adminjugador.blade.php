@@ -11,6 +11,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th></th>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Acciones</th>
@@ -184,6 +185,7 @@ function fetchData(page = 1) {
         tableBody.innerHTML = '';
         data.data.forEach(jugador => {
     var row = `<tr>
+                <td><input type="checkbox" class="jugador-checkbox" value="${jugador.id}"></td>
                 <td>${jugador.id}</td>
                 <td>${jugador.nombre}</td>
                 <td>
