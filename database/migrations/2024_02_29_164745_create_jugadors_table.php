@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('jugadors', function (Blueprint $table) {
             $table->id();
-	    $table->string('nombre');
-	    $table->string('posicion')->default('no tiene');
-	    $table->string('nacionalidad')->default('no tiene');;
-	    $table->integer('edad')->default(0);;
-        $table->foreignId('equipo_id')->constrained('equipos')->onDelete('cascade');
-        $table->string('foto')->nullable(); 
-            $table->text('biografia')->nullable(); 
-        
-	    $table->timestamps();
+            $table->string('nombre');
+            $table->string('posicion')->default('no tiene');
+            $table->string('nacionalidad')->default('no tiene');
+            $table->integer('edad')->default(0);
+            $table->foreignId('equipo_id')->constrained('equipos')->onDelete('cascade');
+            $table->string('foto')->nullable();
+            $table->text('biografia')->nullable();
+            $table->timestamps();
         });
+        
     }
 
     /**

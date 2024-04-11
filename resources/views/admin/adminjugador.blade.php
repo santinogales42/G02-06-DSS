@@ -6,6 +6,8 @@
     
     <input type="text" id="search" placeholder="Buscar jugadores..." onkeyup="fetchData()" class="form-control mb-3">
     <button id="bulk-delete" class="btn btn-danger" onclick="deleteSelectedJugadores()">Eliminar Seleccionados</button>
+    <button id="delete-all" class="btn btn-danger" onclick="deleteAllJugadores()">Eliminar Todos los Jugadores</button>
+    <button class="btn btn-primary" onclick="insertarJugadores()">Insertar Jugadores Aleatorios (Para pruebas)</button>
 
     <div class="table-responsive">
         <table class="table">
@@ -313,7 +315,38 @@ document.getElementById('crearJugadorForm').addEventListener('submit', function(
     })
     .catch(error => console.error('Error:', error));
 });
-
+function deleteAllJugadores() {
+    if (confirm('¿Estás seguro de querer eliminar TODOS los jugadores y sus estadísticas? Esta acción es irreversible.')) {
+        fetch('/adminjugadores/eliminar-todos', {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            fetchData(); // Recargar los datos después de eliminar
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+function insertarJugadores() {
+    fetch('/admin/insertar-jugadores', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(data => alert(data.message))
+    
+    .catch(error => console.error('Error:', error));
+    fetchData();
+}
 </script>
 
 @endsection

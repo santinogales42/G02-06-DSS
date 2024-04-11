@@ -49,6 +49,9 @@
                 <!-- Asumiendo que vas a llenar esto dinámicamente con fetchData() -->
             </tbody>
         </table>
+        <div id="pagination-links" class="d-flex justify-content-center">
+    <!-- Los enlaces de paginación se cargarán aquí -->
+</div>
     </div>
 </div>
 
@@ -72,47 +75,59 @@ function filterByTeam(teamId) {
     selectedTeamId = teamId;
     fetchData();
 }
-function fetchData() {
+function fetchData(page = 1) {
     var search = document.getElementById('search').value;
-    var url = `/jugadores?search=${search}&orderField=${orderField}&orderDirection=${orderDirection}&teamId=${selectedTeamId}`;
-    console.log("URL:", url); // Agregar esta línea para imprimir la URL en la consola
-    console.log("orderField:", orderField); // Agregar esta línea para imprimir orderField en la consola
-    console.log("orderDirection:", orderDirection); // Agregar esta línea para imprimir orderDirection en la consola
+    var url = `/jugadores?search=${search}&orderField=${orderField}&orderDirection=${orderDirection}&page=${page}`;
+    console.log("Fetching data from URL:", url); // Verifica la URL solicitada
+
     fetch(url, {
         method: 'GET',
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
         },
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
+    .then(response => response.json())
+    .then(data => {
+        updateTable(data); // Asegúrate de que esta función maneja correctamente los datos y los enlaces
+        attachClickEventToPaginationLinks(); // Re-attach click events to new pagination links
     })
-    .then(data => updateTable(data))
     .catch(error => console.error('Error:', error));
 }
 
 
+
 function updateTable(data) {
     var tableBody = document.getElementById('jugadores-list');
-    tableBody.innerHTML = ''; // Limpiar la tabla antes de añadir nuevos resultados
+    var paginationDiv = document.getElementById('pagination-links');
 
-    data.forEach(jugador => {
+    tableBody.innerHTML = ''; // Limpiar la tabla
+    data.data.forEach(jugador => {
         var row = `<tr>
-                    <td><a href="/jugadores/${jugador.id}">${jugador.nombre}</a></td>
-                    <td>${jugador.posicion}</td>
-                    <td>${jugador.edad}</td>
-                    <td>${jugador.estadisticas ? jugador.estadisticas.goles : '0'}</td>
-                    <td>${jugador.estadisticas ? jugador.estadisticas.asistencias : '0'}</td>
-                    <td>${jugador.estadisticas ? jugador.estadisticas.amarillas : '0'}</td>
-                    <td>${jugador.estadisticas ? jugador.estadisticas.rojas : '0'}</td>
-                    <td>${jugador.equipo ? jugador.equipo.nombre : 'Sin equipo'}</td>
-                   </tr>`;
+            <td><a href="/jugadores/${jugador.id}">${jugador.nombre}</a></td>
+            <td>${jugador.posicion}</td>
+            <td>${jugador.edad}</td>
+            <td>${jugador.estadisticas.goles}</td>
+            <td>${jugador.estadisticas.asistencias}</td>
+            <td>${jugador.estadisticas.amarillas}</td>
+            <td>${jugador.estadisticas.rojas}</td>
+            <td>${jugador.equipo.nombre}</td>
+        </tr>`;
         tableBody.innerHTML += row;
     });
+    paginationDiv.innerHTML = data.links; // Actualizar los enlaces de paginación
+    attachClickEventToPaginationLinks(); // Asegúrate de volver a adjuntar eventos a los enlaces de paginación
 }
+
+function attachClickEventToPaginationLinks() {
+    document.querySelectorAll('#pagination-links a').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const page = this.getAttribute('href').split('page=')[1];
+            fetchData(page);
+        });
+    });
+}
+
 
 
 </script>

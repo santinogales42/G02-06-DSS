@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Est_jugador;
 use App\Models\Jugador;
 use Illuminate\Http\Request;
-
+use Artisan;
 class AdminJugadoresController extends Controller
 {
     public function index(Request $request)
@@ -95,6 +96,28 @@ public function actualizar(Request $request, $id)
     $jugador->update($validatedData);
     return response()->json(['message' => 'Jugador actualizado con éxito']);
 }
+public function eliminarTodos()
+{
+    try {
+        // Eliminar primero las estadísticas asociadas
+        Est_jugador::query()->delete(); // Asegúrate de que Estadistica es el modelo correcto
+        // Después eliminar los jugadores
+        Jugador::query()->delete();
 
+        return response()->json(['message' => 'Todos los jugadores y estadísticas han sido eliminados con éxito'], 200);
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Error al eliminar todos los jugadores: ' . $e->getMessage()], 500);
+    }
+}
+public function insertarJugadores()
+    {
+        try {
+            // Asegúrate de usar el nombre correcto del seeder
+            Artisan::call('db:seed', ['--class' => 'JugadorsTableSeeder']);
+            return response()->json(['message' => 'Jugadores insertados correctamente']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al insertar jugadores: ' . $e->getMessage()], 500);
+        }
+    }
 
 }
