@@ -31,5 +31,6 @@ class EstJugadorsTableSeeder extends Seeder
             'jugador_id'=>'2'
         ]);
         
+        
     }
 }

@@ -52,18 +52,58 @@
         <!-- Botón de flecha para cerrar la barra lateral -->
         <div class="SidebarSection">
             <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
-            <a href="{{ route('home') }}" class="w3-bar-item w3-button">Inicio</a>
-            <a href="{{ route('noticias') }}" class="w3-bar-item w3-button">Noticias</a>
-            <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button">Jugadores</a>
-            <a href="{{ route('calendario') }}" class="w3-bar-item w3-button">Calendario</a>
-            <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button">Clasificación</a>
-            <a href="{{ route('favoritos') }}" class="w3-bar-item w3-button">Favoritos</a>
-            <div class="w3-dropdown-hover w3-hover-white w3-bar-item">
-                <button class="w3-button w3-bar-item w3-hover-white">Admin <i class="fa fa-caret-down w3-hover-white"></i></button>
-                <div class="w3-dropdown-content">
-                    <a href="#" class="w3-bar-item dropdownButton">Jugadores</a>
-                    <a href="#" class="w3-bar-item dropdownButton ">Usuarios</a>
-                </div>
+
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-12">
+    <a href="{{ route('home') }}" class="w3-bar-item w3-button">Inicio</a>
+    </div>
+</div>
+    <div class="row">
+    <div class="col-12">
+    <a href="{{ route('noticias') }}" class="w3-bar-item w3-button">Noticias</a>
+            </div>
+</div>
+    <div class="row">
+        <div class="col-12">
+        <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button">Jugadores</a>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+        <a href="{{ route('calendario') }}" class="w3-bar-item w3-button">Calendario</a>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+        <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button">Clasificación</a>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+        <a href="{{ route('favoritos') }}" class="w3-bar-item w3-button">Favoritos</a>
+            </div>
+    </div>
+    <div class="w3-dropdown-hover w3-hover-white">
+    <button class="w3-button w3-bar-item w3-hover-white">Admin <i class="fa fa-caret-down w3-hover-white"></i></button>
+    <div class="w3-dropdown-content w3-bar-block ">
+      <a href="#" class="w3-bar-item w3-button w3-red">Jugadores</a>
+      <a href="#" class="w3-bar-item w3-button w3-red">Usuarios</a>
+    </div>
+  </div>
+    <!-- Enlaces en la parte inferior de la barra lateral -->
+    <div class="horizontal-line-1"></div>
+<div class="contenedor-imagenes">
+  <img src="{{ asset('images/insta.png') }}" alt="Imagen 1">
+  <img src="{{ asset('images/face.png') }}" alt="Imagen 2">
+  <img src="{{ asset('images/twit.png') }}" alt="Imagen 3">
+</div>
+        
+        <div class="bottom-links">
+            <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
+             <a href="#" class="w3-bar-item w3-button">Cerrar sesión</a>
+
             </div>
         </div>
         <!-- Enlaces en la parte inferior de la barra lateral -->

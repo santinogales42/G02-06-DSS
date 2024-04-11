@@ -55,34 +55,15 @@ Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
 
 
 
-    /*
-    * Rutas para Usuarios
-    */
-    //Route::get('/admin/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-    //Route::post('/admin/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
-
-    /*
-    * Rutas para Ligas
-    */
-    //Route::get('/admin/ligas', [LigaController::class, 'index'])->name('ligas.index');
-    //Route::post('/admin/ligas', [LigaController::class, 'store'])->name('ligas.store');
-
-    /*
-    * Rutas para Equipos
-    */
-    //Route::get('/admin/equipos', [EquipoController::class, 'index'])->name('equipos.index');
-    //Route::post('/admin/equipos', [EquipoController::class, 'store'])->name('equipos.store');
-
-    /*
-    * Rutas para Jugadores
-    */
-    //Route::get('/admin/jugadores', [JugadorController::class, 'index'])->name('jugadores.index');
-   // Route::post('/admin/jugadores', [JugadorController::class, 'store'])->name('jugadores.store');
-
 Route::get('/adminjugadores', [AdminJugadoresController::class, 'index']);
 Route::post('/adminjugadores/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
 Route::post('/adminjugadores/eliminar-masa', [AdminJugadoresController::class, 'eliminarMasa']);
 Route::post('/adminjugadores/crear', [AdminJugadoresController::class, 'crear']);
 Route::get('/adminjugadores/datos/{id}', [AdminJugadoresController::class, 'getDatos'])->name('jugadores.getDatos');
 Route::post('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');
+
+
+
+Route::post('/adminjugadores/eliminar-todos', [AdminJugadoresController::class, 'eliminarTodos']);
+Route::post('/admin/insertar-jugadores', [AdminJugadoresController::class, 'insertarJugadores']);
 
