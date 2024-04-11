@@ -32,6 +32,26 @@
         color: white !important; /* Mantiene el color del texto blanco */
     }
 }
+.horizontal-line-1 {
+  display: block; /* Asegura que el elemento se comporte como un bloque */
+  width: 242px;
+  height: 0px;
+  border-top: 2px solid #FFFFFF;
+  margin: auto; /* Centra el bloque horizontalmente en su contenedor */
+}
+.contenedor-imagenes {
+  display: flex; /* Activa Flexbox para el contenedor */
+  justify-content: center; /* Centra las imágenes horizontalmente */
+  align-items: center; /* Centra las imágenes verticalmente */
+}
+
+.contenedor-imagenes img {
+  margin: 0 10px; /* Añade un poco de margen entre las imágenes */
+  width: 65px; /* Establece el ancho deseado */
+  height: 60px; /* Establece la altura deseada */
+  margin-top:10px;
+}
+
 
 }
     /* Nuevo estilo para el contenedor de la barra lateral */

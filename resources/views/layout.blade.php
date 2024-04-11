@@ -90,7 +90,12 @@
     </div>
   </div>
     <!-- Enlaces en la parte inferior de la barra lateral -->
-    
+    <div class="horizontal-line-1"></div>
+<div class="contenedor-imagenes">
+  <img src="{{ asset('images/insta.png') }}" alt="Imagen 1">
+  <img src="{{ asset('images/face.png') }}" alt="Imagen 2">
+  <img src="{{ asset('images/twit.png') }}" alt="Imagen 3">
+</div>
         
         <div class="bottom-links">
             <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
