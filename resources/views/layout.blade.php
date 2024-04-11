@@ -12,7 +12,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hurricane&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Incluir Bootstrap JS (asegúrate de que coincida con la versión de Bootstrap CSS) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -57,6 +61,13 @@
         <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button">Clasificación</a>
         <a href="{{ route('favoritos') }}" class="w3-bar-item w3-button">Favoritos</a>
     </div>
+    <div class="w3-dropdown-hover w3-hover-white">
+    <button class="w3-button w3-bar-item w3-hover-white">Admin <i class="fa fa-caret-down w3-hover-white"></i></button>
+    <div class="w3-dropdown-content w3-bar-block ">
+      <a href="#" class="w3-bar-item w3-button w3-red">Jugadores</a>
+      <a href="#" class="w3-bar-item w3-button w3-red">Usuarios</a>
+    </div>
+  </div>
     <!-- Enlaces en la parte inferior de la barra lateral -->
     <div>
         <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
