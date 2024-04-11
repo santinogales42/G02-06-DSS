@@ -3,6 +3,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController; // Importa el HomeController
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\JugadoresController;
 use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\CalendarioController;
@@ -11,14 +13,22 @@ use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\AdminController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
 Route::get('/calendario', [CalendarioController::class, 'index'])->name('calendario');
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos');
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 
 Route::get('/contacto', 'App\Http\Controllers\ContactController@show')->name('contacto');
@@ -28,7 +38,7 @@ Route::post('/limpiar-mensajes', 'App\Http\Controllers\ContactController@limpiar
 Route::get('/mostrar-mensajes', 'App\Http\Controllers\ContactController@verMensajes')->name('mostrarMensajes');
 
 
-Route::get('/jugadores', [JugadoresController::class, 'index']);
+Route::get('/jugadores', [JugadoresController::class, 'index'])->name('jugadores');
 Route::get('/jugadores/{id}', [JugadoresController::class, 'show'])->name('jugadores.show');
 // Dentro de routes/web.php
 
@@ -41,29 +51,28 @@ Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
 
 
 
-/*
- * Rutas para Usuarios
- */
-Route::get('/admin/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-Route::post('/admin/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+    /*
+    * Rutas para Usuarios
+    */
+    //Route::get('/admin/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+    //Route::post('/admin/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
 
-/*
- * Rutas para Ligas
- */
-Route::get('/admin/ligas', [LigaController::class, 'index'])->name('ligas.index');
-Route::post('/admin/ligas', [LigaController::class, 'store'])->name('ligas.store');
+    /*
+    * Rutas para Ligas
+    */
+    //Route::get('/admin/ligas', [LigaController::class, 'index'])->name('ligas.index');
+    //Route::post('/admin/ligas', [LigaController::class, 'store'])->name('ligas.store');
 
-/*
- * Rutas para Equipos
- */
-Route::get('/admin/equipos', [EquipoController::class, 'index'])->name('equipos.index');
-Route::post('/admin/equipos', [EquipoController::class, 'store'])->name('equipos.store');
+    /*
+    * Rutas para Equipos
+    */
+    //Route::get('/admin/equipos', [EquipoController::class, 'index'])->name('equipos.index');
+    //Route::post('/admin/equipos', [EquipoController::class, 'store'])->name('equipos.store');
 
-/*
- * Rutas para Jugadores
- */
-Route::get('/admin/jugadores', [JugadorController::class, 'index'])->name('jugadores.index');
-Route::post('/admin/jugadores', [JugadorController::class, 'store'])->name('jugadores.store');
+    /*
+    * Rutas para Jugadores
+    */
+    //Route::get('/admin/jugadores', [JugadorController::class, 'index'])->name('jugadores.index');
+   // Route::post('/admin/jugadores', [JugadorController::class, 'store'])->name('jugadores.store');
 
-// Añade más rutas para las otras entidades de forma similar
-
+    // Añade más rutas para las otras entidades de forma similar

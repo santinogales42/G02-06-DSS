@@ -46,50 +46,22 @@
 
 
 </div>
-<div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+<div class="w3-sidebar w3-card w3-animate-left" style="display:none" id="mySidebar">
     <!-- Botón de flecha para cerrar la barra lateral -->
-    <div class="row">
-        <div class="col-12">
-            <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
-        </div>
-    </div>
-    <div class="row">
-    <div class="col-12">
-        <a href="#" class="w3-bar-item w3-button">Noticias</a>
-    </div>
-</div>
-    <div class="row">
-        <div class="col-12">
-            <a href="#" class="w3-bar-item w3-button">Jugadores</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <a href="#" class="w3-bar-item w3-button">Calendario</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <a href="#" class="w3-bar-item w3-button">Clasificación</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <a href="#" class="w3-bar-item w3-button">Favoritos</a>
-        </div>
+    <div>
+        <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+        <a href="{{ route('home') }}" class="w3-bar-item w3-button">Inicio</a>
+        <a href="{{ route('noticias') }}" class="w3-bar-item w3-button">Noticias</a>
+        <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button">Jugadores</a>
+        <a href="{{ route('calendario') }}" class="w3-bar-item w3-button">Calendario</a>
+        <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button">Clasificación</a>
+        <a href="{{ route('favoritos') }}" class="w3-bar-item w3-button">Favoritos</a>
     </div>
     <!-- Enlaces en la parte inferior de la barra lateral -->
-    
-        
-        <div class="bottom-links">
-            <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
-             <a href="#" class="w3-bar-item w3-button">Cerrar sesión</a>
-            </div>
-       
-    
-        
-        
-    
+    <div>
+        <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
+        <a href="{{ route('logout') }}" class="w3-bar-item w3-button">Cerrar sesión</a>
+    </div>
 </div>
 
 
@@ -99,14 +71,18 @@
         <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo" style="border: 2px solid red; margin-right: 20px;">
         <h1 class="roboto-flex-title" style="margin: 0 auto;">LALIGA EA SPORTS 2023-24</h1>
         @if($isUserLoggedIn)
-        <div class="navbar-text" style="display: flex; align-items: center;">
-            <span>{{ $userName }}</span>
-            <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" style="width: 30px; height: 30px; margin-left: 10px;">
-        </div>
+            <div class="navbar-text" style="display: flex; align-items: center;">
+                <span>{{ Session::get('userName') }}</span>
+                <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" style="width: 30px; height: 30px; margin-left: 10px;">
+            </div>
         @else
         <div class="navbar-text" style="display: flex; align-items: center;">
-            <button type="button" class="btn btn-outline-light ml-auto">Registrarse</button>
-            <button type="button" class="btn btn-light ml-2">Iniciar Sesión</button>
+            <a type="button" class="btn btn-outline-light ml-auto" href="{{ route('register') }}">Registrarse</a>
+            <a type="button" class="btn btn-light ml-2" href="{{ route('login') }}">Iniciar Sesión</a>
+    
+            <!--<button type="button" class="btn btn-light ml-2" onclick= "window.location ='{{ route('login') }}'" >Iniciar Sesión</button> -->
+
+            
         </div>
         @endif
     </div>
@@ -115,20 +91,11 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
 <script>
     function w3_open() {
         document.getElementById("main").style.marginLeft = "15%";
         document.getElementById("mySidebar").style.width = "15%";
-        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("mySidebar").style.display = "flex";
         document.getElementById("openNav").style.display = 'none';
     }
 
