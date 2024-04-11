@@ -50,11 +50,11 @@
 
     <div class="w3-sidebar w3-card w3-animate-left" style="display:none" id="mySidebar">
         <!-- Botón de flecha para cerrar la barra lateral -->
-        <div class="SidebarSection">
+        
             <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
 
-        </div>
-    </div>
+        
+    
     <div class="row">
     <div class="col-12">
     <a href="{{ route('home') }}" class="w3-bar-item w3-button">Inicio</a>
@@ -107,10 +107,7 @@
             </div>
         </div>
         <!-- Enlaces en la parte inferior de la barra lateral -->
-        <div class="SidebarSection">
-            <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
-            <a href="{{ route('logout') }}" class="w3-bar-item w3-button">Cerrar sesión</a>
-        </div>
+        
     </div>
 
 
