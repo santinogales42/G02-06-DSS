@@ -16,10 +16,19 @@
     text-align: center;
 }
 
-#mySidebar div{
+#mySidebar .SidebarSection{
     display: flex;
     flex-direction: column;
     
+}
+
+.w3-bar-item.dropdownButton {
+    color: #ff3823 !important; 
+    background-color: white;
+    display: block;
+}
+.dropdownButton:hover {
+    color: black;
 }
 
 .w3-bar-item,
