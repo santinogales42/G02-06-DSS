@@ -45,10 +45,10 @@ class JugadoresController extends Controller
         return view('jugadores.index', compact('jugadores'));
     }
     public function show($id)
-{
-    $jugador = Jugador::with('estadisticas', 'equipo')->findOrFail($id);
-    return view('jugadores.show', compact('jugador'));
-}
+    {
+        $jugador = Jugador::with('estadisticas', 'equipo')->findOrFail($id);
+        return view('jugadores.show', compact('jugador'));
+    }
 
 }
 
