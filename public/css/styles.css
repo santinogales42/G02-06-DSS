@@ -241,6 +241,7 @@ color: white !important; /* Establece el color de la fuente a blanco */
     margin: auto;
     border-collapse: collapse;
     margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .fila-partidos-head {
@@ -248,7 +249,7 @@ color: white !important; /* Establece el color de la fuente a blanco */
     font-weight: bold;
     display: flex;
     align-items: center;
-    padding: 10px;
+    
 }
 
 .columna-fecha,
