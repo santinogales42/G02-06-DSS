@@ -118,24 +118,26 @@
             <a href="{{ route('calendario') }}" class="w3-bar-item w3-button">Calendario</a>
             <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button">Clasificación</a>
             <a href="{{ route('favoritos') }}" class="w3-bar-item w3-button">Favoritos</a>
-            <div class="w3-dropdown-hover w3-hover-white w3-bar-item">
-                <button class="w3-button w3-bar-item w3-hover-white">Admin <i class="fa fa-caret-down w3-hover-white"></i></button>
-                <div class="w3-dropdown-content">
-                    <a href="#" class="w3-bar-item dropdownButton">Jugadores</a>
-                    <a href="#" class="w3-bar-item dropdownButton ">Usuarios</a>
+            <div class="w3-dropdown-hover w3-bar-item">
+                <button class="w3-button w3-bar-item">Admin <i class="fas fa-chevron-down"></i></button>
+                <div class="w3-dropdown-content w3-bar-block w3-card">
+                    <a href="#" class="w3-bar-item w3-button dropdownButton">Jugadores</a>
+                    <a href="#" class="w3-bar-item w3-button dropdownButton">Usuarios</a>
+                    <a href="{{ route('admin.partidos.indexcl') }}" class="w3-bar-item w3-button dropdownButton">Partidos</a>
                 </div>
             </div>
-        </div>
         <!-- Enlaces en la parte inferior de la barra lateral -->
-        <div class="SidebarSection">
-            <div class="horizontal-line-1"></div>
-                <div class="contenedor-imagenes">
-                    <img src="{{ asset('images/insta.png') }}" alt="Imagen 1">
-                    <img src="{{ asset('images/face.png') }}" alt="Imagen 2">
-                    <img src="{{ asset('images/twit.png') }}" alt="Imagen 3">
-                </div>
-            <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
-            <a href="{{ route('logout') }}" class="w3-bar-item w3-button">Cerrar sesión</a>
+            <div class="SidebarDownSection">
+                <div class="horizontal-line-1"></div>
+                    <div class="contenedor-imagenes">
+                        <img src="{{ asset('images/insta.png') }}" alt="Imagen 1">
+                        <img src="{{ asset('images/face.png') }}" alt="Imagen 2">
+                        <img src="{{ asset('images/twit.png') }}" alt="Imagen 3">
+                    </div>
+                    <div class="horizontal-line-1"></div>
+                <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
+                <a href="{{ route('logout') }}" class="w3-bar-item w3-button">Cerrar sesión</a>
+            </div>
         </div>
     </div>
 
