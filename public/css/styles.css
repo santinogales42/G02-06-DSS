@@ -96,7 +96,12 @@
     margin-top: 1px;
     /* Ajusta el margen superior según necesites */
 }
-
+.bottom-links {
+    position: absolute;
+    bottom: 0;
+    margin-top: auto;
+    width: 100%;
+}
 /* Estilos para el hover del botón de la barra lateral */
 #openNav {
     background-color: #ff3823;
