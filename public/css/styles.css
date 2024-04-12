@@ -22,14 +22,49 @@
     /*justify-content: space-around;*/
 }
 
+#mySidebar .SidebarDownSection {
+    margin-top: 13rem;
+    margin-bottom: 5rem;
+}
+
 .w3-bar-item.dropdownButton {
     color: #ff3823 !important;
     background-color: white;
     display: block;
 }
+
 .dropdownButton:hover {
     color: black;
 }
+
+/* Estilos para el contenido del menú desplegable */
+.w3-dropdown-content {
+    display: none; /* Ocultar por defecto */
+    position: absolute;
+    background-color: #f9f9f9; /* Color de fondo */
+    min-width: 160px; /* Ancho mínimo */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Sombra */
+    z-index: 1; /* Z-index para estar sobre otros elementos */
+    left: 50%; /* Posición izquierda centrada */
+    transform: translateX(-50%); /* Centrar horizontalmente */
+    top: 50px; /* Ajustar la distancia desde la parte superior */
+    border-radius: 4px; /* Borde redondeado */
+}
+
+/* Ajustar el margen y padding de los elementos de la lista */
+.w3-dropdown-content a {
+    padding: 10px 15px; /* Espaciado interno */
+    display: block; /* Mostrar como bloques */
+    color: black; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
+}
+
+/* Cambiar el color de fondo de los elementos al pasar por encima */
+.w3-dropdown-content a:hover {
+    background-color: #ddd; /* Color de fondo al pasar */
+}
+
 
 .w3-bar-item,
 .rectangle-button {
@@ -64,6 +99,7 @@
         /* Mantiene el color del texto blanco */
     }
 }
+
 .horizontal-line-1 {
   display: block; /* Asegura que el elemento se comporte como un bloque */
   width: 242px;
@@ -261,36 +297,7 @@
 }
 
 
-/* Estilos para inicio de sesión */
-.tarjeta {
-    margin-top: 50px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.encabezado-tarjeta {
-    background-color: #ff3823;
-    text-align: center !important;
-    color: #fff;
-    padding: 20px 0;
-    /* Agrega relleno arriba y abajo de 20px */
-}
-
-.boton-inicio,
-.boton-registro,
-.boton-cancelar {
-    background-color: #fff;
-    color: #ff3823;
-    border-color: #ff3823;
-}
-
-.boton-inicio:hover,
-.boton-registro:hover,
-.boton-cancelar:hover {
-    background-color: #ff3823;
-    color: #fff;
-    border-color: #ff3823;
-}
+/* VISTA CALENDARIO */
 
 /* Estilos para la fila de navegación */
 .jornada-navegacion {
