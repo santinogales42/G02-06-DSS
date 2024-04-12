@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('est_jugadors', function (Blueprint $table) {
             $table->id();
-	    $table->integer('goles');
-	    $table->integer('asistencias');
-	    $table->integer('amarillas');
-	    $table->integer('rojas');
-	    $table->foreignId('jugador_id')->constrained()->onDelete('cascade');
-	    $table->timestamps();
+            $table->integer('goles');
+            $table->integer('asistencias');
+            $table->integer('amarillas');
+            $table->integer('rojas');
+            $table->foreignId('jugador_id')->constrained('jugadors')->onDelete('cascade');
+            $table->timestamps();
         });
+        
     }
 
     /**

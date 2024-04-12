@@ -36,19 +36,23 @@ class JugadoresController extends Controller
             }
         }
 
-        $jugadores = $query->get();
+        $jugadores = $query->paginate(10);
 
         if ($request->ajax()) {
-            return response()->json($jugadores);
+            return response()->json([
+                'data' => $jugadores->items(),
+                'links' => $jugadores->appends($request->all())->links()->toHtml(),
+            ]);
         }
+    
 
         return view('jugadores.index', compact('jugadores'));
     }
     public function show($id)
-{
-    $jugador = Jugador::with('estadisticas', 'equipo')->findOrFail($id);
-    return view('jugadores.show', compact('jugador'));
-}
+    {
+        $jugador = Jugador::with('estadisticas', 'equipo')->findOrFail($id);
+        return view('jugadores.show', compact('jugador'));
+    }
 
 }
 
