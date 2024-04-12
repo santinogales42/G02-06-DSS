@@ -10,9 +10,9 @@ use App\Http\Controllers\ClasificacionController;
 use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminPartidoController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
 
 
 Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
@@ -44,26 +44,36 @@ Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
 /*
  * Rutas para Usuarios
  */
-Route::get('/admin/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-Route::post('/admin/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+//Route::get('/admin/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+//Route::post('/admin/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
 
 /*
  * Rutas para Ligas
  */
-Route::get('/admin/ligas', [LigaController::class, 'index'])->name('ligas.index');
-Route::post('/admin/ligas', [LigaController::class, 'store'])->name('ligas.store');
+//Route::get('/admin/ligas', [LigaController::class, 'index'])->name('ligas.index');
+//Route::post('/admin/ligas', [LigaController::class, 'store'])->name('ligas.store');
 
 /*
  * Rutas para Equipos
  */
-Route::get('/admin/equipos', [EquipoController::class, 'index'])->name('equipos.index');
-Route::post('/admin/equipos', [EquipoController::class, 'store'])->name('equipos.store');
+//Route::get('/admin/equipos', [EquipoController::class, 'index'])->name('equipos.index');
+//Route::post('/admin/equipos', [EquipoController::class, 'store'])->name('equipos.store');
 
 /*
  * Rutas para Jugadores
  */
-Route::get('/admin/jugadores', [JugadorController::class, 'index'])->name('jugadores.index');
-Route::post('/admin/jugadores', [JugadorController::class, 'store'])->name('jugadores.store');
+//Route::get('/admin/jugadores', [JugadorController::class, 'index'])->name('jugadores.index');
+//Route::post('/admin/jugadores', [JugadorController::class, 'store'])->name('jugadores.store');
 
 // Añade más rutas para las otras entidades de forma similar
 
+/*
+ * Rutas para la Administración de Partidos
+ */
+Route::get('/admin/partidos', [AdminPartidoController::class, 'index'])->name('admin.partidos.index');
+Route::get('/admin/partidos/create', [AdminPartidoController::class, 'create'])->name('admin.partidos.create');
+Route::post('/admin/partidos/store', [AdminPartidoController::class, 'store'])->name('admin.partidos.store');
+Route::get('/admin/partidos/edit', [AdminPartidoController::class, 'edit'])->name('admin.partidos.edit');
+Route::put('/admin/partidos/{id}/update', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
+Route::delete('/admin/partidos/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
+Route::post('/admin/partidos/search', [AdminPartidoController::class, 'search'])->name('admin.partidos.search');

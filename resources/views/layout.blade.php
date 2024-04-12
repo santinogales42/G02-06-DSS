@@ -54,10 +54,10 @@
         </div>
     </div>
     <div class="row">
-    <div class="col-12">
-        <a href="#" class="w3-bar-item w3-button">Noticias</a>
+        <div class="col-12">
+            <a href="#" class="w3-bar-item w3-button">Noticias</a>
+        </div>
     </div>
-</div>
     <div class="row">
         <div class="col-12">
             <a href="#" class="w3-bar-item w3-button">Jugadores</a>
@@ -81,16 +81,11 @@
     <!-- Enlaces en la parte inferior de la barra lateral -->
     
         
-        <div class="bottom-links">
-            <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
-             <a href="#" class="w3-bar-item w3-button">Cerrar sesión</a>
-            </div>
-       
-    
-        
-        
-    
-</div>
+    <div class="bottom-links">
+        <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
+            <a href="#" class="w3-bar-item w3-button" style="margin-bottom: 30px;">Cerrar sesión</a>
+        </div>
+    </div>
 
 
 <div id="main">
