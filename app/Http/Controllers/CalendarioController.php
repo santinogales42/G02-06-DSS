@@ -24,6 +24,8 @@ class CalendarioController extends Controller
         // relaciones de equipo cargadas
         $partidos = Partido::where('jornada', $jornada)
                            ->with('equipoLocal', 'equipoVisitante')
+                           ->orderBy('fecha')
+                           ->orderBy('hora')
                            ->get();
 
         return view('calendario', compact('partidos', 'jornada_actual', 'jornadas'));
