@@ -123,7 +123,7 @@
                 <div class="w3-dropdown-content w3-bar-block w3-card">
                     <a href="#" class="w3-bar-item w3-button dropdownButton">Jugadores</a>
                     <a href="#" class="w3-bar-item w3-button dropdownButton">Usuarios</a>
-                    <a href="{{ route('admin.partidos.indexcl') }}" class="w3-bar-item w3-button dropdownButton">Partidos</a>
+                    <a href="{{ route('admin.partidos.index') }}" class="w3-bar-item w3-button dropdownButton">Partidos</a>
                 </div>
             </div>
         <!-- Enlaces en la parte inferior de la barra lateral -->
