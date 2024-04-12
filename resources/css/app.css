@@ -65,3 +65,16 @@
     color: #ff3823 !important;
     /* Cambio el color del texto a rojo */
 }
+.contenedor-imagenes {
+    display: flex; /* Cambia a flex para alinear imágenes horizontalmente */
+    justify-content: space-around; /* Distribuye espacio alrededor de las imágenes */
+    align-items: center; /* Alinea las imágenes verticalmente al centro */
+    padding: 10px 0; /* Añade un padding para separación visual */
+    border-top: 1px solid #fff; /* Línea horizontal por encima de las imágenes */
+}
+
+.contenedor-imagenes img {
+    width: auto; /* Ancho automático para mantener la proporción */
+    height: 50px; /* Altura fija para todas las imágenes */
+    margin: 0 5px; /* Margen para evitar que las imágenes se toquen */
+}
