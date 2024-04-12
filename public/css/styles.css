@@ -19,11 +19,11 @@
 #mySidebar .SidebarSection{
     display: flex;
     flex-direction: column;
-    
+    /*justify-content: space-around;*/
 }
 
 .w3-bar-item.dropdownButton {
-    color: #ff3823 !important; 
+    color: #ff3823 !important;
     background-color: white;
     display: block;
 }
