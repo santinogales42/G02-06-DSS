@@ -72,7 +72,7 @@ Route::post('/admin/insertar-jugadores', [AdminJugadoresController::class, 'inse
 Route::get('/admin/partidos', [AdminPartidoController::class, 'index'])->name('admin.partidos.index');
 Route::get('/admin/partidos/create', [AdminPartidoController::class, 'create'])->name('admin.partidos.create');
 Route::post('/admin/partidos/store', [AdminPartidoController::class, 'store'])->name('admin.partidos.store');
-Route::get('/admin/partidos/edit', [AdminPartidoController::class, 'edit'])->name('admin.partidos.edit');
-Route::put('/admin/partidos/{id}/update', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
+Route::get('/admin/partidos/{id}/edit', [AdminPartidoController::class, 'edit'])->name('admin.partidos.edit');
+Route::put('/admin/partidos/{id}/update/', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
 Route::delete('/admin/partidos/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
 Route::post('/admin/partidos/search', [AdminPartidoController::class, 'search'])->name('admin.partidos.search');

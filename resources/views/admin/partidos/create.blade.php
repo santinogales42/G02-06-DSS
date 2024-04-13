@@ -13,6 +13,14 @@
                     @method('PUT')
                 @endif
 
+                @if(Session::has('success'))
+                    <script>
+                        window.onload = function() {
+                            alert("{{ Session::get('success') }}");
+                        };
+                    </script>
+                @endif
+
                 <div class="mb-3">
                     <label for="fecha" class="form-label">Fecha</label>
                     <input type="date" class="form-control" id="fecha" name="fecha" value="{{ isset($partido) ? $partido->fecha->format('Y-m-d') : '' }}" required>

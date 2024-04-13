@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\Partido;
 
 class CalendarioController extends Controller
@@ -27,6 +28,16 @@ class CalendarioController extends Controller
                            ->orderBy('fecha')
                            ->orderBy('hora')
                            ->get();
+
+        Carbon::setLocale('es');
+
+        foreach ($partidos as $partido) {
+            $fecha = Carbon::createFromFormat('Y-m-d', $partido->fecha);
+            $partido->fecha_nueva = $fecha->isoFormat('ddd D MMM YYYY');
+
+            $hora = Carbon::createFromFormat('H:i:s', $partido->hora);
+            $partido->hora_nueva = $hora->format('H:i');
+        }
 
         return view('calendario', compact('partidos', 'jornada_actual', 'jornadas'));
     }
