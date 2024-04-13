@@ -76,3 +76,15 @@ Route::get('/admin/partidos/{id}/edit', [AdminPartidoController::class, 'edit'])
 Route::put('/admin/partidos/{id}/update/', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
 Route::delete('/admin/partidos/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
 Route::post('/admin/partidos/search', [AdminPartidoController::class, 'search'])->name('admin.partidos.search');
+
+// Rutas para EquipoController
+Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
+Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index');
+Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
+
+// Rutas para AdminEquipoController
+Route::get('/admin/equipos/create', [AdminEquipoController::class, 'create'])->name('admin.equipos.create');
+Route::post('/admin/equipos', [AdminEquipoController::class, 'store'])->name('admin.equipos.store');
+Route::get('/admin/equipos/{equipo}/edit', [AdminEquipoController::class, 'edit'])->name('admin.equipos.edit');
+Route::put('/admin/equipos/{equipo}', [AdminEquipoController::class, 'update'])->name('admin.equipos.update');
+Route::delete('/admin/equipos/{equipo}', [AdminEquipoController::class, 'destroy'])->name('admin.equipos.destroy');
