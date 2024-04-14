@@ -128,9 +128,30 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchData(); // Carga inicial de datos
 });
 
+//Crear noticia
+
+document.getElementById('crearNoticiaForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+    const formData = new FormData(this);
+    fetch('/adminnoticias/crear', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        fetchData();
+    })
+    .catch(error => console.error('Error:', error));
+});
+
 function insertarNoticia() {
     const formData = new FormData(document.getElementById('crearNoticiaForm')); // Obtener los datos del formulario
-    fetch('{{ route('admin.noticias.create') }}', {
+    fetch('{{ route('admin.noticias.crear') }}', {
         method: 'POST',
         body: formData,
         headers: {
@@ -145,7 +166,7 @@ function insertarNoticia() {
     })
     .then(data => {
         alert(data.message); // Mostrar un mensaje de éxito
-        // Puedes redirigir a otra página o actualizar la lista de noticias aquí si es necesario
+        fetchData();
     })
     .catch(error => console.error('Error:', error));
 }
