@@ -91,6 +91,19 @@ Route::get('/admin/equipos/{equipo}/edit', [AdminEquipoController::class, 'edit'
 Route::put('/admin/equipos/{equipo}', [AdminEquipoController::class, 'update'])->name('admin.equipos.update');
 Route::delete('/admin/equipos/{equipo}', [AdminEquipoController::class, 'destroy'])->name('admin.equipos.destroy');
 
-// Rutas para añadir noticias
+// Rutas para administrar noticias
 Route::get('/adminnoticias', [AdminNoticiasController::class, 'index'])->name('adminnoticias');
 Route::post('/adminnoticias/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
+Route::delete('/adminnoticias/eliminar-todas', [AdminNoticiasController::class, 'eliminarTodas'])->name('admin.noticias.eliminar-todas');
+Route::get('/adminnoticias/datos/{id}', [AdminNoticiasController::class, 'getDatos'])->name('noticias.getDatos');
+
+
+
+
+
+
+
+
+
+
+
