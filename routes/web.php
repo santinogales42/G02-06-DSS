@@ -93,3 +93,4 @@ Route::delete('/admin/equipos/{equipo}', [AdminEquipoController::class, 'destroy
 
 // Rutas para añadir noticias
 Route::get('/adminnoticias', [AdminNoticiasController::class, 'index'])->name('adminnoticias');
+Route::post('/adminnoticias/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');

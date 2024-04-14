@@ -81,8 +81,8 @@
                     Crear Nueva Noticia
                 </div>
                 <div class="card-body">
-                <form id="crearNoticiaForm">
-    
+                <form id="crearNoticiaForm" action="{{ route('admin.noticias.crear') }}" method="POST">
+                    
                     <div class="mb-3">
                         <label for="titulo" class="form-label">Título:</label>
                         <input type="text" class="form-control" id="titulo" name="titulo" required>
@@ -121,6 +121,35 @@
         </div>
     </div>
 </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    fetchData(); // Carga inicial de datos
+});
+
+function insertarNoticia() {
+    const formData = new FormData(document.getElementById('crearNoticiaForm')); // Obtener los datos del formulario
+    fetch('{{ route('admin.noticias.create') }}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Hubo un problema al crear la noticia.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert(data.message); // Mostrar un mensaje de éxito
+        // Puedes redirigir a otra página o actualizar la lista de noticias aquí si es necesario
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
 
 
 @endsection
