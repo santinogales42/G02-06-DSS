@@ -5,26 +5,36 @@
     <h1>Administración de Noticias</h1>
     
     <button id="bulk-delete" class="btn btn-danger" onclick="deleteSelectedJugadores()">Eliminar Noticias Seleccionadas</button>
-    <button id="delete-all" class="btn btn-danger" onclick="deleteAllJugadores()">Eliminar todos las Noticias</button>
+    <button id="delete-all" class="btn btn-danger" onclick="deleteAllNoticias()">Eliminar todos las Noticias</button>
 
     <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
-                    <th></th>
                     <th>ID</th>
-                    <th>Nombre</th>
+                    <th>Título noticia</th>
+                    <th>Fecha y hora</th>
+                    <th>Autor</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="jugadores-list">
-                <!-- Los jugadores se llenan dinámicamente -->
+            <tbody id="noticias-list">
+                @foreach($noticias as $noticia)
+                <tr>
+                    <td>{{ $noticia->id }}</td>
+                    <td>{{ $noticia->titulo }}</td>
+                    <td>{{ $noticia->fecha }}</td>
+                    <td>{{ $noticia->autor }}</td>
+                </tr>
+                @endforeach
             </tbody>
         </table>
         <div id="pagination-links" class="d-flex justify-content-center">
-            <!-- Los enlaces de paginación se cargarán aquí -->
+            {{ $noticias->links() }} <!-- Muestra los enlaces de paginación -->
         </div>
     </div>
+
+
 </div>
 
 <!-- Modal de Edición -->
@@ -96,7 +106,7 @@
                         <input type="text" class="form-control" id="autor" name="autor">
                     </div>
                     <div class="mb-3">
-                        <label for="fecha" class="form-label">Fecha:</label>
+                        <label for="fecha" class="form-label">Fecha y hora:</label>
                         <input type="datetime-local" class="form-control" id="fecha" name="fecha">
                     </div>
                     <div class="mb-3">
@@ -128,7 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchData(); // Carga inicial de datos
 });
 
-//Crear noticia
 
 document.getElementById('crearNoticiaForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
@@ -145,9 +154,97 @@ document.getElementById('crearNoticiaForm').addEventListener('submit', function(
     .then(data => {
         alert(data.message);
         fetchData();
+        this.reset();
     })
     .catch(error => console.error('Error:', error));
 });
+
+
+
+// Eliminar noticias
+function deleteAllNoticias() {
+    if (confirm('¿Estás seguro de querer eliminar TODAS las noticias? Esta acción es irreversible.')) {
+        fetch('/adminnoticias/eliminar-todas', {
+            method: 'DELETE',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.links); // Para ver qué está enviando el servidor
+            var tableBody = document.getElementById('noticias-list');
+            tableBody.innerHTML = '';
+            data.data.forEach(noticia => {
+                var row = `<tr>
+                    <td>${noticia.id}</td> <!-- Mostrar el ID de la noticia -->
+                    <td>${noticia.titulo}</td> <!-- Mostrar el título de la noticia -->
+                    <td>${noticia.fecha}</td> <!-- Mostrar la fecha de la noticia -->
+                    <td>${noticia.autor}</td> <!-- Mostrar el autor de la noticia -->
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+            var paginationDiv = document.getElementById('pagination-links');
+            paginationDiv.innerHTML = ''; // Limpiar antes de añadir los nuevos enlaces
+            paginationDiv.innerHTML = data.links; // Añadir los nuevos enlaces de paginación
+            attachClickEventToPaginationLinks();
+        })
+
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+function attachClickEventToPaginationLinks() {
+    document.querySelectorAll('#pagination-links a').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault(); // Evita la navegación directa
+            const page = this.getAttribute('href').split('page=')[1];
+            fetchData(page);
+        });
+    });
+}
+
+// Mostrar noticias en tabla
+
+function fetchData(page = 1) {
+    console.log("fetchData called for page: " + page); // Agrega esta línea para el diagnóstico
+    var search = document.getElementById('search').value;
+    var url = `/adminnoticias?search=${search}&page=${page}`;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.links); // Para ver qué está enviando el servidor
+        var tableBody = document.getElementById('noticias-list');
+        tableBody.innerHTML = '';
+        data.data.forEach(jugador => {
+    var row = `<tr>
+                <td><input type="checkbox" class="noticia-checkbox" value="${noticia.id}"></td>
+                <td>${noticia.id}</td>
+                <td>${noticia.titulo}</td>
+                <td>
+                    <button onclick="openEditModal(${jugador.id})" class="btn btn-primary">Editar</button>
+                    <button class="btn btn-danger" onclick="deleteJugador(${jugador.id})">Eliminar</button>
+                </td>
+            </tr>`;
+    tableBody.innerHTML += row;
+});
+attachCheckboxEvents(); // Adjuntar eventos a los nuevos checkboxes
+    checkSelectedCheckboxes();
+        var paginationDiv = document.getElementById('pagination-links');
+        paginationDiv.innerHTML = ''; // Limpiar antes de añadir los nuevos enlaces
+        paginationDiv.innerHTML = data.links; // Añadir los nuevos enlaces de paginación
+        attachClickEventToPaginationLinks();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 function insertarNoticia() {
     const formData = new FormData(document.getElementById('crearNoticiaForm')); // Obtener los datos del formulario
@@ -168,9 +265,13 @@ function insertarNoticia() {
         alert(data.message); // Mostrar un mensaje de éxito
         fetchData();
     })
+          
     .catch(error => console.error('Error:', error));
 }
+
 </script>
+
+
 
 
 @endsection
