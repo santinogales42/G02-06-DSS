@@ -19,6 +19,7 @@ return new class extends Migration
 	    $table->time('hora');
 	    $table->string('estadio');
 	    $table->string('resultado');
+        $table->integer('jornada');
 	    $table->foreignId('equipo_local_id')->constrained('equipos')->onDelete('cascade');
 	    $table->foreignId('equipo_visitante_id')->constrained('equipos')->onDelete('cascade');
 	    $table->timestamps();
