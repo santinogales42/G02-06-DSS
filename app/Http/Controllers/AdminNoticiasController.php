@@ -112,6 +112,19 @@ class AdminNoticiasController extends Controller
         return response()->json(['message' => 'Noticia eliminada con éxito'], 200);
     }
 
+    public function eliminarMasa(Request $request)
+    {
+        $ids = $request->ids;
+
+        try {
+            Noticia::whereIn('id', $ids)->delete();
+
+            return response()->json(['message' => 'Noticias eliminadas con éxito'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al eliminar noticias: ' . $e->getMessage()], 500);
+        }
+    }
+
     /**
      * Elimina todas las noticias.
      */
@@ -120,4 +133,20 @@ class AdminNoticiasController extends Controller
         Noticia::query()->delete();
         return response()->json(['message' => 'Todas las noticias han sido eliminadas con éxito'], 200);
     }
+
+    public function getEquipoName($id)
+    {
+        // Busca el equipo por su ID
+        $equipo = Equipo::find($id);
+
+        // Verifica si se encontró el equipo
+        if ($equipo) {
+            // Devuelve el nombre del equipo en formato JSON
+            return response()->json(['nombre' => $equipo->nombre]);
+        } else {
+            // Devuelve un mensaje de error si el equipo no se encuentra
+            return response()->json(['error' => 'Equipo no encontrado'], 404);
+        }
+    }
+
 }
