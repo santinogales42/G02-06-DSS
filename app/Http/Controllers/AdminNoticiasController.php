@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Noticia;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,21 +17,26 @@ class AdminNoticiasController extends Controller
         $query = Noticia::query();
 
         if ($request->has('search')) {
-            $search = $request->input('search');
+            $search = $request->search;
             $query->where('titulo', 'LIKE', "%{$search}%")
-                  ->orWhere('contenido', 'LIKE', "%{$search}%");
+                  ->orWhere('id', 'LIKE', "%{$search}%");
         }
 
-        $noticias = $query->orderBy('created_at', 'desc')->paginate(10);
+        $noticias = $query->paginate(10);
+        $equipos = Equipo::all();
 
         if ($request->ajax()) {
+            // Preparando el HTML de los enlaces de paginación
+            $links = $noticias->appends(['search' => $search])->links()->toHtml();
+
+            // Preparando los datos para enviar
             return response()->json([
-                'data' => $noticias->items(),
-                'links' => $noticias->appends(['search' => $search])->links()->toHtml(),
+                'data' => $noticias->items(), // Datos de jugadores
+                'links' => $links, // HTML de los enlaces de paginación
             ]);
         }
 
-        return view('admin.adminnoticias', compact('noticias'));
+        return view('admin.adminnoticias', compact('noticias','equipos'));
     }
 
     /**
@@ -38,20 +44,27 @@ class AdminNoticiasController extends Controller
      */
     public function crear(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $equipos = Equipo::all();
+        // Validar los datos del formulario
+        $validatedData = $request->validate([
             'titulo' => 'required|string|max:255',
             'contenido' => 'required|string',
-            'fecha' => 'required|date',
             'autor' => 'nullable|string|max:255',
+            'fecha' => 'nullable|date',
+            'link_de_la_web' => 'nullable|string|max:255',
+            'enlace_de_la_foto' => 'nullable|string|max:255',
+            'equipo_id' => 'nullable|exists:equipos,id',
         ]);
-
-        if ($validator->fails()) {
-            return response()->json(['message' => 'Error en la validación', 'errors' => $validator->errors()], 422);
+        
+        try{
+            $noticia = Noticia::create($validatedData);
+            return response()->json(['message' => 'Noticia creada con éxito', 'noticia' => $noticia], 200);
+        
         }
-
-        $noticia = Noticia::create($validator->validated());
-
-        return response()->json(['message' => 'Noticia creada con éxito', 'noticia' => $noticia], 201);
+        catch (\Exception $e) {
+            return response()->json(['message' => 'Error al crear noticia: ' . $e->getMessage()], 500);
+        }
+ 
     }
 
     /**
@@ -73,8 +86,11 @@ class AdminNoticiasController extends Controller
         $validator = Validator::make($request->all(), [
             'titulo' => 'required|string|max:255',
             'contenido' => 'required|string',
-            'fecha' => 'required|date',
             'autor' => 'nullable|string|max:255',
+            'fecha' => 'nullable|date',
+            'link_de_la_web' => 'nullable|string|max:255',
+            'enlace_de_la_foto' => 'nullable|string|max:255',
+            'equipo_id' => 'nullable|exists:equipos,id',
         ]);
 
         if ($validator->fails()) {

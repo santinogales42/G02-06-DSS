@@ -100,9 +100,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="equipo_id" class="form-label">Equipo:</label>
-                        <select class="form-control" id="equipo_id" name="equipo_id">
-                            <option value="">Seleccionar Equipo</option>
-                            <!-- Aquí puedes cargar los equipos desde la base de datos si deseas -->
+                        <select class="form-control" id="equipo_id" name="equipo_id" required>
+                            <option value="">Selecciona un equipo</option>
+                            @foreach ($equipos as $equipo)
+                                <option value="{{ $equipo->id }}">{{ $equipo->nombre }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear Noticia</button>
