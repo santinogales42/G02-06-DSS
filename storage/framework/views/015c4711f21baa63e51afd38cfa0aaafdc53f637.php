@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hurricane&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -48,76 +49,16 @@
         </map>
     </div>
 
-    <!-- <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
-    <!-- Botón de flecha para cerrar la barra lateral
-        <div class="row">
-            <div class="col-12">
-                <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="<?php echo e(route('home')); ?>" class="w3-bar-item w3-button">Inicio</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="<?php echo e(route('noticias')); ?>" class="w3-bar-item w3-button">Noticias</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="<?php echo e(route('jugadores')); ?>" class="w3-bar-item w3-button">Jugadores</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="<?php echo e(route('calendario')); ?>" class="w3-bar-item w3-button">Calendario</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="<?php echo e(route('clasificacion')); ?>" class="w3-bar-item w3-button">Clasificación</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="<?php echo e(route('favoritos')); ?>" class="w3-bar-item w3-button">Favoritos</a>
-            </div>
-        </div>
-        ﻿
-
-        <div class="w3-dropdown-hover w3-hover-white">
-            <button class="w3-button w3-bar-item w3-hover-white">Admin <i class="fa fa-caret-down w3-hover-white"></i></button>
-            <div class="w3-dropdown-content w3-bar-block ">
-                <a href="#" class="w3-bar-item w3-button w3-red">Jugadores</a>
-                <a href="#" class="w3-bar-item w3-button w3-red">Usuarios</a>
-            </div>
-        </div>
-         Enlaces en la parte inferior de la barra lateral
-        <div class="horizontal-line-1"></div>
-        <div class="contenedor-imagenes">
-            <img src="<?php echo e(asset('images/insta.png')); ?>" alt="Imagen 1">
-            <img src="<?php echo e(asset('images/face.png')); ?>" alt="Imagen 2">
-            <img src="<?php echo e(asset('images/twit.png')); ?>" alt="Imagen 3">
-        </div>
-        <div class="bottom-links">
-            <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
-            <a href="#" class="w3-bar-item w3-button">Cerrar sesión</a>
-        </div>
-
-    </div> -->
-
     <div class="w3-sidebar w3-card w3-animate-left" style="display:none" id="mySidebar">
         <!-- Botón de flecha para cerrar la barra lateral -->
         <div class="SidebarSection">
             <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
-            <a href="<?php echo e(route('home')); ?>" class="w3-bar-item w3-button">Inicio</a>
-            <a href="<?php echo e(route('noticias')); ?>" class="w3-bar-item w3-button">Noticias</a>
-            <a href="<?php echo e(route('jugadores')); ?>" class="w3-bar-item w3-button">Jugadores</a>
-            <a href="<?php echo e(route('calendario')); ?>" class="w3-bar-item w3-button">Calendario</a>
-            <a href="<?php echo e(route('clasificacion')); ?>" class="w3-bar-item w3-button">Clasificación</a>
-            <a href="<?php echo e(route('favoritos')); ?>" class="w3-bar-item w3-button">Favoritos</a>
+            <a href="<?php echo e(route('home')); ?>" class="w3-bar-item w3-button" style="text-decoration: none;">Inicio</a>
+            <a href="<?php echo e(route('noticias')); ?>" class="w3-bar-item w3-button" style="text-decoration: none;">Noticias</a>
+            <a href="<?php echo e(route('jugadores')); ?>" class="w3-bar-item w3-button" style="text-decoration: none;">Jugadores</a>
+            <a href="<?php echo e(route('calendario')); ?>" class="w3-bar-item w3-button" style="text-decoration: none;">Calendario</a>
+            <a href="<?php echo e(route('clasificacion')); ?>" class="w3-bar-item w3-button" style="text-decoration: none;">Clasificación</a>
+            <a href="<?php echo e(route('favoritos')); ?>" class="w3-bar-item w3-button" style="text-decoration: none;">Favoritos</a>
             <div class="w3-dropdown-hover w3-bar-item">
                 <button class="w3-button w3-bar-item">Admin <i class="fas fa-chevron-down"></i></button>
                 <div class="w3-dropdown-content w3-bar-block w3-card">
@@ -135,8 +76,8 @@
                         <img src="<?php echo e(asset('images/twit.png')); ?>" alt="Imagen 3">
                     </div>
                     <div class="horizontal-line-1"></div>
-                <a href="#" class="w3-bar-item w3-button">Contáctanos</a>
-                <a href="<?php echo e(route('logout')); ?>" class="w3-bar-item w3-button">Cerrar sesión</a>
+                <a href="#" class="w3-bar-item w3-button" style="text-decoration: none;">Contáctanos</a>
+                <a href="<?php echo e(route('logout')); ?>" class="w3-bar-item w3-button" style="text-decoration: none;">Cerrar sesión</a>
             </div>
         </div>
     </div>

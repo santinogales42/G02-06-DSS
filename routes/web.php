@@ -15,7 +15,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminJugadoresController;
 use App\Http\Controllers\AdminPartidoController;
 use App\Http\Controllers\AdminNoticiasController;
-
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\AdminEquipoController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -85,7 +86,8 @@ Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index'
 Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
 
 // Rutas para AdminEquipoController
-Route::get('/admin/equipos/create', [AdminEquipoController::class, 'create'])->name('admin.equipos.create');
+Route::get('/adminequipos', [AdminEquipoController::class, 'index']);
+Route::get('/adminequipos/create', [AdminEquipoController::class, 'create'])->name('admin.equipos.create');
 Route::post('/admin/equipos', [AdminEquipoController::class, 'store'])->name('admin.equipos.store');
 Route::get('/admin/equipos/{equipo}/edit', [AdminEquipoController::class, 'edit'])->name('admin.equipos.edit');
 Route::put('/admin/equipos/{equipo}', [AdminEquipoController::class, 'update'])->name('admin.equipos.update');

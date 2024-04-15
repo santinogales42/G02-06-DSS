@@ -7,21 +7,61 @@ use Illuminate\Http\Request;
 
 class AdminEquipoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $equipos = Equipo::all(); // Obtener todos los equipos
-        return view('admin.equipos.index', compact('equipos'));
+        $query = Equipo::query();
+    
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('nombre', 'LIKE', "%{$search}%");
+        }
+    
+        $equipos = $query->paginate(10); // Paginación
+    
+        if ($request->ajax()) {
+            $links = $equipos->appends(['search' => $search])->links()->toHtml();
+            return response()->json([
+                'data' => $equipos->items(),
+                'links' => $links,
+            ]);
+        }
+    
+        return view('admin.adminequipo', compact('equipos'));
     }
 
-    public function create()
+    public function crear(Request $request)
     {
-        return view('admin.equipos.create');
+        $validatedData = $request->validate([
+        'nombre' => 'required|string|max:75',
+        'liga_id' => 'exists:ligas,id',
+        'ganados' => 'integer',
+        'empatados' => 'integer',
+        'perdidos' => 'integer',
+        'goles_favor' => 'integer',
+        'goles_contra' => 'integer',
+        'puntos' => 'integer',
+        'partidos_jugados' => 'integer'
+        ]);
+        try {
+            $equipo = Equipo::create($validatedData);
+            return response()->json(['message' => 'Equipo creado con éxito', 'equipo' => $equipo], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al crear equipo: ' . $e->getMessage()], 500);
+        }
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
+        'nombre' => 'required|string|max:75',
+        'liga_id' => 'exists:ligas,id',
+        'ganados' => 'integer',
+        'empatados' => 'integer',
+        'perdidos' => 'integer',
+        'goles_favor' => 'integer',
+        'goles_contra' => 'integer',
+        'puntos' => 'integer',
+        'partidos_jugados' => 'integer'
         ]);
 
         try {
@@ -32,38 +72,57 @@ class AdminEquipoController extends Controller
         }
     }
 
-    public function show(Equipo $equipo)
+    public function eliminar(Request $request, $id)
     {
-        return view('admin.equipos.show', compact('equipo'));
+        try {
+            $equipo = Equipo::findOrFail($id);
+            $equipo->delete();
+            return response()->json(['message' => 'Equipo eliminado con éxito'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al eliminar equipo'], 500);
+        }
     }
 
-    public function edit(Equipo $equipo)
+    public function actualizar(Request $request, $id)
     {
-        return view('admin.equipos.edit', compact('equipo'));
-    }
-
-    public function update(Request $request, Equipo $equipo)
-    {
-        $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            // Aquí puedes añadir más campos según el modelo de datos
+        $equipo = Equipo::findOrFail($id);
+        $validatedData = $request->validate([
+            'nombre' => 'required|string|max:75',
         ]);
 
+        $equipo->update($validatedData);
+        return response()->json(['message' => 'Equipo actualizado con éxito']);
+    }
+
+    public function eliminarMasa(Request $request)
+    {
+        $ids = $request->ids;
         try {
-            $equipo->update($validated);
-            return redirect()->route('admin.equipos.index')->with('success', 'Equipo actualizado correctamente.');
+            Equipo::whereIn('id', $ids)->delete();
+            return response()->json(['message' => 'Equipos eliminados con éxito'], 200);
         } catch (\Exception $e) {
-            return back()->withErrors('Error al actualizar el equipo: ' . $e->getMessage());
+            return response()->json(['message' => 'Error al eliminar equipos: ' . $e->getMessage()], 500);
         }
     }
 
-    public function destroy(Equipo $equipo)
+    public function eliminarTodos()
     {
         try {
-            $equipo->delete();
-            return redirect()->route('admin.equipos.index')->with('success', 'Equipo eliminado correctamente.');
+            Equipo::query()->delete();
+            return response()->json(['message' => 'Todos los equipos han sido eliminados con éxito'], 200);
         } catch (\Exception $e) {
-            return back()->withErrors('Error al eliminar el equipo: ' . $e->getMessage());
+            return response()->json(['message' => 'Error al eliminar todos los equipos: ' . $e->getMessage()], 500);
         }
     }
+
+    public function insertarEquipos()
+    {
+        try {
+            Artisan::call('db:seed', ['--class' => 'EquiposTableSeeder']);
+            return response()->json(['message' => 'Equipos insertados correctamente']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al insertar equipos: ' . $e->getMessage()], 500);
+        }
+    }
+
 }
