@@ -17,6 +17,7 @@
                     <th>Título</th>
                     <th>Fecha</th>
                     <th>Autor</th>
+                    <th>Equipo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -57,6 +58,15 @@
                     <div class="mb-3">
                         <label for="edit_autor" class="form-label">Autor:</label>
                         <input type="text" class="form-control" id="edit_autor" name="autor">
+                    </div>
+                    <div class="mb-3">
+                        <label for="equipo_id" class="form-label">Equipo:</label>
+                        <select class="form-control" id="equipo_id" name="equipo_id" required>
+                            <option value="">Selecciona un equipo</option>
+                            @foreach ($equipos as $equipo)
+                                <option value="{{ $equipo->id }}">{{ $equipo->nombre }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Actualizar Noticia</button>
                 </form>
@@ -116,7 +126,11 @@
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    //checkSelectedCheckboxes();
+    attachCheckboxEvents();
+    const selectedIds = JSON.parse(localStorage.getItem('selectedNoticias')) || [];
     fetchData(); // Carga inicial de datos
+    
 });
 document.getElementById('crearNoticiaForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
@@ -138,6 +152,27 @@ document.getElementById('crearNoticiaForm').addEventListener('submit', function(
     .catch(error => console.error('Error:', error));
 });
 
+document.getElementById('editarNoticiaForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const noticiaId = document.getElementById('edit_noticia_id').value;
+    const formData = new FormData(this);
+    fetch(`/adminnoticias/actualizar/${noticiaId}`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        $('#editNoticiaModal').modal('hide');
+        fetchData(); // Asegúrate de que esta función ya esté definida para recargar los datos
+    })
+    .catch(error => console.error('Error:', error));
+});
+
 function fetchData(page = 1) {
     var search = document.getElementById('search').value;
     var url = `/adminnoticias?search=${search}&page=${page}`;
@@ -152,19 +187,29 @@ function fetchData(page = 1) {
         var tableBody = document.getElementById('noticias-list');
         tableBody.innerHTML = '';
         data.data.forEach(noticia => {
-            var row = `<tr>
-                <td><input type="checkbox" class="noticia-checkbox" value="${noticia.id}"></td>
-                <td>${noticia.id}</td>
-                <td>${noticia.titulo}</td>
-                <td>${noticia.fecha}</td>
-                <td>${noticia.autor}</td>
-                <td>
-                    <button onclick="openEditModal(${noticia.id})" class="btn btn-primary">Editar</button>
-                    <button class="btn btn-danger" onclick="deleteNoticia(${noticia.id})">Eliminar</button>
-                </td>
-            </tr>`;
-            tableBody.innerHTML += row;
+            // Realizar una segunda llamada para obtener el nombre del equipo
+            fetch(`/adminnoticias/equipo/${noticia.equipo_id}`)
+                .then(response => response.json())
+                .then(equipo => {
+                    // Ahora tienes el nombre del equipo
+                    var row = `<tr>
+                        <td><input type="checkbox" class="noticia-checkbox" value="${noticia.id}"></td>
+                        <td>${noticia.id}</td>
+                        <td>${noticia.titulo}</td>
+                        <td>${noticia.fecha}</td>
+                        <td>${noticia.autor}</td>
+                        <td>${equipo.nombre}</td>
+                        <td>
+                            <button onclick="openEditModal(${noticia.id})" class="btn btn-primary">Editar</button>
+                            <button class="btn btn-danger" onclick="deleteNoticia(${noticia.id})">Eliminar</button>
+                        </td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                    attachCheckboxEvents(); 
+                    checkSelectedCheckboxes();
+                });
         });
+
         var paginationDiv = document.getElementById('pagination-links');
         paginationDiv.innerHTML = data.links;
     })
@@ -212,21 +257,106 @@ function deleteAllNoticias() {
                 </tr>`;
                 tableBody.innerHTML += row;
             });
+            attachCheckboxEvents(); // Adjuntar eventos a los nuevos checkboxes
+            checkSelectedCheckboxes();
             var paginationDiv = document.getElementById('pagination-links');
             paginationDiv.innerHTML = ''; // Limpiar antes de añadir los nuevos enlaces
             paginationDiv.innerHTML = data.links; // Añadir los nuevos enlaces de paginación
-            attachClickEventToPaginationLinks();
+            
         })
 
         .catch(error => console.error('Error:', error));
     }
 }
 
+function deleteNoticia(noticiaId) {
+    // Mostrar un mensaje de confirmación antes de eliminar
+    if (confirm('¿Seguro que quieres eliminar la noticia?')) {
+        // Si el usuario confirma, proceder con la eliminación
+        eliminarNoticia(noticiaId);
+    }
+}
+
+function eliminarNoticia(noticiaId) {
+    fetch(`/adminnoticias/eliminar/${noticiaId}`, {
+        method: 'POST',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), // Asegúrate de tener este meta tag en tu layout para el CSRF token
+        },
+    })
+    .then(response => {
+    if (response.ok) {
+        fetchData(); // Recargar los datos para actualizar la lista
+        alert('Noticia eliminada con éxito');
+    } else {
+        response.json().then(data => alert(data.message));
+    }
+})
+
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function deleteSelectedNoticias() {
+    
+    //checkSelectedCheckboxes();
+    attachCheckboxEvents();
+    // Obtener IDs seleccionados del almacenamiento local
+    selectedIds = JSON.parse(localStorage.getItem('selectedNoticias')) || [];
+
+    if (selectedIds.length === 0) {
+        alert('Por favor, selecciona al menos una noticia para eliminar.');
+        return;
+    }
+
+    if (!confirm('¿Seguro que quieres eliminar las noticias seleccionadas?')) return;
+
+    // Continúa con la eliminación como antes, usando `selectedIds`
+    fetch('/adminnoticias/eliminar-masa', {
+        method: 'POST',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ids: selectedIds }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        fetchData(); // Recargar la lista para reflejar los cambios
+        localStorage.setItem('selectedNoticias', JSON.stringify([])); // Limpiar las selecciones después de la eliminación
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 
-// Mostrar noticias en tabla
-
-
+function attachCheckboxEvents() {
+    document.querySelectorAll('.noticia-checkbox').forEach(checkbox => {
+        
+        checkbox.addEventListener('change', function() {
+            let selectedIds = JSON.parse(localStorage.getItem('selectedNoticias')) || [];
+            if (this.checked) {
+                selectedIds.push(this.value);
+                console.log(`ID ${this.value} agregado a localStorage`);
+            } else {
+                selectedIds = selectedIds.filter(id => id !== this.value);
+                console.log(`ID ${this.value} eliminado de localStorage`);
+            }
+            localStorage.setItem('selectedNoticias', JSON.stringify(selectedIds));
+            console.log('IDs almacenados en localStorage:', selectedIds);
+        });
+    });
+}
+function checkSelectedCheckboxes() {
+    const selectedIds = JSON.parse(localStorage.getItem('selectedNoticias')) || [];
+    console.log('IDs seleccionados:', selectedIds);
+    document.querySelectorAll('.noticia-checkbox').forEach(checkbox => {
+        checkbox.checked = selectedIds.includes(checkbox.value);
+    });
+}
 
 function insertarNoticia() {
     const formData = new FormData(document.getElementById('crearNoticiaForm')); // Obtener los datos del formulario
