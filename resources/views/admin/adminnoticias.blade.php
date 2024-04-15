@@ -222,7 +222,35 @@ function deleteAllNoticias() {
     }
 }
 
+function deleteNoticia(noticiaId) {
+    // Mostrar un mensaje de confirmación antes de eliminar
+    if (confirm('¿Seguro que quieres eliminar la noticia?')) {
+        // Si el usuario confirma, proceder con la eliminación
+        eliminarNoticia(noticiaId);
+    }
+}
 
+function eliminarNoticia(noticiaId) {
+    fetch(`/adminnoticias/eliminar/${noticiaId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), // Asegúrate de tener este meta tag en tu layout para el CSRF token
+        },
+    })
+    .then(response => {
+    if (response.ok) {
+        fetchData(); // Recargar los datos para actualizar la lista
+        alert('Noticia eliminada con éxito');
+    } else {
+        response.json().then(data => alert(data.message));
+    }
+})
+
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 // Mostrar noticias en tabla
 

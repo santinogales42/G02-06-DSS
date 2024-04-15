@@ -105,7 +105,7 @@ class AdminNoticiasController extends Controller
     /**
      * Elimina una noticia específica.
      */
-    public function eliminar($id)
+    public function eliminar(Request $request, $id)
     {
         $noticia = Noticia::findOrFail($id);
         $noticia->delete();

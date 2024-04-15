@@ -96,6 +96,7 @@ Route::get('/adminnoticias', [AdminNoticiasController::class, 'index'])->name('a
 Route::post('/adminnoticias/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
 Route::delete('/adminnoticias/eliminar-todas', [AdminNoticiasController::class, 'eliminarTodas'])->name('admin.noticias.eliminar-todas');
 Route::get('/adminnoticias/datos/{id}', [AdminNoticiasController::class, 'getDatos'])->name('noticias.getDatos');
+Route::delete('/adminnoticias/eliminar/{id}', [AdminNoticiasController::class, 'eliminar'])->name('admin.noticias.eliminar');
 
 
 
