@@ -13,10 +13,8 @@
         <h2 class="text-center">Administración de Partidos</h2>
 
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <!-- Botón "Crear Partido" -->
             <a href="{{ route('admin.partidos.create') }}" class="btn btn-primary">Crear Partido</a>
 
-            <!-- Formulario de filtrado por Jornada -->
             <div>
                 <label class="mr-2">Seleccionar Jornada:</label>
                 <select onchange="location = this.value;" class="jornada-actual">
@@ -30,7 +28,7 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col" class="text-center">Fecha</th>
@@ -48,15 +46,25 @@
                             <td class="text-center">{{ $partido->fecha_nueva }}</td>
                             <td class="text-center">{{ $partido->hora_nueva }}</td>
                             <td class="text-center">
-                                <div class="d-flex justify-content-between">
-                                    <div style="width: 45%; text-align: center;">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="col text-end me-2">
+                                        @php
+                                            $nombreLimpioLocal = Str::ascii($partido->equipoLocal->nombre);
+                                            $nombreArchivoLocal = strtolower(str_replace(' ', '', $nombreLimpioLocal)) . '.png';
+                                        @endphp
+                                        <img src="{{ asset('images/equipos/' . $nombreArchivoLocal) }}" alt="{{ $partido->equipoLocal->nombre }}" style="width: 30px; height: auto;" class="me-2">
                                         <strong>{{ $partido->equipoLocal->nombre }}</strong>
                                     </div>
-                                    <div style="width: 10%; text-align: center;">
+                                    <div class="col-auto text-center">
                                         <span>{{ $partido->resultado }}</span>
                                     </div>
-                                    <div style="width: 45%; text-align: center;">
+                                    <div class="col text-start ms-2">
                                         <strong>{{ $partido->equipoVisitante->nombre }}</strong>
+                                        @php
+                                            $nombreLimpioVisitante = Str::ascii($partido->equipoVisitante->nombre);
+                                            $nombreArchivoVisitante = strtolower(str_replace(' ', '', $nombreLimpioVisitante)) . '.png';
+                                        @endphp
+                                        <img src="{{ asset('images/equipos/' . $nombreArchivoVisitante) }}" alt="{{ $partido->equipoVisitante->nombre }}" style="width: 30px; height: auto;" class="me-2">
                                     </div>
                                 </div>
                             </td>

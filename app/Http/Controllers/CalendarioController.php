@@ -33,10 +33,17 @@ class CalendarioController extends Controller
 
         foreach ($partidos as $partido) {
             $fecha = Carbon::createFromFormat('Y-m-d', $partido->fecha);
-            $partido->fecha_nueva = $fecha->isoFormat('ddd D MMM YYYY');
 
             $hora = Carbon::createFromFormat('H:i:s', $partido->hora);
             $partido->hora_nueva = $hora->format('H:i');
+            
+            if ($fecha->isToday()) {
+                $partido->fecha_nueva = 'Hoy';
+            } elseif ($fecha->isTomorrow()) {
+                $partido->fecha_nueva = 'Mañana';
+            } else {
+                $partido->fecha_nueva = $fecha->isoFormat('ddd D MMM YYYY');
+            }
         }
 
         return view('calendario', compact('partidos', 'jornada_actual', 'jornadas'));

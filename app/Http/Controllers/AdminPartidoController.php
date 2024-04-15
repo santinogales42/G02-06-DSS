@@ -37,6 +37,7 @@ class AdminPartidoController extends Controller
     public function create()
     {
         $equipos = Equipo::all();
+
         return view('admin.partidos.create', compact('equipos'));
     }
 
@@ -102,11 +103,9 @@ class AdminPartidoController extends Controller
             return redirect()->route('admin.partidos.create');
         }
 
-        // Obtener el máximo ID actual de la tabla Partido
         $maxId = Partido::max('id');
-
-        // Calcular el próximo ID sumando 1 al máximo ID actual
         $nextId = $maxId + 1;
+
 
         $partido = new Partido();
         $partido->id = $nextId;

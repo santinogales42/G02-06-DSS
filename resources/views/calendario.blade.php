@@ -3,7 +3,12 @@
 @section('title', 'Calendario de Partidos')
 
 @section('content')
-    <h1 style="text-align: center; margin-top: 10px;">Calendario de Partidos</h1>
+    <div class="jumbotron jumbotron-fluid" style="background-color: #333333; color: #ffffff;">
+        <div class="container-fluid">
+            <h1 class="display-4 font-weight-bold text-center" style="font-size: 2.5rem;">Calendario de La Liga 2023/24</h1>
+        </div>
+    </div>
+    
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{{ route('calendario', ['jornada' => $jornada_actual - 1]) }}" class="jornada-anterior">
@@ -37,19 +42,31 @@
                             $claseFila = $index % 2 == 0 ? 'fila-par' : 'fila-impar';
                         @endphp
                         <tr class="{{ $claseFila }}">
-                            <td class="text-center">{{ $partido->fecha_nueva }}</td>
+                            <td class="text-center">
+                                {{ $partido->fecha_nueva }}
+                            </td>
                             <td class="text-center">{{ $partido->hora_nueva }}</td>
                             <td class="text-center">{{ $partido->estadio }}</td>
                             <td class="text-center">
-                                <div class="d-flex justify-content-between">
-                                    <div style="width: 45%; text-align: center;">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="col text-end me-2">
+                                        @php
+                                            $nombreLimpioLocal = Str::ascii($partido->equipoLocal->nombre);
+                                            $nombreArchivoLocal = strtolower(str_replace(' ', '', $nombreLimpioLocal)) . '.png';
+                                        @endphp
+                                        <img src="{{ asset('images/equipos/' . $nombreArchivoLocal) }}" alt="{{ $partido->equipoLocal->nombre }}" style="width: 30px; height: auto;" class="me-2">
                                         <strong>{{ $partido->equipoLocal->nombre }}</strong>
                                     </div>
-                                    <div style="width: 10%; text-align: center;">
+                                    <div class="col-auto text-center">
                                         <span>{{ $partido->resultado }}</span>
                                     </div>
-                                    <div style="width: 45%; text-align: center;">
+                                    <div class="col text-start ms-2">
                                         <strong>{{ $partido->equipoVisitante->nombre }}</strong>
+                                        @php
+                                            $nombreLimpioVisitante = Str::ascii($partido->equipoVisitante->nombre);
+                                            $nombreArchivoVisitante = strtolower(str_replace(' ', '', $nombreLimpioVisitante)) . '.png';
+                                        @endphp
+                                        <img src="{{ asset('images/equipos/' . $nombreArchivoVisitante) }}" alt="{{ $partido->equipoVisitante->nombre }}" style="width: 30px; height: auto;" class="me-2">
                                     </div>
                                 </div>
                             </td>
