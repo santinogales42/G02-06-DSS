@@ -16,7 +16,7 @@
     text-align: center;
 }
 
-#mySidebar .SidebarSection{
+#mySidebar .SidebarSection {
     display: flex;
     flex-direction: column;
     /*justify-content: space-around;*/
@@ -39,30 +39,45 @@
 
 /* Estilos para el contenido del menú desplegable */
 .w3-dropdown-content {
-    display: none; /* Ocultar por defecto */
+    display: none;
+    /* Ocultar por defecto */
     position: absolute;
-    background-color: #f9f9f9; /* Color de fondo */
-    min-width: 160px; /* Ancho mínimo */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Sombra */
-    z-index: 1; /* Z-index para estar sobre otros elementos */
-    left: 50%; /* Posición izquierda centrada */
-    transform: translateX(-50%); /* Centrar horizontalmente */
-    top: 50px; /* Ajustar la distancia desde la parte superior */
-    border-radius: 4px; /* Borde redondeado */
+    background-color: #f9f9f9;
+    /* Color de fondo */
+    min-width: 160px;
+    /* Ancho mínimo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Sombra */
+    z-index: 1;
+    /* Z-index para estar sobre otros elementos */
+    left: 50%;
+    /* Posición izquierda centrada */
+    transform: translateX(-50%);
+    /* Centrar horizontalmente */
+    top: 50px;
+    /* Ajustar la distancia desde la parte superior */
+    border-radius: 4px;
+    /* Borde redondeado */
 }
 
 /* Ajustar el margen y padding de los elementos de la lista */
 .w3-dropdown-content a {
-    padding: 10px 15px; /* Espaciado interno */
-    display: block; /* Mostrar como bloques */
-    color: black; /* Color del texto */
-    text-decoration: none; /* Sin subrayado */
-    transition: background-color 0.3s; /* Transición suave del color de fondo */
+    padding: 10px 15px;
+    /* Espaciado interno */
+    display: block;
+    /* Mostrar como bloques */
+    color: black;
+    /* Color del texto */
+    text-decoration: none;
+    /* Sin subrayado */
+    transition: background-color 0.3s;
+    /* Transición suave del color de fondo */
 }
 
 /* Cambiar el color de fondo de los elementos al pasar por encima */
 .w3-dropdown-content a:hover {
-    background-color: #ddd; /* Color de fondo al pasar */
+    background-color: #ddd;
+    /* Color de fondo al pasar */
 }
 
 
@@ -101,23 +116,32 @@
 }
 
 .horizontal-line-1 {
-  display: block; /* Asegura que el elemento se comporte como un bloque */
-  width: 242px;
-  height: 0px;
-  border-top: 2px solid #FFFFFF;
-  margin: auto; /* Centra el bloque horizontalmente en su contenedor */
+    display: block;
+    /* Asegura que el elemento se comporte como un bloque */
+    width: 242px;
+    height: 0px;
+    border-top: 2px solid #FFFFFF;
+    margin: auto;
+    /* Centra el bloque horizontalmente en su contenedor */
 }
+
 .contenedor-imagenes {
-  display: flex; /* Activa Flexbox para el contenedor */
-  justify-content: center; /* Centra las imágenes horizontalmente */
-  align-items: center; /* Centra las imágenes verticalmente */
+    display: flex;
+    /* Activa Flexbox para el contenedor */
+    justify-content: center;
+    /* Centra las imágenes horizontalmente */
+    align-items: center;
+    /* Centra las imágenes verticalmente */
 }
 
 .contenedor-imagenes img {
-  margin: 0 10px; /* Añade un poco de margen entre las imágenes */
-  width: 65px; /* Establece el ancho deseado */
-  height: 60px; /* Establece la altura deseada */
-  margin-top:10px;
+    margin: 0 10px;
+    /* Añade un poco de margen entre las imágenes */
+    width: 65px;
+    /* Establece el ancho deseado */
+    height: 60px;
+    /* Establece la altura deseada */
+    margin-top: 10px;
 }
 
 
@@ -132,12 +156,14 @@
     margin-top: 1px;
     /* Ajusta el margen superior según necesites */
 }
+
 .bottom-links {
     position: absolute;
     bottom: 0;
     margin-top: auto;
     width: 100%;
 }
+
 /* Estilos para el hover del botón de la barra lateral */
 #openNav {
     background-color: #ff3823;
@@ -200,9 +226,6 @@
     /* O la altura que desees para tu logo */
 }
 
-
-
-
 .noticias-1 {
     width: 132px;
     height: 31px;
@@ -261,7 +284,7 @@
 }
 
 .team-danger {
-    background-color: #dc3545 !important;
+    background-color: #ff3823 !important;
 }
 
 
@@ -270,6 +293,7 @@
     margin-top: 50px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .encabezado-tarjeta {
@@ -291,11 +315,67 @@
 .boton-inicio:hover,
 .boton-registro:hover,
 .boton-cancelar:hover {
-    background-color: #ff3823;
+    background-color: #f1706270;
     color: #fff;
     border-color: #ff3823;
 }
 
+
+/*CRUD USUARIOS*/
+.tarjeta-agregar-usuarios {
+    border-color: #ff3823 !important;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    
+}
+.encabezado-tarjeta-usuarios {
+    background-color: #ff9688;
+    text-align: center !important;
+    color: #fff;
+    padding: 20px 0;
+    font-weight: bold;
+}
+
+.boton-agregar {
+    width: 100%;
+    /* Ancho fijo del botón */
+    margin-left: auto;
+    /* Margen izquierdo automático */
+    margin-right: auto;
+    /* Margen derecho automático */
+    color: #ff6961;
+    border-color: #ff3823;
+}
+
+.boton-editar {
+    color: #ff6961;
+    border-color: #ff3823;
+}
+
+.boton-agregar:hover,
+.boton-editar:hover {
+    background-color: #ff6961;
+    color: #fff;
+    border-color: #ff3823;
+}
+
+.boton-actualizar-usuarios {
+    background-color: #ff9688 !important;
+    color: white;
+    
+}
+
+.boton-actualizar-usuarios:hover {
+    background-color: white;
+    color: black;
+}
+
+.btn-elliminar i {
+    color: #ff3823; 
+    font-size: 50px;
+}
 
 /* VISTA CALENDARIO */
 
@@ -315,7 +395,8 @@
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 10px;
-    color: #333; /* Color de texto */
+    color: #333;
+    /* Color de texto */
     transition: background-color 0.3s ease;
 }
 
@@ -327,14 +408,21 @@
 /* Estilos para el enlace "Jornada Anterior" */
 .jornada-anterior,
 .jornada-siguiente {
-    color: #007bff; /* Color de texto normal */
-    text-decoration: none; /* Elimina el subrayado */
+    color: #007bff;
+    /* Color de texto normal */
+    text-decoration: none;
+    /* Elimina el subrayado */
     padding: 10px;
-    background-color: #eaeaea; /* Fondo gris claro */
-    border: 2px solid #fff; /* Borde blanco */
-    transition: background-color 0.3s ease, border-color 0.3s ease; /* Transición suave */
-    margin: 0 20px; /* Margen izquierdo y derecho de 20px */
-    display: inline-block; /* Mostrar como bloque en línea */
+    background-color: #eaeaea;
+    /* Fondo gris claro */
+    border: 2px solid #fff;
+    /* Borde blanco */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    /* Transición suave */
+    margin: 0 20px;
+    /* Margen izquierdo y derecho de 20px */
+    display: inline-block;
+    /* Mostrar como bloque en línea */
 }
 
 /* Cambia el fondo y el borde a blanco al pasar el ratón por encima */
@@ -342,20 +430,27 @@
 .jornada-siguiente:hover {
     background-color: #fff;
     border-color: #eaeaea;
-    color: #000000; /* Mantener el color de texto normal */
-    text-decoration: none; /* Mantener la eliminación del subrayado */
+    color: #000000;
+    /* Mantener el color de texto normal */
+    text-decoration: none;
+    /* Mantener la eliminación del subrayado */
 }
 
 
 /* Estilos específicos para el enlace de "Jornada X" (actual) */
 .jornada-actual {
-    color: #000000; /* Color de texto */
+    color: #000000;
+    /* Color de texto */
     font-weight: bold;
     padding: 10px;
-    border-radius: 20px; /* Bordes circulares */
-    background-color: #eaeaea; /* Fondo gris claro */
-    border: 2px solid #fff; /* Borde blanco */
-    transition: background-color 0.3s ease, border-color 0.3s ease; /* Transición suave */
+    border-radius: 20px;
+    /* Bordes circulares */
+    background-color: #eaeaea;
+    /* Fondo gris claro */
+    border: 2px solid #fff;
+    /* Borde blanco */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    /* Transición suave */
 }
 
 /* Cambia el fondo y el borde a blanco al pasar el ratón por encima */
@@ -377,7 +472,7 @@
     font-weight: bold;
     display: flex;
     align-items: center;
-    
+
 }
 
 .columna-fecha,
@@ -387,27 +482,36 @@
 }
 
 .columna-fecha {
-    width: 10%; /* Ancho de la columna Fecha */
+    width: 10%;
+    /* Ancho de la columna Fecha */
 }
 
 .columna-hora {
-    width: 10%; /* Ancho de la columna Hora */
+    width: 10%;
+    /* Ancho de la columna Hora */
 }
 
 .columna-resultado {
-    width: 95%; /* Ancho de la columna Partido */
-    text-align: center; /* Alineación centrada para el contenido de la columna Partido */
+    width: 95%;
+    /* Ancho de la columna Partido */
+    text-align: center;
+    /* Alineación centrada para el contenido de la columna Partido */
     display: flex;
     flex-direction: row;
-    justify-content: center; /* Centrar contenido horizontalmente */
-    align-items: center; /* Centrar contenido verticalmente */
+    justify-content: center;
+    /* Centrar contenido horizontalmente */
+    align-items: center;
+    /* Centrar contenido verticalmente */
 }
 
 .resultado {
     display: inline-block;
-    text-align: center; /* Alineación centrada para el resultado */
-    width: 50px; /* Ancho del contenedor del resultado */
-    margin: 0 5px; /* Espacio entre los resultados */
+    text-align: center;
+    /* Alineación centrada para el resultado */
+    width: 50px;
+    /* Ancho del contenedor del resultado */
+    margin: 0 5px;
+    /* Espacio entre los resultados */
 }
 
 
@@ -416,13 +520,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ddd; /* Borde inferior para separar las filas */
+    border-bottom: 1px solid #ddd;
+    /* Borde inferior para separar las filas */
 }
 
 .fila-par {
-    background-color: #ffffff; /* Color de fondo para filas pares */
+    background-color: #ffffff;
+    /* Color de fondo para filas pares */
 }
 
 .fila-impar {
-    background-color: #f4f4f4; /* Color de fondo para filas impares */
+    background-color: #f4f4f4;
+    /* Color de fondo para filas impares */
 }

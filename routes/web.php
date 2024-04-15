@@ -14,11 +14,9 @@ use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminJugadoresController;
 use App\Http\Controllers\AdminPartidoController;
+use App\Http\Controllers\AdminUsuariosController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-
-
 
 
 Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
@@ -76,3 +74,11 @@ Route::get('/admin/partidos/edit', [AdminPartidoController::class, 'edit'])->nam
 Route::put('/admin/partidos/{id}/update', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
 Route::delete('/admin/partidos/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
 Route::post('/admin/partidos/search', [AdminPartidoController::class, 'search'])->name('admin.partidos.search');
+
+
+Route::get('/admin/usuarios', [AdminUsuariosController::class, 'index'])->name('admin.usuarios.index');
+Route::get('/admin/usuarios/create', [AdminUsuariosController::class, 'create'])->name('admin.usuarios.create');
+Route::get('/admin/usuarios/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
+Route::delete('/admin/usuarios/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
+Route::post('/admin/usuarios/store', [AdminUsuariosController::class, 'store'])->name('admin.usuarios.store');
+Route::put('/admin/usuarios/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');
