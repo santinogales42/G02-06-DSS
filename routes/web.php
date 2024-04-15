@@ -14,6 +14,8 @@ use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminJugadoresController;
 use App\Http\Controllers\AdminPartidoController;
+use App\Http\Controllers\AdminNoticiasController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -88,3 +90,20 @@ Route::post('/admin/equipos', [AdminEquipoController::class, 'store'])->name('ad
 Route::get('/admin/equipos/{equipo}/edit', [AdminEquipoController::class, 'edit'])->name('admin.equipos.edit');
 Route::put('/admin/equipos/{equipo}', [AdminEquipoController::class, 'update'])->name('admin.equipos.update');
 Route::delete('/admin/equipos/{equipo}', [AdminEquipoController::class, 'destroy'])->name('admin.equipos.destroy');
+
+// Rutas para administrar noticias
+Route::get('/adminnoticias', [AdminNoticiasController::class, 'index'])->name('adminnoticias');
+Route::post('/adminnoticias/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
+Route::delete('/adminnoticias/eliminar-todas', [AdminNoticiasController::class, 'eliminarTodas'])->name('admin.noticias.eliminar-todas');
+Route::get('/adminnoticias/datos/{id}', [AdminNoticiasController::class, 'getDatos'])->name('noticias.getDatos');
+
+
+
+
+
+
+
+
+
+
+
