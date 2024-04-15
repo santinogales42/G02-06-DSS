@@ -284,9 +284,67 @@
 }
 
 .team-danger {
-    background-color: #ff3823 !important;
+    background-color: #dc3545 !important;
 }
 
+
+.noticia {
+    border: 2px solid #ccc; /* Borde alrededor de cada noticia */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px; /* Espacio interno */
+    margin-bottom: 20px; /* Margen inferior para separar noticias */
+    overflow: hidden; /* Para limpiar el float de la imagen */
+}
+
+.noticia h2 {
+    margin-top: 0; /* Elimina el margen superior del título */
+}
+
+.noticia h2 a{
+    color: red;
+}
+
+.noticia img {
+    float: right; /* Mover la imagen a la derecha */
+    max-height: 100%;
+    float: right; /* Mover la imagen a la derecha */
+    margin-left: 10px; /* Espacio entre la imagen y el contenido */
+    width: 280px; /* Ancho de la imagen */
+    border-radius: 5px; /* Bordes redondeados */
+
+}
+
+.noticia p {
+    margin: 0; /* Elimina los márgenes de los párrafos */
+    font-size: 1.1em; /* Tamaño de letra para el contenido de la noticia */
+}
+
+.noticia p:last-child {
+    font-size: 0.8em; /* Tamaño de letra más pequeño para el autor y la fecha */
+    color: #888; /* Color gris para el autor y la fecha */
+}
+
+.noticia .descripcion {
+    text-align: justify; /* Justifica el texto de la descripción */
+
+    padding-bottom: 5px; /* Espacio inferior para separar la línea de la descripción */
+}
+
+.noticia-info-extra {
+    display: flex; /* Utilizar flexbox */
+    align-items: end; /* Alinear los elementos en la línea base */
+    position: absolute; /* Posicionamiento absoluto */
+}
+
+.noticia-info-extra p {
+    display: inline; /* Alinear elementos en la misma línea */
+    font-size: 0.8em; /* Tamaño de letra más pequeño */
+    color: #888; /* Color gris */
+}
+
+.noticia-info-extra .noticia-autor::after {
+    content: " - "; /* Agregar el guion como contenido después del autor */
+}
 
 /* Estilos para inicio de sesión */
 .tarjeta {
@@ -382,154 +440,67 @@
 /* Estilos para la fila de navegación */
 .jornada-navegacion {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 185px;
-    margin-right: 185px;
+    justify-content: center; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
     padding: 10px;
-    border-radius: 5px;
+    margin: 0 auto; /* Margen automático para centrar horizontalmente */
+    width: 61%; /* Ancho máximo del contenedor */
 }
 
-/* Estilos para cada enlace de navegación */
-.jornada-navegacion a {
+/* Estilos para "Jornada Anterior" */
+.jornada-anterior {
+    color: #000000;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 10px;
     border-radius: 10px;
-    color: #333;
-    /* Color de texto */
-    transition: background-color 0.3s ease;
-}
-
-/* Cambia el fondo a blanco al pasar el ratón por encima */
-.jornada-navegacion a:hover {
-    background-color: #fff;
-}
-
-/* Estilos para el enlace "Jornada Anterior" */
-.jornada-anterior,
-.jornada-siguiente {
-    color: #007bff;
-    /* Color de texto normal */
-    text-decoration: none;
-    /* Elimina el subrayado */
-    padding: 10px;
     background-color: #eaeaea;
-    /* Fondo gris claro */
     border: 2px solid #fff;
-    /* Borde blanco */
     transition: background-color 0.3s ease, border-color 0.3s ease;
-    /* Transición suave */
-    margin: 0 20px;
-    /* Margen izquierdo y derecho de 20px */
+    margin-right: auto; /* Alinea a la izquierda */
     display: inline-block;
-    /* Mostrar como bloque en línea */
+}
+
+/* Estilos para "Jornada Siguiente" */
+.jornada-siguiente {
+    color: #000000;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #eaeaea;
+    border: 2px solid #fff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    margin-left: auto; /* Alinea a la derecha */
+    display: inline-block;
+}
+
+/* Estilos para el selector de jornada actual */
+.jornada-actual {
+    color: #000000;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #eaeaea;
+    border: 2px solid #fff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Cambia el fondo y el borde a blanco al pasar el ratón por encima */
 .jornada-anterior:hover,
-.jornada-siguiente:hover {
-    background-color: #fff;
-    border-color: #eaeaea;
-    color: #000000;
-    /* Mantener el color de texto normal */
-    text-decoration: none;
-    /* Mantener la eliminación del subrayado */
-}
-
-
-/* Estilos específicos para el enlace de "Jornada X" (actual) */
-.jornada-actual {
-    color: #000000;
-    /* Color de texto */
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 20px;
-    /* Bordes circulares */
-    background-color: #eaeaea;
-    /* Fondo gris claro */
-    border: 2px solid #fff;
-    /* Borde blanco */
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    /* Transición suave */
-}
-
-/* Cambia el fondo y el borde a blanco al pasar el ratón por encima */
+.jornada-siguiente:hover,
 .jornada-actual:hover {
     background-color: #fff;
     border-color: #eaeaea;
-}
-
-.tabla-calendario {
-    width: 80%;
-    margin: auto;
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin-bottom: 50px;
-}
-
-.fila-partidos-head {
-    background-color: #f4f4f4;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-
-}
-
-.columna-fecha,
-.columna-hora,
-.columna-resultado {
-    padding: 15px;
-}
-
-.columna-fecha {
-    width: 10%;
-    /* Ancho de la columna Fecha */
-}
-
-.columna-hora {
-    width: 10%;
-    /* Ancho de la columna Hora */
-}
-
-.columna-resultado {
-    width: 95%;
-    /* Ancho de la columna Partido */
-    text-align: center;
-    /* Alineación centrada para el contenido de la columna Partido */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    /* Centrar contenido horizontalmente */
-    align-items: center;
-    /* Centrar contenido verticalmente */
-}
-
-.resultado {
-    display: inline-block;
-    text-align: center;
-    /* Alineación centrada para el resultado */
-    width: 50px;
-    /* Ancho del contenedor del resultado */
-    margin: 0 5px;
-    /* Espacio entre los resultados */
-}
-
-
-
-.fila-partido {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    /* Borde inferior para separar las filas */
+    color: #000000;
+    text-decoration: none;
 }
 
 .fila-par {
-    background-color: #ffffff;
-    /* Color de fondo para filas pares */
+    background-color: #f8f9fa; /* Color de fondo para filas pares */
+    vertical-align: middle;
+    padding: 10px;
 }
 
 .fila-impar {
-    background-color: #f4f4f4;
-    /* Color de fondo para filas impares */
+    background-color: #e0e0e0; /* Color de fondo para filas impares */
+    vertical-align: middle;
 }
