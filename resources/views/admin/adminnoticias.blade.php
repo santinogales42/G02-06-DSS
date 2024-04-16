@@ -212,9 +212,20 @@ function fetchData(page = 1) {
 
         var paginationDiv = document.getElementById('pagination-links');
         paginationDiv.innerHTML = data.links;
+        attachClickEventToPaginationLinks();
     })
     .catch(error => console.error('Error:', error));
 }
+
+function attachClickEventToPaginationLinks() {
+        document.querySelectorAll('#pagination-links a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault(); // Evita la navegación directa
+                const page = this.getAttribute('href').split('page=')[1];
+                fetchData(page);
+            });
+        });
+    }
 
 function openEditModal(noticiaId) {
     fetch(`/adminnoticias/datos/${noticiaId}`)
@@ -268,6 +279,7 @@ function deleteAllNoticias() {
         .catch(error => console.error('Error:', error));
     }
 }
+
 
 function deleteNoticia(noticiaId) {
     // Mostrar un mensaje de confirmación antes de eliminar
