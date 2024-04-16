@@ -8,9 +8,35 @@ use Illuminate\Http\Request;
 
 class NoticiasController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('noticias');
+        $query = Noticia::query();
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('titulo', 'LIKE', "%{$search}%")
+                ->orWhere('id', 'LIKE', "%{$search}%")
+                ->orWhereHas('equipo', function ($query) use ($search) {
+                    $query->where('nombre', 'LIKE', "%{$search}%");
+                });
+        }
+
+
+        $noticias = $query->paginate(5);
+        $equipos = Equipo::all();
+
+        if ($request->ajax()) {
+            // Preparando el HTML de los enlaces de paginación
+            $links = $noticias->appends(['search' => $search])->links()->toHtml();
+
+            // Preparando los datos para enviar
+            return response()->json([
+                'data' => $noticias->items(), // Datos de jugadores
+                'links' => $links, // HTML de los enlaces de paginación
+            ]);
+        }
+
+        return view('noticias', compact('noticias','equipos'));
     }
 
     public function getDatos($id)
