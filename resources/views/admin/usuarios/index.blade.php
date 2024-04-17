@@ -7,6 +7,10 @@
             <div class="tarjeta-agregar-usuarios">
                 <a href="{{ route('admin.usuarios.create') }}" class="btn boton-agregar">Agregar Usuario</a>
             </div>
+            <form action="{{ route('admin.usuarios.index') }}" method="GET">
+                <input type="text" name="salida" placeholder="Buscar por nombre o correo" value="{{ request('salida') }}">
+                <button type="submit">Buscar</button>
+            </form>
             <div class="tarjeta">
                 <div class="encabezado-tarjeta-usuarios">Lista de Usuarios</div>
 

@@ -11,10 +11,26 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminUsuariosController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::all();
-        return view('admin.usuarios.index', compact('usuarios'));
+        $query = User::query();
+
+    if ($request->filled('search')) {
+        $searchTerm = $request->input('search');
+
+        // Verificar si el término de búsqueda contiene el carácter '@'
+        if (strpos($searchTerm, '@') !== false) {
+            // Es un término de búsqueda de correo electrónico
+            $query->where('email', 'LIKE', '%' . $searchTerm . '%');
+        } else {
+            // Es un término de búsqueda de nombre
+            $query->where('name', 'LIKE', '%' . $searchTerm . '%');
+        }
+    }
+
+    $usuarios = $query->get();
+
+    return view('admin.usuarios.index', compact('usuarios'));
     }
 
     public function create()

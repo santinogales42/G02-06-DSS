@@ -32,7 +32,7 @@ class Equipo extends Model
 
     public function usuarios()
     {
-        return $this->belongsToMany(Usuario::class, 'usuarios_equipos');
+        return $this->belongsToMany(User::class, 'usuarios_equipos');
     }
 
     public function titulos()

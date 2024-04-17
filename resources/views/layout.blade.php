@@ -68,17 +68,16 @@
                     <a href="{{ route('admin.partidos.index') }}" class="w3-bar-item w3-button dropdownButton">Partidos</a>
                 </div>
             </div>
-        <!-- Enlaces en la parte inferior de la barra lateral -->
+            <!-- Enlaces en la parte inferior de la barra lateral -->
             <div class="SidebarDownSection">
                 <div class="horizontal-line-1"></div>
-                    <div class="contenedor-imagenes">
-                        <img src="{{ asset('images/insta.png') }}" alt="Imagen 1">
-                        <img src="{{ asset('images/face.png') }}" alt="Imagen 2">
-                        <img src="{{ asset('images/twit.png') }}" alt="Imagen 3">
-                    </div>
-                    <div class="horizontal-line-1"></div>
+                <div class="contenedor-imagenes">
+                    <img src="{{ asset('images/insta.png') }}" alt="Imagen 1">
+                    <img src="{{ asset('images/face.png') }}" alt="Imagen 2">
+                    <img src="{{ asset('images/twit.png') }}" alt="Imagen 3">
+                </div>
+                <div class="horizontal-line-1"></div>
                 <a href="#" class="w3-bar-item w3-button" style="text-decoration: none;">Contáctanos</a>
-                <a href="{{ route('logout') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Cerrar sesión</a>
             </div>
         </div>
     </div>
@@ -91,8 +90,16 @@
             <h1 class="roboto-flex-title" style="margin: 0 auto;">LALIGA EA SPORTS 2023-24</h1>
             @if($isUserLoggedIn)
             <div class="navbar-text" style="display: flex; align-items: center;">
-                <span>{{ Session::get('userName') }}</span>
-                <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" style="width: 30px; height: 30px; margin-left: 10px;">
+                <div class="w3-dropdown-hover" id="userDropdown">
+                    <button class="w3-button w3-bar-item" id="userButton">
+                        <span>{{ Session::get('userName') }}</span>
+                        <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" class="user-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="w3-dropdown-content w3-bar-block w3-card" id="dropdownContent-cerrarSesion">
+                        <a href="{{ route('logout') }}" class="w3-bar-item w3-button" id="logoutButton">Cerrar sesión</a>
+                    </div>
+                </div>
             </div>
             @else
             <div class="navbar-text" style="display: flex; align-items: center;">
@@ -100,20 +107,12 @@
                 <a type="button" class="btn btn-light ml-2" href="{{ route('login') }}">Iniciar Sesión</a>
             </div>
             @endif
+
         </div>
         <div class="content">
             @yield('content')
         </div>
     </div>
-
-
-
-
-
-
-
-
-
 
     <script>
         function w3_open() {

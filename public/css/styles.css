@@ -378,6 +378,44 @@
     border-color: #ff3823;
 }
 
+/*Estilo dropdown cerrar sesion*/
+#userDropdown {
+    background-color: #ff3823;
+    color: white;
+}
+
+#userButton {
+    background-color: #ff3823;
+    color: white;
+}
+
+#dropdownContent-cerrarSesion {
+    background-color: #ff3823;
+}
+
+#logoutButton {
+    text-decoration: none;
+    color: white;
+}
+
+.user-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.user-icon:hover {
+    color: #ff3823;
+}
+
+#userDropdown:hover {
+    background-color: #ff3823 ; /* Mantiene el color de fondo al pasar el ratón */
+}
+
+#userButton:hover {
+    background-color: #ff3823; /* Mantiene el color de fondo al pasar el ratón */
+}
+
 
 /*CRUD USUARIOS*/
 .tarjeta-agregar-usuarios {
