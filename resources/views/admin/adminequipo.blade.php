@@ -75,31 +75,31 @@
                         </div>
                         <div class="mb-3">
                             <label for="ganados" class="form-label">Ganados:</label>
-                            <input type="number" class="form-control" id="ganados" name="ganados" required>
+                            <input type="number" class="form-control" id="ganados" name="ganados">
                         </div>
                         <div class="mb-3">
                             <label for="empatados" class="form-label">Empatados:</label>
-                            <input type="number" class="form-control" id="empatados" name="empatados" required>
+                            <input type="number" class="form-control" id="empatados" name="empatados">
                         </div>
                         <div class="mb-3">
                             <label for="perdidos" class="form-label">Perdidos:</label>
-                            <input type="number" class="form-control" id="perdidos" name="perdidos" required>
+                            <input type="number" class="form-control" id="perdidos" name="perdidos">
                         </div>
                         <div class="mb-3">
                             <label for="goles_favor" class="form-label">Goles a Favor:</label>
-                            <input type="number" class="form-control" id="goles_favor" name="goles_favor" required>
+                            <input type="number" class="form-control" id="goles_favor" name="goles_favor">
                         </div>
                         <div class="mb-3">
                             <label for="goles_contra" class="form-label">Goles en Contra:</label>
-                            <input type="number" class="form-control" id="goles_contra" name="goles_contra" required>
+                            <input type="number" class="form-control" id="goles_contra" name="goles_contra">
                         </div>
                         <div class="mb-3">
                             <label for="puntos" class="form-label">Puntos:</label>
-                            <input type="number" class="form-control" id="puntos" name="puntos" required>
+                            <input type="number" class="form-control" id="puntos" name="puntos">
                         </div>
                         <div class="mb-3">
                             <label for="partidos_jugados" class="form-label">Partidos Jugados:</label>
-                            <input type="number" class="form-control" id="partidos_jugados" name="partidos_jugados" required>
+                            <input type="number" class="form-control" id="partidos_jugados" name="partidos_jugados">
                         </div>
                         <!-- Añade más campos según necesites -->
                         <button type="submit" class="btn btn-primary">Crear Equipo</button>

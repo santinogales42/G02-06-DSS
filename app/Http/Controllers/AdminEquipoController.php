@@ -32,16 +32,17 @@ class AdminEquipoController extends Controller
     public function crear(Request $request)
     {
         $validatedData = $request->validate([
-        'nombre' => 'required|string|max:75',
-        'liga_id' => 'exists:ligas,id',
-        'ganados' => 'integer',
-        'empatados' => 'integer',
-        'perdidos' => 'integer',
-        'goles_favor' => 'integer',
-        'goles_contra' => 'integer',
-        'puntos' => 'integer',
-        'partidos_jugados' => 'integer'
+            'nombre' => 'required|string|max:75',
+            'liga_id' => 'nullable|exists:ligas,id',
+            'ganados' => 'nullable|integer',
+            'empatados' => 'nullable|integer',
+            'perdidos' => 'nullable|integer',
+            'goles_favor' => 'nullable|integer',
+            'goles_contra' => 'nullable|integer',
+            'puntos' => 'nullable|integer',
+            'partidos_jugados' => 'nullable|integer'
         ]);
+
         try {
             $equipo = Equipo::create($validatedData);
             return response()->json(['message' => 'Equipo creado con éxito', 'equipo' => $equipo], 200);
@@ -50,27 +51,6 @@ class AdminEquipoController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-        'nombre' => 'required|string|max:75',
-        'liga_id' => 'exists:ligas,id',
-        'ganados' => 'integer',
-        'empatados' => 'integer',
-        'perdidos' => 'integer',
-        'goles_favor' => 'integer',
-        'goles_contra' => 'integer',
-        'puntos' => 'integer',
-        'partidos_jugados' => 'integer'
-        ]);
-
-        try {
-            $equipo = Equipo::create($validated);
-            return redirect()->route('admin.equipos.index')->with('success', 'Equipo creado correctamente.');
-        } catch (\Exception $e) {
-            return back()->withErrors('Error al crear el equipo: ' . $e->getMessage());
-        }
-    }
 
     public function eliminar(Request $request, $id)
     {
