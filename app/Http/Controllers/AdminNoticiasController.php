@@ -19,7 +19,10 @@ class AdminNoticiasController extends Controller
         if ($request->has('search')) {
             $search = $request->search;
             $query->where('titulo', 'LIKE', "%{$search}%")
-                  ->orWhere('id', 'LIKE', "%{$search}%");
+                ->orWhere('id', 'LIKE', "%{$search}%")
+                ->orWhereHas('equipo', function ($query) use ($search) {
+                    $query->where('nombre', 'LIKE', "%{$search}%");
+                });
         }
 
         $noticias = $query->paginate(10);
@@ -101,6 +104,8 @@ class AdminNoticiasController extends Controller
 
         return response()->json(['message' => 'Noticia actualizada con éxito', 'noticia' => $noticia], 200);
     }
+
+
 
     /**
      * Elimina una noticia específica.
