@@ -97,7 +97,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="w3-dropdown-content w3-bar-block w3-card" id="dropdownContent-cerrarSesion">
-                        <a href="{{ route('logout') }}" class="w3-bar-item w3-button" id="logoutButton">Cerrar sesión</a>
+                        <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button" id="logoutButton">Cerrar sesión</a>
                     </div>
                 </div>
             </div>

@@ -13,26 +13,24 @@ class AdminUsuariosController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::query();
-
-    if ($request->filled('search')) {
-        $searchTerm = $request->input('search');
-
-        // Verificar si el término de búsqueda contiene el carácter '@'
-        if (strpos($searchTerm, '@') !== false) {
-            // Es un término de búsqueda de correo electrónico
-            $query->where('email', 'LIKE', '%' . $searchTerm . '%');
+        $query = $request->get('salida');
+        $ordenNombre = $request->get('ordenNombre', 'asc');
+        $usuariosQuery = User::query(); // Obtener la consulta base
+    
+        // Verificar si el query contiene el símbolo '@'
+        if ($query !== null && strpos($query, '@') !== false) {
+            $usuariosQuery->where('email', 'like', '%' . $query . '%');
         } else {
-            // Es un término de búsqueda de nombre
-            $query->where('name', 'LIKE', '%' . $searchTerm . '%');
+            // Si no contiene '@', buscar por nombre
+            $usuariosQuery->where('name', 'like', $query . '%');
         }
+    
+        // Aplicar la ordenación después del filtro de búsqueda
+        $usuarios = $usuariosQuery->orderBy('name', $ordenNombre)->get();
+    
+        return view('admin.usuarios.index', compact('usuarios'));
     }
-
-    $usuarios = $query->get();
-
-    return view('admin.usuarios.index', compact('usuarios'));
-    }
-
+    
     public function create()
     {
         return view('admin.usuarios.create');
@@ -57,7 +55,6 @@ class AdminUsuariosController extends Controller
 
         Session::flash('success', 'Usuario creado exitosamente.');
         return redirect()->route('admin.usuarios.index');
-
     }
 
     public function edit($id)
@@ -65,7 +62,7 @@ class AdminUsuariosController extends Controller
         $usuario = User::findOrFail($id);
         return view('admin.usuarios.edit', compact('usuario'));
     }
-    
+
     public function update(Request $request, $id)
     {
         $usuario = User::findOrFail($id);
@@ -88,7 +85,7 @@ class AdminUsuariosController extends Controller
     }
 
     public function destroy($id)
-    {   
+    {
         $usuarioABorrar = User::findOrFail($id);
         $usuarioABorrar->delete();
         return redirect()->route('admin.usuarios.index')->with('success', 'Usuario eliminado correctamente.');

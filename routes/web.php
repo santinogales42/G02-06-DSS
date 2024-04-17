@@ -18,6 +18,7 @@ use App\Http\Controllers\AdminPartidoController;
 use App\Http\Controllers\AdminNoticiasController;
 use App\Http\Controllers\AdminEquipoController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\LogoutController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -31,7 +32,8 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+Route::get('/confirmar-cerrar-sesion', [LogoutController::class, 'confirmarCerrarSesion'])->name('confirmar.cerrar.sesion');
 
 
 

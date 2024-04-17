@@ -1100,3 +1100,11 @@ Did you mean this?
 #58 /home/paula/Documentos/DSS/Práctica/github/G02-06-DSS/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #59 {main}
 "} 
+[2024-04-17 18:04:59] local.ERROR: Cannot use lexical variable $query as a parameter name {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot use lexical variable $query as a parameter name at /home/paula/Documentos/DSS/Práctica/github/G02-06-DSS/app/Http/Controllers/AdminUsuariosController.php:22)
+[stacktrace]
+#0 {main}
+"} 
+[2024-04-17 18:05:10] local.ERROR: Cannot use lexical variable $query as a parameter name {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot use lexical variable $query as a parameter name at /home/paula/Documentos/DSS/Práctica/github/G02-06-DSS/app/Http/Controllers/AdminUsuariosController.php:22)
+[stacktrace]
+#0 {main}
+"} 

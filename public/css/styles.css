@@ -326,7 +326,6 @@
 
 .noticia .descripcion {
     text-align: justify; /* Justifica el texto de la descripción */
-
     padding-bottom: 5px; /* Espacio inferior para separar la línea de la descripción */
 }
 
@@ -473,6 +472,28 @@
     font-size: 50px;
 }
 
+/*Barra búsqueda*/
+.boton-buscar {
+    background-color: #fff;
+    color: #ff3823;
+    border-color: #ff3823;
+    margin-top: 3rem;
+}
+.boton-buscar:hover {
+    background-color: #f1706270;
+    color: #fff;
+    border-color: #ff3823;
+}
+
+.buscador {
+    margin-top: 3rem;
+    width: auto;
+}
+
+#ordenarNombre {
+    color: black;
+    font-weight: bold;
+}
 /* VISTA CALENDARIO */
 
 /* Estilos para la fila de navegación */
