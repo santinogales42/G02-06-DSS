@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        /*
-        Schema::create('usuarios', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->string('correo')->unique();
-            $table->string('contraseña');
-            $table->timestamps();
-        });*/
+        Schema::create('users_equipos', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('equipo_id')->constrained()->onDelete('cascade');
+            $table->primary(['user_id', 'equipo_id']);
+        });
     }
 
     /**
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('users_equipos');
     }
 };

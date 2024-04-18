@@ -16,7 +16,7 @@
             </div>
 
             <!-- Tarjeta de usuarios -->
-            <div class="tarjeta">
+            <div class="tarjeta mb-3">
                 <div class="encabezado-tarjeta-usuarios">Lista de Usuarios</div>
 
                 <div class="card-body">

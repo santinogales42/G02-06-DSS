@@ -30,6 +30,11 @@ class Equipo extends Model
         return $this->hasMany(Partido::class, 'equipo_visitante_id');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_equipos');
+    }
+
     public function usuarios()
     {
         return $this->belongsToMany(User::class, 'usuarios_equipos');
