@@ -14,9 +14,15 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>ID</th>
                     <th>Nombre</th>
-                    <th>Acciones</th>
+                    <th>Liga</th>
+                    <th>Ganados</th>
+                    <th>Empatados</th>
+                    <th>Perdidos</th>
+                    <th>Partidos Jugados</th>
+                    <th>GF</th>
+                    <th>GC</th>
+                    <th>Puntos</th>
                 </tr>
             </thead>
             <tbody id="equipos-list">
@@ -110,38 +116,36 @@
     </div>
 </div>
 
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    fetchData(); // Carga inicial de datos al cargar la página
+    fetchData(); // Carga inicial de datos
 });
 
-function openEditModal(equipoId) {
-    fetch(`/adminequipos/datos/${equipoId}`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP status ${response.status}`);
-        }
-        return response.json();
+// Añadir evento submit al formulario de creación de equipo
+document.getElementById('crearEquipoForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+    const formData = new FormData(this);
+    fetch('/adminequipos/crear', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
     })
+    .then(response => response.json())
     .then(data => {
-        document.getElementById('edit_equipo_id').value = data.id;
-        document.getElementById('edit_nombre').value = data.nombre;
-        document.getElementById('edit_liga_id').value = data.liga_id;
-        document.getElementById('edit_ganados').value = data.ganados;
-        document.getElementById('edit_empatados').value = data.empatados;
-        document.getElementById('edit_perdidos').value = data.perdidos;
-        document.getElementById('edit_goles_favor').value = data.goles_favor;
-        document.getElementById('edit_goles_contra').value = data.goles_contra;
-        document.getElementById('edit_puntos').value = data.puntos;
-        document.getElementById('edit_partidos_jugados').value = data.partidos_jugados;
-        $('#editEquipoModal').modal('show');
+        alert(data.message); // Mostrar un mensaje de éxito o error
+        fetchData(); // Recargar la lista de equipos
+        this.reset(); // Restablecer el formulario después de la creación exitosa
     })
     .catch(error => console.error('Error:', error));
-}
+});
 
-document.getElementById('editarEquipoForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
+// Añadir evento submit al formulario de edición de equipo
+document.getElementById('editarEquipoForm').addEventListener('submit', function(event) {
+    event.preventDefault();
     const equipoId = document.getElementById('edit_equipo_id').value;
     const formData = new FormData(this);
     fetch(`/adminequipos/actualizar/${equipoId}`, {
@@ -160,6 +164,7 @@ document.getElementById('editarEquipoForm').addEventListener('submit', function(
     .catch(error => console.error('Error:', error));
 });
 
+// Función para cargar los datos de equipos
 function fetchData(page = 1) {
     var search = document.getElementById('search').value;
     var url = `/adminequipos?search=${search}&page=${page}`;
@@ -175,27 +180,46 @@ function fetchData(page = 1) {
         tableBody.innerHTML = '';
         data.data.forEach(equipo => {
             var row = `<tr>
-                        <td><input type="checkbox" class="equipo-checkbox" value="${equipo.id}"></td>
-                        <td>${equipo.id}</td>
-                        <td>${equipo.nombre}</td>
-                        <td>
-                            <button onclick="openEditModal(${equipo.id})" class="btn btn-primary">Editar</button>
-                            <button class="btn btn-danger" onclick="deleteEquipo(${equipo.id})">Eliminar</button>
-                        </td>
-                       </tr>`;
+                <td><input type="checkbox" class="equipo-checkbox" value="${equipo.id}"></td>
+                <td>${equipo.nombre}</td>
+                <td>${equipo.liga_id}</td>
+                <td>${equipo.ganados}</td>
+                <td>${equipo.empatados}</td>
+                <td>${equipo.perdidos}</td>
+                <td>${equipo.partidos_jugados}</td>
+                <td>${equipo.goles_favor}</td>
+                <td>${equipo.goles_contra}</td>
+                <td>${equipo.puntos}</td>
+                <td>
+                    <button onclick="openEditModal(${equipo.id})" class="btn btn-primary">Editar</button>
+                    <button class="btn btn-danger" onclick="deleteEquipo(${equipo.id})">Eliminar</button>
+                </td>
+            </tr>`;
             tableBody.innerHTML += row;
         });
-        attachCheckboxEvents();
-        checkSelectedCheckboxes();
+
         var paginationDiv = document.getElementById('pagination-links');
-        paginationDiv.innerHTML = data.links; // Añadir los nuevos enlaces de paginación
+        paginationDiv.innerHTML = data.links;
         attachClickEventToPaginationLinks();
     })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    .catch(error => console.error('Error:', error));
 }
 
+// Abre el modal de edición cargando los datos del equipo seleccionado
+function openEditModal(equipoId) {
+    fetch(`/adminequipos/datos/${equipoId}`)
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('edit_equipo_id').value = data.id;
+        document.getElementById('edit_nombre').value = data.nombre || '';
+        document.getElementById('edit_liga_id').value = data.liga_id || '';
+        // Añade aquí más campos si es necesario
+        $('#editEquipoModal').modal('show');
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Eventos para la paginación
 function attachClickEventToPaginationLinks() {
     document.querySelectorAll('#pagination-links a').forEach(item => {
         item.addEventListener('click', function(e) {
@@ -206,33 +230,50 @@ function attachClickEventToPaginationLinks() {
     });
 }
 
+// Elimina todos los equipos
+function deleteAllEquipos() {
+    if (confirm('¿Estás seguro de querer eliminar TODOS los equipos? Esta acción es irreversible.')) {
+        fetch('/adminequipos/eliminar-todos', {
+            method: 'DELETE',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            fetchData(); // Recargar la lista de equipos
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+// Elimina un equipo específico
 function deleteEquipo(equipoId) {
     if (confirm('¿Seguro que quieres eliminar el equipo?')) {
-        eliminarEquipo(equipoId);
+        fetch(`/adminequipos/eliminar/${equipoId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Equipo eliminado con éxito');
+                fetchData();
+            } else {
+                response.json().then(data => alert(data.message));
+            }
+        })
+        .catch(error => console.error('Error:', error));
     }
 }
 
-function eliminarEquipo(equipoId) {
-    fetch(`/adminequipos/eliminar/${equipoId}`, {
-        method: 'POST',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        },
-    })
-    .then(response => {
-    if (response.ok) {
-        alert('Equipo eliminado con éxito');
-        fetchData(); // Recargar los datos para actualizar la lista
-    } else {
-        response.json().then(data => alert(data.message));
-    }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
+// Elimina los equipos seleccionados
 function deleteSelectedEquipos() {
-    const selectedIds = JSON.parse(localStorage.getItem('selectedEquipos')) || [];
+    let selectedIds = Array.from(document.querySelectorAll('.equipo-checkbox:checked')).map(el => el.value);
     if (selectedIds.length === 0) {
         alert('Por favor, selecciona al menos un equipo para eliminar.');
         return;
@@ -253,32 +294,13 @@ function deleteSelectedEquipos() {
     .then(data => {
         alert(data.message);
         fetchData(); // Recargar la lista para reflejar los cambios
-        localStorage.setItem('selectedEquipos', JSON.stringify([])); // Limpiar las selecciones después de la eliminación
     })
     .catch(error => console.error('Error:', error));
 }
 
-function attachCheckboxEvents() {
-    document.querySelectorAll('.equipo-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            let selectedIds = JSON.parse(localStorage.getItem('selectedEquipos')) || [];
-            if (this.checked) {
-                selectedIds.push(this.value);
-            } else {
-                selectedIds = selectedIds.filter(id => id !== this.value);
-            }
-            localStorage.setItem('selectedEquipos', JSON.stringify(selectedIds));
-        });
-    });
-}
-function checkSelectedCheckboxes() {
-    const selectedIds = JSON.parse(localStorage.getItem('selectedEquipos')) || [];
-    document.querySelectorAll('.equipo-checkbox').forEach(checkbox => {
-        checkbox.checked = selectedIds.includes(checkbox.value);
-    });
-}
-
 </script>
+
+
 
 
 @endsection

@@ -1,65 +1,101 @@
 @extends('layout')
 
-@section('title', 'Home')
+@section('title', 'La Liga')
 
 @section('content')
-
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h2 class="mt-4">Noticias</h2>
-            <div class="news-section">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h3 class="card-title">¿Por qué la Superliga genera tanta incertidumbre en el modelo europeo del fútbol?</h3>
-                        <p class="card-text">La Superliga ha quedado vista para sentencia. Todo lo que no sea un modelo totalmente abierto, con acceso a todas las competiciones europeas, temporada a temporada, es un formato cerrado, contrario a los valores europeos del deporte. La Liga pide a la Comisión Europea medidas legislativas para proteger la estabilidad y futuro del fútbol europeo.</p>
-                    </div>
-                </div>
+            <h1>Noticias de actualidad</h1>
+            <input type="text" id="search" placeholder="Buscar noticias por equipo o título de la noticia ..." onkeyup="fetchData()" class="form-control mb-3">
 
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h3 class="card-title">¿Por qué la Superliga genera tanta incertidumbre en el modelo europeo del fútbol?</h3>
-                        <p class="card-text">La Superliga ha quedado vista para sentencia. Todo lo que no sea un modelo totalmente abierto, con acceso a todas las competiciones europeas, temporada a temporada, es un formato cerrado, contrario a los valores europeos del deporte. La Liga pide a la Comisión Europea medidas legislativas para proteger la estabilidad y futuro del fútbol europeo.</p>
-                    </div>
-                </div>
+            <div id="noticias-list" class="row">
+                <!-- Las noticias se llenarán dinámicamente -->
+            </div>
+
+            <div id="pagination-links" class="d-flex justify-content-center">
+                <!-- Los enlaces de paginación se cargarán aquí -->
             </div>
         </div>
-        
-        
+
         <div class="col-md-4">
-    <h2 class="mt-4">Clasificación</h2>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th class="text-center">Posición</th>
-                    <th>Equipo</th>
-                    <th class="text-center">Puntos</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($equipos as $index => $equipo)
-                    <tr>
-                        <td class="text-center">{{ $index + 1 }}</td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                @php
-                                    $nombreLimpio = Str::ascii($equipo->nombre);
-                                    $nombreArchivo = strtolower(str_replace(' ', '', $nombreLimpio)) . '.png';
-                                @endphp
-                                <img src="{{ asset('images/equipos/' . $nombreArchivo) }}" alt="{{ $equipo->nombre }}" style="width: 30px; height: auto;" class="me-2">
-                                {{ $equipo->nombre }}
-                            </div>
-                        </td>
-                        <td class="text-center">{{ $equipo->puntos }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
+                <h2 class="mt-4">Clasificación</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Pos</th>
+                                <th>Equipo</th>
+                                <th class="text-center">Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($equipos as $index => $equipo)
+                                <tr>
+                                    <td class="text-center">{{ $index + 1 }}</td>
+                                    <td>{{ $equipo->nombre }}</td>
+                                    <td class="text-center">{{ $equipo->puntos }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
     </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    fetchData(); // Carga inicial de datos
+});
+
+function fetchData(page = 1) {
+    const search = document.getElementById('search').value;
+    const url = `/noticias?search=${search}&page=${page}`;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        const noticiasList = document.getElementById('noticias-list');
+        noticiasList.innerHTML = ''; // Limpiar la lista actual
+        data.data.forEach(noticia => {
+            const noticiaHTML = `
+                <div class="col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="${noticia.link_de_la_web}">${noticia.titulo}</a></h3>
+                            <p>${noticia.contenido}</p>
+                            <p class="text-muted">${noticia.fecha}</p>
+                        </div>
+                        <div class="card-footer">
+                            Autor: ${noticia.autor}
+                        </div>
+                    </div>
+                </div>
+            `;
+            noticiasList.innerHTML += noticiaHTML;
+        });
+
+        const paginationDiv = document.getElementById('pagination-links');
+        paginationDiv.innerHTML = data.links;
+        attachClickEventToPaginationLinks();
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function attachClickEventToPaginationLinks() {
+    document.querySelectorAll('#pagination-links a').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault(); // Evita la navegación directa
+            const page = this.getAttribute('href').split('page=')[1];
+            fetchData(page);
+        });
+    });
+}
+</script>
 
 @endsection

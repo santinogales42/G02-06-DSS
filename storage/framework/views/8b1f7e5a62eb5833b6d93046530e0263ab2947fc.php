@@ -1,97 +1,100 @@
-<?php $__env->startSection('title', 'Home'); ?>
+<?php $__env->startSection('title', 'La Liga'); ?>
 
 <?php $__env->startSection('content'); ?>
-
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <!-- Sección de Noticias -->
         <div class="col-md-8">
-            <h2>Noticias</h2>
-            <div class="news-section">
-<!--                <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $newsItem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <article>
-                        <h3><?php echo e($newsItem->title); ?></h3>
-                        <p><?php echo e($newsItem->content); ?></p>
-                    </article>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>-->
-                <h3>¿POR QUÉ LA SUPERLIGA GENERA TANTA INCERTIDUMBRE EN EL MODELO EUROPEO DEL FÚTBOL?</h3>
-                <p>La Superliga ha quedado vista para sentencia. Todo lo que no sea un modelo totalmente abierto, 
-                    con acceso a todas las competiciones europeas, temporada a temporada, es un formato cerrado, 
-                    contrario a los valores europeos del deporte. LALIGA pide a la Comisión Europea medidas legislativas 
-                    para proteger la estabilidad y futuro del fútbol europeo.</p>
-                    <h3>¿POR QUÉ LA SUPERLIGA GENERA TANTA INCERTIDUMBRE EN EL MODELO EUROPEO DEL FÚTBOL?</h3>
-                <p>La Superliga ha quedado vista para sentencia. Todo lo que no sea un modelo totalmente abierto, 
-                    con acceso a todas las competiciones europeas, temporada a temporada, es un formato cerrado, 
-                    contrario a los valores europeos del deporte. LALIGA pide a la Comisión Europea medidas legislativas 
-                    para proteger la estabilidad y futuro del fútbol europeo.</p>
+            <h1>Noticias de actualidad</h1>
+            <input type="text" id="search" placeholder="Buscar noticias por equipo o título de la noticia ..." onkeyup="fetchData()" class="form-control mb-3">
+
+            <div id="noticias-list" class="row">
+                <!-- Las noticias se llenarán dinámicamente -->
+            </div>
+
+            <div id="pagination-links" class="d-flex justify-content-center">
+                <!-- Los enlaces de paginación se cargarán aquí -->
             </div>
         </div>
-        
-        <!-- Sección de Clasificación -->
-        <div class="col-md-4">
-            <h2>Clasificación</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Posición</th>
-                        <th>Equipo</th>
-                        <th>Puntos</th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    <!--<?php $__currentLoopData = $classification; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $team): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr>
-                            <td><?php echo e($index + 1); ?></td>
-                            <td><?php echo e($team->foto); ?></td>
-                            <td><?php echo e($team->nombre); ?></td>
-                            <td><?php echo e($team->puntos); ?></td>
-                        </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>-->
-                    <tr>
-                    <td>1</td>
-                        <td><div class="row align-items-center">
-                            <div class="col-auto">
-                                <img src="<?php echo e(asset('images/ligaicono.png')); ?>" alt="Logo La Liga" style="width: 30px; height: auto;">
-                            </div>
-                            <div class="col">
-                                Villareal
-                            </div>
-                        </div>
-                        </td>
-                        <td>70</td>
-                    </tr>
-                    <tr>
-                    <td>2</td>
-                        <td><div class="row align-items-center">
-                            <div class="col-auto">
-                                <img src="<?php echo e(asset('images/ligaicono.png')); ?>" alt="Logo La Liga" style="width: 30px; height: auto;">
-                            </div>
-                            <div class="col">
-                                Osasuna
-                            </div>
-                        </div>
-                        </td>
-                        <td>67</td>
-                    </tr>
-                    <tr>
-                    <td>1</td>
-                        <td><div class="row align-items-center">
-                            <div class="col-auto">
-                                <img src="<?php echo e(asset('images/ligaicono.png')); ?>" alt="Logo La Liga" style="width: 30px; height: auto;">
-                            </div>
-                            <div class="col">
-                                Real Sociedad
-                            </div>
-                        </div>
-                        </td>
-                        <td>50</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="col-md-4">
+                <h2 class="mt-4">Clasificación</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Pos</th>
+                                <th>Equipo</th>
+                                <th class="text-center">Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $__currentLoopData = $equipos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $equipo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <tr>
+                                    <td class="text-center"><?php echo e($index + 1); ?></td>
+                                    <td><?php echo e($equipo->nombre); ?></td>
+                                    <td class="text-center"><?php echo e($equipo->puntos); ?></td>
+                                </tr>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    fetchData(); // Carga inicial de datos
+});
+
+function fetchData(page = 1) {
+    const search = document.getElementById('search').value;
+    const url = `/noticias?search=${search}&page=${page}`;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        const noticiasList = document.getElementById('noticias-list');
+        noticiasList.innerHTML = ''; // Limpiar la lista actual
+        data.data.forEach(noticia => {
+            const noticiaHTML = `
+                <div class="col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="${noticia.link_de_la_web}">${noticia.titulo}</a></h3>
+                            <p>${noticia.contenido}</p>
+                            <p class="text-muted">${noticia.fecha}</p>
+                        </div>
+                        <div class="card-footer">
+                            Autor: ${noticia.autor}
+                        </div>
+                    </div>
+                </div>
+            `;
+            noticiasList.innerHTML += noticiaHTML;
+        });
+
+        const paginationDiv = document.getElementById('pagination-links');
+        paginationDiv.innerHTML = data.links;
+        attachClickEventToPaginationLinks();
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function attachClickEventToPaginationLinks() {
+    document.querySelectorAll('#pagination-links a').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault(); // Evita la navegación directa
+            const page = this.getAttribute('href').split('page=')[1];
+            fetchData(page);
+        });
+    });
+}
+</script>
 
 <?php $__env->stopSection(); ?>
 

@@ -94,12 +94,13 @@ Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index'
 Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
 
 // Rutas para AdminEquipoController
-Route::get('/adminequipos', [AdminEquipoController::class, 'index']);
-Route::get('/adminequipos/create', [AdminEquipoController::class, 'create'])->name('admin.equipos.create');
-Route::post('/admin/equipos', [AdminEquipoController::class, 'store'])->name('admin.equipos.store');
-Route::get('/admin/equipos/{equipo}/edit', [AdminEquipoController::class, 'edit'])->name('admin.equipos.edit');
-Route::put('/admin/equipos/{equipo}', [AdminEquipoController::class, 'update'])->name('admin.equipos.update');
-Route::delete('/admin/equipos/{equipo}', [AdminEquipoController::class, 'destroy'])->name('admin.equipos.destroy');
+Route::get('/adminequipos', [AdminEquipoController::class, 'index'])->name('admin.equipos');
+Route::post('/adminequipos/crear', [AdminEquipoController::class, 'crear'])->name('admin.equipos.crear');
+Route::delete('/adminequipos/eliminar-todos', [AdminEquipoController::class, 'eliminarTodos'])->name('admin.equipos.eliminar-todos');
+Route::get('/adminequipos/datos/{id}', [AdminEquipoController::class, 'getDatos'])->name('equipos.getDatos');
+Route::delete('/adminequipos/eliminar/{id}', [AdminEquipoController::class, 'eliminar'])->name('admin.equipos.eliminar');
+Route::post('/adminequipos/actualizar/{id}', [AdminEquipoController::class, 'actualizar'])->name('equipos.actualizar');
+Route::post('/adminequipos/eliminar-masa', [AdminEquipoController::class, 'eliminarMasa'])->name('equipos.eliminarMasa');
 
 // Rutas para administrar noticias
 Route::get('/adminnoticias', [AdminNoticiasController::class, 'index'])->name('adminnoticias');
