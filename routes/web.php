@@ -13,14 +13,14 @@ use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminJugadoresController;
+use App\Http\Controllers\AdminUsuariosController;
 use App\Http\Controllers\AdminPartidoController;
 use App\Http\Controllers\AdminNoticiasController;
-
+use App\Http\Controllers\AdminEquipoController;
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\LogoutController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-
-
 
 
 Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
@@ -34,7 +34,8 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+Route::get('/confirmar-cerrar-sesion', [LogoutController::class, 'confirmarCerrarSesion'])->name('confirmar.cerrar.sesion');
 
 
 
@@ -52,10 +53,8 @@ Route::get('/jugadores/{id}', [JugadoresController::class, 'show'])->name('jugad
 
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-
 // Ruta para manejar el envío del formulario (añadir jugador) sin restricción de autenticación
 Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
-
 
 
 Route::get('/adminjugadores', [AdminJugadoresController::class, 'index']);
@@ -70,9 +69,8 @@ Route::post('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class,
 Route::post('/adminjugadores/eliminar-todos', [AdminJugadoresController::class, 'eliminarTodos']);
 Route::post('/admin/insertar-jugadores', [AdminJugadoresController::class, 'insertarJugadores']);
 
-/*
- * Rutas para la Administración de Partidos
- */
+
+//Rutas para la Administración de Partidos
 Route::get('/admin/partidos', [AdminPartidoController::class, 'index'])->name('admin.partidos.index');
 Route::get('/admin/partidos/create', [AdminPartidoController::class, 'create'])->name('admin.partidos.create');
 Route::post('/admin/partidos/store', [AdminPartidoController::class, 'store'])->name('admin.partidos.store');
@@ -81,6 +79,14 @@ Route::get('/admin/partidos/{equipo}/show', [AdminPartidoController::class, 'sho
 Route::put('/admin/partidos/{id}/update/', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
 Route::delete('/admin/partidos/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
 Route::post('/admin/partidos/search', [AdminPartidoController::class, 'search'])->name('admin.partidos.search');
+
+//Rutas para AdminUsuarios
+Route::get('/admin/usuarios', [AdminUsuariosController::class, 'index'])->name('admin.usuarios.index');
+Route::get('/admin/usuarios/create', [AdminUsuariosController::class, 'create'])->name('admin.usuarios.create');
+Route::get('/admin/usuarios/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
+Route::delete('/admin/usuarios/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
+Route::post('/admin/usuarios/store', [AdminUsuariosController::class, 'store'])->name('admin.usuarios.store');
+Route::put('/admin/usuarios/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');
 
 // Rutas para EquipoController
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
@@ -99,6 +105,12 @@ Route::get('/adminnoticias', [AdminNoticiasController::class, 'index'])->name('a
 Route::post('/adminnoticias/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
 Route::delete('/adminnoticias/eliminar-todas', [AdminNoticiasController::class, 'eliminarTodas'])->name('admin.noticias.eliminar-todas');
 Route::get('/adminnoticias/datos/{id}', [AdminNoticiasController::class, 'getDatos'])->name('noticias.getDatos');
+Route::delete('/adminnoticias/eliminar/{id}', [AdminNoticiasController::class, 'eliminar'])->name('admin.noticias.eliminar');
+Route::post('/adminnoticias/actualizar/{id}', [AdminNoticiasController::class, 'actualizar'])->name('noticias.actualizar');
+Route::get('/adminnoticias/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
+Route::post('/adminnoticias/eliminar-masa', [AdminNoticiasController::class, 'eliminarMasa']);
+Route::get('/noticias/{id}', [AdminNoticiasController::class, 'getDatos'])->name('jugadores.show');
+Route::get('/noticias/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
 
 
 
@@ -107,6 +119,20 @@ Route::get('/adminnoticias/datos/{id}', [AdminNoticiasController::class, 'getDat
 
 
 
+// Rutas para EquipoController
+Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
+Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index');
+Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
 
-
-
+// Rutas para AdminEquipoController
+Route::get('/admin/equipos/create', [AdminEquipoController::class, 'create'])->name('admin.equipos.create');
+Route::post('/admin/equipos', [AdminEquipoController::class, 'store'])->name('admin.equipos.store');
+Route::get('/admin/equipos/{equipo}/edit', [AdminEquipoController::class, 'edit'])->name('admin.equipos.edit');
+Route::put('/admin/equipos/{equipo}', [AdminEquipoController::class, 'update'])->name('admin.equipos.update');
+Route::delete('/admin/equipos/{equipo}', [AdminEquipoController::class, 'destroy'])->name('admin.equipos.destroy');
+Route::get('/admin/usuarios', [AdminUsuariosController::class, 'index'])->name('admin.usuarios.index');
+Route::get('/admin/usuarios/create', [AdminUsuariosController::class, 'create'])->name('admin.usuarios.create');
+Route::get('/admin/usuarios/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
+Route::delete('/admin/usuarios/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
+Route::post('/admin/usuarios/store', [AdminUsuariosController::class, 'store'])->name('admin.usuarios.store');
+Route::put('/admin/usuarios/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');

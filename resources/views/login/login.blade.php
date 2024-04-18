@@ -35,7 +35,6 @@
                             <div class="form-group d-flex justify-content-between">
                                 <a href="{{ route('home') }}" class="btn boton-cancelar">Cancelar</a>
                                 <button type="submit" class="btn boton-inicio">Iniciar Sesión</button>
-                                
                             </div>
 
                             @if (Route::has('password.request'))
