@@ -39,15 +39,4 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', 'Credenciales incorrectas. Por favor, inténtalo de nuevo.');
         }
     }
-
-    public function logout(Request $request): RedirectResponse
-    {
-        Auth::logout();
-    
-        $request->session()->invalidate();
-    
-        $request->session()->regenerateToken();
-    
-        return redirect(url()->previous());
-    }
 }

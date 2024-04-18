@@ -41,4 +41,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $guarded = [];
+
+    public function equipos()
+    {
+        return $this->belongsToMany(Equipo::class, 'users_equipos');
+    }
 }

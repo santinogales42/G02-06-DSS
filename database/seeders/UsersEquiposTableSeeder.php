@@ -5,10 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Usuario;
-use Faker\Factory as Faker;
+use App\Models\Equipo;
+use Illuminate\Support\Facades\DB;
 
-class UsuariosTableSeeder extends Seeder
+class UsersEquiposTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,6 +17,9 @@ class UsuariosTableSeeder extends Seeder
      */
     public function run()
     {
-        
+        DB::table('users_equipos')->insert([
+            ['user_id' => 1, 'equipo_id' => 1]
+
+        ]);
     }
 }

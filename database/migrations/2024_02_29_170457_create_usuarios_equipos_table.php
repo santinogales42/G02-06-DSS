@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        /*
         Schema::create('usuarios_equipos', function (Blueprint $table) {
         $table->foreignId('usuario_id')->constrained()->onDelete('cascade');
 	    $table->foreignId('equipo_id')->constrained()->onDelete('cascade');
 	    $table->primary(['usuario_id', 'equipo_id']);
-	});
+	    }); */
     }
 
     /**

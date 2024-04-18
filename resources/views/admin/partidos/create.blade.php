@@ -4,7 +4,6 @@
     <div class="container">
         <h1 style="text-align: center;">Administración de Partidos</h1>
 
-        <!-- Formulario para Crear Partido -->
         <div class="mb-3">
             <h2>Crear Nuevo Partido</h2>
             <form action="{{ isset($partido) ? route('admin.partidos.update', $partido->id) : route('admin.partidos.store') }}" method="POST">

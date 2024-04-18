@@ -326,7 +326,6 @@
 
 .noticia .descripcion {
     text-align: justify; /* Justifica el texto de la descripción */
-
     padding-bottom: 5px; /* Espacio inferior para separar la línea de la descripción */
 }
 
@@ -376,6 +375,44 @@
     background-color: #f1706270;
     color: #fff;
     border-color: #ff3823;
+}
+
+/*Estilo dropdown cerrar sesion*/
+#userDropdown {
+    background-color: #ff3823;
+    color: white;
+}
+
+#userButton {
+    background-color: #ff3823;
+    color: white;
+}
+
+#dropdownContent-cerrarSesion {
+    background-color: #ff3823;
+}
+
+#logoutButton {
+    text-decoration: none;
+    color: white;
+}
+
+.user-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.user-icon:hover {
+    color: #ff3823;
+}
+
+#userDropdown:hover {
+    background-color: #ff3823 ; /* Mantiene el color de fondo al pasar el ratón */
+}
+
+#userButton:hover {
+    background-color: #ff3823; /* Mantiene el color de fondo al pasar el ratón */
 }
 
 
@@ -435,6 +472,28 @@
     font-size: 50px;
 }
 
+/*Barra búsqueda*/
+.boton-buscar {
+    background-color: #fff;
+    color: #ff3823;
+    border-color: #ff3823;
+    margin-top: 3rem;
+}
+.boton-buscar:hover {
+    background-color: #f1706270;
+    color: #fff;
+    border-color: #ff3823;
+}
+
+.buscador {
+    margin-top: 3rem;
+    width: auto;
+}
+
+#ordenarNombre {
+    color: black;
+    font-weight: bold;
+}
 /* VISTA CALENDARIO */
 
 /* Estilos para la fila de navegación */
@@ -503,4 +562,8 @@
 .fila-impar {
     background-color: #e0e0e0; /* Color de fondo para filas impares */
     vertical-align: middle;
+}
+
+.partido-hover:hover {
+    background-color: #000000;
 }

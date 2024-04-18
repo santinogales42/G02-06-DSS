@@ -18,12 +18,15 @@ use App\Http\Controllers\AdminPartidoController;
 use App\Http\Controllers\AdminNoticiasController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AdminEquipoController;
+use App\Http\Controllers\LogoutController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
-Route::get('/calendario/{jornada?}', [CalendarioController::class, 'index'])->name('calendario');
+Route::get('/calendario/{jornada?}', [CalendarioController::class, 'index'])->name('calendario.index');
+Route::get('/calendario/{equipo}/show', [CalendarioController::class, 'show'])->name('calendario.show');
+Route::get('/partidos/{id}', [CalendarioController::class, 'showEstadisticas'])->name('partidos');
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos');
 
@@ -31,7 +34,8 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+Route::get('/confirmar-cerrar-sesion', [LogoutController::class, 'confirmarCerrarSesion'])->name('confirmar.cerrar.sesion');
 
 
 
@@ -71,6 +75,7 @@ Route::get('/admin/partidos', [AdminPartidoController::class, 'index'])->name('a
 Route::get('/admin/partidos/create', [AdminPartidoController::class, 'create'])->name('admin.partidos.create');
 Route::post('/admin/partidos/store', [AdminPartidoController::class, 'store'])->name('admin.partidos.store');
 Route::get('/admin/partidos/{id}/edit', [AdminPartidoController::class, 'edit'])->name('admin.partidos.edit');
+Route::get('/admin/partidos/{equipo}/show', [AdminPartidoController::class, 'show'])->name('admin.partidos.show');
 Route::put('/admin/partidos/{id}/update/', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
 Route::delete('/admin/partidos/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
 Route::post('/admin/partidos/search', [AdminPartidoController::class, 'search'])->name('admin.partidos.search');

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use App\Models\Equipo;
 use App\Models\Partido;
+use App\Models\Est_partido;
 
 class AdminPartidoController extends Controller
 {
@@ -30,13 +31,16 @@ class AdminPartidoController extends Controller
         $jornadas = range(1, $totalJornadas);
         $jornada_actual = $request->jornada;
 
-        return view('admin.partidos.index', compact('partidos', 'jornadaSeleccionada', 'jornadas', 'jornada_actual'));
+        $equipos = Equipo::all();
+
+        return view('admin.partidos.index', compact('partidos', 'jornadaSeleccionada', 'jornadas', 'jornada_actual', 'equipos'));
     }
 
-    
+
     public function create()
     {
         $equipos = Equipo::all();
+
         return view('admin.partidos.create', compact('equipos'));
     }
 
@@ -52,8 +56,8 @@ class AdminPartidoController extends Controller
 
         $equipoLocal = $request->input('equipo_local');
         $partidoEquipoLocal = Partido::where('jornada', $jornada)
-                                    ->where('equipo_local_id', $equipoLocal)
-                                    ->first();
+            ->where('equipo_local_id', $equipoLocal)
+            ->first();
 
         if ($partidoEquipoLocal) {
             Session::flash('success', 'Este equipo ya existe en un partido de esta jornada.');
@@ -62,8 +66,8 @@ class AdminPartidoController extends Controller
 
         $equipoVisitante = $request->input('equipo_visitante');
         $partidoEquipoVisitante = Partido::where('jornada', $jornada)
-                                        ->where('equipo_visitante_id', $equipoVisitante)
-                                        ->first();
+            ->where('equipo_visitante_id', $equipoVisitante)
+            ->first();
 
         if ($partidoEquipoVisitante) {
             Session::flash('success', 'Este equipo ya existe en un partido de esta jornada.');
@@ -98,15 +102,13 @@ class AdminPartidoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            
+
             return redirect()->route('admin.partidos.create');
         }
 
-        // Obtener el máximo ID actual de la tabla Partido
         $maxId = Partido::max('id');
-
-        // Calcular el próximo ID sumando 1 al máximo ID actual
         $nextId = $maxId + 1;
+
 
         $partido = new Partido();
         $partido->id = $nextId;
@@ -118,7 +120,31 @@ class AdminPartidoController extends Controller
         $partido->equipo_visitante_id = $request->equipo_visitante;
         $partido->jornada = $request->jornada;
         $partido->save();
-        
+
+        $resultado = $partido->resultado;
+
+        if ($resultado === '-') {
+            $goles_local = 0;
+            $goles_visitante = 0;
+        } else {
+            list($goles_local, $goles_visitante) = explode('-', $resultado);
+            $goles_local = trim($goles_local);
+            $goles_visitante = trim($goles_visitante);
+        }
+
+        $maxIdEst = Est_partido::max('id');
+        $nextIdEst = $maxIdEst + 1;
+
+        $estPartido = new Est_partido();
+        $estPartido->id = $nextIdEst;
+        $estPartido->partido_id = $partido->id;
+        $estPartido->goles_local = trim($goles_local);
+        $estPartido->goles_visitante = trim($goles_visitante);
+        $estPartido->amarillas = 0;
+        $estPartido->rojas = 0;
+
+        $estPartido->save();
+
         return redirect()->route('admin.partidos.index')->with('success', 'Partido creado exitosamente.');
     }
 
@@ -128,6 +154,39 @@ class AdminPartidoController extends Controller
 
         $equipos = Equipo::all();
         return view('admin.partidos.edit', compact('equipos', 'partido'));
+    }
+
+    public function show($equipo)
+    {
+        $equipo_id = $equipo;
+
+        $equipo = Equipo::findOrFail($equipo_id);
+
+        $partidos = Partido::where('equipo_local_id', $equipo_id)
+            ->orWhere('equipo_visitante_id', $equipo_id)
+            ->orderBy('jornada')
+            ->get();
+
+        Carbon::setLocale('es');
+
+        foreach ($partidos as $partido) {
+            $fecha = Carbon::createFromFormat('Y-m-d', $partido->fecha);
+
+            $hora = Carbon::createFromFormat('H:i:s', $partido->hora);
+            $partido->hora_nueva = $hora->format('H:i');
+
+            if ($fecha->isToday()) {
+                $partido->fecha_nueva = 'Hoy';
+            } elseif ($fecha->isTomorrow()) {
+                $partido->fecha_nueva = 'Mañana';
+            } else {
+                $partido->fecha_nueva = $fecha->isoFormat('ddd D MMM YYYY');
+            }
+        }
+
+        $equipos = Equipo::all();
+
+        return view('admin.partidos.show', compact('equipos', 'partidos'));
     }
 
     public function update(Request $request, $id)
@@ -159,7 +218,6 @@ class AdminPartidoController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Actualizar los datos del partido
         $partido->fecha = $request->input('fecha');
         $partido->hora = $request->hora;
         $partido->estadio = $request->estadio;
@@ -168,7 +226,32 @@ class AdminPartidoController extends Controller
         $partido->equipo_local_id = $request->equipo_local;
         $partido->equipo_visitante_id = $request->equipo_visitante;
         $partido->save();
-    
+
+
+        $resultado = $partido->resultado;
+
+        if ($resultado === '-') {
+            $goles_local = 0;
+            $goles_visitante = 0;
+        } else {
+            list($goles_local, $goles_visitante) = explode('-', $resultado);
+            $goles_local = trim($goles_local);
+            $goles_visitante = trim($goles_visitante);
+        }
+
+        $maxIdEst = Est_partido::max('id');
+        $nextIdEst = $maxIdEst + 1;
+
+        $estPartido = Est_partido::where('partido_id', $partido->id)->firstOrNew();
+        $estPartido->id = $nextIdEst;
+        $estPartido->partido_id = $partido->id;
+        $estPartido->goles_local = trim($goles_local);
+        $estPartido->goles_visitante = trim($goles_visitante);
+        $estPartido->amarillas = 0;
+        $estPartido->rojas = 0;
+
+        $estPartido->save();
+
         return redirect()->route('admin.partidos.index')->with('success', 'Partido actualizado correctamente.');
     }
 
@@ -188,8 +271,8 @@ class AdminPartidoController extends Controller
         $visitante = $request->input('equipo_visitante');
 
         $partido = Partido::where('equipo_local_id', $local)
-                        ->where('equipo_visitante_id', $visitante)
-                        ->first();
+            ->where('equipo_visitante_id', $visitante)
+            ->first();
 
         if (!$partido) {
             return redirect()->route('admin.partidos.edit')->with('error', 'No se encontró ningún partido con los equipos seleccionados.');
