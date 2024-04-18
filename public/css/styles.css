@@ -424,3 +424,7 @@
     background-color: #e0e0e0; /* Color de fondo para filas impares */
     vertical-align: middle;
 }
+
+.partido-hover:hover {
+    background-color: #000000;
+}

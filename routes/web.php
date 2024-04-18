@@ -24,7 +24,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
-Route::get('/calendario/{jornada?}', [CalendarioController::class, 'index'])->name('calendario');
+Route::get('/calendario/{jornada?}', [CalendarioController::class, 'index'])->name('calendario.index');
+Route::get('/calendario/{equipo}/show', [CalendarioController::class, 'show'])->name('calendario.show');
+Route::get('/partidos/{id}', [CalendarioController::class, 'showEstadisticas'])->name('partidos');
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos');
 
@@ -75,6 +77,7 @@ Route::get('/admin/partidos', [AdminPartidoController::class, 'index'])->name('a
 Route::get('/admin/partidos/create', [AdminPartidoController::class, 'create'])->name('admin.partidos.create');
 Route::post('/admin/partidos/store', [AdminPartidoController::class, 'store'])->name('admin.partidos.store');
 Route::get('/admin/partidos/{id}/edit', [AdminPartidoController::class, 'edit'])->name('admin.partidos.edit');
+Route::get('/admin/partidos/{equipo}/show', [AdminPartidoController::class, 'show'])->name('admin.partidos.show');
 Route::put('/admin/partidos/{id}/update/', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
 Route::delete('/admin/partidos/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
 Route::post('/admin/partidos/search', [AdminPartidoController::class, 'search'])->name('admin.partidos.search');

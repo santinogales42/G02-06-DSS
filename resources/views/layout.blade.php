@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LALIGA EA SPORTS 2023-24</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <!-- Google Fonts -->
@@ -12,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hurricane&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -56,7 +56,7 @@
             <a href="{{ route('home') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Inicio</a>
             <a href="{{ route('noticias') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Noticias</a>
             <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Jugadores</a>
-            <a href="{{ route('calendario') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Calendario</a>
+            <a href="{{ route('calendario.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Calendario</a>
             <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Clasificación</a>
             <a href="{{ route('favoritos') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Favoritos</a>
             <div class="w3-dropdown-hover w3-bar-item">
