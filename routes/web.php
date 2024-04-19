@@ -113,3 +113,6 @@ Route::get('/noticias/{id}', [AdminNoticiasController::class, 'getDatos'])->name
 Route::get('/noticias/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
 
 
+Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos.index');
+Route::get('/favoritos/{nombreEquipo}/edit', [FavoritosController::class, 'editar'])->name('favoritos.edit');
+Route::delete('/favoritos/{nombreEquipo}', [FavoritosController::class, 'delete'])->name('favoritos.delete');

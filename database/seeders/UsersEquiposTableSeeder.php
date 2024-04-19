@@ -18,7 +18,11 @@ class UsersEquiposTableSeeder extends Seeder
     public function run()
     {
         DB::table('users_equipos')->insert([
-            ['user_id' => 1, 'equipo_id' => 1]
+            ['user_id' => 1, 'equipo_id' => 1],
+            ['user_id' => 1, 'equipo_id' => 2],
+            ['user_id' => 1, 'equipo_id' => 3],
+            ['user_id' => 1, 'equipo_id' => 4],
+            ['user_id' => 1, 'equipo_id' => 5]
 
         ]);
     }

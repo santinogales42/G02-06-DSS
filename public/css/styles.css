@@ -567,3 +567,42 @@
 .partido-hover:hover {
     background-color: #000000;
 }
+
+
+/*ESTILOS VISTA FAVORITOS*/
+.texto-h1-favoritos {
+    text-align: center;
+    font-size: 2.3rem;
+    margin: 2rem;
+}
+
+.tarjeta-favoritos {
+    border: 2px solid #ff3823; /* Borde rojo de 2px */
+    border-radius: 8px; /* Borde redondeado */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 20px; /* Espaciado inferior */
+    position: relative; /* Hace que los elementos posicionados dentro de esta tarjeta sean relativos a ella */
+}
+
+.tarjeta-favoritos-nombreEquipo {
+    font-weight: bold;
+    margin-top: 2rem;
+}
+.cuerpo-tarjetas-favoritos {
+    text-align: center;
+}
+.boton-favorito {
+    color: white; 
+    background-color: transparent; 
+    border: none;
+}
+
+.boton-favorito:hover {
+    transform: scale(1.2);
+}
+
+.corazon-lleno {
+    color: red; 
+    font-size: 34px;
+    transition: transform 1s ease-in-out;
+}
