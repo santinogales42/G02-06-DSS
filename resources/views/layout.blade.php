@@ -63,7 +63,7 @@
             <div class="w3-dropdown-hover w3-bar-item">
                 <button class="w3-button w3-bar-item">Admin <i class="fas fa-chevron-down"></i></button>
                 <div class="w3-dropdown-content w3-bar-block w3-card">
-                    <a href="#" class="w3-bar-item w3-button dropdownButton">Jugadores</a>
+                    <a href="{{ route('admin.adminjugador') }}" class="w3-bar-item w3-button dropdownButton">Jugadores</a>
                     <a href="{{ route('admin.usuarios.index') }}" class="w3-bar-item w3-button dropdownButton">Usuarios</a>
                     <a href="{{ route('admin.partidos.index') }}" class="w3-bar-item w3-button dropdownButton">Partidos</a>
                 </div>
