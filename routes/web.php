@@ -90,6 +90,9 @@ Route::put('/admin/usuarios/{id}/update', [AdminUsuariosController::class, 'upda
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index');
 Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
+Route::post('/equipos/{equipo}/favorito', [EquipoController::class, 'agregarFavorito'])->name('equipos.agregarFavorito');
+Route::delete('/equipos/{equipo}/favorito', [EquipoController::class, 'eliminarFavorito'])->name('equipos.eliminarFavorito');
+
 
 // Rutas para AdminEquipoController
 Route::get('/adminequipos', [AdminEquipoController::class, 'index'])->name('admin.equipos');

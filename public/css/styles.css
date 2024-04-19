@@ -567,3 +567,26 @@
 .partido-hover:hover {
     background-color: #000000;
 }
+
+.boton-favorito {
+    color: white; 
+    background-color: transparent; 
+    border: none;
+}
+
+.boton-favorito:hover {
+    transform: scale(1.2);
+}
+
+.corazon-lleno {
+    color: red; 
+    font-size: 34px;
+    transition: transform 1s ease-in-out;
+}
+
+.corazon-vacio {
+    color: red; 
+    border-color: red; 
+    font-size: 34px;
+    transition: transform 1s ease-in-out;
+}

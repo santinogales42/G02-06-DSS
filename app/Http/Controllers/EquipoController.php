@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
 
@@ -9,20 +10,9 @@ class EquipoController extends Controller
 {
     public function index(Request $request)
     {
-        $equipos = Equipo::query();
+        $equipos = Equipo::all();
 
-        if ($request->has('order')) {
-            $order = $request->order;
-            if (in_array($order, ['puntos', 'goles_favor', 'goles_contra'])) {
-                $equipos->orderBy($order, 'desc');
-            }
-        } else {
-            $equipos->orderBy('puntos', 'desc');
-        }
-
-        $equipos = $equipos->get();
-
-        return view('clasificacion.index', compact('equipos'));
+        return view('equipos.index', compact('equipos'));
     }
 
 
@@ -31,5 +21,27 @@ class EquipoController extends Controller
         return view('equipos.show', compact('equipo'));
     }
 
-}
+    public function agregarFavorito(Request $request, Equipo $equipo)
+    {
+        $user = Auth::user();
 
+        if ($user) {
+            $user->equipos()->attach($equipo->id);
+            return redirect()->route('equipos.index');
+        } else {
+            return redirect()->route('equipos.index');
+        }
+    }
+
+    public function eliminarFavorito(Request $request, Equipo $equipo)
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            $user->equipos()->detach($equipo->id);
+            return redirect()->route('equipos.index');
+        } else {
+            return redirect()->route('equipos.index');
+        }
+    }
+}

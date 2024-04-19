@@ -32,6 +32,8 @@
                     </div>
                     <div class="card-body">
                         <p>Goles: {{ $estPartido->goles_local }}</p>
+                        <p>Amarillas: {{ $estPartido->amarillas }}</p>
+                        <p>Rojas: {{ $estPartido->rojas }}</p>
                     </div>
                 </div>
             </div>
@@ -44,6 +46,8 @@
                     </div>
                     <div class="card-body">
                         <p>Goles: {{ $estPartido->goles_visitante }}</p>
+                        <p>Amarillas: {{ $estPartido->amarillas }}</p>
+                        <p>Rojas: {{ $estPartido->rojas }}</p>
                     </div>
                 </div>
             </div>
