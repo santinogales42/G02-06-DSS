@@ -102,21 +102,27 @@ function updateTable(data) {
 
     tableBody.innerHTML = ''; // Limpiar la tabla
     data.data.forEach(jugador => {
+        var goles = jugador.estadisticas ? jugador.estadisticas.goles : 'N/A';
+        var asistencias = jugador.estadisticas ? jugador.estadisticas.asistencias : 'N/A';
+        var amarillas = jugador.estadisticas ? jugador.estadisticas.amarillas : 'N/A';
+        var rojas = jugador.estadisticas ? jugador.estadisticas.rojas : 'N/A';
         var row = `<tr>
             <td><a href="/jugadores/${jugador.id}">${jugador.nombre}</a></td>
             <td>${jugador.posicion}</td>
             <td>${jugador.edad}</td>
-            <td>${jugador.estadisticas.goles}</td>
-            <td>${jugador.estadisticas.asistencias}</td>
-            <td>${jugador.estadisticas.amarillas}</td>
-            <td>${jugador.estadisticas.rojas}</td>
-            <td>${jugador.equipo.nombre}</td>
+            <td>${goles}</td>
+            <td>${asistencias}</td>
+            <td>${amarillas}</td>
+            <td>${rojas}</td>
+            <td>${jugador.equipo ? jugador.equipo.nombre : 'N/A'}</td>
         </tr>`;
         tableBody.innerHTML += row;
     });
     paginationDiv.innerHTML = data.links; // Actualizar los enlaces de paginación
-    attachClickEventToPaginationLinks(); // Asegúrate de volver a adjuntar eventos a los enlaces de paginación
+    attachClickEventToPaginationLinks(); // Re-attach click events to new pagination links
 }
+
+
 
 function attachClickEventToPaginationLinks() {
     document.querySelectorAll('#pagination-links a').forEach(item => {
