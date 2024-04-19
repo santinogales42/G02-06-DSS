@@ -61,7 +61,7 @@
             <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Jugadores</a>
             <a href="{{ route('calendario.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Calendario</a>
             <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Clasificación</a>
-            <a href="{{ route('favoritos') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Favoritos</a>
+            <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Favoritos</a>
             <div class="w3-dropdown-hover w3-bar-item">
                 <button class="w3-button w3-bar-item">Admin <i class="fas fa-chevron-down"></i></button>
                 <div class="w3-dropdown-content w3-bar-block w3-card">
