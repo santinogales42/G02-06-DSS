@@ -6,7 +6,7 @@ use App\Models\Est_partido;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use App\Models\Jugador;
+use App\Models\Partido;
 class EstPartidosTableSeeder extends Seeder
 {
     /**
@@ -16,16 +16,22 @@ class EstPartidosTableSeeder extends Seeder
      */
     public function run()
     {
-        Est_partido::create([
-            'goles_local'=> '1',
-            'goles_visitante'=>'3',
-            'amarillas'=>5,
-            'rojas'=>1,
-            'partido_id'=>1
+        $partidos = Partido::all();
 
+        foreach ($partidos as $partido) {
+            // Obtener los goles del resultado del partido
+            $resultado = explode('-', $partido->resultado);
+            $golesLocal = trim($resultado[0]);
+            $golesVisitante = trim($resultado[1]);
 
-
-        ]);
-        
+            // Insertar en la tabla est_partidos
+            Est_partido::create([
+                'partido_id' => $partido->id,
+                'goles_local' => $golesLocal,
+                'goles_visitante' => $golesVisitante,
+                'amarillas' => 0,
+                'rojas' => 0
+            ]);
+        }
     }
 }
