@@ -16,8 +16,8 @@ use App\Http\Controllers\AdminJugadoresController;
 use App\Http\Controllers\AdminUsuariosController;
 use App\Http\Controllers\AdminPartidoController;
 use App\Http\Controllers\AdminNoticiasController;
-use App\Http\Controllers\AdminEquipoController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\AdminEquipoController;
 use App\Http\Controllers\LogoutController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -34,8 +34,9 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('/confirmar-cerrar-sesion', [LogoutController::class, 'confirmarCerrarSesion'])->name('confirmar.cerrar.sesion');
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
 
 
 
@@ -63,9 +64,6 @@ Route::post('/adminjugadores/eliminar-masa', [AdminJugadoresController::class, '
 Route::post('/adminjugadores/crear', [AdminJugadoresController::class, 'crear']);
 Route::get('/adminjugadores/datos/{id}', [AdminJugadoresController::class, 'getDatos'])->name('jugadores.getDatos');
 Route::post('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');
-
-
-
 Route::post('/adminjugadores/eliminar-todos', [AdminJugadoresController::class, 'eliminarTodos']);
 Route::post('/admin/insertar-jugadores', [AdminJugadoresController::class, 'insertarJugadores']);
 
@@ -94,11 +92,13 @@ Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index'
 Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
 
 // Rutas para AdminEquipoController
-Route::get('/admin/equipos/create', [AdminEquipoController::class, 'create'])->name('admin.equipos.create');
-Route::post('/admin/equipos', [AdminEquipoController::class, 'store'])->name('admin.equipos.store');
-Route::get('/admin/equipos/{equipo}/edit', [AdminEquipoController::class, 'edit'])->name('admin.equipos.edit');
-Route::put('/admin/equipos/{equipo}', [AdminEquipoController::class, 'update'])->name('admin.equipos.update');
-Route::delete('/admin/equipos/{equipo}', [AdminEquipoController::class, 'destroy'])->name('admin.equipos.destroy');
+Route::get('/adminequipos', [AdminEquipoController::class, 'index'])->name('admin.equipos');
+Route::post('/adminequipos/crear', [AdminEquipoController::class, 'crear'])->name('admin.equipos.crear');
+Route::delete('/adminequipos/eliminar-todos', [AdminEquipoController::class, 'eliminarTodos'])->name('admin.equipos.eliminar-todos');
+Route::get('/adminequipos/datos/{id}', [AdminEquipoController::class, 'getDatos'])->name('equipos.getDatos');
+Route::delete('/adminequipos/eliminar/{id}', [AdminEquipoController::class, 'eliminar'])->name('admin.equipos.eliminar');
+Route::post('/adminequipos/actualizar/{id}', [AdminEquipoController::class, 'actualizar'])->name('equipos.actualizar');
+Route::post('/adminequipos/eliminar-masa', [AdminEquipoController::class, 'eliminarMasa'])->name('equipos.eliminarMasa');
 
 // Rutas para administrar noticias
 Route::get('/adminnoticias', [AdminNoticiasController::class, 'index'])->name('adminnoticias');
@@ -113,26 +113,3 @@ Route::get('/noticias/{id}', [AdminNoticiasController::class, 'getDatos'])->name
 Route::get('/noticias/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
 
 
-
-
-
-
-
-
-// Rutas para EquipoController
-Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
-Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index');
-Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
-
-// Rutas para AdminEquipoController
-Route::get('/admin/equipos/create', [AdminEquipoController::class, 'create'])->name('admin.equipos.create');
-Route::post('/admin/equipos', [AdminEquipoController::class, 'store'])->name('admin.equipos.store');
-Route::get('/admin/equipos/{equipo}/edit', [AdminEquipoController::class, 'edit'])->name('admin.equipos.edit');
-Route::put('/admin/equipos/{equipo}', [AdminEquipoController::class, 'update'])->name('admin.equipos.update');
-Route::delete('/admin/equipos/{equipo}', [AdminEquipoController::class, 'destroy'])->name('admin.equipos.destroy');
-Route::get('/admin/usuarios', [AdminUsuariosController::class, 'index'])->name('admin.usuarios.index');
-Route::get('/admin/usuarios/create', [AdminUsuariosController::class, 'create'])->name('admin.usuarios.create');
-Route::get('/admin/usuarios/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
-Route::delete('/admin/usuarios/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
-Route::post('/admin/usuarios/store', [AdminUsuariosController::class, 'store'])->name('admin.usuarios.store');
-Route::put('/admin/usuarios/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');
