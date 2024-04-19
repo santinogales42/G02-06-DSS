@@ -57,8 +57,8 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 // Ruta para manejar el envío del formulario (añadir jugador) sin restricción de autenticación
 Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
 
-
-Route::get('/adminjugadores', [AdminJugadoresController::class, 'index']);
+//Rutas para la Administración de Jugadores
+Route::get('/adminjugadores', [AdminJugadoresController::class, 'index'])->name('admin.adminjugador');
 Route::post('/adminjugadores/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
 Route::post('/adminjugadores/eliminar-masa', [AdminJugadoresController::class, 'eliminarMasa']);
 Route::post('/adminjugadores/crear', [AdminJugadoresController::class, 'crear']);

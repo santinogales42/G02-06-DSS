@@ -4,7 +4,7 @@
 
 namespace Database\Factories;
 use App\Models\Est_jugador;
-
+use App\Models\Jugador;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EstJugadorFactory extends Factory
@@ -23,5 +23,11 @@ class EstJugadorFactory extends Factory
             'rojas' => $this->faker->numberBetween(0, 3),
             'jugador_id' => $this->faker->unique()->numberBetween(1, 30) // Asegura relación uno a uno si es necesario
         ];
+    }
+    public function configure()
+    {
+        return $this->afterCreating(function (Jugador $jugador) {
+            Est_jugador::factory()->create(['jugador_id' => $jugador->id]);
+        });
     }
 }
