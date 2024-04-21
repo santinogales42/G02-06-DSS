@@ -1,6 +1,12 @@
 @extends('layout')
 
 @section('content')
+<!-- Primero jQuery -->
+<!-- Bootstrap JS con Popper (de CDN oficial de Bootstrap) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Luego Bootstrap JS (asegúrate de que incluya Popper si es necesario) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 <div class="container">
     <h1>Administración de Equipos</h1>
     
@@ -36,6 +42,7 @@
 </div>
 
 <!-- Modal de Edición -->
+<!-- Modal de Edición -->
 <div class="modal fade" id="editEquipoModal" tabindex="-1" aria-labelledby="editEquipoModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -55,13 +62,41 @@
                         <label for="edit_liga_id" class="form-label">ID de la Liga:</label>
                         <input type="number" class="form-control" id="edit_liga_id" name="liga_id">
                     </div>
-                    <!-- Añade más campos si es necesario -->
+                    <div class="mb-3">
+                        <label for="edit_ganados" class="form-label">Ganados:</label>
+                        <input type="number" class="form-control" id="edit_ganados" name="ganados">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_empatados" class="form-label">Empatados:</label>
+                        <input type="number" class="form-control" id="edit_empatados" name="empatados">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_perdidos" class="form-label">Perdidos:</label>
+                        <input type="number" class="form-control" id="edit_perdidos" name="perdidos">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_goles_favor" class="form-label">Goles a Favor:</label>
+                        <input type="number" class="form-control" id="edit_goles_favor" name="goles_favor">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_goles_contra" class="form-label">Goles en Contra:</label>
+                        <input type="number" class="form-control" id="edit_goles_contra" name="goles_contra">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_puntos" class="form-label">Puntos:</label>
+                        <input type="number" class="form-control" id="edit_puntos" name="puntos">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_partidos_jugados" class="form-label">Partidos Jugados:</label>
+                        <input type="number" class="form-control" id="edit_partidos_jugados" name="partidos_jugados">
+                    </div>
                     <button type="submit" class="btn btn-primary">Actualizar Equipo</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -75,10 +110,7 @@
                             <label for="nombre" class="form-label">Nombre:</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="liga_id" class="form-label">ID de la Liga:</label>
-                            <input type="number" class="form-control" id="liga_id" name="liga_id">
-                        </div>
+                        
                         <div class="mb-3">
                             <label for="ganados" class="form-label">Ganados:</label>
                             <input type="number" class="form-control" id="ganados" name="ganados">
@@ -125,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // Añadir evento submit al formulario de creación de equipo
 document.getElementById('crearEquipoForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-
     const formData = new FormData(this);
     fetch('/adminequipos/crear', {
         method: 'POST',
@@ -159,7 +190,7 @@ document.getElementById('editarEquipoForm').addEventListener('submit', function(
     .then(data => {
         alert(data.message);
         $('#editEquipoModal').modal('hide');
-        fetchData(); // Recargar los datos
+        fetchData(); // Recargar los datos de la tabla
     })
     .catch(error => console.error('Error:', error));
 });
@@ -177,7 +208,7 @@ function fetchData(page = 1) {
     .then(response => response.json())
     .then(data => {
         var tableBody = document.getElementById('equipos-list');
-        tableBody.innerHTML = '';
+        tableBody.innerHTML = ''; // Limpieza del cuerpo de la tabla
         data.data.forEach(equipo => {
             var row = `<tr>
                 <td><input type="checkbox" class="equipo-checkbox" value="${equipo.id}"></td>
@@ -200,26 +231,11 @@ function fetchData(page = 1) {
 
         var paginationDiv = document.getElementById('pagination-links');
         paginationDiv.innerHTML = data.links;
-        attachClickEventToPaginationLinks();
+        attachClickEventToPaginationLinks(); // Asegúrate de que esta función esté definida
     })
     .catch(error => console.error('Error:', error));
 }
-
-// Abre el modal de edición cargando los datos del equipo seleccionado
-function openEditModal(equipoId) {
-    fetch(`/adminequipos/datos/${equipoId}`)
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('edit_equipo_id').value = data.id;
-        document.getElementById('edit_nombre').value = data.nombre || '';
-        document.getElementById('edit_liga_id').value = data.liga_id || '';
-        // Añade aquí más campos si es necesario
-        $('#editEquipoModal').modal('show');
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Eventos para la paginación
+// Función para adjuntar eventos de clic a los enlaces de paginación
 function attachClickEventToPaginationLinks() {
     document.querySelectorAll('#pagination-links a').forEach(item => {
         item.addEventListener('click', function(e) {
@@ -229,6 +245,34 @@ function attachClickEventToPaginationLinks() {
         });
     });
 }
+
+// Abre el modal de edición cargando los datos del equipo seleccionado
+function openEditModal(equipoId) {
+    fetch(`/adminequipos/datos/${equipoId}`)
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('edit_equipo_id').value = data.id;
+        document.getElementById('edit_nombre').value = data.nombre;
+        document.getElementById('edit_liga_id').value = data.liga_id || ''; // Use || '' para manejar nulls
+        document.getElementById('edit_ganados').value = data.ganados;
+        document.getElementById('edit_empatados').value = data.empatados;
+        document.getElementById('edit_perdidos').value = data.perdidos;
+        document.getElementById('edit_goles_favor').value = data.goles_favor;
+        document.getElementById('edit_goles_contra').value = data.goles_contra;
+        document.getElementById('edit_puntos').value = data.puntos;
+        document.getElementById('edit_partidos_jugados').value = data.partidos_jugados;
+        
+        var editModal = new bootstrap.Modal(document.getElementById('editEquipoModal'));
+        editModal.show();
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
+
+
+// Eventos para la paginación
+
 
 // Elimina todos los equipos
 function deleteAllEquipos() {

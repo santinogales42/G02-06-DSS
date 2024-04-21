@@ -64,15 +64,31 @@ class AdminEquipoController extends Controller
     }
 
     public function actualizar(Request $request, $id)
-    {
-        $equipo = Equipo::findOrFail($id);
-        $validatedData = $request->validate([
-            'nombre' => 'required|string|max:75',
-        ]);
+{
+    $equipo = Equipo::findOrFail($id);
 
-        $equipo->update($validatedData);
-        return response()->json(['message' => 'Equipo actualizado con éxito']);
-    }
+    // Actualización para incluir todos los campos mostrados en el modal de edición
+    $validatedData = $request->validate([
+        'nombre' => 'required|string|max:75',
+        'liga_id' => 'nullable|exists:ligas,id',
+        'ganados' => 'nullable|integer',
+        'empatados' => 'nullable|integer',
+        'perdidos' => 'nullable|integer',
+        'goles_favor' => 'nullable|integer',
+        'goles_contra' => 'nullable|integer',
+        'puntos' => 'nullable|integer',
+        'partidos_jugados' => 'nullable|integer'
+    ]);
+
+    // Actualizar el modelo de Equipo con los datos validados
+    $equipo->update($validatedData);
+
+    // Devolver respuesta JSON indicando el éxito de la operación
+    return response()->json(['message' => 'Equipo actualizado con éxito']);
+}
+
+
+
 
     public function eliminarMasa(Request $request)
     {
@@ -104,5 +120,14 @@ class AdminEquipoController extends Controller
             return response()->json(['message' => 'Error al insertar equipos: ' . $e->getMessage()], 500);
         }
     }
+    public function getDatos($id)
+{
+    try {
+        $equipo = Equipo::findOrFail($id);
+        return response()->json($equipo);
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Error al recuperar los datos del equipo: ' . $e->getMessage()], 500);
+    }
+}
 
 }

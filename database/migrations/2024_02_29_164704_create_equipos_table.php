@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('equipos', function (Blueprint $table) {
 	    $table->id();
 	    $table->string('nombre');
-	    $table->foreignId('liga_id')->constrained()->onDelete('cascade');
-	    $table->integer('ganados');
+	    $table->foreignId('liga_id')->nullable()->constrained()->onDelete('cascade');
+        $table->integer('ganados');
 	    $table->integer('empatados');
 	    $table->integer('perdidos');
 	    $table->integer('goles_favor');
