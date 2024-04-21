@@ -15,5 +15,5 @@
   * santinogales42
 
 ## *Esquema BB.DD. y Mockups* ##
-[BBDD](BBDD/BBDD - DSS.pdf)
+[BBDD](BBDD/BBDD-DSS.pdf)
 [Mockups](BBDD/Mockups.pdf)
