@@ -97,7 +97,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Administración de equipos
     Route::prefix('/adminequipos')->group(function () {
-        Route::get('/', [AdminEquipoController::class, 'index'])->name('admin.equipos');
+        Route::get('/', [AdminEquipoController::class, 'index'])->name('admin.equipos.index');
         Route::post('/crear', [AdminEquipoController::class, 'crear'])->name('admin.equipos.crear');
         Route::get('/datos/{id}', [AdminEquipoController::class, 'getDatos'])->name('equipos.getDatos');
         Route::delete('/eliminar/{id}', [AdminEquipoController::class, 'eliminar'])->name('admin.equipos.eliminar');

@@ -70,6 +70,9 @@
                     <a href="{{ route('admin.adminjugador') }}" class="w3-bar-item w3-button dropdownButton">Jugadores</a>
                     <a href="{{ route('admin.usuarios.index') }}" class="w3-bar-item w3-button dropdownButton">Usuarios</a>
                     <a href="{{ route('admin.partidos.index') }}" class="w3-bar-item w3-button dropdownButton">Partidos</a>
+                    <a href="{{ route('admin.equipos.index') }}" class="w3-bar-item w3-button dropdownButton">Equipos</a>
+                    <a href="{{ route('mostrarMensajes') }}" class="w3-bar-item w3-button dropdownButton">Mensajes</a>
+                
                 </div>
             </div>
             @endif
