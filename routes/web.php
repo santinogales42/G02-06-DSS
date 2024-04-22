@@ -53,39 +53,57 @@ Route::get('/jugadores/{id}', [JugadoresController::class, 'show'])->name('jugad
 
 
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-// Ruta para manejar el envío del formulario (añadir jugador) sin restricción de autenticación
-Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
 
-//Rutas para la Administración de Jugadores
-Route::get('/adminjugadores', [AdminJugadoresController::class, 'index'])->name('admin.adminjugador');
-Route::post('/adminjugadores/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
-Route::post('/adminjugadores/eliminar-masa', [AdminJugadoresController::class, 'eliminarMasa']);
-Route::post('/adminjugadores/crear', [AdminJugadoresController::class, 'crear']);
-Route::get('/adminjugadores/datos/{id}', [AdminJugadoresController::class, 'getDatos'])->name('jugadores.getDatos');
-Route::post('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');
-Route::post('/adminjugadores/eliminar-todos', [AdminJugadoresController::class, 'eliminarTodos']);
-Route::post('/admin/insertar-jugadores', [AdminJugadoresController::class, 'insertarJugadores']);
+    // Administración de jugadores
+    Route::prefix('/adminjugadores')->group(function () {
+        Route::get('/', [AdminJugadoresController::class, 'index'])->name('admin.adminjugador');
+        Route::post('/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
+        Route::post('/crear', [AdminJugadoresController::class, 'crear']);
+        Route::get('/datos/{id}', [AdminJugadoresController::class, 'getDatos'])->name('jugadores.getDatos');
+        Route::post('/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');
+    });
 
+    // Administración de partidos
+    Route::prefix('/admin/partidos')->group(function () {
+        Route::get('/', [AdminPartidoController::class, 'index'])->name('admin.partidos.index');
+        Route::get('/create', [AdminPartidoController::class, 'create'])->name('admin.partidos.create');
+        Route::post('/store', [AdminPartidoController::class, 'store'])->name('admin.partidos.store');
+        Route::get('/{id}/edit', [AdminPartidoController::class, 'edit'])->name('admin.partidos.edit');
+        Route::put('/{id}/update', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
+        Route::delete('/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
+    });
 
-//Rutas para la Administración de Partidos
-Route::get('/admin/partidos', [AdminPartidoController::class, 'index'])->name('admin.partidos.index');
-Route::get('/admin/partidos/create', [AdminPartidoController::class, 'create'])->name('admin.partidos.create');
-Route::post('/admin/partidos/store', [AdminPartidoController::class, 'store'])->name('admin.partidos.store');
-Route::get('/admin/partidos/{id}/edit', [AdminPartidoController::class, 'edit'])->name('admin.partidos.edit');
-Route::get('/admin/partidos/{equipo}/show', [AdminPartidoController::class, 'show'])->name('admin.partidos.show');
-Route::put('/admin/partidos/{id}/update/', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
-Route::delete('/admin/partidos/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
-Route::post('/admin/partidos/search', [AdminPartidoController::class, 'search'])->name('admin.partidos.search');
+    // Administración de usuarios
+    Route::prefix('/admin/usuarios')->group(function () {
+        Route::get('/', [AdminUsuariosController::class, 'index'])->name('admin.usuarios.index');
+        Route::get('/create', [AdminUsuariosController::class, 'create'])->name('admin.usuarios.create');
+        Route::post('/store', [AdminUsuariosController::class, 'store'])->name('admin.usuarios.store');
+        Route::get('/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
+        Route::put('/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');
+        Route::delete('/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
+    });
 
-//Rutas para AdminUsuarios
-Route::get('/admin/usuarios', [AdminUsuariosController::class, 'index'])->name('admin.usuarios.index');
-Route::get('/admin/usuarios/create', [AdminUsuariosController::class, 'create'])->name('admin.usuarios.create');
-Route::get('/admin/usuarios/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
-Route::delete('/admin/usuarios/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
-Route::post('/admin/usuarios/store', [AdminUsuariosController::class, 'store'])->name('admin.usuarios.store');
-Route::put('/admin/usuarios/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');
+    // Administración de noticias
+    Route::prefix('/adminnoticias')->group(function () {
+        Route::get('/', [AdminNoticiasController::class, 'index'])->name('admin.noticias.index');
+        Route::post('/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
+        Route::get('/datos/{id}', [AdminNoticiasController::class, 'getDatos'])->name('noticias.getDatos');
+        Route::delete('/eliminar/{id}', [AdminNoticiasController::class, 'eliminar'])->name('admin.noticias.eliminar');
+        Route::post('/actualizar/{id}', [AdminNoticiasController::class, 'actualizar'])->name('noticias.actualizar');
+    });
 
+    // Administración de equipos
+    Route::prefix('/adminequipos')->group(function () {
+        Route::get('/', [AdminEquipoController::class, 'index'])->name('admin.equipos');
+        Route::post('/crear', [AdminEquipoController::class, 'crear'])->name('admin.equipos.crear');
+        Route::get('/datos/{id}', [AdminEquipoController::class, 'getDatos'])->name('equipos.getDatos');
+        Route::delete('/eliminar/{id}', [AdminEquipoController::class, 'eliminar'])->name('admin.equipos.eliminar');
+        Route::post('/actualizar/{id}', [AdminEquipoController::class, 'actualizar'])->name('equipos.actualizar');
+    });
+});
 // Rutas para EquipoController
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index');
@@ -94,26 +112,6 @@ Route::post('/equipos/{equipo}/favorito', [EquipoController::class, 'agregarFavo
 Route::delete('/equipos/{equipo}/favorito', [EquipoController::class, 'eliminarFavorito'])->name('equipos.eliminarFavorito');
 
 
-// Rutas para AdminEquipoController
-Route::get('/adminequipos', [AdminEquipoController::class, 'index'])->name('admin.equipos');
-Route::post('/adminequipos/crear', [AdminEquipoController::class, 'crear'])->name('admin.equipos.crear');
-Route::delete('/adminequipos/eliminar-todos', [AdminEquipoController::class, 'eliminarTodos'])->name('admin.equipos.eliminar-todos');
-Route::get('/adminequipos/datos/{id}', [AdminEquipoController::class, 'getDatos'])->name('equipos.getDatos');
-Route::delete('/adminequipos/eliminar/{id}', [AdminEquipoController::class, 'eliminar'])->name('admin.equipos.eliminar');
-Route::post('/adminequipos/actualizar/{id}', [AdminEquipoController::class, 'actualizar'])->name('equipos.actualizar');
-Route::post('/adminequipos/eliminar-masa', [AdminEquipoController::class, 'eliminarMasa'])->name('equipos.eliminarMasa');
-
-// Rutas para administrar noticias
-Route::get('/adminnoticias', [AdminNoticiasController::class, 'index'])->name('adminnoticias');
-Route::post('/adminnoticias/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
-Route::delete('/adminnoticias/eliminar-todas', [AdminNoticiasController::class, 'eliminarTodas'])->name('admin.noticias.eliminar-todas');
-Route::get('/adminnoticias/datos/{id}', [AdminNoticiasController::class, 'getDatos'])->name('noticias.getDatos');
-Route::delete('/adminnoticias/eliminar/{id}', [AdminNoticiasController::class, 'eliminar'])->name('admin.noticias.eliminar');
-Route::post('/adminnoticias/actualizar/{id}', [AdminNoticiasController::class, 'actualizar'])->name('noticias.actualizar');
-Route::get('/adminnoticias/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
-Route::post('/adminnoticias/eliminar-masa', [AdminNoticiasController::class, 'eliminarMasa']);
-Route::get('/noticias/{id}', [AdminNoticiasController::class, 'getDatos'])->name('jugadores.show');
-Route::get('/noticias/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
 
 
 Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos.index');
