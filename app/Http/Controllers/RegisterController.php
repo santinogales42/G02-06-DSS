@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session; // Importa la clase Session
+use Illuminate\Support\Facades\Validator;
+use App\Rules\CustomEmailRule;
+use App\Rules\ValidarNombre;
 
 class RegisterController extends Controller
 {
@@ -20,29 +23,43 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        // Validar los datos del formulario de registro
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8', // Verifica que la contraseña tenga al menos 8 caracteres
-            'password_confirmation' => 'required|string|same:password', // Verifica que la confirmación de la contraseña coincida con la contraseña
-        ], [
-            'password.min' => 'La contraseña debe tener al menos 8 dígitos', // Personaliza el mensaje de error para la validación de longitud mínima de contraseña
-            'password_confirmation.same' => 'Las contraseñas introducidas no coinciden', // Personaliza el mensaje de error para la validación de coincidencia de contraseña
-        ]);
-        if ($request->password !== $request->password_confirmation) {
-            return redirect()->back()->withInput()->withErrors(['password_confirmation' => 'Las contraseñas no coinciden']);
+        // Define las reglas de validación
+        $rules = [
+            'name' => ['required', 'string', 'max:255', new ValidarNombre],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', new CustomEmailRule],
+            'password' => 'required|string|min:8',
+            'password_confirmation' => 'required|string|same:password',
+        ];
+
+        // Define los mensajes de error personalizados
+        $messages = [
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres',
+            'password_confirmation.same' => 'Las contraseñas no coinciden',
+            'email.custom_email' => 'El formato de correo electrónico es incorrecto',
+        ];
+
+        // Aplica las reglas de validación y los mensajes personalizados
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        // Verifica si hay errores de validación
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         // Crear un nuevo usuario en la base de datos
         $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' =>  Hash::make($validatedData['password']),
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
 
+        // Inicia sesión con el nuevo usuario
         Auth::login($user);
-        Session::put('userName', Auth::user()->name);
+
+        // Guarda el nombre del usuario en la sesión
+        Session::put('userName', $user->name);
+
+        // Redirige a la página de inicio
         return redirect()->route('home');
     }
 }
