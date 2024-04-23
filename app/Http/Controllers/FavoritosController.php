@@ -11,19 +11,14 @@ class FavoritosController extends Controller
     public function index()
     {
         // Verificar si el usuario está autenticado
-        if (auth()->check()) {
-            // Obtener el usuario actualmente autenticado
-            $user = auth()->user();
+        // Obtener el usuario actualmente autenticado
+        $user = auth()->user();
 
-            // Obtener los equipos favoritos del usuario
-            $equiposFavoritos = $user->equipos()->get();
+        // Obtener los equipos favoritos del usuario
+        $equiposFavoritos = $user->equipos()->get();
 
-            // Renderizar la vista con los equipos favoritos
-            return view('favoritos.index', compact('equiposFavoritos'));
-        } else {
-            // Si el usuario no está autenticado, mostrar un mensaje de advertencia
-            return view('favoritos.index')->with('warning', 'Debes registrarte/iniciar sesión para ver tus favoritos.');
-        }
+        // Renderizar la vista con los equipos favoritos
+        return view('favoritos.index', compact('equiposFavoritos'));
     }
 
     public function editar($nombreEquipo)

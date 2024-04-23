@@ -61,15 +61,21 @@
             <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Jugadores</a>
             <a href="{{ route('calendario.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Calendario</a>
             <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Clasificación</a>
-            <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Favoritos</a>
+            @auth
+            @if(Auth::user()->isAdmin)
             <div class="w3-dropdown-hover w3-bar-item">
                 <button class="w3-button w3-bar-item">Admin <i class="fas fa-chevron-down"></i></button>
                 <div class="w3-dropdown-content w3-bar-block w3-card">
                     <a href="{{ route('admin.adminjugador') }}" class="w3-bar-item w3-button dropdownButton">Jugadores</a>
                     <a href="{{ route('admin.usuarios.index') }}" class="w3-bar-item w3-button dropdownButton">Usuarios</a>
                     <a href="{{ route('admin.partidos.index') }}" class="w3-bar-item w3-button dropdownButton">Partidos</a>
+                    <a href="{{ route('admin.equipos.index') }}" class="w3-bar-item w3-button dropdownButton">Equipos</a>
+                    <a href="{{ route('mostrarMensajes') }}" class="w3-bar-item w3-button dropdownButton">Mensajes</a>
+                
                 </div>
             </div>
+            @endif
+@endauth
             <!-- Enlaces en la parte inferior de la barra lateral -->
             <div class="SidebarDownSection">
                 <div class="horizontal-line-1"></div>
@@ -99,6 +105,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="w3-dropdown-content w3-bar-block w3-card" id="dropdownContent-cerrarSesion">
+                        <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Favoritos</a>
                         <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button" id="logoutButton">Cerrar sesión</a>
                     </div>
                 </div>

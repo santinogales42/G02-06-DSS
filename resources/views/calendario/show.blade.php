@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <a style="margin-bottom: 1rem;" href="{{ route('calendario.index') }}" class="btn btn-secondary">Volver</a>
+    <a href="{{ route('calendario.index') }}" class="btn boton-volver-a-calendario">Volver</a>
     @foreach ($partidos as $partido)
     <div class="card mb-3">
         <div class="card-body">

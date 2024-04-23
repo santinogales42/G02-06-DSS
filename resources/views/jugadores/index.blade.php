@@ -15,7 +15,7 @@
     <!-- Botones desplegables para ordenar -->
     
     <div class="dropdown mb-3">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Ordenar por
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -107,7 +107,7 @@ function updateTable(data) {
         var amarillas = jugador.estadisticas ? jugador.estadisticas.amarillas : 'N/A';
         var rojas = jugador.estadisticas ? jugador.estadisticas.rojas : 'N/A';
         var row = `<tr>
-            <td><a href="/jugadores/${jugador.id}">${jugador.nombre}</a></td>
+            <td><a style='color: red;' href="/jugadores/${jugador.id}">${jugador.nombre}</a></td>
             <td>${jugador.posicion}</td>
             <td>${jugador.edad}</td>
             <td>${goles}</td>

@@ -287,6 +287,14 @@
     background-color: #dc3545 !important;
 }
 
+.links-noticias a{
+    color: #ff3823;
+}
+
+.links-noticias a:hover {
+    color: #ff3823;
+    text-decoration: underline; /* Subraya el texto al pasar el ratón */
+}
 
 .noticia {
     border: 2px solid #ccc; /* Borde alrededor de cada noticia */
@@ -301,7 +309,7 @@
 }
 
 .noticia h2 a{
-    color: red;
+    color: #ff3823;
 }
 
 .noticia img {
@@ -542,12 +550,17 @@
     border: 2px solid #fff;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+.jornada-actual:hover {
+    background-color: #cccbcb;
+    border-color: #c9c9c9;
+    color: #000000;
+    text-decoration: none;
+}
 
 /* Cambia el fondo y el borde a blanco al pasar el ratón por encima */
 .jornada-anterior:hover,
-.jornada-siguiente:hover,
-.jornada-actual:hover {
-    background-color: #fff;
+.jornada-siguiente:hover {
+    background-color: #da9797;
     border-color: #eaeaea;
     color: #000000;
     text-decoration: none;
@@ -612,4 +625,50 @@
     border-color: red; 
     font-size: 34px;
     transition: transform 1s ease-in-out;
+}
+
+
+/*Estilos mejorados Jugadores*/
+#dropdownMenuButton {
+    background-color: #ff6961;
+}
+
+
+/*Estilos mejorados Calendario*/
+.jumbotron {
+    background-color:#444444 !important; /* Color de fondo rosita */
+    padding: 2.5rem 2rem !important; /* Ajusta el espacio interior del jumbotron */
+}
+
+/* Estilo para las opciones del desplegable */
+.boton-seleccionar-equipo {
+    background-color: #f8817b; /* Fondo rosita */
+    color: white; /* Texto blanco */
+    border-color: #ff3823; /* Borde rojizo */
+    font-size: 1rem; /* Tamaño de fuente más grande */
+    padding: 0.5rem 1rem; /* Ajuste de padding para hacer el botón más grande */
+    border-radius: 0.5rem; /* Bordes redondeados */
+}
+/* Anular estilos para las opciones del desplegable */
+.boton-seleccionar-equipo option {
+    background-color: white; /* Fondo blanco */
+    color: black;
+}
+
+.boton-volver-a-calendario {
+    background-color: #f09893 !important;
+    border-radius: 0.5rem;
+    border-color: red;
+    margin-bottom: 1rem;
+}
+
+.boton-volver-a-calendario:hover {
+    background-color: #f1706270;
+    color: #fff;
+    border-color: #ff3823;
+}
+
+/*Estilos mejorados Calendario*/
+.container-fluid-clasificacion {
+    align-items: center !important;
 }

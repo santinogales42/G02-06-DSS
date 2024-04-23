@@ -26,6 +26,6 @@ class ValidarNombre implements Rule
      */
     public function message()
     {
-        return 'El campo :attribute debe contener al menos una letra y no puede consistir únicamente de números.';
+        return 'El campo :attribute debe contener al menos una letra.';
     }
 }

@@ -3,16 +3,16 @@
 @section('title', 'Calendario de Partidos')
 
 @section('content')
-<div class="jumbotron jumbotron-fluid" style="background-color: #333333; color: #ffffff;">
+<div class="jumbotron jumbotron-fluid">
     <div class="container-fluid">
-        <h1 class="display-4 font-weight-bold text-center" style="font-size: 2.5rem;">Calendario de La Liga 2023/24</h1>
+        <h1 class="display-4 font-weight-bold text-center" style="font-size: 2.5rem; color:white;">Calendario de La Liga 2023/24</h1>
     </div>
 </div>
 
 <div class="container mt-4">
     <div class="row" style="margin-bottom: 1rem;">
         <div class="col-md-6">
-            <select class="btn btn-secondary dropdown-toggle" onchange="location = this.value;">
+            <select class="boton-seleccionar-equipo dropdown-toggle" onchange="location = this.value;">
                 <option value="" selected disabled>Selecciona un equipo</option>
                 @foreach ($equipos as $equipo)
                 <option value="{{ route('calendario.show', ['equipo' => $equipo->id]) }}">{{ $equipo->nombre }}</option>
