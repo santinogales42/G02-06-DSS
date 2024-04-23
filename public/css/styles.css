@@ -355,7 +355,7 @@
 
 /* Estilos para inicio de sesión */
 .tarjeta {
-    margin-top: 50px;
+    margin-top: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -671,4 +671,56 @@
 /*Estilos mejorados Calendario*/
 .container-fluid-clasificacion {
     align-items: center !important;
+}
+
+/*Estilos AdminJugadores*/
+.titulo-admin-jugadores,
+.titulo-admin-Equipos {
+    text-align: center;
+    padding: 2rem;
+}
+.boton-insertar-usuarios {
+    background-color: #ff9688 !important;
+    color: white !important;
+}
+
+.boton-insertar-usuarios:hover {
+    color: black !important;
+}
+
+#pagination-links {
+    color: #ff3823 !important; 
+    margin-bottom: 1rem;
+}
+
+#pagination-links a {
+    color: black; /* Cambiar el color del texto a negro */
+}
+
+.boton-crear-jugador,
+.boton-crear-equipo,
+.boton-limpiar-mensajes,
+.boton-enviar-mensaje {
+    background-color: white !important;
+    color: #ff3823 !important;
+    border-color: #ff3823 !important;
+}
+
+.boton-crear-jugador:hover,
+.boton-crear-equipo:hover,
+.boton-limpiar-mensajes:hover,
+.boton-enviar-mensaje:hover {
+    background-color: #f1706270 !important;
+    color: black !important;
+    border-color: #ff3823;
+}
+
+/*Mejora estilos AdminPartidos*/
+.row-crearPartido {
+    align-items: center !important;
+    margin-bottom: 1rem; 
+}
+
+.bg-rojo-pastel {
+    background-color: #f1f1f1; /* Puedes ajustar este valor según el tono de rojo pastel que desees */
 }

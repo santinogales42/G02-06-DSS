@@ -9,26 +9,26 @@
 </script>
 @endif
 
-<div class="jumbotron jumbotron-fluid" style="background-color: #333333; color: #ffffff;">
+<div class="jumbotron jumbotron-fluid">
     <div class="container-fluid">
-        <h1 class="display-4 text-center" style="font-size: 2.5rem;">Administración de Partidos</h1>
+        <h1 class="display-4 text-center" style="font-size: 2.5rem; color:white">Administración de Partidos</h1>
     </div>
 </div>
 
 <div class="container mt-4" style="margin-bottom: 6rem;">
-    <div class="row" style="margin-bottom: 1rem;">
+    <div class="tarjeta-agregar-usuarios mb-3">
+        <a href="{{ route('admin.partidos.create') }}" class="btn boton-agregar">Crear Partido</a>
+    </div>
+    <div class="d-flex justify-content-between mb-3">
         <div class="col-md-6">
-            <select class="btn btn-secondary dropdown-toggle" onchange="location = this.value;">
+            <select class="boton-seleccionar-equipo dropdown-toggle" onchange="location = this.value;">
                 <option value="" selected disabled>Selecciona un equipo</option>
                 @foreach ($equipos as $equipo)
                 <option value="{{ route('admin.partidos.show', ['equipo' => $equipo->id]) }}">{{ $equipo->nombre }}</option>
                 @endforeach
             </select>
         </div>
-    </div>
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <a href="{{ route('admin.partidos.create') }}" class="btn btn-danger">Crear Partido</a>
-
+        
         <div>
             <label class="mr-2">Seleccionar Jornada:</label>
             <select onchange="location = this.value;" class="jornada-actual">

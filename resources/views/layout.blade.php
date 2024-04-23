@@ -85,7 +85,7 @@
                     <img src="{{ asset('images/twit.png') }}" alt="Imagen 3">
                 </div>
                 <div class="horizontal-line-1"></div>
-                <a href="#" class="w3-bar-item w3-button" style="text-decoration: none;">Contáctanos</a>
+                <a href="{{ route('contacto') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Contáctanos</a>
             </div>
         </div>
     </div>
