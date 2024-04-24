@@ -24,8 +24,13 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-{
-    View::composer('*', function ($view) {
-        $view->with('isUserLoggedIn', Auth::check());
-    });}
+    {
+        // Compartir la variable $isUserLoggedIn con todas las vistas
+        View::composer('*', function ($view) {
+            $view->with([
+                'isUserLoggedIn' => Auth::check(),
+                'custom_email' => 'custom@example.com', // Puedes cambiar esto por el valor deseado
+            ]);
+        });
+    }
 }

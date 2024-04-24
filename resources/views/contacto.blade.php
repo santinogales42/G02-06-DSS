@@ -6,11 +6,11 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card rounded-lg shadow-sm bg-light">
+            <div class="tarjeta rounded-lg shadow-sm bg-rojo-pastel">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <h1 class="text-center mb-4">Cuentanos tu problema</h1>
+                            <h1 class="text-center mb-4">Cuéntanos tu problema</h1>
                             @if(session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
@@ -30,7 +30,7 @@
                                     <label for="mensaje">Mensaje:</label>
                                     <textarea id="mensaje" name="mensaje" rows="6" class="form-control" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                                <button type="submit" class="btn boton-enviar-mensaje">Enviar mensaje</button>
                             </form>
                         </div>
                         <div class="col-md-6">

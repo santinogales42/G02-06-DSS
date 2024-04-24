@@ -15,9 +15,13 @@
         </div>
     @endif
     <input type="text" id="search" placeholder="Buscar jugadores..." onkeyup="fetchData()" class="form-control mb-3">
-    <button id="bulk-delete" class="btn btn-danger" onclick="deleteSelectedJugadores()">Eliminar Seleccionados</button>
-    <button id="delete-all" class="btn btn-danger" onclick="deleteAllJugadores()">Eliminar Todos los Jugadores</button>
-    <button class="btn btn-primary" onclick="insertarJugadores()">Insertar Jugadores Aleatorios (Para pruebas)</button>
+    <div class="d-flex justify-content-between" style="padding: 1rem;">
+        <button class="btn boton-insertar-usuarios" onclick="insertarJugadores()">Insertar Jugadores Aleatorios (Para pruebas)</button>
+        <div>
+            <button id="bulk-delete" class="btn btn-danger" onclick="deleteSelectedJugadores()">Eliminar Seleccionados</button>
+            <button id="delete-all" class="btn btn-danger" onclick="deleteAllJugadores()">Eliminar Todos los Jugadores</button>
+        </div>
+    </div>
 
     <div class="table-responsive">
         <table class="table">
@@ -43,44 +47,46 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
+            <div class="card mb-3">
+                <div class="encabezado-tarjeta-usuarios">
                     Crear Nuevo Jugador
                 </div>
                 <div class="card-body">
-<form id="crearJugadorForm">
-    <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre:</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" required>
-    </div>
+                    <form id="crearJugadorForm">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
 
-    <div class="mb-3">
-        <label for="posicion" class="form-label">Posición:</label>
-        <input type="text" class="form-control" id="posicion" name="posicion">
-    </div>
-    <div class="mb-3">
-        <label for="nacionalidad" class="form-label">Nacionalidad:</label>
-        <input type="text" class="form-control" id="nacionalidad" name="nacionalidad">
-    </div>
-    <div class="mb-3">
-        <label for="edad" class="form-label">Edad:</label>
-        <input type="number" class="form-control" id="edad" name="edad">
-    </div>
-    <div class="mb-3">
-        <label for="equipo_id" class="form-label">ID del Equipo:</label>
-        <input type="number" class="form-control" id="equipo_id" name="equipo_id">
-    </div>
-    <div class="mb-3">
-        <label for="foto" class="form-label">Foto (URL):</label>
-        <input type="text" class="form-control" id="foto" name="foto">
-    </div>
-    <div class="mb-3">
-        <label for="biografia" class="form-label">Biografía:</label>
-        <textarea class="form-control" id="biografia" name="biografia"></textarea>
-    </div>
+                        <div class="mb-3">
+                            <label for="posicion" class="form-label">Posición:</label>
+                            <input type="text" class="form-control" id="posicion" name="posicion">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nacionalidad" class="form-label">Nacionalidad:</label>
+                            <input type="text" class="form-control" id="nacionalidad" name="nacionalidad">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edad" class="form-label">Edad:</label>
+                            <input type="number" class="form-control" id="edad" name="edad">
+                        </div>
+                        <div class="mb-3">
+                            <label for="equipo_id" class="form-label">ID del Equipo:</label>
+                            <input type="number" class="form-control" id="equipo_id" name="equipo_id">
+                        </div>
+                        <div class="mb-3">
+                            <label for="foto" class="form-label">Foto (URL):</label>
+                            <input type="text" class="form-control" id="foto" name="foto">
+                        </div>
+                        <div class="mb-3">
+                            <label for="biografia" class="form-label">Biografía:</label>
+                            <textarea class="form-control" id="biografia" name="biografia"></textarea>
+                        </div>
 
                         <!-- Añade más campos según necesites -->
-                        <button type="submit" class="btn btn-primary">Crear Jugador</button>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn boton-crear-jugador">Crear Jugador</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -95,8 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.getElementById('editarJugadorForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+    document.getElementById('editarJugadorForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
     const jugadorId = document.getElementById('edit_jugador_id').value;
     const formData = new FormData(this);
@@ -136,7 +142,7 @@ function fetchData(page = 1) {
             <td>${jugador.id}</td>
             <td>${jugador.nombre}</td>
             <td>
-            <a href="/adminjugadores/jugadores/editar/${jugador.id}" class="btn btn-primary">Editar</a>
+            <button href="/adminjugadores/jugadores/editar/${jugador.id}" class="btn boton-editar"><i class="fas fa-pencil-alt"></i></button>
 <button class="btn btn-eliminar" onclick="deleteJugador(${jugador.id})"><i class="fas fa-trash-alt" style="color: red;"></i></button>
             </td>
         </tr>`;
@@ -155,144 +161,151 @@ attachCheckboxEvents(); // Adjuntar eventos a los nuevos checkboxes
     });
 }
 
-function attachClickEventToPaginationLinks() {
-    document.querySelectorAll('#pagination-links a').forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault(); // Evita la navegación directa
-            const page = this.getAttribute('href').split('page=')[1];
-            fetchData(page);
+    function attachClickEventToPaginationLinks() {
+        document.querySelectorAll('#pagination-links a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault(); // Evita la navegación directa
+                const page = this.getAttribute('href').split('page=')[1];
+                fetchData(page);
+            });
         });
-    });
-}
-function deleteJugador(jugadorId) {
-    // Mostrar un mensaje de confirmación antes de eliminar
-    if (confirm('¿Seguro que quieres eliminar al jugador?')) {
-        // Si el usuario confirma, proceder con la eliminación
-        eliminarJugador(jugadorId);
-    }
-}
-
-function eliminarJugador(jugadorId) {
-    fetch(`/adminjugadores/eliminar/${jugadorId}`, {
-        method: 'POST',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), // Asegúrate de tener este meta tag en tu layout para el CSRF token
-        },
-    })
-    .then(response => {
-    if (response.ok) {
-        fetchData(); // Recargar los datos para actualizar la lista
-        alert('Jugador eliminado con éxito');
-    } else {
-        response.json().then(data => alert(data.message));
-    }
-})
-
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
-function deleteSelectedJugadores() {
-    // Obtener IDs seleccionados del almacenamiento local
-    const selectedIds = JSON.parse(localStorage.getItem('selectedJugadores')) || [];
-
-    if (selectedIds.length === 0) {
-        alert('Por favor, selecciona al menos un jugador para eliminar.');
-        return;
     }
 
-    if (!confirm('¿Seguro que quieres eliminar a los jugadores seleccionados?')) return;
+    function deleteJugador(jugadorId) {
+        // Mostrar un mensaje de confirmación antes de eliminar
+        if (confirm('¿Seguro que quieres eliminar al jugador?')) {
+            // Si el usuario confirma, proceder con la eliminación
+            eliminarJugador(jugadorId);
+        }
+    }
 
-    // Continúa con la eliminación como antes, usando `selectedIds`
-    fetch('/adminjugadores/eliminar-masa', {
-        method: 'POST',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ids: selectedIds }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        fetchData(); // Recargar la lista para reflejar los cambios
-        localStorage.setItem('selectedJugadores', JSON.stringify([])); // Limpiar las selecciones después de la eliminación
-    })
-    .catch(error => console.error('Error:', error));
-}
+    function eliminarJugador(jugadorId) {
+        fetch(`/adminjugadores/eliminar/${jugadorId}`, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), // Asegúrate de tener este meta tag en tu layout para el CSRF token
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    fetchData(); // Recargar los datos para actualizar la lista
+                    alert('Jugador eliminado con éxito');
+                } else {
+                    response.json().then(data => alert(data.message));
+                }
+            })
 
-function attachCheckboxEvents() {
-    document.querySelectorAll('.jugador-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            let selectedIds = JSON.parse(localStorage.getItem('selectedJugadores')) || [];
-            if (this.checked) {
-                selectedIds.push(this.value);
-            } else {
-                selectedIds = selectedIds.filter(id => id !== this.value);
-            }
-            localStorage.setItem('selectedJugadores', JSON.stringify(selectedIds));
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function deleteSelectedJugadores() {
+        // Obtener IDs seleccionados del almacenamiento local
+        const selectedIds = JSON.parse(localStorage.getItem('selectedJugadores')) || [];
+
+        if (selectedIds.length === 0) {
+            alert('Por favor, selecciona al menos un jugador para eliminar.');
+            return;
+        }
+
+        if (!confirm('¿Seguro que quieres eliminar a los jugadores seleccionados?')) return;
+
+        // Continúa con la eliminación como antes, usando `selectedIds`
+        fetch('/adminjugadores/eliminar-masa', {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ids: selectedIds
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                fetchData(); // Recargar la lista para reflejar los cambios
+                localStorage.setItem('selectedJugadores', JSON.stringify([])); // Limpiar las selecciones después de la eliminación
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function attachCheckboxEvents() {
+        document.querySelectorAll('.jugador-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                let selectedIds = JSON.parse(localStorage.getItem('selectedJugadores')) || [];
+                if (this.checked) {
+                    selectedIds.push(this.value);
+                } else {
+                    selectedIds = selectedIds.filter(id => id !== this.value);
+                }
+                localStorage.setItem('selectedJugadores', JSON.stringify(selectedIds));
+            });
         });
-    });
-}
-function checkSelectedCheckboxes() {
-    const selectedIds = JSON.parse(localStorage.getItem('selectedJugadores')) || [];
-    document.querySelectorAll('.jugador-checkbox').forEach(checkbox => {
-        checkbox.checked = selectedIds.includes(checkbox.value);
-    });
-}
-
-document.getElementById('crearJugadorForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-    fetch('/adminjugadores/crear', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        fetchData(); // Recargar la lista de jugadores para incluir el nuevo jugador
-    })
-    .catch(error => console.error('Error:', error));
-});
-function deleteAllJugadores() {
-    if (confirm('¿Estás seguro de querer eliminar TODOS los jugadores y sus estadísticas? Esta acción es irreversible.')) {
-        fetch('/adminjugadores/eliminar-todos', {
-            method: 'POST',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-            fetchData(); // Recargar los datos después de eliminar
-        })
-        .catch(error => console.error('Error:', error));
     }
-}
-function insertarJugadores() {
-    fetch('/admin/insertar-jugadores', {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'Content-Type': 'application/json'
-        },
-    })
-    .then(response => response.json())
-    .then(data => alert(data.message))
-    
-    .catch(error => console.error('Error:', error));
-    fetchData();
-}
+
+    function checkSelectedCheckboxes() {
+        const selectedIds = JSON.parse(localStorage.getItem('selectedJugadores')) || [];
+        document.querySelectorAll('.jugador-checkbox').forEach(checkbox => {
+            checkbox.checked = selectedIds.includes(checkbox.value);
+        });
+    }
+
+    document.getElementById('crearJugadorForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        fetch('/adminjugadores/crear', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                fetchData(); // Recargar la lista de jugadores para incluir el nuevo jugador
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    function deleteAllJugadores() {
+        if (confirm('¿Estás seguro de querer eliminar TODOS los jugadores y sus estadísticas? Esta acción es irreversible.')) {
+            fetch('/adminjugadores/eliminar-todos', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    fetchData(); // Recargar los datos después de eliminar
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }
+
+    function insertarJugadores() {
+        fetch('/admin/insertar-jugadores', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+
+            .catch(error => console.error('Error:', error));
+        fetchData();
+    }
 </script>
 
 @endsection

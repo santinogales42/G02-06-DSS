@@ -6,9 +6,9 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h1 class="card-title">Mensajes recibidos</h1>
+            <div class="tarjeta">
+                <div class="encabezado-tarjeta-usuarios">
+                   Mensajes recibidos
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -22,7 +22,7 @@
                 <div class="card-footer">
                     <form action="{{ route('limpiarMensajes') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-danger">Limpiar mensajes</button>
+                        <button type="submit" class="btn boton-limpiar-mensajes">Limpiar mensajes</button>
                     </form>
                 </div>
             </div>

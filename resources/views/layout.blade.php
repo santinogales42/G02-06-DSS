@@ -61,7 +61,6 @@
             <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Jugadores</a>
             <a href="{{ route('calendario.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Calendario</a>
             <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Clasificación</a>
-            <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Favoritos</a>
             @auth
             @if(Auth::user()->isAdmin)
             <div class="w3-dropdown-hover w3-bar-item">
@@ -86,7 +85,7 @@
                     <img src="{{ asset('images/twit.png') }}" alt="Imagen 3">
                 </div>
                 <div class="horizontal-line-1"></div>
-                <a href="#" class="w3-bar-item w3-button" style="text-decoration: none;">Contáctanos</a>
+                <a href="{{ route('contacto') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Contáctanos</a>
             </div>
         </div>
     </div>
@@ -106,6 +105,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="w3-dropdown-content w3-bar-block w3-card" id="dropdownContent-cerrarSesion">
+                        <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Favoritos</a>
                         <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button" id="logoutButton">Cerrar sesión</a>
                     </div>
                 </div>
