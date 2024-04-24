@@ -63,7 +63,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
         Route::post('/crear', [AdminJugadoresController::class, 'crear']);
         Route::get('/datos/{id}', [AdminJugadoresController::class, 'getDatos'])->name('jugadores.getDatos');
-        Route::post('/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');
+        Route::put('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');    
+        Route::get('/jugadores/editar/{id}', [AdminJugadoresController::class, 'editar'])->name('jugadores.editar');
+
     });
 
     // Administración de partidos

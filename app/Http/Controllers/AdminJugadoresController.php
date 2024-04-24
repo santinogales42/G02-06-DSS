@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Equipo;
 use App\Models\Est_jugador;
 use App\Models\Jugador;
 use Illuminate\Http\Request;
@@ -55,6 +55,14 @@ public function eliminarMasa(Request $request)
         return response()->json(['message' => 'Error al eliminar jugadores: ' . $e->getMessage()], 500);
     }
 }
+// AdminJugadoresController.php
+public function editar($id)
+    {
+        $jugador = Jugador::findOrFail($id);
+        $equipos = Equipo::all();  // Carga todos los equipos para el selector en la vista
+        return view('editar', compact('jugador', 'equipos'));
+    }
+
 public function crear(Request $request)
 {
     $validatedData = $request->validate([
@@ -79,23 +87,44 @@ public function getDatos($id)
     $jugador = Jugador::findOrFail($id);
     return response()->json($jugador);
 }
-
+// AdminJugadoresController.php
 public function actualizar(Request $request, $id)
 {
-    $jugador = Jugador::findOrFail($id);
-    $validatedData = $request->validate([
+    $request->validate([
         'nombre' => 'required|string|max:255',
-        'posicion' => 'string|max:255|nullable',
-        'nacionalidad' => 'string|max:255|nullable',
-        'edad' => 'integer|nullable',
+        'posicion' => 'nullable|string|max:255',
+        'nacionalidad' => 'nullable|string|max:255',
+        'edad' => 'nullable|integer',
         'equipo_id' => 'required|exists:equipos,id',
-        'foto' => 'string|nullable',
-        'biografia' => 'string|nullable',
+        'foto' => 'nullable|string', // 2MB max, consider adjusting if needed
+        'biografia' => 'nullable|string',
+        'goles' => 'required|integer',
+        'asistencias' => 'required|integer',
+        'amarillas' => 'required|integer',
+        'rojas' => 'required|integer',
     ]);
+    try {
+    $jugador = Jugador::findOrFail($id);
+    $jugador->update($request->only(['nombre', 'posicion', 'nacionalidad', 'edad', 'equipo_id', 'biografia', 'foto']));
 
-    $jugador->update($validatedData);
-    return response()->json(['message' => 'Jugador actualizado con éxito']);
+    if ($request->hasFile('foto')) {
+        $path = $request->file('foto')->store('public/fotos');
+        $jugador->foto = basename($path);
+        $jugador->save();
+    }
+
+    $estadisticas = $request->only(['goles', 'asistencias', 'amarillas', 'rojas']);
+    $jugador->estadisticas()->updateOrCreate(['jugador_id' => $jugador->id], $estadisticas);
+
+    return redirect()->route('admin.adminjugador')->with('success', 'Jugador actualizado correctamente.');
+    } catch (\Exception $e) {
+        return back()->withInput()->with('error', 'Error al actualizar el jugador: ' . $e->getMessage());
+    }
+
 }
+
+
+
 public function eliminarTodos()
 {
     try {
@@ -119,5 +148,37 @@ public function insertarJugadores()
             return response()->json(['message' => 'Error al insertar jugadores: ' . $e->getMessage()], 500);
         }
     }
+    
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'posicion' => 'nullable|string|max:255',
+            'nacionalidad' => 'nullable|string|max:255',
+            'edad' => 'nullable|integer',
+            'equipo_id' => 'required|exists:equipos,id',
+            'biografia' => 'nullable|string',
+            'foto' => 'nullable|image|max:1999', // 2MB max, consider adjusting if needed
+        ]);
 
+        $jugador = Jugador::findOrFail($id);
+
+        $jugador->nombre = $request->nombre;
+        $jugador->posicion = $request->posicion;
+        $jugador->nacionalidad = $request->nacionalidad;
+        $jugador->edad = $request->edad;
+        $jugador->equipo_id = $request->equipo_id;
+        $jugador->biografia = $request->biografia;
+
+        if ($request->hasFile('foto')) {
+            // Asumimos que quieres guardar el archivo en el disco local
+            $path = $request->file('foto')->store('public/fotos');
+            $jugador->foto = basename($path);
+        }
+
+        $jugador->save();
+
+        return redirect()->route('admin.adminjugador')->with('success', 'Jugador actualizado correctamente.');
+    }
 }
+
