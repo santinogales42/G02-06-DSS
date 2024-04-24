@@ -1,6 +1,8 @@
 @extends('layout')
 
 @section('content')
+<head> <meta name="csrf-token" content="{{ csrf_token() }}"></head>
+
 <div class="container">
     <h1>Administración de Jugadores</h1>
     @if (session('success'))
@@ -71,9 +73,13 @@
                             <input type="number" class="form-control" id="edad" name="edad">
                         </div>
                         <div class="mb-3">
-                            <label for="equipo_id" class="form-label">ID del Equipo:</label>
-                            <input type="number" class="form-control" id="equipo_id" name="equipo_id">
-                        </div>
+                        <label for="equipo_id" class="form-label">Equipo:</label>
+                        <select class="form-select" id="equipo_id" name="equipo_id">
+    @foreach ($equipos as $equipo)
+        <option value="{{ $equipo->id }}">{{ $equipo->nombre }}</option>
+    @endforeach
+</select>
+</div>
                         <div class="mb-3">
                             <label for="foto" class="form-label">Foto (URL):</label>
                             <input type="text" class="form-control" id="foto" name="foto">
@@ -83,7 +89,7 @@
                             <textarea class="form-control" id="biografia" name="biografia"></textarea>
                         </div>
 
-                        <!-- Añade más campos según necesites -->
+                        
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn boton-crear-jugador">Crear Jugador</button>
                         </div>
@@ -101,26 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-    document.getElementById('editarJugadorForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-    const jugadorId = document.getElementById('edit_jugador_id').value;
-    const formData = new FormData(this);
-    fetch(`/adminjugadores/actualizar/${jugadorId}`, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        $('#editJugadorModal').modal('hide');
-        fetchData(); // Asegúrate de que esta función ya esté definida para recargar los datos
-    })
-    .catch(error => console.error('Error:', error));
-});
+   
 function fetchData(page = 1) {
     console.log("fetchData called for page: " + page); // Agrega esta línea para el diagnóstico
     var search = document.getElementById('search').value;
@@ -142,8 +129,8 @@ function fetchData(page = 1) {
             <td>${jugador.id}</td>
             <td>${jugador.nombre}</td>
             <td>
-            <button href="/adminjugadores/jugadores/editar/${jugador.id}" class="btn boton-editar"><i class="fas fa-pencil-alt"></i></button>
-<button class="btn btn-eliminar" onclick="deleteJugador(${jugador.id})"><i class="fas fa-trash-alt" style="color: red;"></i></button>
+            <a href="/adminjugadores/jugadores/editar/${jugador.id}" class="btn boton-editar"><i class="fas fa-pencil-alt"></i></a>
+            <button class="btn btn-eliminar" onclick="deleteJugador(${jugador.id})"><i class="fas fa-trash-alt" style="color: red;"></i></button>
             </td>
         </tr>`;
 
@@ -255,23 +242,28 @@ attachCheckboxEvents(); // Adjuntar eventos a los nuevos checkboxes
     }
 
     document.getElementById('crearJugadorForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+    e.preventDefault();
 
-        const formData = new FormData(this);
-        fetch('/adminjugadores/crear', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
+    const formData = new FormData(this);
+    fetch('/adminjugadores/crear', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Aquí puedes ver lo que responde el servidor
+            if (data.message) {
                 alert(data.message);
-                fetchData(); // Recargar la lista de jugadores para incluir el nuevo jugador
-            })
-            .catch(error => console.error('Error:', error));
-    });
+            }
+            if (data.jugador) {
+                fetchData(); // Recargar la lista de jugadores
+            }
+        })
+        .catch(error => console.error('Error:', error));
+});
 
     function deleteAllJugadores() {
         if (confirm('¿Estás seguro de querer eliminar TODOS los jugadores y sus estadísticas? Esta acción es irreversible.')) {
@@ -293,19 +285,42 @@ attachCheckboxEvents(); // Adjuntar eventos a los nuevos checkboxes
     }
 
     function insertarJugadores() {
-        fetch('/admin/insertar-jugadores', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Content-Type': 'application/json'
-                },
-            })
-            .then(response => response.json())
-            .then(data => alert(data.message))
+    fetch('/adminjugadores/admin/insertar-jugadores', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            // Asegúrate de que si el servidor espera algún dato, lo envíes aquí.
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            // Si la respuesta no está bien, imprime el estado y retorna el texto para más detalles
+            console.error('Network response was not ok, status:', response.status);
+            return response.text(); // o puedes usar response.json() si esperas un JSON incluso en el caso de error
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data instanceof String) {
+            // Si la respuesta es un string, podría ser un mensaje de error.
+            console.error('Error message from server:', data);
+        } else {
+            alert(data.message);
+            fetchData(); // Recargar la lista de jugadores
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
-            .catch(error => console.error('Error:', error));
-        fetchData();
-    }
+
+
+
+
 </script>
 
 @endsection

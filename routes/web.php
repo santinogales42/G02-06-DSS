@@ -61,13 +61,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('/adminjugadores')->group(function () {
         Route::get('/', [AdminJugadoresController::class, 'index'])->name('admin.adminjugador');
         Route::post('/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
-        Route::post('/crear', [AdminJugadoresController::class, 'crear']);
+        Route::post('/crear', [AdminJugadoresController::class, 'crear'])->name('adminjugador.crear');
         Route::get('/datos/{id}', [AdminJugadoresController::class, 'getDatos'])->name('jugadores.getDatos');
         Route::put('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');    
         Route::get('/jugadores/editar/{id}', [AdminJugadoresController::class, 'editar'])->name('jugadores.editar');
         Route::post('/eliminar-masa', [AdminJugadoresController::class, 'eliminarMasa'])->name('adminjugadores.eliminar-masa');
-
-    });
+        Route::post('/eliminar-todos', [AdminJugadoresController::class, 'eliminarTodos'])->name('adminjugadores.eliminar-todos');
+        Route::post('/admin/insertar-jugadores', [AdminJugadoresController::class, 'insertarJugadores']);
+});
 
     // Administración de partidos
     Route::prefix('/admin/partidos')->group(function () {

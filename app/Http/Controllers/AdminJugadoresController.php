@@ -6,10 +6,14 @@ use App\Models\Est_jugador;
 use App\Models\Jugador;
 use Illuminate\Http\Request;
 use Artisan;
+use Illuminate\Support\Facades;
+use Illuminate\Support\Facades\Log;
+
 class AdminJugadoresController extends Controller
 {
     public function index(Request $request)
     {
+        $equipos = Equipo::all();
         $query = Jugador::query();
     
         if ($request->has('search')) {
@@ -30,7 +34,7 @@ class AdminJugadoresController extends Controller
             ]);
         }
     
-        return view('admin.adminjugador', compact('jugadores'));
+        return view('admin.adminjugador', compact('jugadores','equipos'));
     }
     public function eliminar(Request $request, $id)
 {
@@ -55,16 +59,22 @@ public function eliminarMasa(Request $request)
         return response()->json(['message' => 'Error al eliminar jugadores: ' . $e->getMessage()], 500);
     }
 }
+
 // AdminJugadoresController.php
 public function editar($id)
     {
+        $equipos = Equipo::all(); // Obtiene todos los equipos
         $jugador = Jugador::findOrFail($id);
         $equipos = Equipo::all();  // Carga todos los equipos para el selector en la vista
         return view('editar', compact('jugador', 'equipos'));
     }
 
-public function crear(Request $request)
+    public function crear(Request $request)
 {
+    // Log de la entrada para depuración
+    Log::info($request->all());
+    
+    // Validación para los datos del jugador
     $validatedData = $request->validate([
         'nombre' => 'required|string|max:255',
         'posicion' => 'string|max:255|nullable',
@@ -75,13 +85,29 @@ public function crear(Request $request)
         'biografia' => 'string|nullable',
     ]);
 
+    // Validación para las estadísticas del jugador
+   
+
+    // Intenta crear el jugador y sus estadísticas dentro de una transacción
     try {
         $jugador = Jugador::create($validatedData);
-        return response()->json(['message' => 'Jugador creado con éxito', 'jugador' => $jugador], 200);
+
+        // Asegúrate de que el modelo Jugador tiene un método estadisticas() que define la relación
+        // La creación de estadísticas se hace solo una vez aquí.
+        
+        // Devuelve una respuesta exitosa con datos del jugador y sus estadísticas
+        return response()->json([
+            'message' => 'Jugador creado con éxito',
+            'jugador' => $jugador,
+             
+        ], 200);
     } catch (\Exception $e) {
+        // Captura cualquier excepción y devuelve un error
         return response()->json(['message' => 'Error al crear jugador: ' . $e->getMessage()], 500);
     }
 }
+
+    
 public function getDatos($id)
 {
     $jugador = Jugador::findOrFail($id);
@@ -139,14 +165,17 @@ public function eliminarTodos()
     }
 }
 public function insertarJugadores()
-    {
-        try {
-            // Asegúrate de usar el nombre correcto del seeder
-            Artisan::call('db:seed', ['--class' => 'JugadorsTableSeeder']);
-            return response()->json(['message' => 'Jugadores insertados correctamente']);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Error al insertar jugadores: ' . $e->getMessage()], 500);
-        }
+{
+    try {
+        // Asumiendo que tienes un seeder que se llama JugadorsTableSeeder
+        Artisan::call('db:seed', ['--class' => 'JugadorsTableSeeder']);
+
+        // Respuesta exitosa con mensaje
+        return response()->json(['message' => 'Jugadores insertados correctamente'], 200);
+    } catch (\Exception $e) {
+        // Respuesta de error con mensaje
+        return response()->json(['message' => 'Error al insertar jugadores: ' . $e->getMessage()], 500);
+    }
     }
     
     public function update(Request $request, $id)

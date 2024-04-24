@@ -9,6 +9,7 @@ class Est_jugador extends Model
 {
  	use HasFactory;	
     protected $guarded = [];
+    
     //protected $table = 'est_jugadors';
     public function jugador()
     {
