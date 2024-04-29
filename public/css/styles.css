@@ -1,12 +1,41 @@
+/* Estilos existentes */
 .w3-teal {
     background-color: #ff3823 !important;
     position: relative;
 }
+.icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white; /* Cambia según tu esquema de color */
+}
 
+.icon-link i {
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+    font-size: 1.5em; /* Tamaño del icono */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .icon-link i {
+        font-size: 1.2em; /* Tamaño más pequeño en dispositivos móviles */
+    }
+    .icon-link {
+        font-size: 16px; /* Tamaño de texto más pequeño en pantallas pequeñas */
+    }
+}
+
+@media (min-width: 769px) {
+    .icon-link i {
+        font-size: 1.5em; /* Tamaño más grande en pantallas grandes */
+    }
+    .icon-link {
+        font-size: 20px; /* Tamaño de texto más grande en pantallas grandes */
+    }
+}
 .w3-sidebar {
     background-color: #ff3823 !important;
     position: relative;
-
 }
 
 #mySidebar {
@@ -37,113 +66,75 @@
     color: black;
 }
 
-/* Estilos para el contenido del menú desplegable */
-.w3-dropdown-content {
-    display: none;
-    /* Ocultar por defecto */
-    position: absolute;
-    background-color: #f9f9f9;
-    /* Color de fondo */
-    min-width: 160px;
-    /* Ancho mínimo */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    /* Sombra */
-    z-index: 1;
-    /* Z-index para estar sobre otros elementos */
-    left: 50%;
-    /* Posición izquierda centrada */
-    transform: translateX(-50%);
-    /* Centrar horizontalmente */
-    top: 50px;
-    /* Ajustar la distancia desde la parte superior */
-    border-radius: 4px;
-    /* Borde redondeado */
+/* Nuevo estilo para los enlaces de la barra lateral */
+.w3-sidebar .w3-bar-item {
+    background-color: #ff3823; /* Fondo del color de la página */
+    border: 2px solid white; /* Bordes blancos */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Aumenta el espacio entre elementos */
+    color: white; /* Texto blanco para mayor legibilidad */
+    text-align: center; /* Centrado de texto */
+    transition: background-color 0.3s ease; /* Suaviza la transición del color de fondo */
 }
-
-/* Ajustar el margen y padding de los elementos de la lista */
-.w3-dropdown-content a {
-    padding: 10px 15px;
-    /* Espaciado interno */
-    display: block;
-    /* Mostrar como bloques */
-    color: black;
-    /* Color del texto */
-    text-decoration: none;
-    /* Sin subrayado */
-    transition: background-color 0.3s;
-    /* Transición suave del color de fondo */
+.w3-sidebar .w3-bar-item:hover {
+    background-color: #e63946; /* Un tono más claro de rojo al hacer hover */
+    color: white; /* Texto blanco al hacer hover */
 }
-
-/* Cambiar el color de fondo de los elementos al pasar por encima */
-.w3-dropdown-content a:hover {
-    background-color: #ddd;
-    /* Color de fondo al pasar */
+.w3-bar-item.w3-button.w3-large {
+    margin-top: 10px; /* Aumenta o disminuye según la cantidad de espacio que necesites */
 }
-
-
+/* Asegurarse de que la barra lateral no tenga un fondo definido para mostrar correctamente los colores */
+.w3-sidebar {
+    background: none;
+}
+button.icon-link .fa-chevron-down {
+    font-size: 0.8em; 
+    margin-left: 10px;
+}
+/* Continuación de los estilos existentes */
 .w3-bar-item,
 .rectangle-button {
     font-size: 20px !important;
-    /* Aumenta el tamaño de la fuente */
     padding: 12px 20px !important;
-    /* Ajusta el padding para mejor visualización y clickeabilidad */
     color: white !important;
-    /* Establece el color de la fuente a blanco */
 }
 
-/* Si deseas asegurarte de que todos los enlaces tengan texto blanco, incluido el botón de cerrar, puedes mantener esta regla general. Sin embargo, si el botón de cerrar ya es blanco y deseas mantenerlo así, este cambio no afectará ese estilo. */
-
-/* Para mantener la coherencia, asegúrate de que el estado hover también refleje tu preferencia de diseño */
 .w3-bar-item:hover,
 .rectangle-button:hover {
     background-color: white !important;
     color: #ff3823 !important;
-    /* Asegura que el texto cambie a color contrastante al pasar el mouse */
 }
 
-/* Considera añadir media queries si necesitas ajustar para dispositivos móviles */
 @media (max-width: 600px) {
-
     .w3-bar-item,
     .rectangle-button {
         font-size: 18px !important;
-        /* Tamaño de fuente más pequeño para pantallas pequeñas */
         padding: 10px 15px !important;
-        /* Padding reducido para pantallas pequeñas */
         color: white !important;
-        /* Mantiene el color del texto blanco */
     }
 }
 
 .horizontal-line-1 {
     display: block;
-    /* Asegura que el elemento se comporte como un bloque */
     width: 242px;
     height: 0px;
     border-top: 2px solid #FFFFFF;
     margin: auto;
-    /* Centra el bloque horizontalmente en su contenedor */
 }
 
 .contenedor-imagenes {
     display: flex;
-    /* Activa Flexbox para el contenedor */
     justify-content: center;
-    /* Centra las imágenes horizontalmente */
     align-items: center;
-    /* Centra las imágenes verticalmente */
 }
 
 .contenedor-imagenes img {
     margin: 0 10px;
-    /* Añade un poco de margen entre las imágenes */
     width: 65px;
-    /* Establece el ancho deseado */
     height: 60px;
-    /* Establece la altura deseada */
     margin-top: 10px;
 }
-
 
 /* Nuevo estilo para el contenedor de la barra lateral */
 /* Agrega esta regla para el estado hover */
