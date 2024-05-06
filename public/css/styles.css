@@ -148,16 +148,38 @@ button.icon-link .fa-chevron-down {
 
 .contenedor-imagenes {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-}
-
-.contenedor-imagenes img {
-    margin: 0 10px;
-    width: 65px;
-    height: 60px;
     margin-top: 10px;
-}
+    margin-bottom: 20px;
+    margin-left: 20px; 
+    margin-right: 20px;
+    transition: border-color 1s; 
+    transition: transform 1s;
+  }
+  
+.contenedor-imagenes img {
+    width: 50px; 
+    height: 50px; 
+    border: 2px solid black; 
+    border-radius: 50%; 
+    padding: 5px; 
+ }
+
+ .contenedor-imagenes img:hover {
+    border-color: white;
+    animation: tumbado 0.3s ease forwards; 
+  }
+  
+  @keyframes tumbado {
+    0% {
+      transform: none;
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+  
 
 /* Nuevo estilo para el contenedor de la barra lateral */
 /* Agrega esta regla para el estado hover */
