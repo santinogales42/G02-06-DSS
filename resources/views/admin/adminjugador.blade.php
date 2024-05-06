@@ -4,7 +4,7 @@
 <head> <meta name="csrf-token" content="{{ csrf_token() }}"></head>
 
 <div class="container">
-    <h1>Administración de Jugadores</h1>
+    <h1 style="text-align: center; margin: 1rem;">Administración de Jugadores</h1>
     @if (session('success'))
         <div class="alert alert-success" role="alert">
             {{ session('success') }}

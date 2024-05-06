@@ -73,12 +73,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
         Route::post('/crear', [AdminJugadoresController::class, 'crear'])->name('adminjugador.crear');
         Route::get('/datos/{id}', [AdminJugadoresController::class, 'getDatos'])->name('jugadores.getDatos');
-        Route::put('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');    
+        Route::put('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');
         Route::get('/jugadores/editar/{id}', [AdminJugadoresController::class, 'editar'])->name('jugadores.editar');
         Route::post('/eliminar-masa', [AdminJugadoresController::class, 'eliminarMasa'])->name('adminjugadores.eliminar-masa');
         Route::post('/eliminar-todos', [AdminJugadoresController::class, 'eliminarTodos'])->name('adminjugadores.eliminar-todos');
         Route::post('/admin/insertar-jugadores', [AdminJugadoresController::class, 'insertarJugadores']);
-});
+    });
 
     // Administración de partidos
     Route::prefix('/admin/partidos')->group(function () {
@@ -99,6 +99,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
         Route::put('/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');
         Route::delete('/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
+        Route::post('/usuarios/eliminar-todos', [AdminUsuariosController::class, 'eliminarTodos'])->name('admin.usuarios.eliminar-todos');
+        Route::post('/usuarios/eliminar-seleccionados', [AdminUsuariosController::class, 'eliminarSeleccionados'])->name('admin.usuarios.eliminar-seleccionados');
     });
 
     // Administración de noticias
@@ -125,5 +127,3 @@ Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index'
 Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
 Route::post('/equipos/{equipo}/favorito', [EquipoController::class, 'agregarFavorito'])->name('equipos.agregarFavorito');
 Route::delete('/equipos/{equipo}/favorito', [EquipoController::class, 'eliminarFavorito'])->name('equipos.eliminarFavorito');
-
-

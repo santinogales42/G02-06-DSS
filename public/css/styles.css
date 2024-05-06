@@ -497,6 +497,10 @@ button.icon-link .fa-chevron-down {
     font-size: 50px;
 }
 
+.checked-red {
+    background-color: #ff3823;
+}
+
 /*Barra búsqueda*/
 .boton-buscar {
     background-color: #fff;
