@@ -19,6 +19,7 @@ use App\Http\Controllers\AdminNoticiasController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AdminEquipoController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PerfilUsuarioController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -34,9 +35,18 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+
+
+Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos.index');
+Route::get('/favoritos/{nombreEquipo}/edit', [FavoritosController::class, 'editar'])->name('favoritos.edit');
+Route::delete('/favoritos/{nombreEquipo}', [FavoritosController::class, 'delete'])->name('favoritos.delete');
+
 Route::get('/confirmar-cerrar-sesion', [LogoutController::class, 'confirmarCerrarSesion'])->name('confirmar.cerrar.sesion');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
+Route::get('/perfilUsuario', [PerfilUsuarioController::class, 'index'])->name('perfilUsuario.index');
+Route::get('/perfilUsuario/edit', [PerfilUsuarioController::class, 'edit'])->name('perfilUsuario.edit');
+Route::put('/{id}/update', [PerfilUsuarioController::class, 'update'])->name('perfilUsuario.update');
 
 
 
@@ -117,8 +127,3 @@ Route::post('/equipos/{equipo}/favorito', [EquipoController::class, 'agregarFavo
 Route::delete('/equipos/{equipo}/favorito', [EquipoController::class, 'eliminarFavorito'])->name('equipos.eliminarFavorito');
 
 
-
-
-Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos.index');
-Route::get('/favoritos/{nombreEquipo}/edit', [FavoritosController::class, 'editar'])->name('favoritos.edit');
-Route::delete('/favoritos/{nombreEquipo}', [FavoritosController::class, 'delete'])->name('favoritos.delete');

@@ -117,6 +117,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="w3-dropdown-content w3-bar-block w3-card" id="dropdownContent-cerrarSesion">
+                        <a href="{{ route('perfilUsuario.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Mi Perfil</a>
                         <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Favoritos</a>
                         <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button" id="logoutButton">Cerrar sesión</a>
                     </div>

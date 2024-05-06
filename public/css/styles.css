@@ -403,8 +403,8 @@ button.icon-link .fa-chevron-down {
 }
 
 .user-icon:hover {
-    color: #ff3823;
-}
+    color: #ff3823 !important;
+} 
 
 #userDropdown:hover {
     background-color: #ff3823 ; /* Mantiene el color de fondo al pasar el ratón */
@@ -422,7 +422,6 @@ button.icon-link .fa-chevron-down {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    
 }
 .encabezado-tarjeta-usuarios {
     background-color: #ff9688;
@@ -714,4 +713,40 @@ button.icon-link .fa-chevron-down {
 
 .bg-rojo-pastel {
     background-color: #f1f1f1; /* Puedes ajustar este valor según el tono de rojo pastel que desees */
+}
+
+/* ESTILOS PERFIL USUARIO */
+.tarjeta-perfil {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 50rem;
+    margin: 70px auto;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.tarjeta-editar-perfil {
+    margin: 100px auto;
+    width: 50rem;
+    border-color: #ff3823 !important;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.boton-editar-perfil {
+    width: 50rem;
+    /* Ancho fijo del botón */
+    margin-left: auto;
+    /* Margen izquierdo automático */
+    margin-right: auto;
+    /* Margen derecho automático */
+    color: #ff6961;
+    border-color: #ff3823;
+}
+
+.boton-editar-perfil:hover {
+    background-color: #ff6961;
+    color: #fff;
+    border-color: #ff3823;
 }
