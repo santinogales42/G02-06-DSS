@@ -9,12 +9,35 @@
     justify-content: flex-start;
     color: white; /* Cambia según tu esquema de color */
 }
-
+.header {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    background-color: #008080; /* Color Teal */
+}
 .icon-link i {
     margin-right: 10px; /* Espacio entre el icono y el texto */
     font-size: 1.5em; /* Tamaño del icono */
 }
+.w3-dropdown-content {
+    position: absolute;
+    top: 100%;
+    right: 0; /* Alinea el contenido del desplegable a la derecha del botón */
+    z-index: 1000; /* Asegura que el desplegable esté sobre otros elementos */
+}
 
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+    }
+    .title-logo, .roboto-flex-title, .navbar-text {
+        width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+        text-align: center;
+    }
+    .title-logo {
+        margin-bottom: 10px; /* Espacio adicional debajo del logo en pantallas pequeñas */
+    }
+}
 /* Estilos responsivos */
 @media (max-width: 768px) {
     .icon-link i {
@@ -175,6 +198,10 @@ button.icon-link .fa-chevron-down {
 
 /* Roboto Flex con peso 400 */
 .roboto-flex-title {
+    flex-grow: 1;
+    margin: 0;
+    text-align: center;
+
     font-family: "Roboto Flex", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -211,10 +238,10 @@ button.icon-link .fa-chevron-down {
 }
 
 .title-logo {
+    border: 2px solid red;
     margin-right: 20px;
-    /* Espacio a la derecha de la imagen */
-    height: 100px;
-    /* O la altura que desees para tu logo */
+    max-width: 100px; /* Tamaño máximo para logo */
+    flex-shrink: 0;
 }
 
 .noticias-1 {
@@ -488,10 +515,17 @@ button.icon-link .fa-chevron-down {
     margin-top: 3rem;
     width: auto;
 }
+.w3-dropdown-hover {
+    position: relative;
+}
 
 #ordenarNombre {
     color: black;
     font-weight: bold;
+}
+.navbar-text {
+    display: flex;
+    align-items: center;
 }
 /* VISTA CALENDARIO */
 
