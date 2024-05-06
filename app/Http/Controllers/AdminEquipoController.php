@@ -42,6 +42,9 @@ class AdminEquipoController extends Controller
             'puntos' => 'nullable|integer',
             'partidos_jugados' => 'nullable|integer'
         ]);
+        $validatedData = array_filter($validatedData, function($value) {
+            return !is_null($value);
+        });
 
         try {
             $equipo = Equipo::create($validatedData);

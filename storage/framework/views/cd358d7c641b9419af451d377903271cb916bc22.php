@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Tabla de a de La Liga 2023/24'); ?>
+<?php $__env->startSection('title', 'Tabla de Clasificación de La Liga 2023/24'); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="jumbotron jumbotron-fluid" style="background-color: #333333; color: #ffffff;">

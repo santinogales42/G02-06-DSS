@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Tabla de a de La Liga 2023/24')
+@section('title', 'Tabla de Clasificación de La Liga 2023/24')
 
 @section('content')
 <div class="jumbotron jumbotron-fluid">
