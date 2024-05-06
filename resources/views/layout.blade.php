@@ -82,6 +82,7 @@
                 <div class="w3-dropdown-content w3-bar-block w3-card " >
                     <a href="{{ route('admin.adminjugador') }}" class="w3-bar-item w3-button  icon-link">Jugadores</a>
                     <a href="{{ route('admin.usuarios.index') }}" class="w3-bar-item w3-button icon-link">Usuarios</a>
+                    <a href="{{ route('admin.noticias.index') }}" class="w3-bar-item w3-button icon-link">Noticias</a>
                     <a href="{{ route('admin.partidos.index') }}" class="w3-bar-item w3-button icon-link">Partidos</a>
                     <a href="{{ route('admin.equipos.index') }}" class="w3-bar-item w3-button icon-link">Equipos</a>
                     <a href="{{ route('mostrarMensajes') }}" class="w3-bar-item w3-button icon-link">Mensajes</a>
