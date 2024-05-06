@@ -75,7 +75,7 @@
 }
 
 #mySidebar .SidebarDownSection {
-    margin-top: 13rem;
+    margin-top: 10rem;
     margin-bottom: 5rem;
 }
 
@@ -151,7 +151,7 @@ button.icon-link .fa-chevron-down {
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     margin-left: 20px; 
     margin-right: 20px;
     transition: border-color 1s; 

@@ -54,7 +54,7 @@
 
     <div class="w3-sidebar w3-card w3-animate-left" style="display:none" id="mySidebar">
     <div class="SidebarSection">
-        <button class="w3-bar-item w3-button w3-large" style="text-decoration: none; margin-left: 20px; margin-right: 20px;" onclick="w3_close()">Close &times;</button>
+        <button class="w3-bar-item w3-button w3-large" style="text-decoration: none; margin-left: 20px; margin-right: 20px; margin-bottom: 40px;" onclick="w3_close()">Close &times;</button>
         
         <a href="{{ route('home') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
             <i class="fa-solid fa-house"></i> Inicio
