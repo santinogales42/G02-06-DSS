@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('equipos', function (Blueprint $table) {
 	    $table->id();
 	    $table->string('nombre');
-	    $table->foreignId('liga_id')->nullable()->constrained()->onDelete('cascade');
-        $table->integer('ganados');
-	    $table->integer('empatados');
-	    $table->integer('perdidos');
-	    $table->integer('goles_favor');
-	    $table->integer('goles_contra');
-	    $table->integer('puntos');
-	    $table->integer('partidos_jugados');
+	    $table->foreignId('liga_id')->nullable()->default(1)->constrained()->onDelete('cascade');
+        $table->integer('ganados')->nullable()->default(0);
+	    $table->integer('empatados')->nullable()->default(0);
+	    $table->integer('perdidos')->nullable()->default(0);
+	    $table->integer('goles_favor')->nullable()->default(0);
+	    $table->integer('goles_contra')->nullable()->default(0);
+	    $table->integer('puntos')->nullable()->default(0);
+	    $table->integer('partidos_jugados')->nullable()->default(0);
 	    $table->timestamps();
 });
         

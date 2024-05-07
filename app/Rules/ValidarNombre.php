@@ -15,8 +15,9 @@ class ValidarNombre implements Rule
      */
     public function passes($attribute, $value)
     {
-        // Verifica si el nombre contiene al menos una letra y no consiste únicamente de números
-        return preg_match('/[a-zA-Z]/', $value) && !ctype_digit($value);
+        // Verifica si el nombre contiene al menos una letra, no consiste únicamente de números
+        // y no contiene el carácter '@'
+        return preg_match('/[a-zA-Z]/', $value) && !ctype_digit($value) && strpos($value, '@') === false;
     }
 
     /**
@@ -26,6 +27,6 @@ class ValidarNombre implements Rule
      */
     public function message()
     {
-        return 'El campo :attribute debe contener al menos una letra.';
+        return 'El campo :attribute debe contener al menos una letra y no puede contener "@"';
     }
 }

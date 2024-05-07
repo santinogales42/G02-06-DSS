@@ -19,8 +19,12 @@ use App\Http\Controllers\AdminNoticiasController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AdminEquipoController;
 use App\Http\Controllers\LogoutController;
+
 use App\Http\Controllers\ThreadController;
 use App\Http\Controllers\ResponseController;
+
+use App\Http\Controllers\PerfilUsuarioController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -36,9 +40,18 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+
+
+Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos.index');
+Route::get('/favoritos/{nombreEquipo}/edit', [FavoritosController::class, 'editar'])->name('favoritos.edit');
+Route::delete('/favoritos/{nombreEquipo}', [FavoritosController::class, 'delete'])->name('favoritos.delete');
+
 Route::get('/confirmar-cerrar-sesion', [LogoutController::class, 'confirmarCerrarSesion'])->name('confirmar.cerrar.sesion');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
+Route::get('/perfilUsuario', [PerfilUsuarioController::class, 'index'])->name('perfilUsuario.index');
+Route::get('/perfilUsuario/edit', [PerfilUsuarioController::class, 'edit'])->name('perfilUsuario.edit');
+Route::put('/{id}/update', [PerfilUsuarioController::class, 'update'])->name('perfilUsuario.update');
 
 
 
@@ -77,12 +90,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
         Route::post('/crear', [AdminJugadoresController::class, 'crear'])->name('adminjugador.crear');
         Route::get('/datos/{id}', [AdminJugadoresController::class, 'getDatos'])->name('jugadores.getDatos');
-        Route::put('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');    
+        Route::put('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');
         Route::get('/jugadores/editar/{id}', [AdminJugadoresController::class, 'editar'])->name('jugadores.editar');
         Route::post('/eliminar-masa', [AdminJugadoresController::class, 'eliminarMasa'])->name('adminjugadores.eliminar-masa');
         Route::post('/eliminar-todos', [AdminJugadoresController::class, 'eliminarTodos'])->name('adminjugadores.eliminar-todos');
         Route::post('/admin/insertar-jugadores', [AdminJugadoresController::class, 'insertarJugadores']);
-});
+    });
 
     // Administración de partidos
     Route::prefix('/admin/partidos')->group(function () {
@@ -103,6 +116,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
         Route::put('/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');
         Route::delete('/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
+        Route::post('/usuarios/eliminar-todos', [AdminUsuariosController::class, 'eliminarTodos'])->name('admin.usuarios.eliminar-todos');
+        Route::post('/usuarios/eliminar-seleccionados', [AdminUsuariosController::class, 'eliminarSeleccionados'])->name('admin.usuarios.eliminar-seleccionados');
     });
 
     // Administración de noticias
@@ -129,10 +144,3 @@ Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index'
 Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
 Route::post('/equipos/{equipo}/favorito', [EquipoController::class, 'agregarFavorito'])->name('equipos.agregarFavorito');
 Route::delete('/equipos/{equipo}/favorito', [EquipoController::class, 'eliminarFavorito'])->name('equipos.eliminarFavorito');
-
-
-
-
-Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos.index');
-Route::get('/favoritos/{nombreEquipo}/edit', [FavoritosController::class, 'editar'])->name('favoritos.edit');
-Route::delete('/favoritos/{nombreEquipo}', [FavoritosController::class, 'delete'])->name('favoritos.delete');

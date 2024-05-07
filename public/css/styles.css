@@ -75,7 +75,7 @@
 }
 
 #mySidebar .SidebarDownSection {
-    margin-top: 13rem;
+    margin-top: 10rem;
     margin-bottom: 5rem;
 }
 
@@ -148,16 +148,38 @@ button.icon-link .fa-chevron-down {
 
 .contenedor-imagenes {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-}
-
-.contenedor-imagenes img {
-    margin: 0 10px;
-    width: 65px;
-    height: 60px;
     margin-top: 10px;
-}
+    margin-bottom: 25px;
+    margin-left: 20px; 
+    margin-right: 20px;
+    transition: border-color 1s; 
+    transition: transform 1s;
+  }
+  
+.contenedor-imagenes img {
+    width: 50px; 
+    height: 50px; 
+    border: 2px solid black; 
+    border-radius: 50%; 
+    padding: 5px; 
+ }
+
+ .contenedor-imagenes img:hover {
+    border-color: white;
+    animation: tumbado 0.3s ease forwards; 
+  }
+  
+  @keyframes tumbado {
+    0% {
+      transform: none;
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+  
 
 /* Nuevo estilo para el contenedor de la barra lateral */
 /* Agrega esta regla para el estado hover */
@@ -430,8 +452,8 @@ button.icon-link .fa-chevron-down {
 }
 
 .user-icon:hover {
-    color: #ff3823;
-}
+    color: #ff3823 !important;
+} 
 
 #userDropdown:hover {
     background-color: #ff3823 ; /* Mantiene el color de fondo al pasar el ratón */
@@ -449,7 +471,6 @@ button.icon-link .fa-chevron-down {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    
 }
 .encabezado-tarjeta-usuarios {
     background-color: #ff9688;
@@ -496,6 +517,10 @@ button.icon-link .fa-chevron-down {
 .btn-elliminar i {
     color: #ff3823; 
     font-size: 50px;
+}
+
+.checked-red {
+    background-color: #ff3823;
 }
 
 /*Barra búsqueda*/
@@ -748,4 +773,40 @@ button.icon-link .fa-chevron-down {
 
 .bg-rojo-pastel {
     background-color: #f1f1f1; /* Puedes ajustar este valor según el tono de rojo pastel que desees */
+}
+
+/* ESTILOS PERFIL USUARIO */
+.tarjeta-perfil {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 50rem;
+    margin: 70px auto;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.tarjeta-editar-perfil {
+    margin: 100px auto;
+    width: 50rem;
+    border-color: #ff3823 !important;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.boton-editar-perfil {
+    width: 50rem;
+    /* Ancho fijo del botón */
+    margin-left: auto;
+    /* Margen izquierdo automático */
+    margin-right: auto;
+    /* Margen derecho automático */
+    color: #ff6961;
+    border-color: #ff3823;
+}
+
+.boton-editar-perfil:hover {
+    background-color: #ff6961;
+    color: #fff;
+    border-color: #ff3823;
 }

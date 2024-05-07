@@ -18,7 +18,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
     <!-- Incluir Bootstrap JS (asegúrate de que coincida con la versión de Bootstrap CSS) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -54,32 +58,33 @@
 
     <div class="w3-sidebar w3-card w3-animate-left" style="display:none" id="mySidebar">
     <div class="SidebarSection">
-        <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+        <button class="w3-bar-item w3-button w3-large" style="text-decoration: none; margin-left: 20px; margin-right: 20px; margin-bottom: 40px;" onclick="w3_close()">Close &times;</button>
         
-        <a href="{{ route('home') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none;">
+        <a href="{{ route('home') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
             <i class="fa-solid fa-house"></i> Inicio
         </a>
-        <a href="{{ route('noticias') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none;">
+        <a href="{{ route('noticias') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
             <i class="fa-solid fa-newspaper"></i> Noticias
         </a>
-        <a href="{{ route('equipos.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none;">
+        <a href="{{ route('equipos.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
             <i class="fa-solid fa-users"></i> Equipos
         </a>
-        <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none;">
+        <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
             <i class="fa-solid fa-user"></i> Jugadores
         </a>
-        <a href="{{ route('calendario.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none;">
+        <a href="{{ route('calendario.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
             <i class="fa-regular fa-calendar fa-lg"></i> Calendario
         </a>
-        <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none;">
+        <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
             <i class="fa-solid fa-chart-line"></i> Clasificación
         </a> @auth
             @if(Auth::user()->isAdmin)
-            <div class="w3-dropdown-hover w3-bar-item w3-hover-white">
-                <button class="w3-button icon-link  "><i class="fa-solid fa-wrench"></i>Admin  <i class="fas fa-chevron-down"></i></button>
+            <div class="w3-dropdown-hover w3-bar-item w3-hover-white" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
+                <button class="w3-button icon-link  " ><i class="fa-solid fa-wrench"></i>Admin  <i class="fas fa-chevron-down"></i> </button>
                 <div class="w3-dropdown-content w3-bar-block w3-card " >
                     <a href="{{ route('admin.adminjugador') }}" class="w3-bar-item w3-button  icon-link">Jugadores</a>
                     <a href="{{ route('admin.usuarios.index') }}" class="w3-bar-item w3-button icon-link">Usuarios</a>
+                    <a href="{{ route('admin.noticias.index') }}" class="w3-bar-item w3-button icon-link">Noticias</a>
                     <a href="{{ route('admin.partidos.index') }}" class="w3-bar-item w3-button icon-link">Partidos</a>
                     <a href="{{ route('admin.equipos.index') }}" class="w3-bar-item w3-button icon-link">Equipos</a>
                     <a href="{{ route('mostrarMensajes') }}" class="w3-bar-item w3-button icon-link">Mensajes</a>
@@ -90,14 +95,18 @@
 @endauth
             <!-- Enlaces en la parte inferior de la barra lateral -->
             <div class="SidebarDownSection">
-                <div class="horizontal-line-1"></div>
+                
                 <div class="contenedor-imagenes">
                     <img src="{{ asset('images/insta.png') }}" alt="Imagen 1">
                     <img src="{{ asset('images/face.png') }}" alt="Imagen 2">
                     <img src="{{ asset('images/twit.png') }}" alt="Imagen 3">
                 </div>
                 
+
                </div>
+      <a href="{{ route('contacto') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">Contáctanos</a>
+            </div>
+
         </div>
     </div>
 
@@ -118,8 +127,14 @@
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="w3-dropdown-content w3-bar-block w3-card" id="dropdownContent-cerrarSesion">
+
                     <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button icon-link">Favoritos</a>
                     <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button icon-link" id="logoutButton">Cerrar sesión</a>
+
+                        <a href="{{ route('perfilUsuario.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Mi Perfil</a>
+                    <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button">Favoritos</a>
+                    <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button" id="logoutButton">Cerrar sesión</a>
+
                 </div>
             </div>
         </div>
