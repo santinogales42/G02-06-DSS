@@ -13,10 +13,42 @@ class ThreadController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $threads = Thread::all(); // Obtener todos los hilos
-        return view('threads.index', compact('threads')); // Pasar los hilos a la vista
+{
+    $threads = Thread::with('user')->get(); // Carga anticipada de usuarios
+    return view('threads.index', compact('threads'));
+}
+public function filterThreadsByUser(User $user)
+{
+    $threads = $user->threads; // Asume que tienes una relación 'threads' en el modelo User
+    return view('threads.thread_list', compact('threads')); // Reutiliza la vista de lista de hilos para mostrar los hilos filtrados
+}
+
+public function toggleThreads(Request $request)
+{
+    if ($request->query('showMy', 'false') === 'true') {
+        $threads = Thread::where('user_id', auth()->id())->get();
+    } else {
+        $threads = Thread::all();
     }
+    return view('threads.thread_list', ['threads' => $threads]);
+}
+
+public function threadsByUser()
+{
+    \Log::debug("Fetching users with threads.");
+    try {
+        $users = User::has('threads')->with('threads')->get();
+        return view('threads.users_list', ['users' => $users]);
+    } catch (\Exception $e) {
+        \Log::error("Error retrieving users with threads: " . $e->getMessage());
+        throw $e; // Re-lanza la excepción para que se pueda ver en el log
+    }
+}
+
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -110,10 +142,14 @@ class ThreadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $thread = Thread::findOrFail($id);
-        $thread->delete();
-        return redirect()->route('threads.index'); // Redireccionar al index después de eliminar
-    }
+    public function destroy(Thread $thread)
+{
+    $this->authorize('delete', $thread);
+
+    $thread->delete();
+
+    return redirect()->route('threads.index')
+        ->with('success', 'Hilo eliminado correctamente.');
+}
+
 }

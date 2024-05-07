@@ -60,11 +60,14 @@ Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store
 Route::get('/threads/{thread}', [ThreadController::class, 'show'])->name('threads.show');
 Route::get('/threads/{thread}/edit', 'ThreadController@edit')->name('threads.edit');
 Route::put('/threads/{thread}', 'ThreadController@update')->name('threads.update');
-Route::delete('/threads/{thread}', 'ThreadController@destroy')->name('threads.destroy');
+Route::delete('threads/{thread}', [ThreadController::class, 'destroy'])->name('threads.destroy');
+Route::get('/threadsByUser', [ThreadController::class,'threadsByUser'])->name('threads.byUser')->middleware('auth', 'isAdmin');
+Route::get('/filterThreads/{user}', [ThreadController::class,'filterThreadsByUser'])->name('threads.filterByUser');
 
+Route::get('/toggleThreads', [ThreadController::class,'toggleThreads'])->name('threads.toggle')->middleware('auth');
 // Rutas para respuestas
 Route::post('/threads/{thread}/responses', [ResponseController::class, 'store'])->name('responses.store');
-Route::delete('/responses/{response}', [ResponseController::class .'destroy'])->name('responses.destroy');
+Route::delete('responses/{response}', [ResponseController::class, 'destroy'])->name('responses.destroy');
 
 //rutas de admin
 Route::middleware(['auth', 'admin'])->group(function () {
