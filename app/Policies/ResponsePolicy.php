@@ -65,7 +65,7 @@ class ResponsePolicy
  */
 public function delete(User $user, Response $response)
 {
-    return $user->id === $response->user_id;
+    return $user->id === $response->user_id || $user->isAdmin;
 }
     /**
      * Determine whether the user can restore the model.
