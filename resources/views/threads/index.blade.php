@@ -6,11 +6,9 @@
         <div class="col-md-8">
             <a href="{{ route('threads.create') }}" class="btn btn-primary mb-3">Crear un Hilo</a>
             <button id="toggleMyThreads" class="btn btn-secondary mb-3" data-mine="false">Ver Mis Hilos</button>
-            @auth
-                @if (auth()->user()->isAdmin)
-                    <button id="showThreadsByUser" class="btn btn-info mb-3">Mostrar Hilos por Usuario</button>
-                @endif
-            @endauth
+
+            <!-- Search bar -->
+            <input type="text" id="search" placeholder="Buscar hilos o usuarios..." class="form-control mb-3">
 
             <div id="threadsContainer">
                 @include('threads.thread_list', ['threads' => $threads])
@@ -19,36 +17,47 @@
     </div>
 </div>
 
-
-
-
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search');
     const toggleBtn = document.getElementById('toggleMyThreads');
-    const showThreadsByUserBtn = document.getElementById('showThreadsByUser');
-    let showMyThreads = toggleBtn.getAttribute('data-mine') === 'true'; // Estado inicial del toggle de "Mis Hilos"
+    let showMyThreads = false; // Initialize as false
 
-    // Función para cargar los hilos según el estado del botón "Mis Hilos"
+    toggleBtn.addEventListener('click', () => {
+        showMyThreads = !showMyThreads; // Toggle the boolean value
+        toggleBtn.setAttribute('data-mine', showMyThreads.toString()); // Update the attribute
+        toggleBtn.textContent = showMyThreads ? 'Ver Todos los Hilos' : 'Ver Mis Hilos'; // Update the button text
+        fetchMyThreads(); // Fetch threads based on the new filter
+    });
+
     function fetchThreads() {
-        fetch(`{{ url('/toggleThreads') }}?showMy=${showMyThreads}`)
+        const searchTerm = searchInput.value;
+        fetch(`{{ url('/threads/search') }}?search=${searchTerm}&showMy=false`)
         .then(response => response.text())
         .then(html => {
             document.getElementById('threadsContainer').innerHTML = html;
-            attachDeleteHandlers(); // Reasignar manejadores para los botones de eliminar
+            attachDeleteHandlers();
         })
         .catch(error => console.error('Error loading the threads:', error));
     }
 
-    // Función para manejar la eliminación de hilos usando AJAX
+    function fetchMyThreads() {
+        fetch(`{{ url('/toggleThreads') }}?showMy=${showMyThreads}`)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('threadsContainer').innerHTML = html;
+            attachDeleteHandlers();
+        })
+        .catch(error => console.error('Error loading the threads:', error));
+    }
+
     function attachDeleteHandlers() {
         document.querySelectorAll('.delete-btn').forEach(button => {
-            button.removeEventListener('click', handleDelete); // Remover el listener para evitar duplicados
-            button.addEventListener('click', handleDelete); // Agregar el listener
+            button.removeEventListener('click', handleDelete);
+            button.addEventListener('click', handleDelete);
         });
     }
 
-    // Manejador del evento de clic para eliminar un hilo
     function handleDelete() {
         if (confirm('¿Estás seguro de querer eliminar este hilo?')) {
             const threadId = this.getAttribute('data-thread-id');
@@ -63,42 +72,18 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => {
                 if (response.ok) {
                     document.getElementById('thread-' + threadId).remove();
-                    if(showMyThreads) {
-                        fetchThreads(); // Recargar los hilos si se está en modo "Mis Hilos"
-                    }
+                    fetchMyThreads();
                 }
             })
             .catch(error => console.error('Error:', error));
         }
     }
 
-    // Evento de clic para el botón "Ver Mis Hilos"
-    toggleBtn.addEventListener('click', () => {
-        showMyThreads = !showMyThreads;
-        toggleBtn.setAttribute('data-mine', showMyThreads ? 'true' : 'false');
-        toggleBtn.textContent = showMyThreads ? 'Ver Todos los Hilos' : 'Ver Mis Hilos';
-        fetchThreads();
-    });
+    searchInput.addEventListener('keyup', fetchThreads);
 
-    // Evento de clic para "Mostrar Hilos por Usuario"
-    if (showThreadsByUserBtn) {
-        showThreadsByUserBtn.addEventListener('click', () => {
-            fetch(`{{ url('/threadsByUser') }}`)
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('threadsContainer').innerHTML = html;
-                // Aquí podrías necesitar agregar manejadores si la nueva vista lo requiere
-            })
-            .catch(error => console.error('Error loading user threads:', error));
-        });
-    }
-
-    // Cargar los hilos inicialmente
-    fetchThreads();
+    fetchThreads(); // Initial fetch of threads
 });
+
 </script>
 
-
 @endsection
-
-

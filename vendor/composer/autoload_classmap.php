@@ -52,6 +52,8 @@ return array(
     'App\\Models\\Titulo' => $baseDir . '/app/Models/Titulo.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\Usuario' => $baseDir . '/app/Models/Usuario.php',
+    'App\\Policies\\ResponsePolicy' => $baseDir . '/app/Policies/ResponsePolicy.php',
+    'App\\Policies\\ThreadPolicy' => $baseDir . '/app/Policies/ThreadPolicy.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

@@ -8,10 +8,10 @@
             <small>Publicado por {{ $thread->user->name }} el {{ $thread->created_at->format('d/m/Y H:i') }}</small>
         </div>
         <div class="card-footer">
-            @auth
-                <!-- Botón para ver detalles del hilo -->
-                <a href="{{ route('threads.show', $thread->id) }}" class="btn btn-primary">Ver Hilo</a>
+            <!-- Botón para ver detalles del hilo, disponible para todos los usuarios -->
+            <a href="{{ route('threads.show', $thread->id) }}" class="btn btn-primary">Ver Hilo</a>
 
+            @auth
                 <!-- Condicionales para mostrar el botón de eliminar -->
                 @if (auth()->user()->id == $thread->user_id || (auth()->user()->isAdmin && auth()->user()->id != $thread->user_id))
                     <button type="button" class="btn btn-danger delete-btn" data-thread-id="{{ $thread->id }}">Eliminar</button>

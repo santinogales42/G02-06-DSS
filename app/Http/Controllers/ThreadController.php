@@ -4,24 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Models\Thread;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class ThreadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
 {
     $threads = Thread::with('user')->get(); // Carga anticipada de usuarios
     return view('threads.index', compact('threads'));
 }
-public function filterThreadsByUser(User $user)
+public function search(Request $request)
 {
-    $threads = $user->threads; // Asume que tienes una relación 'threads' en el modelo User
-    return view('threads.thread_list', compact('threads')); // Reutiliza la vista de lista de hilos para mostrar los hilos filtrados
+    $query = Thread::query();
+
+    if ($request->has('search')) {
+        $search = $request->input('search');
+        $query->where('topic', 'like', "%{$search}%")
+              ->orWhereHas('user', function ($q) use ($search) {
+                  $q->where('name', 'like', "%{$search}%");
+              });
+    }
+
+    if ($request->input('showMy') === 'true') {
+        $query->where('user_id', auth()->id());
+    }
+
+    $threads = $query->get();
+
+    return view('threads.thread_list', ['threads' => $threads]);
 }
+
+
 
 public function toggleThreads(Request $request)
 {
@@ -34,15 +49,11 @@ public function toggleThreads(Request $request)
 }
 
 public function threadsByUser()
-{
-    \Log::debug("Fetching users with threads.");
-    try {
-        $users = User::has('threads')->with('threads')->get();
-        return view('threads.users_list', ['users' => $users]);
-    } catch (\Exception $e) {
-        \Log::error("Error retrieving users with threads: " . $e->getMessage());
-        throw $e; // Re-lanza la excepción para que se pueda ver en el log
-    }
+{   
+    Log::info('Accediendo a threadsByUser');
+    $users = User::with('threads')->get();
+    return view('threads.users', compact('users'));
+
 }
 
 
@@ -50,22 +61,15 @@ public function threadsByUser()
 
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+    
     public function create()
     {
         return view('threads.create'); // Devolver la vista para crear un nuevo hilo
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
 {
     $request->validate([
@@ -85,12 +89,7 @@ public function threadsByUser()
 }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
 {
     $thread = Thread::with(['responses' => function ($query) {
@@ -104,44 +103,11 @@ public function threadsByUser()
 }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $thread = Thread::findOrFail($id);
-        return view('threads.edit', compact('thread')); // Devolver la vista para editar un hilo
-    }
+   
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'topic' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'nullable|image'
-        ]);
+    
 
-        $thread = Thread::findOrFail($id);
-        $thread->update($request->all());
-        return redirect()->route('threads.index'); // Redireccionar al index después de actualizar
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Thread $thread)
 {
     $this->authorize('delete', $thread);
