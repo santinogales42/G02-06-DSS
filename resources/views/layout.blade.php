@@ -75,10 +75,11 @@
         <a href="{{ route('calendario.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
             <i class="fa-regular fa-calendar fa-lg"></i> Calendario
         </a>
-        <a href="{{ route('threads.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none;">
-        <i class="fa-solid fa-hashtag"></i> Foro
+        <a href="{{ route('threads.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
+            <i class="fa-solid fa-hashtag"></i> Foro
         </a>
-        <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none;">
+        
+        <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button icon-link"  style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
             <i class="fa-solid fa-chart-line"></i> Clasificación
         </a> @auth
             @if(Auth::user()->isAdmin)
