@@ -1,6 +1,43 @@
 @extends('layout')
 
 @section('content')
+<style>
+    .container {
+        padding-top: 20px;
+    }
+    .btn-primary, .btn-secondary {
+        width: 200px;
+    }
+    .card {
+        margin-top: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    .card-header {
+    background-color: #495057; /* Un gris más oscuro para mayor contraste */
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #17a2b8; /* Un azul diferente para el botón Ver Hilo */
+    border-color: #17a2b8;
+}
+    .card-body {
+        padding: 20px;
+    }
+    .search-bar {
+        margin-bottom: 20px;
+    }
+</style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,7 +45,7 @@
             <button id="toggleMyThreads" class="btn btn-secondary mb-3" data-mine="false">Ver Mis Hilos</button>
 
             <!-- Search bar -->
-            <input type="text" id="search" placeholder="Buscar hilos o usuarios..." class="form-control mb-3">
+            <input type="text" id="search" placeholder="Buscar hilos o usuarios..." class="form-control search-bar">
 
             <div id="threadsContainer">
                 @include('threads.thread_list', ['threads' => $threads])
