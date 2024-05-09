@@ -59,10 +59,10 @@
         <div class="card-header">
             <h4>{{ $thread->topic }}</h4>
         </div>
-        <div class="card-body">
-            <p>{{ $thread->content }}</p>
-            <small>Publicado por {{ $thread->user->name }} el {{ $thread->created_at->format('d/m/Y H:i') }}</small>
-        </div>
+        <div class="card-body" style="overflow-x: auto;">
+    <pre style="white-space: pre-wrap;">{{ $thread->content }}</pre>
+    <small>Publicado por {{ $thread->user->name }} el {{ $thread->created_at->format('d/m/Y H:i') }}</small>
+</div>
 
         <div class="response-form">
             <form method="POST" action="{{ route('responses.store', $thread->id) }}">

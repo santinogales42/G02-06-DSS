@@ -50,7 +50,7 @@
             <h4>{{ $thread->topic }}</h4>
         </div>
         <div class="card-body">
-            <p>{{ $thread->content }}</p>
+            <p>{{ substr($thread->content, 0, 100) }}{{ strlen($thread->content) > 100 ? '...' : '' }}</p>
             <small>Publicado por {{ $thread->user->name }} el {{ $thread->created_at->format('d/m/Y H:i') }}</small>
         </div>
         <div class="card-footer">
@@ -66,3 +66,4 @@
         </div>
     </div>
 @endforeach
+

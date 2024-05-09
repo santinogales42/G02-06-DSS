@@ -28,7 +28,7 @@
     }
 </style>
 <div class="response-block" style="margin-left: {{ 20 * $level }}px; padding: 20px; border-left: 2px solid #ccc;">
-    <p>{{ $response->content }}</p>
+    <pre style="white-space: pre-wrap;">{{ $response->content }}</pre>
     <small>Respondido por {{ $response->user->name }} el {{ $response->created_at->format('d/m/Y H:i') }}</small>
 
     <!-- Solo verifica si el usuario es administrador para mostrar el botón de eliminar -->
@@ -51,7 +51,6 @@
         @include('threads.show_responses', ['response' => $child, 'level' => $level + 1])
     @endforeach
 </div>
-
 
 @if ($level == 0)
 </div>
