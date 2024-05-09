@@ -34,5 +34,14 @@ public function store(Request $request, $threadId)
     return redirect()->route('threads.show', $thread->id)
         ->with('success', 'Respuesta publicada correctamente.');
 }
+public function destroy(Response $response)
+{
+    $this->authorize('delete', $response);
+
+    $response->delete();
+
+    return back()->with('success', 'Respuesta eliminada correctamente.');
+}
+
 
 }

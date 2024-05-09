@@ -1,36 +1,126 @@
-
-<!-- resources/views/clasificacion/index.blade.php -->
-
 @extends('layout')
-@section('content')
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center">
-        <h1>Hilos del Foro</h1>
-        <a href="{{ route('threads.create') }}" class="btn btn-primary">Crear un Hilo</a>
-    </div>
 
-    {{-- Aquí podrías listar los hilos existentes --}}
-    <div class="mt-3">
-        <div class="list-group">
-            @forelse($threads as $thread)
-                <a href="{{ route('threads.show', $thread->id) }}" class="list-group-item list-group-item-action">
-                    <h5 class="mb-1">{{ $thread->topic }}</h5>
-                    <p class="mb-1">{{ Str::limit($thread->content, 150) }}</p>
-                    <small>Creado por: {{ $thread->user->name }}</small>
-                </a>
-            @empty
-                <div class="alert alert-info" role="alert">
-                    No hay hilos para mostrar.
-                </div>
-            @endforelse
+@section('content')
+<style>
+    .container {
+        padding-top: 20px;
+    }
+    .btn-primary, .btn-secondary {
+        width: 200px;
+    }
+    .card {
+        margin-top: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    .card-header {
+    background-color: #495057; /* Un gris más oscuro para mayor contraste */
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #17a2b8; /* Un azul diferente para el botón Ver Hilo */
+    border-color: #17a2b8;
+}
+    .card-body {
+        padding: 20px;
+    }
+    .search-bar {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <a href="{{ route('threads.create') }}" class="btn btn-primary mb-3">Crear un Hilo</a>
+            <button id="toggleMyThreads" class="btn btn-secondary mb-3" data-mine="false">Ver Mis Hilos</button>
+
+            <!-- Search bar -->
+            <input type="text" id="search" placeholder="Buscar hilos o usuarios..." class="form-control search-bar">
+
+            <div id="threadsContainer">
+                @include('threads.thread_list', ['threads' => $threads])
+            </div>
         </div>
     </div>
+</div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search');
+    const toggleBtn = document.getElementById('toggleMyThreads');
+    let showMyThreads = false; // Initialize as false
 
+    toggleBtn.addEventListener('click', () => {
+        showMyThreads = !showMyThreads; // Toggle the boolean value
+        toggleBtn.setAttribute('data-mine', showMyThreads.toString()); // Update the attribute
+        toggleBtn.textContent = showMyThreads ? 'Ver Todos los Hilos' : 'Ver Mis Hilos'; // Update the button text
+        fetchMyThreads(); // Fetch threads based on the new filter
+    });
 
+    function fetchThreads() {
+        const searchTerm = searchInput.value;
+        fetch(`{{ url('/threads/search') }}?search=${searchTerm}&showMy=false`)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('threadsContainer').innerHTML = html;
+            attachDeleteHandlers();
+        })
+        .catch(error => console.error('Error loading the threads:', error));
+    }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    function fetchMyThreads() {
+        fetch(`{{ url('/toggleThreads') }}?showMy=${showMyThreads}`)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('threadsContainer').innerHTML = html;
+            attachDeleteHandlers();
+        })
+        .catch(error => console.error('Error loading the threads:', error));
+    }
 
+    function attachDeleteHandlers() {
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.removeEventListener('click', handleDelete);
+            button.addEventListener('click', handleDelete);
+        });
+    }
+
+    function handleDelete() {
+        if (confirm('¿Estás seguro de querer eliminar este hilo?')) {
+            const threadId = this.getAttribute('data-thread-id');
+            fetch(`{{ route('threads.destroy', '') }}/${threadId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ _method: 'DELETE' })
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('thread-' + threadId).remove();
+                    fetchMyThreads();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
+
+    searchInput.addEventListener('keyup', fetchThreads);
+
+    fetchThreads(); // Initial fetch of threads
+});
+
+</script>
 
 @endsection
-

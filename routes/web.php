@@ -19,12 +19,9 @@ use App\Http\Controllers\AdminNoticiasController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AdminEquipoController;
 use App\Http\Controllers\LogoutController;
-
-use App\Http\Controllers\ThreadController;
 use App\Http\Controllers\ResponseController;
 
-use App\Http\Controllers\PerfilUsuarioController;
-
+use App\Http\Controllers\ThreadController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -65,19 +62,22 @@ Route::get('/mostrar-mensajes', 'App\Http\Controllers\ContactController@verMensa
 Route::get('/jugadores', [JugadoresController::class, 'index'])->name('jugadores');
 Route::get('/jugadores/{id}', [JugadoresController::class, 'show'])->name('jugadores.show');
 
+Route::get('/threads/search', [ThreadController::class, 'search']);
+
 
 // Rutas para hilos
 Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');
 Route::get('/threads/create', [ThreadController::class, 'create'])->name('threads.create')->middleware('auth');
 Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store')->middleware('auth');
 Route::get('/threads/{thread}', [ThreadController::class, 'show'])->name('threads.show');
-Route::get('/threads/{thread}/edit', 'ThreadController@edit')->name('threads.edit');
-Route::put('/threads/{thread}', 'ThreadController@update')->name('threads.update');
-Route::delete('/threads/{thread}', 'ThreadController@destroy')->name('threads.destroy');
 
+Route::delete('threads/{thread}', [ThreadController::class, 'destroy'])->name('threads.destroy');
+Route::get('/threads/users', [ThreadController::class, 'threadsByUser'])->name('threads.users');
+
+Route::get('/toggleThreads', [ThreadController::class,'toggleThreads'])->name('threads.toggle')->middleware('auth');
 // Rutas para respuestas
 Route::post('/threads/{thread}/responses', [ResponseController::class, 'store'])->name('responses.store');
-Route::delete('/responses/{response}', [ResponseController::class .'destroy'])->name('responses.destroy');
+Route::delete('responses/{response}', [ResponseController::class, 'destroy'])->name('responses.destroy');
 
 //rutas de admin
 Route::middleware(['auth', 'admin'])->group(function () {

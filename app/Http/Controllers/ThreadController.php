@@ -4,36 +4,72 @@ namespace App\Http\Controllers;
 
 use App\Models\Thread;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class ThreadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
-    {
-        $threads = Thread::all(); // Obtener todos los hilos
-        return view('threads.index', compact('threads')); // Pasar los hilos a la vista
+{
+    $threads = Thread::with('user')->get(); // Carga anticipada de usuarios
+    return view('threads.index', compact('threads'));
+}
+public function search(Request $request)
+{
+    $query = Thread::query();
+
+    if ($request->has('search')) {
+        $search = $request->input('search');
+        $query->where('topic', 'like', "%{$search}%")
+              ->orWhereHas('user', function ($q) use ($search) {
+                  $q->where('name', 'like', "%{$search}%");
+              });
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    if ($request->input('showMy') === 'true') {
+        $query->where('user_id', auth()->id());
+    }
+
+    $threads = $query->get();
+
+    return view('threads.thread_list', ['threads' => $threads]);
+}
+
+
+
+public function toggleThreads(Request $request)
+{
+    if ($request->query('showMy', 'false') === 'true') {
+        $threads = Thread::where('user_id', auth()->id())->get();
+    } else {
+        $threads = Thread::all();
+    }
+    return view('threads.thread_list', ['threads' => $threads]);
+}
+
+public function threadsByUser()
+{   
+    Log::info('Accediendo a threadsByUser');
+    $users = User::with('threads')->get();
+    return view('threads.users', compact('users'));
+
+}
+
+
+
+
+
+
+
+
+    
     public function create()
     {
         return view('threads.create'); // Devolver la vista para crear un nuevo hilo
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
 {
     $request->validate([
@@ -53,12 +89,7 @@ class ThreadController extends Controller
 }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
 {
     $thread = Thread::with(['responses' => function ($query) {
@@ -72,48 +103,19 @@ class ThreadController extends Controller
 }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $thread = Thread::findOrFail($id);
-        return view('threads.edit', compact('thread')); // Devolver la vista para editar un hilo
-    }
+   
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'topic' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'nullable|image'
-        ]);
+    
 
-        $thread = Thread::findOrFail($id);
-        $thread->update($request->all());
-        return redirect()->route('threads.index'); // Redireccionar al index después de actualizar
-    }
+    
+    public function destroy(Thread $thread)
+{
+    $this->authorize('delete', $thread);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $thread = Thread::findOrFail($id);
-        $thread->delete();
-        return redirect()->route('threads.index'); // Redireccionar al index después de eliminar
-    }
+    $thread->delete();
+
+    return redirect()->route('threads.index')
+        ->with('success', 'Hilo eliminado correctamente.');
+}
+
 }

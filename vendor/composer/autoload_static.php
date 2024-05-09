@@ -572,6 +572,8 @@ class ComposerStaticInit3aaa71986228bbd1b7c87e9bd43753f4
         'App\\Models\\Titulo' => __DIR__ . '/../..' . '/app/Models/Titulo.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Usuario' => __DIR__ . '/../..' . '/app/Models/Usuario.php',
+        'App\\Policies\\ResponsePolicy' => __DIR__ . '/../..' . '/app/Policies/ResponsePolicy.php',
+        'App\\Policies\\ThreadPolicy' => __DIR__ . '/../..' . '/app/Policies/ThreadPolicy.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
