@@ -138,6 +138,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/actualizar/{id}', [AdminEquipoController::class, 'actualizar'])->name('equipos.actualizar');
     });
 });
+
 // Rutas para EquipoController
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index');

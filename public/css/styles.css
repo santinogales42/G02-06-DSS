@@ -1,4 +1,5 @@
 /* Estilos existentes */
+
 .w3-teal {
     background-color: #ff3823 !important;
     position: relative;
@@ -809,4 +810,79 @@ button.icon-link .fa-chevron-down {
     background-color: #ff6961;
     color: #fff;
     border-color: #ff3823;
+}
+
+
+.circle-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.circle {
+    width: 170px;
+    height: 170px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 170px;
+    position: absolute;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.circle:hover {
+    background-color: #0056b3;
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    color:white;
+}
+
+.circle a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
+    /* Modificaciones */
+    display: block;
+    margin-top: 30px;
+}
+
+.circle:hover a {
+    font-size: 1.5em;
+}
+.circle:nth-child(1) {
+    top: 0%;
+    left: 25%;
+}
+
+.circle:nth-child(2) {
+    top: 40%;
+    left: 85%;
+}
+
+.circle:nth-child(3) {
+    top: 40%;
+    left: -35%;
+}
+
+.circle:nth-child(4) {
+    top: 110%;
+    left: 85%;
+}
+
+.circle:nth-child(5) {
+    top: 110%;
+    left: -35%;
+}
+
+.circle:nth-child(6) {
+    top: 155%;
+    left: 25%;
 }
