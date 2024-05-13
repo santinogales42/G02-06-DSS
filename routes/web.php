@@ -74,7 +74,7 @@ Route::get('/threads/{thread}', [ThreadController::class, 'show'])->name('thread
 Route::delete('threads/{thread}', [ThreadController::class, 'destroy'])->name('threads.destroy');
 Route::get('/threads/users', [ThreadController::class, 'threadsByUser'])->name('threads.users');
 
-Route::get('/toggleThreads', [ThreadController::class,'toggleThreads'])->name('threads.toggle')->middleware('auth');
+Route::get('/toggleThreads', [ThreadController::class,'toggleThreads'])->name('threads.toggle');
 // Rutas para respuestas
 Route::post('/threads/{thread}/responses', [ResponseController::class, 'store'])->name('responses.store');
 Route::delete('responses/{response}', [ResponseController::class, 'destroy'])->name('responses.destroy');
