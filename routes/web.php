@@ -122,11 +122,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Administración de noticias
     Route::prefix('/adminnoticias')->group(function () {
-        Route::get('/', [AdminNoticiasController::class, 'index'])->name('admin.noticias.index');
+        Route::get('/', [AdminNoticiasController::class, 'index'])->name('adminnoticias');
         Route::post('/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
+        Route::delete('/eliminar-todas', [AdminNoticiasController::class, 'eliminarTodas'])->name('admin.noticias.eliminar-todas');
         Route::get('/datos/{id}', [AdminNoticiasController::class, 'getDatos'])->name('noticias.getDatos');
         Route::delete('/eliminar/{id}', [AdminNoticiasController::class, 'eliminar'])->name('admin.noticias.eliminar');
         Route::post('/actualizar/{id}', [AdminNoticiasController::class, 'actualizar'])->name('noticias.actualizar');
+        Route::get('/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
+        Route::post('/eliminar-masa', [AdminNoticiasController::class, 'eliminarMasa']);
     });
 
     // Administración de equipos
@@ -145,3 +148,7 @@ Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index'
 Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
 Route::post('/equipos/{equipo}/favorito', [EquipoController::class, 'agregarFavorito'])->name('equipos.agregarFavorito');
 Route::delete('/equipos/{equipo}/favorito', [EquipoController::class, 'eliminarFavorito'])->name('equipos.eliminarFavorito');
+
+//Rutas noticias
+Route::get('/noticias/{id}', [AdminNoticiasController::class, 'getDatos'])->name('jugadores.show');
+Route::get('/noticias/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
