@@ -83,18 +83,9 @@
             <i class="fa-solid fa-chart-line"></i> Clasificación
         </a> @auth
             @if(Auth::user()->isAdmin)
-            <div class="w3-dropdown-hover w3-bar-item w3-hover-white" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <button class="w3-button icon-link  " ><i class="fa-solid fa-wrench"></i>Admin  <i class="fas fa-chevron-down"></i> </button>
-                <div class="w3-dropdown-content w3-bar-block w3-card " >
-                    <a href="{{ route('admin.adminjugador') }}" class="w3-bar-item w3-button  icon-link">Jugadores</a>
-                    <a href="{{ route('admin.usuarios.index') }}" class="w3-bar-item w3-button icon-link">Usuarios</a>
-                    <a href="{{ route('admin.noticias.index') }}" class="w3-bar-item w3-button icon-link">Noticias</a>
-                    <a href="{{ route('admin.partidos.index') }}" class="w3-bar-item w3-button icon-link">Partidos</a>
-                    <a href="{{ route('admin.equipos.index') }}" class="w3-bar-item w3-button icon-link">Equipos</a>
-                    <a href="{{ route('mostrarMensajes') }}" class="w3-bar-item w3-button icon-link">Mensajes</a>
-                
-                </div>
-            </div>
+            <a href="{{ route('admin.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
+    <i class="fa-solid fa-wrench"></i> Admin
+</a>
             @endif
 @endauth
             <!-- Enlaces en la parte inferior de la barra lateral -->
