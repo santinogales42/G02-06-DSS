@@ -23,6 +23,12 @@ class UsersTableSeeder extends Seeder
                 'isAdmin'=>true
             ],
             [
+                'name' => 'admin2',
+                'email' => 'admin2@example.com',
+                'password' => bcrypt('admin12345'),
+                'isAdmin'=>true
+            ],
+            [
                 'name' => 'prueba',
                 'email' => 'prueba@example.com',
                 'password' => bcrypt('prueba1234'),
@@ -30,6 +36,6 @@ class UsersTableSeeder extends Seeder
             ]
         ]);
 
-        User::factory()->count(4)->create();
+        User::factory()->count(7)->create();
     }
 }

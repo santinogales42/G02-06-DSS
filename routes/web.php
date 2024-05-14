@@ -19,6 +19,9 @@ use App\Http\Controllers\AdminNoticiasController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AdminEquipoController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ResponseController;
+
+use App\Http\Controllers\ThreadController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -35,9 +38,18 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+
+
+Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos.index');
+Route::get('/favoritos/{nombreEquipo}/edit', [FavoritosController::class, 'editar'])->name('favoritos.edit');
+Route::delete('/favoritos/{nombreEquipo}', [FavoritosController::class, 'delete'])->name('favoritos.delete');
+
 Route::get('/confirmar-cerrar-sesion', [LogoutController::class, 'confirmarCerrarSesion'])->name('confirmar.cerrar.sesion');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
+Route::get('/perfilUsuario', [PerfilUsuarioController::class, 'index'])->name('perfilUsuario.index');
+Route::get('/perfilUsuario/edit', [PerfilUsuarioController::class, 'edit'])->name('perfilUsuario.edit');
+Route::put('/{id}/update', [PerfilUsuarioController::class, 'update'])->name('perfilUsuario.update');
 
 
 
@@ -50,10 +62,25 @@ Route::get('/mostrar-mensajes', 'App\Http\Controllers\ContactController@verMensa
 
 Route::get('/jugadores', [JugadoresController::class, 'index'])->name('jugadores');
 Route::get('/jugadores/{id}', [JugadoresController::class, 'show'])->name('jugadores.show');
-// Dentro de routes/web.php
+
+Route::get('/threads/search', [ThreadController::class, 'search']);
 
 
+// Rutas para hilos
+Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');
+Route::get('/threads/create', [ThreadController::class, 'create'])->name('threads.create')->middleware('auth');
+Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store')->middleware('auth');
+Route::get('/threads/{thread}', [ThreadController::class, 'show'])->name('threads.show');
 
+Route::delete('threads/{thread}', [ThreadController::class, 'destroy'])->name('threads.destroy');
+Route::get('/threads/users', [ThreadController::class, 'threadsByUser'])->name('threads.users');
+
+Route::get('/toggleThreads', [ThreadController::class,'toggleThreads'])->name('threads.toggle')->middleware('auth');
+// Rutas para respuestas
+Route::post('/threads/{thread}/responses', [ResponseController::class, 'store'])->name('responses.store');
+Route::delete('responses/{response}', [ResponseController::class, 'destroy'])->name('responses.destroy');
+
+//rutas de admin
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
@@ -64,12 +91,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
         Route::post('/crear', [AdminJugadoresController::class, 'crear'])->name('adminjugador.crear');
         Route::get('/datos/{id}', [AdminJugadoresController::class, 'getDatos'])->name('jugadores.getDatos');
-        Route::put('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');    
+        Route::put('/adminjugadores/actualizar/{id}', [AdminJugadoresController::class, 'actualizar'])->name('jugadores.actualizar');
         Route::get('/jugadores/editar/{id}', [AdminJugadoresController::class, 'editar'])->name('jugadores.editar');
         Route::post('/eliminar-masa', [AdminJugadoresController::class, 'eliminarMasa'])->name('adminjugadores.eliminar-masa');
         Route::post('/eliminar-todos', [AdminJugadoresController::class, 'eliminarTodos'])->name('adminjugadores.eliminar-todos');
         Route::post('/admin/insertar-jugadores', [AdminJugadoresController::class, 'insertarJugadores']);
-});
+    });
 
     // Administración de partidos
     Route::prefix('/admin/partidos')->group(function () {
@@ -92,15 +119,20 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
         Route::put('/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');
         Route::delete('/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
+        Route::post('/usuarios/eliminar-todos', [AdminUsuariosController::class, 'eliminarTodos'])->name('admin.usuarios.eliminar-todos');
+        Route::post('/usuarios/eliminar-seleccionados', [AdminUsuariosController::class, 'eliminarSeleccionados'])->name('admin.usuarios.eliminar-seleccionados');
     });
 
     // Administración de noticias
     Route::prefix('/adminnoticias')->group(function () {
-        Route::get('/', [AdminNoticiasController::class, 'index'])->name('admin.noticias.index');
+        Route::get('/', [AdminNoticiasController::class, 'index'])->name('adminnoticias');
         Route::post('/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
+        Route::delete('/eliminar-todas', [AdminNoticiasController::class, 'eliminarTodas'])->name('admin.noticias.eliminar-todas');
         Route::get('/datos/{id}', [AdminNoticiasController::class, 'getDatos'])->name('noticias.getDatos');
         Route::delete('/eliminar/{id}', [AdminNoticiasController::class, 'eliminar'])->name('admin.noticias.eliminar');
         Route::post('/actualizar/{id}', [AdminNoticiasController::class, 'actualizar'])->name('noticias.actualizar');
+        Route::get('/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
+        Route::post('/eliminar-masa', [AdminNoticiasController::class, 'eliminarMasa']);
     });
 
     // Administración de equipos
@@ -112,6 +144,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/actualizar/{id}', [AdminEquipoController::class, 'actualizar'])->name('equipos.actualizar');
     });
 });
+
 // Rutas para EquipoController
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index');
@@ -119,9 +152,6 @@ Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipo
 Route::post('/equipos/{equipo}/favorito', [EquipoController::class, 'agregarFavorito'])->name('equipos.agregarFavorito');
 Route::delete('/equipos/{equipo}/favorito', [EquipoController::class, 'eliminarFavorito'])->name('equipos.eliminarFavorito');
 
-
-
-
-Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos.index');
-Route::get('/favoritos/{nombreEquipo}/edit', [FavoritosController::class, 'editar'])->name('favoritos.edit');
-Route::delete('/favoritos/{nombreEquipo}', [FavoritosController::class, 'delete'])->name('favoritos.delete');
+//Rutas noticias
+Route::get('/noticias/{id}', [AdminNoticiasController::class, 'getDatos'])->name('jugadores.show');
+Route::get('/noticias/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);

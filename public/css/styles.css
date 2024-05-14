@@ -1,4 +1,5 @@
 /* Estilos existentes */
+
 .w3-teal {
     background-color: #ff3823 !important;
     position: relative;
@@ -9,12 +10,35 @@
     justify-content: flex-start;
     color: white; /* Cambia según tu esquema de color */
 }
-
+.header {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    background-color: #008080; /* Color Teal */
+}
 .icon-link i {
     margin-right: 10px; /* Espacio entre el icono y el texto */
     font-size: 1.5em; /* Tamaño del icono */
 }
+.w3-dropdown-content {
+    position: absolute;
+    top: 100%;
+    right: 0; /* Alinea el contenido del desplegable a la derecha del botón */
+    z-index: 1000; /* Asegura que el desplegable esté sobre otros elementos */
+}
 
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+    }
+    .title-logo, .roboto-flex-title, .navbar-text {
+        width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+        text-align: center;
+    }
+    .title-logo {
+        margin-bottom: 10px; /* Espacio adicional debajo del logo en pantallas pequeñas */
+    }
+}
 /* Estilos responsivos */
 @media (max-width: 768px) {
     .icon-link i {
@@ -52,7 +76,7 @@
 }
 
 #mySidebar .SidebarDownSection {
-    margin-top: 13rem;
+    margin-top: 10rem;
     margin-bottom: 5rem;
 }
 
@@ -125,16 +149,38 @@ button.icon-link .fa-chevron-down {
 
 .contenedor-imagenes {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-}
-
-.contenedor-imagenes img {
-    margin: 0 10px;
-    width: 65px;
-    height: 60px;
     margin-top: 10px;
-}
+    margin-bottom: 25px;
+    margin-left: 20px; 
+    margin-right: 20px;
+    transition: border-color 1s; 
+    transition: transform 1s;
+  }
+  
+.contenedor-imagenes img {
+    width: 50px; 
+    height: 50px; 
+    border: 2px solid black; 
+    border-radius: 50%; 
+    padding: 5px; 
+ }
+
+ .contenedor-imagenes img:hover {
+    border-color: white;
+    animation: tumbado 0.3s ease forwards; 
+  }
+  
+  @keyframes tumbado {
+    0% {
+      transform: none;
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+  
 
 /* Nuevo estilo para el contenedor de la barra lateral */
 /* Agrega esta regla para el estado hover */
@@ -175,6 +221,10 @@ button.icon-link .fa-chevron-down {
 
 /* Roboto Flex con peso 400 */
 .roboto-flex-title {
+    flex-grow: 1;
+    margin: 0;
+    text-align: center;
+
     font-family: "Roboto Flex", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -211,10 +261,10 @@ button.icon-link .fa-chevron-down {
 }
 
 .title-logo {
+    border: 2px solid red;
     margin-right: 20px;
-    /* Espacio a la derecha de la imagen */
-    height: 100px;
-    /* O la altura que desees para tu logo */
+    max-width: 100px; /* Tamaño máximo para logo */
+    flex-shrink: 0;
 }
 
 .noticias-1 {
@@ -403,8 +453,8 @@ button.icon-link .fa-chevron-down {
 }
 
 .user-icon:hover {
-    color: #ff3823;
-}
+    color: #ff3823 !important;
+} 
 
 #userDropdown:hover {
     background-color: #ff3823 ; /* Mantiene el color de fondo al pasar el ratón */
@@ -422,7 +472,6 @@ button.icon-link .fa-chevron-down {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    
 }
 .encabezado-tarjeta-usuarios {
     background-color: #ff9688;
@@ -471,6 +520,10 @@ button.icon-link .fa-chevron-down {
     font-size: 50px;
 }
 
+.checked-red {
+    background-color: #ff3823;
+}
+
 /*Barra búsqueda*/
 .boton-buscar {
     background-color: #fff;
@@ -488,10 +541,17 @@ button.icon-link .fa-chevron-down {
     margin-top: 3rem;
     width: auto;
 }
+.w3-dropdown-hover {
+    position: relative;
+}
 
 #ordenarNombre {
     color: black;
     font-weight: bold;
+}
+.navbar-text {
+    display: flex;
+    align-items: center;
 }
 /* VISTA CALENDARIO */
 
@@ -774,4 +834,116 @@ button.icon-link .fa-chevron-down {
 
 .bg-rojo-pastel {
     background-color: #f1f1f1; /* Puedes ajustar este valor según el tono de rojo pastel que desees */
+}
+
+/* ESTILOS PERFIL USUARIO */
+.tarjeta-perfil {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 50rem;
+    margin: 70px auto;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.tarjeta-editar-perfil {
+    margin: 100px auto;
+    width: 50rem;
+    border-color: #ff3823 !important;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.boton-editar-perfil {
+    width: 50rem;
+    /* Ancho fijo del botón */
+    margin-left: auto;
+    /* Margen izquierdo automático */
+    margin-right: auto;
+    /* Margen derecho automático */
+    color: #ff6961;
+    border-color: #ff3823;
+}
+
+.boton-editar-perfil:hover {
+    background-color: #ff6961;
+    color: #fff;
+    border-color: #ff3823;
+}
+
+/*ESTILOS PANEL ADMINISTRADOR*/
+
+.circle-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.circle {
+    width: 170px;
+    height: 170px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 170px;
+    position: absolute;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.circle:hover {
+    background-color: #0056b3;
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    color:white;
+}
+
+.circle a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
+    /* Modificaciones */
+    display: block;
+    margin-top: 30px;
+}
+
+.circle:hover a {
+    font-size: 1.5em;
+}
+.circle:nth-child(1) {
+    top: 0%;
+    left: 25%;
+}
+
+.circle:nth-child(2) {
+    top: 40%;
+    left: 85%;
+}
+
+.circle:nth-child(3) {
+    top: 40%;
+    left: -35%;
+}
+
+.circle:nth-child(4) {
+    top: 110%;
+    left: 85%;
+}
+
+.circle:nth-child(5) {
+    top: 110%;
+    left: -35%;
+}
+
+.circle:nth-child(6) {
+    top: 155%;
+    left: 25%;
 }
