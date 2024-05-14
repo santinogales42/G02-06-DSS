@@ -106,7 +106,7 @@
             <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
             <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo" style="border: 2px solid red; margin-right: 20px; flex-shrink: 0;">
             <h1 class="roboto-flex-title" style="flex-grow: 1; text-align: center;">LALIGA EA SPORTS 2023-24</h1>
-            <a href="{{ route('contacto') }}" class=" w3-bar-item w3-button icon-link " style="text-decoration: none;">Contáctanos</a>
+            <a href="{{ route('contacto') }}" class=" btn btn-outline-light mr-2 ">Contáctanos</a>
 
             @if($isUserLoggedIn)
             <div class="navbar-text" style="display: flex; align-items: center;">
