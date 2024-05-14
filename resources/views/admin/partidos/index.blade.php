@@ -15,6 +15,10 @@
     </div>
 </div>
 
+<a href="{{ route('admin.index') }}" class="btn boton-flecha">
+    <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
+</a>
+
 <div class="container mt-4" style="margin-bottom: 6rem;">
     <div class="tarjeta-agregar-usuarios mb-3">
         <a href="{{ route('admin.partidos.create') }}" class="btn boton-agregar">Crear Partido</a>

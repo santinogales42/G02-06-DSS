@@ -20,7 +20,7 @@ use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AdminEquipoController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ResponseController;
-
+use App\Http\Controllers\PerfilUsuarioController;
 use App\Http\Controllers\ThreadController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -125,7 +125,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Administración de noticias
     Route::prefix('/adminnoticias')->group(function () {
-        Route::get('/', [AdminNoticiasController::class, 'index'])->name('adminnoticias');
+        Route::get('/', [AdminNoticiasController::class, 'index'])->name('admin.noticias.index');
         Route::post('/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
         Route::delete('/eliminar-todas', [AdminNoticiasController::class, 'eliminarTodas'])->name('admin.noticias.eliminar-todas');
         Route::get('/datos/{id}', [AdminNoticiasController::class, 'getDatos'])->name('noticias.getDatos');
