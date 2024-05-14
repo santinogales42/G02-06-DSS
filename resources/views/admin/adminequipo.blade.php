@@ -7,6 +7,12 @@
 
 <!-- Luego Bootstrap JS (asegúrate de que incluya Popper si es necesario) -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+<a href="{{ route('admin.index') }}" class="btn boton-flecha">
+    <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
+</a>
+
+
 <div class="container">
     <h1 class="titulo-admin-Equipos"> Administración de Equipos</h1>
 
