@@ -56,4 +56,8 @@ class User extends Authenticatable
     public function predicciones(){
         return $this->hasMany(Prediccion::class);
     }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

@@ -33,7 +33,7 @@
     <pre style="white-space: pre-wrap;">{{ $response->content }}</pre>
     <small>Respondido por {{ $response->user->name }} el {{ $response->created_at->format('d/m/Y H:i') }}</small>
 
-    @if (auth()->check() && (auth()->user()->id == $response->user_id || auth()->user()->isAdmin))   
+    @if (auth()->check() && (auth()->user()->id == $response->user_id || Auth::user()->role->name === 'admin'))   
     <form method="POST" action="{{ route('responses.destroy', $response->id) }}">
             @csrf
             @method('DELETE')

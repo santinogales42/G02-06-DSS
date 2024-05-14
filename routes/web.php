@@ -81,11 +81,28 @@ Route::post('/threads/{thread}/responses', [ResponseController::class, 'store'])
 Route::delete('responses/{response}', [ResponseController::class, 'destroy'])->name('responses.destroy');
 
 //rutas de admin
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::group(['middleware' => ['role:admin,analista,noticiero']], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
+});
+Route::group(['middleware' => ['role:admin']], function () {
+   
 
-    // Administración de jugadores
+    // Administración de usuarios
+    Route::prefix('/admin/usuarios')->group(function () {
+        Route::get('/', [AdminUsuariosController::class, 'index'])->name('admin.usuarios.index');
+        Route::get('/create', [AdminUsuariosController::class, 'create'])->name('admin.usuarios.create');
+        Route::post('/store', [AdminUsuariosController::class, 'store'])->name('admin.usuarios.store');
+        Route::get('/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
+        Route::put('/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');
+        Route::delete('/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
+        Route::post('/usuarios/eliminar-todos', [AdminUsuariosController::class, 'eliminarTodos'])->name('admin.usuarios.eliminar-todos');
+        Route::post('/usuarios/eliminar-seleccionados', [AdminUsuariosController::class, 'eliminarSeleccionados'])->name('admin.usuarios.eliminar-seleccionados');
+    });
+});
+    Route::group(['middleware' => ['role:admin,analista']], function () {
+
+        // Administración de jugadores
     Route::prefix('/adminjugadores')->group(function () {
         Route::get('/', [AdminJugadoresController::class, 'index'])->name('admin.adminjugador');
         Route::post('/eliminar/{id}', [AdminJugadoresController::class, 'eliminar']);
@@ -110,20 +127,21 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::delete('/deleteSelected', [AdminPartidoController::class, 'deleteSelected'])->name('admin.partidos.deleteSelected');
         Route::delete('/deleteAll', [AdminPartidoController::class, 'deleteAll'])->name('admin.partidos.deleteAll');
     });
-
-    // Administración de usuarios
-    Route::prefix('/admin/usuarios')->group(function () {
-        Route::get('/', [AdminUsuariosController::class, 'index'])->name('admin.usuarios.index');
-        Route::get('/create', [AdminUsuariosController::class, 'create'])->name('admin.usuarios.create');
-        Route::post('/store', [AdminUsuariosController::class, 'store'])->name('admin.usuarios.store');
-        Route::get('/{id}/edit', [AdminUsuariosController::class, 'edit'])->name('admin.usuarios.edit');
-        Route::put('/{id}/update', [AdminUsuariosController::class, 'update'])->name('admin.usuarios.update');
-        Route::delete('/{id}', [AdminUsuariosController::class, 'destroy'])->name('admin.usuarios.destroy');
-        Route::post('/usuarios/eliminar-todos', [AdminUsuariosController::class, 'eliminarTodos'])->name('admin.usuarios.eliminar-todos');
-        Route::post('/usuarios/eliminar-seleccionados', [AdminUsuariosController::class, 'eliminarSeleccionados'])->name('admin.usuarios.eliminar-seleccionados');
+    // Administración de equipos
+    Route::prefix('/adminequipos')->group(function () {
+        Route::get('/', [AdminEquipoController::class, 'index'])->name('admin.equipos.index');
+        Route::post('/crear', [AdminEquipoController::class, 'crear'])->name('admin.equipos.crear');
+        Route::get('/datos/{id}', [AdminEquipoController::class, 'getDatos'])->name('equipos.getDatos');
+        Route::delete('/eliminar/{id}', [AdminEquipoController::class, 'eliminar'])->name('admin.equipos.eliminar');
+        Route::post('/actualizar/{id}', [AdminEquipoController::class, 'actualizar'])->name('equipos.actualizar');
     });
+});
+
+    
+    
 
     // Administración de noticias
+    Route::group(['middleware' => ['role:admin,noticiero']], function () {
     Route::prefix('/adminnoticias')->group(function () {
         Route::get('/', [AdminNoticiasController::class, 'index'])->name('admin.noticias.index');
         Route::post('/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
@@ -134,16 +152,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
         Route::post('/eliminar-masa', [AdminNoticiasController::class, 'eliminarMasa']);
     });
-
-    // Administración de equipos
-    Route::prefix('/adminequipos')->group(function () {
-        Route::get('/', [AdminEquipoController::class, 'index'])->name('admin.equipos.index');
-        Route::post('/crear', [AdminEquipoController::class, 'crear'])->name('admin.equipos.crear');
-        Route::get('/datos/{id}', [AdminEquipoController::class, 'getDatos'])->name('equipos.getDatos');
-        Route::delete('/eliminar/{id}', [AdminEquipoController::class, 'eliminar'])->name('admin.equipos.eliminar');
-        Route::post('/actualizar/{id}', [AdminEquipoController::class, 'actualizar'])->name('equipos.actualizar');
-    });
 });
+
+    
+    
+
 
 // Rutas para EquipoController
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
