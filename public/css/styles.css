@@ -433,8 +433,13 @@ button.icon-link .fa-chevron-down {
 }
 
 #userButton {
-    background-color: #ff3823;
-    color: white;
+    display: flex;
+    align-items: center;
+    border: 1px solid #000000;
+    color: #000000;
+    background-color: #d9534f;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
 }
 
 #dropdownContent-cerrarSesion {
@@ -460,9 +465,12 @@ button.icon-link .fa-chevron-down {
     background-color: #ff3823 ; /* Mantiene el color de fondo al pasar el ratón */
 }
 
-#userButton:hover {
-    background-color: #ff3823; /* Mantiene el color de fondo al pasar el ratón */
-}
+#userButton:hover,
+        #userButton:focus {
+            color: #ffffff;
+            background-color: #fd3c35;
+            border-color: #1b1e20;
+        }
 
 
 /*CRUD USUARIOS*/
