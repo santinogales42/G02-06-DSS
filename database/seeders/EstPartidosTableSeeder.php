@@ -19,10 +19,16 @@ class EstPartidosTableSeeder extends Seeder
         $partidos = Partido::all();
 
         foreach ($partidos as $partido) {
-            // Obtener los goles del resultado del partido
-            $resultado = explode('-', $partido->resultado);
-            $golesLocal = trim($resultado[0]);
-            $golesVisitante = trim($resultado[1]);
+            if($partido->resultado = ' - '){
+                $golesLocal = 0;
+                $golesVisitante = 0;
+            }
+            else{
+                // Obtener los goles del resultado del partido
+                $resultado = explode('-', $partido->resultado);
+                $golesLocal = trim($resultado[0]);
+                $golesVisitante = trim($resultado[1]);
+            }
 
             // Insertar en la tabla est_partidos
             Est_partido::create([

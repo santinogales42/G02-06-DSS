@@ -87,7 +87,12 @@ class PartidosTableSeeder extends Seeder
                     ->addMinutes($partido * 30); // Ajustar la hora a XX:00 o XX:30
 
                 // Crear el partido en la base de datos
-                $resultado = rand(0, 5) . ' - ' . rand(0, 5); // Generar resultado aleatorio
+                if($jornada > 2){
+                    $resultado = ' - ';
+                }
+                else{
+                    $resultado = rand(0, 5) . ' - ' . rand(0, 5); // Generar resultado aleatorio
+                }
 
                 Partido::create([
                     'fecha' => $fechaPartido->format('Y-m-d'),

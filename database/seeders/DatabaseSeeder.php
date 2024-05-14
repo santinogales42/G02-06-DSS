@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             EstPartidosTableSeeder::class,
             NoticiasTableSeeder::class,
             UsersEquiposTableSeeder::class,
-            UsuariosEquiposTableSeeder::class
+            UsuariosEquiposTableSeeder::class,
+            PrediccionesTableSeeder::class
         ]);
        
 

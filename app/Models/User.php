@@ -48,4 +48,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Equipo::class, 'users_equipos');
     }
+
+    public function predicciones(){
+        return $this->hasMany(Prediccion::class);
+    }
 }
