@@ -19,11 +19,11 @@ class EstPartidosTableSeeder extends Seeder
         $partidos = Partido::all();
 
         foreach ($partidos as $partido) {
-            if($partido->resultado = ' - '){
+            if($partido->resultado == ' - '){
                 $golesLocal = 0;
                 $golesVisitante = 0;
-            }
-            else{
+            } 
+            else {
                 // Obtener los goles del resultado del partido
                 $resultado = explode('-', $partido->resultado);
                 $golesLocal = trim($resultado[0]);
