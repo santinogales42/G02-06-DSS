@@ -27,6 +27,7 @@ Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
 Route::get('/calendario/{jornada?}', [CalendarioController::class, 'index'])->name('calendario.index');
 Route::get('/calendario/{equipo}/show', [CalendarioController::class, 'show'])->name('calendario.show');
 Route::get('/partidos/{id}', [CalendarioController::class, 'showEstadisticas'])->name('partidos');
+Route::post('/guardar-voto', [CalendarioController::class, 'guardarVoto'])->name('guardarVoto');
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos');
 
@@ -79,6 +80,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/{equipo}/show', [AdminPartidoController::class, 'show'])->name('admin.partidos.show');
         Route::put('/{id}/update', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
         Route::delete('/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
+        Route::delete('/deleteSelected', [AdminPartidoController::class, 'deleteSelected'])->name('admin.partidos.deleteSelected');
+        Route::delete('/deleteAll', [AdminPartidoController::class, 'deleteAll'])->name('admin.partidos.deleteAll');
     });
 
     // Administración de usuarios
