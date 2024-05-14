@@ -20,7 +20,7 @@ use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\AdminEquipoController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ResponseController;
-
+use App\Http\Controllers\PerfilUsuarioController;
 use App\Http\Controllers\ThreadController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -30,6 +30,7 @@ Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
 Route::get('/calendario/{jornada?}', [CalendarioController::class, 'index'])->name('calendario.index');
 Route::get('/calendario/{equipo}/show', [CalendarioController::class, 'show'])->name('calendario.show');
 Route::get('/partidos/{id}', [CalendarioController::class, 'showEstadisticas'])->name('partidos');
+Route::post('/guardar-voto', [CalendarioController::class, 'guardarVoto'])->name('guardarVoto');
 Route::get('/clasificacion', [ClasificacionController::class, 'index'])->name('clasificacion');
 Route::get('/favoritos', [FavoritosController::class, 'index'])->name('favoritos');
 
@@ -106,6 +107,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/{equipo}/show', [AdminPartidoController::class, 'show'])->name('admin.partidos.show');
         Route::put('/{id}/update', [AdminPartidoController::class, 'update'])->name('admin.partidos.update');
         Route::delete('/{id}/delete', [AdminPartidoController::class, 'delete'])->name('admin.partidos.delete');
+        Route::delete('/deleteSelected', [AdminPartidoController::class, 'deleteSelected'])->name('admin.partidos.deleteSelected');
+        Route::delete('/deleteAll', [AdminPartidoController::class, 'deleteAll'])->name('admin.partidos.deleteAll');
     });
 
     // Administración de usuarios
@@ -122,7 +125,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Administración de noticias
     Route::prefix('/adminnoticias')->group(function () {
-        Route::get('/', [AdminNoticiasController::class, 'index'])->name('adminnoticias');
+        Route::get('/', [AdminNoticiasController::class, 'index'])->name('admin.noticias.index');
         Route::post('/crear', [AdminNoticiasController::class, 'crear'])->name('admin.noticias.crear');
         Route::delete('/eliminar-todas', [AdminNoticiasController::class, 'eliminarTodas'])->name('admin.noticias.eliminar-todas');
         Route::get('/datos/{id}', [AdminNoticiasController::class, 'getDatos'])->name('noticias.getDatos');

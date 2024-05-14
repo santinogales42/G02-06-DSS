@@ -3,6 +3,11 @@
 @section('title', 'Mensajes recibidos')
 
 @section('content')
+
+<a href="{{ route('admin.index') }}" class="btn boton-flecha">
+    <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
+</a>
+
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">

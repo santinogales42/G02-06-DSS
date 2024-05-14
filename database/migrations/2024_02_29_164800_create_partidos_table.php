@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('partidos', function (Blueprint $table) {
             $table->id();
-	    $table->date('fecha');
-	    $table->time('hora');
-	    $table->string('estadio');
-	    $table->string('resultado');
-        $table->integer('jornada');
-	    $table->foreignId('equipo_local_id')->constrained('equipos')->onDelete('cascade');
-	    $table->foreignId('equipo_visitante_id')->constrained('equipos')->onDelete('cascade');
-	    $table->timestamps();
+            $table->date('fecha');
+            $table->time('hora');
+            $table->string('estadio');
+            $table->string('resultado');
+            $table->integer('jornada');
+            $table->foreignId('equipo_local_id')->constrained('equipos')->onDelete('cascade');
+            $table->foreignId('equipo_visitante_id')->constrained('equipos')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

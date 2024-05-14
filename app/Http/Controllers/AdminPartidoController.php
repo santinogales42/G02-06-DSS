@@ -258,6 +258,9 @@ class AdminPartidoController extends Controller
     public function delete($id)
     {
         $partido = Partido::findOrFail($id);
+
+        Est_partido::where('partido_id', $partido->id)->delete();
+
         $partido->delete();
 
         Session::flash('success', 'Partido eliminado exitosamente.');
@@ -279,5 +282,40 @@ class AdminPartidoController extends Controller
         }
         $equipos = Equipo::all();
         return view('admin.partidos.edit', compact('partido', 'equipos'));
+    }
+
+    public function deleteSelected(Request $request)
+    {
+        $partidosSeleccionados = $request->input('partidosSeleccionados', '');
+
+    if (empty($partidosSeleccionados)) {
+        return redirect()->route('admin.partidos.index')->with('success', 'No se han seleccionado partidos para eliminar.');
+    }
+
+    // Convertir los IDs de partido a enteros
+    $partidosSeleccionados = explode(',', $partidosSeleccionados);
+    $partidosSeleccionados = array_map('intval', $partidosSeleccionados);
+
+    // Eliminar las estadísticas de los partidos seleccionados
+    Est_partido::whereIn('partido_id', $partidosSeleccionados)->delete();
+
+    // Eliminar los partidos seleccionados
+    Partido::whereIn('id', $partidosSeleccionados)->delete();
+
+    return redirect()->back()->with('success', 'Partidos seleccionados eliminados correctamente.');
+    }
+
+    public function deleteAll()
+    {
+        // Obtener todos los partidos
+        $partidos = Partido::all();
+
+        // Recorrer todos los partidos y eliminar las estadísticas asociadas
+        foreach ($partidos as $partido) {
+            Est_partido::where('partido_id', $partido->id)->delete();
+            $partido->delete();
+        }
+
+        return redirect()->back()->with('success', 'Todos los partidos se han eliminado correctamente.');
     }
 }

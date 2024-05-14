@@ -3,6 +3,11 @@
 @section('content')
 <head> <meta name="csrf-token" content="{{ csrf_token() }}"></head>
 
+<a href="{{ route('admin.index') }}" class="btn boton-flecha">
+    <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
+</a>
+
+
 <div class="container">
     <h1 style="text-align: center; margin: 1rem;">Administración de Jugadores</h1>
     @if (session('success'))
