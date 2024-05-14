@@ -34,14 +34,13 @@
             <!-- Tarjeta de usuarios -->
             <div class="tarjeta mb-3">
                 <div class="encabezado-tarjeta-usuarios">Lista de Usuarios</div>
-
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr style="margin-bottom: auto;">
                                 <th>Seleccionar</th>
                                 <th>
-                                    <button id="ordenarNombre" class="btn boton-nombre">Nombre</button>
+                                    <button id="ordenarNombre" class="btn boton-nombre">Nombre </button>
                                 </th>
                                 <th>Correo</th>
                                 <th>Acciones</th>
@@ -74,6 +73,10 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <!-- Agrega la paginación aquí -->
+            <div id="pagination-links" class="pagination justify-content-center">
+                {{ $usuarios->links() }}
             </div>
         </div>
     </div>

@@ -16,7 +16,7 @@ class AdminUsuariosController extends Controller
         $query = $request->get('salida');
         $ordenNombre = $request->get('ordenNombre', 'asc');
         $usuariosQuery = User::query(); // Obtener la consulta base
-
+    
         // Verificar si el query contiene el símbolo '@'
         if ($query !== null && strpos($query, '@') !== false) {
             $usuariosQuery->where('email', 'like', '%' . $query . '%');
@@ -24,10 +24,10 @@ class AdminUsuariosController extends Controller
             // Si no contiene '@', buscar por nombre
             $usuariosQuery->where('name', 'like', $query . '%');
         }
-
+    
         // Aplicar la ordenación después del filtro de búsqueda
-        $usuarios = $usuariosQuery->orderBy('name', $ordenNombre)->get();
-
+        $usuarios = $usuariosQuery->orderBy('name', $ordenNombre)->paginate(10); // Paginación con 10 usuarios por página
+    
         return view('admin.usuarios.index', compact('usuarios'));
     }
 
