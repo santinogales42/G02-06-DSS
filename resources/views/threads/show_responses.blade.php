@@ -1,6 +1,4 @@
-@if ($level == 0)
-<div class="card mt-3">
-@endif
+
 <style>
     .response-block {
     background-color: #f9f9f9; /* Color de fondo para destacar */
@@ -27,13 +25,16 @@
         border-radius: 5px;
     }
 </style>
+@if ($level == 0)
+<div class="card mt-3">
+@endif
+
 <div class="response-block" style="margin-left: {{ 20 * $level }}px; padding: 20px; border-left: 2px solid #ccc;">
     <pre style="white-space: pre-wrap;">{{ $response->content }}</pre>
     <small>Respondido por {{ $response->user->name }} el {{ $response->created_at->format('d/m/Y H:i') }}</small>
 
-    <!-- Solo verifica si el usuario es administrador para mostrar el botón de eliminar -->
     @if (auth()->check() && (auth()->user()->id == $response->user_id || auth()->user()->isAdmin))   
-    <form method="POST" action="{{ route('responses.destroy', $response->id) }}" style="display: inline;">
+    <form method="POST" action="{{ route('responses.destroy', $response->id) }}">
             @csrf
             @method('DELETE')
             <button type="submit" class="delete-btn" onclick="return confirm('¿Estás seguro de querer eliminar esta respuesta?');">Eliminar</button>

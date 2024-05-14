@@ -64,6 +64,7 @@
     <small>Publicado por {{ $thread->user->name }} el {{ $thread->created_at->format('d/m/Y H:i') }}</small>
 </div>
 
+
         <div class="response-form">
             <form method="POST" action="{{ route('responses.store', $thread->id) }}">
                 @csrf
@@ -71,12 +72,12 @@
                 <button type="submit">Responder</button>
             </form>
         </div>
-
+        </div>
         <hr>
-
+        
         @foreach ($thread->responses->whereNull('parent_id') as $response)
             @include('threads.show_responses', ['response' => $response, 'level' => 0])
         @endforeach
-    </div>
+    
 </div>
 @endsection
