@@ -30,7 +30,7 @@
 
 <body>
 <div class="banner">
-    <img src="{{ asset('images/tims.png') }}" alt="Banner" class="img-fluid" usemap="#equiposMap" style="width:100%;">
+    <img src="{{ asset('images/tims.png') }}" alt="Banner" usemap="#equiposMap" style="width:100%;">
     <map name="equiposMap">
     <area shape="rect" href="https://www.athletic-club.eus/" alt="AthleticClub" target="_blank">
     <area shape="rect" href="https://www.atleticodemadrid.com/" alt="AtleticoMadrid" target="_blank">
@@ -92,9 +92,9 @@
             <div class="SidebarDownSection">
                 
                 <div class="contenedor-imagenes">
-                    <img src="{{ asset('images/insta.png') }}" alt="Imagen 1" class="img-fluid">
-                    <img src="{{ asset('images/face.png') }}" alt="Imagen 2" class="img-fluid">
-                    <img src="{{ asset('images/twit.png') }}" alt="Imagen 3" class="img-fluid">
+                    <img src="{{ asset('images/insta.png') }}" alt="Imagen 1">
+                    <img src="{{ asset('images/face.png') }}" alt="Imagen 2">
+                    <img src="{{ asset('images/twit.png') }}" alt="Imagen 3">
                 </div>
                 
 
@@ -118,7 +118,7 @@
             <div class="w3-dropdown-hover" id="userDropdown">
                 <button class="w3-button w3-bar-item" id="userButton">
                     <span>{{ Session::get('userName') }}</span>
-                    <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" class="user-icon" class="img-fluid">
+                    <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" class="user-icon">
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="w3-dropdown-content w3-bar-block w3-card" id="dropdownContent-cerrarSesion">
