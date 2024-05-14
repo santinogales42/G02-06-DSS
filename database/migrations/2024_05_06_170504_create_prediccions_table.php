@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('est_partidos', function (Blueprint $table) {
+        Schema::create('prediccions', function (Blueprint $table) {
             $table->id();
-            $table->integer('goles_local');
-            $table->integer('goles_visitante');
-            $table->integer('amarillas');
-            $table->integer('rojas');
+            $table->boolean('voto_local')->default(0);
+            $table->boolean('voto_empate')->default(0);
+            $table->boolean('voto_visitante')->default(0);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('partido_id')->constrained('partidos')->onDelete('cascade');
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('est_partidos');
+        Schema::dropIfExists('prediccions');
     }
 };

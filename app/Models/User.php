@@ -52,4 +52,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Thread::class);
     }
+
+    public function predicciones(){
+        return $this->hasMany(Prediccion::class);
+    }
 }

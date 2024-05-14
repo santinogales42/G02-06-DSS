@@ -1,9 +1,16 @@
 @extends('layout')
 
 @section('content')
+<a href="{{ route('admin.index') }}" class="btn boton-flecha">
+    <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
+</a>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 position-relative">
+
+            <!-- Botón de retorno -->
+
             <!-- Formulario de búsqueda -->
             <form action="{{ route('admin.usuarios.index') }}" method="GET" class="mb-3 d-flex justify-content-end">
                 <input type="text" name="salida" class="buscador" placeholder="Buscar por nombre o correo" value="{{ request('salida') }}">
@@ -34,14 +41,13 @@
             <!-- Tarjeta de usuarios -->
             <div class="tarjeta mb-3">
                 <div class="encabezado-tarjeta-usuarios">Lista de Usuarios</div>
-
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr style="margin-bottom: auto;">
                                 <th>Seleccionar</th>
                                 <th>
-                                    <button id="ordenarNombre" class="btn boton-nombre">Nombre</button>
+                                    <button id="ordenarNombre" class="btn boton-nombre">Nombre </button>
                                 </th>
                                 <th>Correo</th>
                                 <th>Acciones</th>
@@ -74,6 +80,10 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <!-- Agrega la paginación aquí -->
+            <div id="pagination-links" class="d-flex justify-content-center">
+                {{ $usuarios->links() }}
             </div>
         </div>
     </div>

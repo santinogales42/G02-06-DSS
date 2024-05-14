@@ -632,6 +632,66 @@ button.icon-link .fa-chevron-down {
     background-color: #000000;
 }
 
+.prediccion {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.prediccion-resultados {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circulo-equipo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 18px;
+    background-color: #646464;
+    color: #ffffff;
+    margin: 10px;
+}
+
+.prediccion-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.equipo-info {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    justify-content: end;
+}
+
+.barra-progreso {
+    width: 60%; /* Ancho máximo de la barra de progreso */
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: auto auto auto 40px;
+}
+
+.relleno {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #ff3823;
+    transition: width 0.3s ease; /* Transición suave al cambiar el ancho */
+}
+
+.porcentajeFinal {
+    width: 10%;
+}
+
 
 /*ESTILOS VISTA FAVORITOS*/
 .texto-h1-favoritos {
@@ -824,7 +884,7 @@ button.icon-link .fa-chevron-down {
 .circle {
     width: 170px;
     height: 170px;
-    background-color: #007bff;
+    background-color: #ff6961;
     color: white;
     border-radius: 50%;
     text-align: center;
@@ -835,7 +895,7 @@ button.icon-link .fa-chevron-down {
 }
 
 .circle:hover {
-    background-color: #0056b3;
+    background-color: #ff3823;
     transform: scale(1.2);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     color:white;
@@ -886,4 +946,11 @@ button.icon-link .fa-chevron-down {
 .circle:nth-child(6) {
     top: 155%;
     left: 25%;
+}
+
+.boton-flecha {
+    color: #ff3823 !important;
+    font-size: x-large !important;
+    margin-top: 25px;
+    margin-left: 25px;
 }

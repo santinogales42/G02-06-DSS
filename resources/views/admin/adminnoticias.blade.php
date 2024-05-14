@@ -1,6 +1,12 @@
 @extends('layout')
 
 @section('content')
+
+<a href="{{ route('admin.index') }}" class="btn boton-flecha">
+    <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
+</a>
+
+
 <div class="container">
     <h1 style="text-align: center; margin: 1rem;">Administración de Noticias</h1>
     <input type="text" id="search" placeholder="Buscar noticias..." onkeyup="fetchData()" class="form-control mb-3">
