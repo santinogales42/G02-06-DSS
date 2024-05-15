@@ -122,13 +122,13 @@
 
 
         .common-btn-style {
-        font-size: 18px;
+        font-size: 15px;
         letter-spacing: 2px;
         text-transform: uppercase;
         display: inline-block;
         text-align: center;
         font-weight: bold;
-        padding: 0.7em 2em;
+        padding: 0.8em 1.3em;
         border: 3px solid Black;
         border-radius: 2px;
         position: relative;
@@ -138,7 +138,7 @@
         transition: 0.3s ease all;
         z-index: 1;
         border-radius: 15px;
-        height: 60px;
+        height: 55px;
         }
 
         .common-btn-style:before {
@@ -276,7 +276,7 @@
                 <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo img-fluid" style="border: 2px solid red;">
             </a>
             <h1 class="roboto-flex-title flex-grow-1 text-center d-none d-md-block">LALIGA EA SPORTS 2023-24</h1>
-            <a href="{{ route('contacto') }}" class="btn common-btn-style ml-3">Contáctanos</a>
+            <a href="{{ route('contacto') }}" style="padding: 1em;"class="btn common-btn-style ml-3">Contáctanos</a>
             @if($isUserLoggedIn)
             <div class="navbar-text d-flex align-items-center dropdown-admin">
                 <div class="dropdown" id="userDropdown">
