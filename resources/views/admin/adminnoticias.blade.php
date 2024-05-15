@@ -1,13 +1,20 @@
 @extends('layout')
 
 @section('content')
+
+<a href="{{ route('admin.index') }}" class="btn boton-flecha">
+    <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
+</a>
+
+
 <div class="container">
-    <h1>Administración de Noticias</h1>
+    <h1 style="text-align: center; margin: 1rem;">Administración de Noticias</h1>
     <input type="text" id="search" placeholder="Buscar noticias..." onkeyup="fetchData()" class="form-control mb-3">
     
+    <div style="display: flex; justify-content: space-between; margin: 1rem">
     <button id="bulk-delete" class="btn btn-danger" onclick="deleteSelectedNoticias()">Eliminar Noticias Seleccionadas</button>
     <button id="delete-all" class="btn btn-danger" onclick="deleteAllNoticias()">Eliminar todas las Noticias</button>
-
+    </div>
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -77,8 +84,8 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
+            <div class="tarjeta mb-3">
+                <div class="encabezado-tarjeta-usuarios">
                     Crear Nueva Noticia
                 </div>
                 <div class="card-body">
@@ -117,7 +124,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Crear Noticia</button>
+                    <button type="submit" class="btn boton-actualizar-usuarios btn-outline-light ml-auto">Crear Noticia</button>
                 </form>
                 </div>
             </div>

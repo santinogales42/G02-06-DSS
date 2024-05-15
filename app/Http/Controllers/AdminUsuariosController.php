@@ -26,11 +26,11 @@ class AdminUsuariosController extends Controller
         }
     
         // Aplicar la ordenación después del filtro de búsqueda
-        $usuarios = $usuariosQuery->orderBy('name', $ordenNombre)->get();
+        $usuarios = $usuariosQuery->orderBy('name', $ordenNombre)->paginate(10); // Paginación con 10 usuarios por página
     
         return view('admin.usuarios.index', compact('usuarios'));
     }
-    
+
     public function create()
     {
         return view('admin.usuarios.create');
@@ -89,5 +89,39 @@ class AdminUsuariosController extends Controller
         $usuarioABorrar = User::findOrFail($id);
         $usuarioABorrar->delete();
         return redirect()->route('admin.usuarios.index')->with('success', 'Usuario eliminado correctamente.');
+    }
+
+    public function eliminarTodos()
+    {
+        // Eliminar todos los usuarios excepto el administrador
+        User::where('isAdmin', false)->delete();
+
+        return redirect()->route('admin.usuarios.index')->with('success', 'Todos los usuarios han sido eliminados.');
+    }
+
+    public function eliminarSeleccionados(Request $request)
+    {
+        // Obtener los IDs de usuarios seleccionados
+        $usuariosSeleccionados = $request->input('usuarios_seleccionados', []);
+
+        // Verificar si no se ha seleccionado ningún usuario
+        if (empty($usuariosSeleccionados)) {
+            // No hacer nada y redirigir con un mensaje de advertencia
+            return redirect()->route('admin.usuarios.index')->with('warning', 'No se han seleccionado usuarios para eliminar.');
+        }
+
+        // Verificar que la entrada de usuarios seleccionados sea una cadena
+        if (is_string($usuariosSeleccionados)) {
+            // Convertir la cadena en un array de IDs de usuario
+            $usuariosSeleccionados = explode(',', $usuariosSeleccionados);
+        }
+
+        // Convertir los IDs de usuario a enteros
+        $usuariosSeleccionados = array_map('intval', $usuariosSeleccionados);
+
+        // Eliminar los usuarios seleccionados
+        User::whereIn('id', $usuariosSeleccionados)->delete();
+
+        return redirect()->route('admin.usuarios.index')->with('success', 'Usuarios seleccionados eliminados correctamente.');
     }
 }

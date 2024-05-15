@@ -1,30 +1,53 @@
 @extends('layout')
 
 @section('content')
+<a href="{{ route('admin.index') }}" class="btn boton-flecha">
+    <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
+</a>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 position-relative">
+
+            <!-- Botón de retorno -->
+
             <!-- Formulario de búsqueda -->
             <form action="{{ route('admin.usuarios.index') }}" method="GET" class="mb-3 d-flex justify-content-end">
                 <input type="text" name="salida" class="buscador" placeholder="Buscar por nombre o correo" value="{{ request('salida') }}">
                 <button type="submit" class="btn boton-buscar">Buscar</button>
             </form>
 
+
+
             <!-- Tarjeta de agregar usuarios -->
             <div class="tarjeta-agregar-usuarios mb-3">
                 <a href="{{ route('admin.usuarios.create') }}" class="btn boton-agregar">Agregar Usuario</a>
             </div>
 
+            <!-- Botones para eliminar usuarios -->
+            <div class="d-flex justify-content-between mb-3">
+                <form action="{{ route('admin.usuarios.eliminar-seleccionados') }}" method="POST" id="formEliminarSeleccionados">
+                    @csrf
+                    <input type="hidden" name="usuarios_seleccionados" id="usuariosSeleccionados">
+                    <button type="button" class="btn btn-danger" id="eliminarSeleccionados" onclick="return confirm('¿Estás seguro de que deseas eliminar los usuarios seleccionados?')">Eliminar Seleccionados</button>
+                </form>
+                <form action="{{ route('admin.usuarios.eliminar-todos') }}" method="POST" id="formEliminarTodos">
+                    @csrf
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar todos los usuarios excepto el administrador?')">Eliminar Todos</button>
+                </form>
+            </div>
+
+
             <!-- Tarjeta de usuarios -->
             <div class="tarjeta mb-3">
                 <div class="encabezado-tarjeta-usuarios">Lista de Usuarios</div>
-
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr style="margin-bottom: auto;">
+                                <th>Seleccionar</th>
                                 <th>
-                                    <button id="ordenarNombre" class="btn boton-nombre">Nombre</button>
+                                    <button id="ordenarNombre" class="btn boton-nombre">Nombre </button>
                                 </th>
                                 <th>Correo</th>
                                 <th>Acciones</th>
@@ -33,6 +56,11 @@
                         <tbody>
                             @foreach($usuarios as $usuario)
                             <tr>
+                                <td>
+                                    @if (!$usuario->isAdmin)
+                                    <input type="checkbox" name="usuarios_seleccionados[]" value="{{ $usuario->id }}" class="checkbox-red">
+                                    @endif
+                                </td>
                                 <td>{{ $usuario->name }}</td>
                                 <td>{{ $usuario->email }}</td>
                                 <td>
@@ -53,6 +81,10 @@
                     </table>
                 </div>
             </div>
+            <!-- Agrega la paginación aquí -->
+            <div id="pagination-links" class="d-flex justify-content-center">
+                {{ $usuarios->links() }}
+            </div>
         </div>
     </div>
 </div>
@@ -66,11 +98,22 @@
 @endif
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function() {
+        $('.checkbox-red').change(function() {
+            if ($(this).is(':checked')) {
+                $(this).addClass('checked-red');
+            } else {
+                $(this).removeClass('checked-red');
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
         const botonOrdenarNombre = document.getElementById('ordenarNombre');
         let ordenAscendenteNombre = true;
 
-        botonOrdenarNombre.addEventListener('click', function () {
+        botonOrdenarNombre.addEventListener('click', function() {
             // Cambia la dirección del orden para el nombre
             ordenAscendenteNombre = !ordenAscendenteNombre;
 
@@ -84,6 +127,43 @@
         if (ordenNombreParam === 'desc') {
             ordenAscendenteNombre = false;
         }
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const botonEliminarSeleccionados = document.getElementById('eliminarSeleccionados');
+        const formEliminarSeleccionados = document.getElementById('formEliminarSeleccionados');
+        const checkboxes = document.querySelectorAll('.checkbox-red');
+
+        botonEliminarSeleccionados.addEventListener('click', function(event) {
+            const usuariosSeleccionados = [];
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    usuariosSeleccionados.push(checkbox.value);
+                }
+            });
+
+            // Si no hay ningún checkbox seleccionado, mostrar mensaje y cancelar el evento
+            if (usuariosSeleccionados.length === 0) {
+                alert('No has seleccionado ningún usuario para eliminar.');
+                event.preventDefault();
+                return false;
+            }
+
+            // Confirmar la eliminación si hay usuarios seleccionados
+            if (!confirm('¿Estás seguro de que deseas eliminar los usuarios seleccionados?')) {
+                event.preventDefault();
+                return false;
+            }
+
+            // Establecer los IDs seleccionados en el campo oculto
+            document.getElementById('usuariosSeleccionados').value = usuariosSeleccionados.join(',');
+
+            // Enviar el formulario de eliminación de usuarios seleccionados
+            formEliminarSeleccionados.submit();
+        });
     });
 </script>
 

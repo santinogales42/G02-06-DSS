@@ -1,4 +1,5 @@
 /* Estilos existentes */
+
 .w3-teal {
     background-color: #ff3823 !important;
     position: relative;
@@ -75,7 +76,7 @@
 }
 
 #mySidebar .SidebarDownSection {
-    margin-top: 13rem;
+    margin-top: 10rem;
     margin-bottom: 5rem;
 }
 
@@ -148,16 +149,38 @@ button.icon-link .fa-chevron-down {
 
 .contenedor-imagenes {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-}
-
-.contenedor-imagenes img {
-    margin: 0 10px;
-    width: 65px;
-    height: 60px;
     margin-top: 10px;
-}
+    margin-bottom: 25px;
+    margin-left: 20px; 
+    margin-right: 20px;
+    transition: border-color 1s; 
+    transition: transform 1s;
+  }
+  
+.contenedor-imagenes img {
+    width: 50px; 
+    height: 50px; 
+    border: 2px solid black; 
+    border-radius: 50%; 
+    padding: 5px; 
+ }
+
+ .contenedor-imagenes img:hover {
+    border-color: white;
+    animation: tumbado 0.3s ease forwards; 
+  }
+  
+  @keyframes tumbado {
+    0% {
+      transform: none;
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+  
 
 /* Nuevo estilo para el contenedor de la barra lateral */
 /* Agrega esta regla para el estado hover */
@@ -430,8 +453,8 @@ button.icon-link .fa-chevron-down {
 }
 
 .user-icon:hover {
-    color: #ff3823;
-}
+    color: #ff3823 !important;
+} 
 
 #userDropdown:hover {
     background-color: #ff3823 ; /* Mantiene el color de fondo al pasar el ratón */
@@ -449,7 +472,6 @@ button.icon-link .fa-chevron-down {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    
 }
 .encabezado-tarjeta-usuarios {
     background-color: #ff9688;
@@ -496,6 +518,10 @@ button.icon-link .fa-chevron-down {
 .btn-elliminar i {
     color: #ff3823; 
     font-size: 50px;
+}
+
+.checked-red {
+    background-color: #ff3823;
 }
 
 /*Barra búsqueda*/
@@ -604,6 +630,66 @@ button.icon-link .fa-chevron-down {
 
 .partido-hover:hover {
     background-color: #000000;
+}
+
+.prediccion {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.prediccion-resultados {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circulo-equipo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 18px;
+    background-color: #646464;
+    color: #ffffff;
+    margin: 10px;
+}
+
+.prediccion-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.equipo-info {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    justify-content: end;
+}
+
+.barra-progreso {
+    width: 60%; /* Ancho máximo de la barra de progreso */
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: auto auto auto 40px;
+}
+
+.relleno {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #ff3823;
+    transition: width 0.3s ease; /* Transición suave al cambiar el ancho */
+}
+
+.porcentajeFinal {
+    width: 10%;
 }
 
 
@@ -748,4 +834,123 @@ button.icon-link .fa-chevron-down {
 
 .bg-rojo-pastel {
     background-color: #f1f1f1; /* Puedes ajustar este valor según el tono de rojo pastel que desees */
+}
+
+/* ESTILOS PERFIL USUARIO */
+.tarjeta-perfil {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 50rem;
+    margin: 70px auto;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.tarjeta-editar-perfil {
+    margin: 100px auto;
+    width: 50rem;
+    border-color: #ff3823 !important;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.boton-editar-perfil {
+    width: 50rem;
+    /* Ancho fijo del botón */
+    margin-left: auto;
+    /* Margen izquierdo automático */
+    margin-right: auto;
+    /* Margen derecho automático */
+    color: #ff6961;
+    border-color: #ff3823;
+}
+
+.boton-editar-perfil:hover {
+    background-color: #ff6961;
+    color: #fff;
+    border-color: #ff3823;
+}
+
+/*ESTILOS PANEL ADMINISTRADOR*/
+
+.circle-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.circle {
+    width: 170px;
+    height: 170px;
+    background-color: #ff6961;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 170px;
+    position: absolute;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.circle:hover {
+    background-color: #ff3823;
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    color:white;
+}
+
+.circle a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
+    /* Modificaciones */
+    display: block;
+    margin-top: 30px;
+}
+
+.circle:hover a {
+    font-size: 1.5em;
+}
+.circle:nth-child(1) {
+    top: 0%;
+    left: 25%;
+}
+
+.circle:nth-child(2) {
+    top: 40%;
+    left: 85%;
+}
+
+.circle:nth-child(3) {
+    top: 40%;
+    left: -35%;
+}
+
+.circle:nth-child(4) {
+    top: 110%;
+    left: 85%;
+}
+
+.circle:nth-child(5) {
+    top: 110%;
+    left: -35%;
+}
+
+.circle:nth-child(6) {
+    top: 155%;
+    left: 25%;
+}
+
+.boton-flecha {
+    color: #ff3823 !important;
+    font-size: x-large !important;
+    margin-top: 25px;
+    margin-left: 25px;
 }

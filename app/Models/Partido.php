@@ -24,4 +24,8 @@ class Partido extends Model
     {
         return $this->hasOne(Est_partido::class);
     }
+
+    public function predicciones(){
+        return $this->hasMany(Prediccion::class);
+    }
 }
