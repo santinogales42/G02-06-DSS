@@ -12,23 +12,25 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="nombre">Nuevo nombre:</label>
+                            <label for="name">Nuevo nombre:</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ $usuario->name }}">
                         </div>
                         <div class="form-group">
                             <label for="email">Nuevo email:</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{ $usuario->email }}">
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="password">Nueva Contraseña:</label>
-                            <input type="password" class="form-control" id="password" name="password" value="{{ $usuario->password }}">
+                        <div class="form-group">
+                            <label for="role">Asignar rol:</label>
+                            <select class="form-control" id="role" name="role_id">
+                                @foreach($roles as $role)
+                                    <option value="{{ $role->id }}" {{ $usuario->role_id == $role->id ? 'selected' : '' }}>
+                                        {{ ucfirst($role->name) }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="password_confirmation">Confirmar Nueva Contraseña:</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
-                        </div> -->
-                        <div class="form-group">
-                        <button type="submit" class="btn boton-actualizar-usuarios btn-outline-light ml-auto">Guardar Cambios</button>
+                            <button type="submit" class="btn boton-actualizar-usuarios btn-outline-light ml-auto">Guardar Cambios</button>
                         </div>
                     </form>
                 </div>
