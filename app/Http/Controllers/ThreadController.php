@@ -27,7 +27,7 @@ public function search(Request $request)
               });
     }
 
-    if ($request->input('showMy') === 'true') {
+    if ($request->input('showMy') === 'true' && auth()->check()) {
         $query->where('user_id', auth()->id());
     }
 
@@ -37,16 +37,25 @@ public function search(Request $request)
 }
 
 
-
 public function toggleThreads(Request $request)
 {
+    if (!auth()->check()) {
+        // Retorna un estado HTTP 401 con un mensaje, en lugar de redireccionar
+        return response()->json(['error' => 'Unauthorized'], 401);
+    }
+
+    $threads = Thread::all();
+
     if ($request->query('showMy', 'false') === 'true') {
         $threads = Thread::where('user_id', auth()->id())->get();
-    } else {
-        $threads = Thread::all();
     }
-    return view('threads.thread_list', ['threads' => $threads]);
+
+    // Devuelve la vista como HTML
+    return view('threads.thread_list', ['threads' => $threads])->render();
 }
+
+
+
 
 public function threadsByUser()
 {   

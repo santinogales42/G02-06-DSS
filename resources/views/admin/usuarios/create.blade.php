@@ -68,6 +68,16 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group">
+                                <label for="role">Asignar rol:</label>
+                                <select class="form-control" id="role" name="role_id">
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>
+                                            {{ ucfirst($role->name) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
                             <div class="form-group d-flex justify-content-between">
                                 <a href="{{ route('admin.usuarios.index') }}" class="btn boton-cancelar">Cancelar</a>

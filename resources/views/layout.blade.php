@@ -81,8 +81,10 @@
 
             <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
                 <i class="fa-solid fa-chart-line"></i> Clasificación
-            </a> @auth
-            @if(Auth::user()->isAdmin)
+            </a> 
+           
+            @auth
+            @if(Auth::check() && (Auth::user()->role->name === 'admin'||Auth::user()->role->name === 'noticiero'||Auth::user()->role->name === 'analista'))
             <a href="{{ route('admin.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
                 <i class="fa-solid fa-wrench"></i> Admin
             </a>

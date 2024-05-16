@@ -42,14 +42,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <a href="{{ route('threads.create') }}" class="btn btn-primary mb-3">Crear un Hilo</a>
+            
             <button id="toggleMyThreads" class="btn btn-secondary mb-3" data-mine="false">Ver Mis Hilos</button>
-
+            
             <!-- Search bar -->
             <input type="text" id="search" placeholder="Buscar hilos o usuarios..." class="form-control search-bar">
 
             <div id="threadsContainer">
-                @include('threads.thread_list', ['threads' => $threads])
-            </div>
+    
+        @include('threads.thread_list', ['threads' => $threads])
+   
+</div>
         </div>
     </div>
 </div>
@@ -79,14 +82,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function fetchMyThreads() {
-        fetch(`{{ url('/toggleThreads') }}?showMy=${showMyThreads}`)
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById('threadsContainer').innerHTML = html;
-            attachDeleteHandlers();
-        })
-        .catch(error => console.error('Error loading the threads:', error));
-    }
+    fetch(`{{ url('/toggleThreads') }}?showMy=${showMyThreads}`)
+    .then(response => {
+        if (response.status === 401) { // Si el usuario no está autenticado
+            window.location.href = "{{ route('login') }}"; // Redirige al usuario a la página de inicio de sesión
+        }
+        return response.text(); // Procesa el resto de la respuesta como texto
+    })
+    .then(html => {
+        document.getElementById('threadsContainer').innerHTML = html; // Actualiza el HTML del contenedor
+        attachDeleteHandlers(); // Vuelve a enganchar los manejadores de eventos
+    })
+    .catch(error => console.error('Error loading the threads:', error));
+}
+
+
 
     function attachDeleteHandlers() {
         document.querySelectorAll('.delete-btn').forEach(button => {

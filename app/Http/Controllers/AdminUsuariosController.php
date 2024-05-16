@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session; // Importa la clase Session
@@ -33,7 +34,8 @@ class AdminUsuariosController extends Controller
 
     public function create()
     {
-        return view('admin.usuarios.create');
+        $roles = Role::all(); // Obtener todos los roles disponibles
+        return view('admin.usuarios.create', compact('roles'));
     }
 
     public function store(Request $request)
@@ -44,23 +46,25 @@ class AdminUsuariosController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8', // Verifica que la contraseña tenga al menos 8 caracteres
             'password_confirmation' => 'required|string|same:password', // Verifica que la confirmación de la contraseña coincida con la contraseña
+            'role_id' => 'required|exists:roles,id', // Validar el role_id
         ]);
 
         // Crear un nuevo usuario en la base de datos
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' =>  Hash::make($request->password),
+            'password' => Hash::make($request->password),
+            'role_id' => $request->role_id, // Asignar el role_id
         ]);
 
         Session::flash('success', 'Usuario creado exitosamente.');
         return redirect()->route('admin.usuarios.index');
     }
-
     public function edit($id)
     {
         $usuario = User::findOrFail($id);
-        return view('admin.usuarios.edit', compact('usuario'));
+        $roles = Role::all(); // Obtener todos los roles disponibles
+        return view('admin.usuarios.edit', compact('usuario', 'roles'));
     }
 
     public function update(Request $request, $id)
@@ -70,14 +74,17 @@ class AdminUsuariosController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
+            'role_id' => 'required|exists:roles,id', // Validar el role_id
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
         // Actualizar los campos del usuario con los datos del formulario
         $usuario->name = $request->name;
         $usuario->email = $request->email;
+        $usuario->role_id = $request->role_id; // Actualizar el role_id
         $usuario->save();
 
         // Redirigir a la página de lista de usuarios con un mensaje de éxito
