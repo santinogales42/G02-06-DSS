@@ -8,6 +8,6 @@
 <body>
     <h1>Bienvenido, {{ $userName }}!</h1>
     <p>Gracias por registrarte en nuestro sitio web. Estamos encantados de tenerte con nosotros.</p>
-    <p>Saludos,<br>{{ config('app.name') }}</p>
+    <p>Saludos,<br>LigaTrack S.L.</p>
 </body>
 </html>
