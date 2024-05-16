@@ -1,27 +1,27 @@
-@extends('layout')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <head> 
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 </head>
 
-<a href="{{ route('admin.index') }}" class="btn boton-flecha">
+<a href="<?php echo e(route('admin.index')); ?>" class="btn boton-flecha">
     <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
 </a>
 
 <div class="container">
     <h1 style="text-align: center; margin: 1rem;">Administración de Jugadores</h1>
-    @if (session('success'))
+    <?php if(session('success')): ?>
         <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
+            <?php echo e(session('success')); ?>
 
-    @if (session('error'))
-        <div class="alert alert-danger" role="alert">
-            {{ session('error') }}
         </div>
-    @endif
+    <?php endif; ?>
+
+    <?php if(session('error')): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo e(session('error')); ?>
+
+        </div>
+    <?php endif; ?>
     <input type="text" id="search" placeholder="Buscar jugadores..." onkeyup="fetchData()" class="form-control mb-3">
     <div class="d-flex justify-content-between" style="padding: 1rem;">
         <button class="btn boton-insertar-usuarios" onclick="insertarJugadores()">Insertar Jugadores Aleatorios (Para pruebas)</button>
@@ -80,9 +80,9 @@
                         <div class="mb-3">
                             <label for="equipo_id" class="form-label">Equipo:</label>
                             <select class="form-select" id="equipo_id" name="equipo_id">
-                                @foreach ($equipos as $equipo)
-                                    <option value="{{ $equipo->id }}">{{ $equipo->nombre }}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $equipos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $equipo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($equipo->id); ?>"><?php echo e($equipo->nombre); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -310,4 +310,6 @@ function insertarJugadores() {
 }
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/usuario/Escritorio/DSS/G02-06-DSS/resources/views/admin/adminjugador.blade.php ENDPATH**/ ?>
