@@ -5,7 +5,7 @@
 @section('content')
 <div class="jumbotron jumbotron-fluid">
     <div class="container-fluid">
-        <h1 class="display-4 font-weight-bold text-center" style="font-size: 2.5rem; color:white;">Calendario de La Liga 2023/24</h1>
+        <h1 class="display-4 font-weight-bold text-center" style="font-size: 2rem; color:white;">Calendario de La Liga 2023/24</h1>
     </div>
 </div>
 

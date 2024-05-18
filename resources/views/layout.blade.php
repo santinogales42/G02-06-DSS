@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,8 +83,8 @@
 
             <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
                 <i class="fa-solid fa-chart-line"></i> Clasificación
-            </a> 
-           
+            </a>
+
             @auth
             @if(Auth::check() && (Auth::user()->role->name === 'admin'||Auth::user()->role->name === 'noticiero'||Auth::user()->role->name === 'analista'))
             <a href="{{ route('admin.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
@@ -90,15 +92,22 @@
             </a>
             @endif
             @endauth
+    
             <!-- Enlaces en la parte inferior de la barra lateral -->
             <div class="SidebarDownSection">
-
                 <div class="contenedor-imagenes">
-                    <img src="{{ asset('images/insta.png') }}" alt="Imagen 1" class="img-fluid">
-                    <img src="{{ asset('images/face.png') }}" alt="Imagen 2" class="img-fluid">
-                    <img src="{{ asset('images/twit.png') }}" alt="Imagen 3" class="img-fluid">
+                    <a href="https://www.instagram.com/laliga/" target="_blank">
+                        <img src="{{ asset('images/insta.png') }}" alt="Instagram" class="img-fluid">
+                    </a>
+                    <a href="https://www.facebook.com/LALIGA/?locale=es_ES" target="_blank">
+                        <img src="{{ asset('images/face.png') }}" alt="Facebook" class="img-fluid">
+                    </a>
+                    <a href="https://x.com/LaLiga?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank">
+                        <img src="{{ asset('images/twit.png') }}" alt="Twitter" class="img-fluid">
+                    </a>
                 </div>
             </div>
+
         </div>
 
     </div>

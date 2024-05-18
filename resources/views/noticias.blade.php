@@ -3,6 +3,13 @@
 @section('title', 'La Liga')
 
 @section('content')
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container-fluid">
+        <h1 class="display-4 font-weight-bold text-center" style="font-size: 2rem; color:white;">Noticias de La Liga 2023/24</h1>
+    </div>
+</div>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +19,6 @@
 </head>
 <body>
     <div class="container">
-        <h1>Noticias de actualidad</h1>
         <input type="text" id="search" placeholder="Buscar noticias por equipo o título de la noticia ..." onkeyup="fetchData()" class="form-control mb-3">
 
         <div id="noticias-list" class="row">

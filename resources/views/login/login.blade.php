@@ -1,6 +1,8 @@
 @extends('layout')
 
 @section('content')
+
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -18,14 +20,6 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        <!-- <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
-                            @error('password')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div> -->
 
                         <!-- Agregar esto en tu formulario -->
                         <div class="form-group">
@@ -50,7 +44,7 @@
                             <input type="checkbox" class="form-check-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                             <label class="form-check-label" for="remember">Recordar Sesión</label>
                         </div>
- -->
+                        -->
                         <div class="form-group d-flex justify-content-between">
                             <a href="{{ route('home') }}" class="btn boton-cancelar">Cancelar</a>
                             <button type="submit" class="btn boton-inicio">Iniciar Sesión</button>
@@ -67,6 +61,7 @@
         </div>
     </div>
 </div>
+
 <!-- Agregar FontAwesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <script>

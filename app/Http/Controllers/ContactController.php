@@ -37,22 +37,21 @@ class ContactController extends Controller
 
         // Redireccionar de vuelta a la página de contacto con un mensaje de éxito
         return redirect()->route('contacto')->with('success', '¡Mensaje enviado correctamente!');
-    
-}
+    }
 
-public function verMensajes()
-{
-    // Obtener el contenido del archivo de mensajes
-    $contenido = Storage::disk('local')->get('mensajes.txt');
+    public function verMensajes()
+    {
+        // Obtener el contenido del archivo de mensajes
+        $contenido = Storage::disk('local')->get('mensajes.txt');
 
-    // Convertir el contenido en un array dividiendo por saltos de línea
-    $mensajes = explode("\n", $contenido);
+        // Convertir el contenido en un array dividiendo por saltos de línea
+        $mensajes = explode("\n", $contenido);
 
-    // Pasar los mensajes a la vista
-    return view('admin.mensajes', compact('mensajes'));
-}
+        // Pasar los mensajes a la vista
+        return view('admin.mensajes', compact('mensajes'));
+    }
 
-public function limpiarMensajes()
+    public function limpiarMensajes()
     {
         // Eliminar todos los mensajes del archivo mensajes.txt
         Storage::disk('local')->put('mensajes.txt', '');
@@ -60,5 +59,4 @@ public function limpiarMensajes()
         // Redireccionar de vuelta a la página de mensajes con un mensaje de éxito
         return redirect()->route('mostrarMensajes')->with('success', '¡Mensajes limpiados correctamente!');
     }
-
 }
