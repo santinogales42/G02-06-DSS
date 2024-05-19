@@ -93,84 +93,71 @@
 
         .navbar {
             background-color: #ff3d36;
+            transition: all 0.3s ease;
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
         }
 
         .navbar-brand {
-            margin-left: 15px;
+            margin-left: 20px;
+            transition: all 0.3s ease;
         }
-        /*
+
+        .navbar-brand img {
+            transition: all 0.3s ease;
+            display: block;
+        }
+
         .common-btn-style {
-            margin-left: 15px;
-            border: 1.5px solid black;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            text-align: center;
+            font-weight: bold;
+            padding: 0.8em 1.3em;
+            border: 3px solid black;
+            border-radius: 2px;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
             color: black;
-            background-color: white;
-            padding: 0.375rem 0.75rem;
-            border-radius: 0.25rem;
-            display: inline-flex;
-            align-items: center;
-            height: 38px;
-
-        }
-
-        .common-btn-style:hover,
-        .common-btn-style:focus {
-            color: red;
-            background-color: white;
-            border-color: #6c757d;
-        }
-        */
-
-
-        .common-btn-style {
-        font-size: 15px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        display: inline-block;
-        text-align: center;
-        font-weight: bold;
-        padding: 0.8em 1.3em;
-        border: 3px solid Black;
-        border-radius: 2px;
-        position: relative;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
-        color: black;
-        text-decoration: none;
-        transition: 0.3s ease all;
-        z-index: 1;
-        border-radius: 15px;
-        height: 55px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1;
+            border-radius: 15px;
+            height: 55px;
         }
 
         .common-btn-style:before {
-        transition: 0.5s all ease;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        right: 50%;
-        bottom: 0;
-        opacity: 0;
-        content: '';
-        background-color: white;
-        z-index: -1;
+            transition: 0.5s all ease;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            right: 50%;
+            bottom: 0;
+            opacity: 0;
+            content: '';
+            background-color: white;
+            z-index: -1;
         }
 
         .common-btn-style:hover, .common-btn-style:focus {
-        color: #ff3823;
-        
+            color: #ff3823;
         }
 
         .common-btn-style:hover:before, .common-btn-style:focus:before {
-        transition: 0.5s all ease;
-        left: 0;
-        right: 0;
-        opacity: 1;
-        border-radius: 12px;
+            transition: 0.5s all ease;
+            left: 0;
+            right: 0;
+            opacity: 1;
+            border-radius: 12px;
         }
 
         .common-btn-style:active {
-        transform: scale(0.9);
+            transform: scale(0.9);
         }
-
 
         .dropdown-menu {
             min-width: 10rem;
@@ -188,6 +175,10 @@
 
         #userDropdown {
             margin-left: 15px;
+        }
+
+        .user-icon {
+            transition: filter 0.3s ease;
         }
 
         /* Overlay effect */
@@ -215,6 +206,90 @@
 
             .overlay {
                 display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                height: auto;
+            }
+
+            .navbar-brand {
+                margin-left: 20px; /* Fixed distance from the hamburger menu */
+            }
+
+            .navbar-brand img {
+                width: 50px;
+                height: auto;
+            }
+
+            .common-btn-style {
+                font-size: 12px;
+                padding: 0.5em 1em;
+                height: auto;
+            }
+
+            .dropdown-admin .dropdown-toggle {
+                font-size: 12px;
+                padding: 0.5em 1em;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            
+
+            .navbar {
+                height: auto;
+            }
+
+            .navbar-brand {
+                margin-left: 20px; /* Fixed distance from the hamburger menu */
+            }
+
+            .navbar-brand img {
+                width: 40px;
+                height: auto;
+            }
+
+            .common-btn-style {
+                font-size: 10px;
+                padding: 0.4em 0.8em;
+                height: auto;
+            }
+
+            .dropdown-admin .dropdown-toggle {
+                font-size: 10px;
+                padding: 0.4em 0.8em;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                height: auto;
+            }
+
+            .navbar-brand {
+                margin-left: 10px; /* Fixed distance from the hamburger menu */
+            }
+
+            .navbar-brand img {
+                width: 30px;
+                height: auto;
+            }
+
+            .common-btn-style {
+                font-size: 8px;
+                padding: 0.3em 0.6em;
+                height: auto;
+            }
+
+            .dropdown-admin .dropdown-toggle {
+                font-size: 8px;
+                padding: 0.3em 0.6em;
+                height: auto;
             }
         }
     </style>
@@ -273,16 +348,16 @@
         <nav class="navbar navbar-light">
             <button class="openbtn" onclick="openNav()">&#9776;</button>
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo img-fluid" style="border: 2px solid red;">
+                <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo img-fluid">
             </a>
             <h1 class="roboto-flex-title flex-grow-1 text-center d-none d-md-block">LALIGA EA SPORTS 2023-24</h1>
-            <a href="{{ route('contacto') }}" style="padding: 1em;"class="btn common-btn-style ml-3">Contáctanos</a>
+            <a href="{{ route('contacto') }}" style="padding: 1em;" class="btn common-btn-style ml-3">Contáctanos</a>
             @if($isUserLoggedIn)
             <div class="navbar-text d-flex align-items-center dropdown-admin">
                 <div class="dropdown" id="userDropdown">
                     <button class="btn common-btn-style dropdown-toggle" id="userButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span>{{ Session::get('userName') }}</span>
-                        <img src="{{ asset('images/usuario_r.png') }} " alt="Perfil" class="user-icon img-fluid" style="margin-left: 5px; filter: invert(100%);">
+                        <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" class="user-icon img-fluid" style="margin-left: 5px; filter: invert(100%);">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userButton">
                         <a href="{{ route('perfilUsuario.index') }}" class="dropdown-item">Mi Perfil</a>
@@ -293,8 +368,8 @@
             </div>
             @else
             <div class="navbar-text d-flex align-items-center">
-                <a class="btn common-btn-style ml-auto" href="{{ route('register') }}">Registrarse</a>
-                <a class="btn common-btn-style ml-2" href="{{ route('login') }}">Iniciar Sesión</a>
+                <a class="btn common-btn-style ml-auto" href="{{ route('register') }}" style="padding: 1em;">Registrarse</a>
+                <a class="btn common-btn-style ml-2" href="{{ route('login') }}" style="padding: 1em;">Iniciar Sesión</a>
             </div>
             @endif
         </nav>
@@ -342,49 +417,3 @@
 </body>
 
 </html>
-
-
-
-
-
-    <script>
-        window.onload = function() {
-            var image = document.querySelector('.banner img');
-            var areas = document.querySelectorAll('map[name="equiposMap"] area');
-            var numLinks = areas.length;
-            var width = image.clientWidth;
-
-            areas.forEach(function(area, index) {
-                var x1 = Math.round(width * index / numLinks);
-                var x2 = Math.round(width * (index + 1) / numLinks);
-                area.coords = `${x1},0,${x2},47`; // Ajusta la coordenada Y según sea necesario
-            });
-        };
-
-        window.onresize = function() {
-            // Repite el código de ajuste cuando la ventana cambie de tamaño
-            var image = document.querySelector('.banner img');
-            var areas = document.querySelectorAll('map[name="equiposMap"] area');
-            var numLinks = areas.length;
-            var width = image.clientWidth;
-
-            areas.forEach(function(area, index) {
-                var x1 = Math.round(width * index / numLinks);
-                var x2 = Math.round(width * (index + 1) / numLinks);
-                area.coords = `${x1},0,${x2},47`;
-            });
-        };
-
-        function w3_open() {
-            document.getElementById("main").style.marginLeft = "15%";
-            document.getElementById("mySidebar").style.width = "15%";
-            document.getElementById("mySidebar").style.display = "block";
-            document.getElementById("openNav").style.display = 'none';
-        }
-
-        function w3_close() {
-            document.getElementById("main").style.marginLeft = "0%";
-            document.getElementById("mySidebar").style.display = "none";
-            document.getElementById("openNav").style.display = "inline-block";
-        }
-    </script>

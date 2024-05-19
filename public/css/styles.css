@@ -27,36 +27,6 @@
     z-index: 1000; /* Asegura que el desplegable esté sobre otros elementos */
 }
 
-@media (max-width: 600px) {
-    .header {
-        flex-direction: column;
-    }
-    .title-logo, .roboto-flex-title, .navbar-text {
-        width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
-        text-align: center;
-    }
-    .title-logo {
-        margin-bottom: 10px; /* Espacio adicional debajo del logo en pantallas pequeñas */
-    }
-}
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .icon-link i {
-        font-size: 1.2em; /* Tamaño más pequeño en dispositivos móviles */
-    }
-    .icon-link {
-        font-size: 16px; /* Tamaño de texto más pequeño en pantallas pequeñas */
-    }
-}
-
-@media (min-width: 769px) {
-    .icon-link i {
-        font-size: 1.5em; /* Tamaño más grande en pantallas grandes */
-    }
-    .icon-link {
-        font-size: 20px; /* Tamaño de texto más grande en pantallas grandes */
-    }
-}
 .w3-sidebar {
     background-color: #ff3823 !important;
     position: relative;
@@ -265,6 +235,7 @@ button.icon-link .fa-chevron-down {
     margin-right: 20px;
     max-width: 100px; /* Tamaño máximo para logo */
     flex-shrink: 0;
+    margin-left: 5px;
 }
 
 .noticias-1 {
