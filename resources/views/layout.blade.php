@@ -64,7 +64,8 @@
             background-color: transparent;
             color: white;
             padding: 10px 15px;
-            border: none;
+            border: 0px;
+            border-color: 0px;
             position: absolute;
             top: 10px; /* Ajuste para mantener el botón en la parte superior */
             left: 6px; /* Ajuste para mantener el botón en la parte izquierda */
@@ -79,7 +80,7 @@
             width: 25px;
             height: 3px;
             margin: 5px auto;
-            background-color: #fff;
+            background-color: transparent;
         }
 
         .map-area {
@@ -367,7 +368,6 @@
     </div>
 
     <div id="main">
-        
         <nav class="navbar navbar-light">
             <div style="width:27.5%">
                 <button class="openbtn" onclick="openNav()">&#9776;</button>
@@ -376,13 +376,13 @@
                 </a>
             </div>
             <h1 class="roboto-flex-title flex-grow-1 text-center d-none d-md-block">LALIGA EA SPORTS 2023-24</h1>
-            <a href="{{ route('contacto') }}" style="padding: 1em;" class="btn common-btn-style ml-3">Contáctanos</a>
+            <a href="{{ route('contacto') }}" style="padding: 1em;"class="btn common-btn-style ml-3">Contáctanos</a>
             @if($isUserLoggedIn)
             <div class="navbar-text d-flex align-items-center dropdown-admin">
                 <div class="dropdown" id="userDropdown">
                     <button class="btn common-btn-style dropdown-toggle" id="userButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span>{{ Session::get('userName') }}</span>
-                        <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" class="user-icon img-fluid" style="margin-left: 5px; filter: invert(100%);">
+                        <img src="{{ asset('images/usuario_r.png') }} " alt="Perfil" class="user-icon img-fluid" style="margin-left: 5px; filter: invert(100%);">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userButton">
                         <a href="{{ route('perfilUsuario.index') }}" class="dropdown-item">Mi Perfil</a>
@@ -393,8 +393,8 @@
             </div>
             @else
             <div class="navbar-text d-flex align-items-center">
-                <a class="btn common-btn-style ml-auto" href="{{ route('register') }}" style="padding: 1em;">Registrarse</a>
-                <a class="btn common-btn-style ml-2" href="{{ route('login') }}" style="padding: 1em;">Iniciar Sesión</a>
+                <a class="btn common-btn-style ml-auto" href="{{ route('register') }}">Registrarse</a>
+                <a class="btn common-btn-style ml-2" href="{{ route('login') }}">Iniciar Sesión</a>
             </div>
             @endif
         </nav>
@@ -442,3 +442,49 @@
 </body>
 
 </html>
+
+
+
+
+
+    <script>
+        window.onload = function() {
+            var image = document.querySelector('.banner img');
+            var areas = document.querySelectorAll('map[name="equiposMap"] area');
+            var numLinks = areas.length;
+            var width = image.clientWidth;
+
+            areas.forEach(function(area, index) {
+                var x1 = Math.round(width * index / numLinks);
+                var x2 = Math.round(width * (index + 1) / numLinks);
+                area.coords = `${x1},0,${x2},47`; // Ajusta la coordenada Y según sea necesario
+            });
+        };
+
+        window.onresize = function() {
+            // Repite el código de ajuste cuando la ventana cambie de tamaño
+            var image = document.querySelector('.banner img');
+            var areas = document.querySelectorAll('map[name="equiposMap"] area');
+            var numLinks = areas.length;
+            var width = image.clientWidth;
+
+            areas.forEach(function(area, index) {
+                var x1 = Math.round(width * index / numLinks);
+                var x2 = Math.round(width * (index + 1) / numLinks);
+                area.coords = `${x1},0,${x2},47`;
+            });
+        };
+
+        function w3_open() {
+            document.getElementById("main").style.marginLeft = "15%";
+            document.getElementById("mySidebar").style.width = "15%";
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("openNav").style.display = 'none';
+        }
+
+        function w3_close() {
+            document.getElementById("main").style.marginLeft = "0%";
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("openNav").style.display = "inline-block";
+        }
+    </script>
