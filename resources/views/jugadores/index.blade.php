@@ -1,6 +1,11 @@
 @extends('layout')
 
 @section('content')
+<div class="jumbotron jumbotron-fluid">
+    <div class="container-fluid">
+        <h1 class="display-4 font-weight-bold text-center" style="font-size: 2.5rem; color:white;">Jugadores de La Liga 2023/24</h1>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
 <!-- Popper.js (Necesario para los dropdowns, tooltips, y popovers en Bootstrap 4) -->
@@ -10,7 +15,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 <div class="container">
-    <h1>Listado de Jugadores</h1>
 
     <!-- Botones desplegables para ordenar -->
     
@@ -32,7 +36,7 @@
     
 <input type="text" id="search" placeholder="Buscar jugadores..." onkeyup="fetchData()" class="form-control mb-3">
     <div class="table-responsive">
-        <table class="table table-striped table-bordered" style="width: 80%; margin: auto;">
+        <table class="table table-striped table-bordered" style="width: 100%; margin: auto;">
             <thead class="thead-dark">
                 <tr>
                     <th>Nombre</th>

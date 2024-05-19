@@ -1,6 +1,11 @@
 @extends('layout')
 
 @section('content')
+<div class="jumbotron jumbotron-fluid">
+    <div class="container-fluid">
+        <h1 class="display-4 font-weight-bold text-center" style="font-size: 2rem; color:white;">Equipos de La Liga 2023/24</h1>
+    </div>
+</div>
 @if (session('success'))
 <div class="alert alert-success">
     {{ session('success') }}

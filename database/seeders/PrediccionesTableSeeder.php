@@ -23,7 +23,7 @@ class PrediccionesTableSeeder extends Seeder
 
         // Iterar sobre cada partido y asignar predicciones a cada usuario
         foreach ($partidos as $partido) {
-            if($partido->id % 2 != 0){
+            if($partido->jornada >= 3 && $partido->jornada <= 7){
                 foreach ($users as $user) {
                     // Generar un número aleatorio entre 0 y 2 para determinar qué voto será 1
                     $randomIndex = rand(0, 2);

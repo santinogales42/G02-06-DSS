@@ -59,7 +59,7 @@
 
             @auth
                 <!-- Condicionales para mostrar el botón de eliminar -->
-                @if (auth()->user()->id == $thread->user_id || (auth()->user()->isAdmin && auth()->user()->id != $thread->user_id))
+                @if (auth()->user()->id == $thread->user_id || (Auth::user()->role->name === 'admin' && auth()->user()->id != $thread->user_id))
                     <button type="button" class="btn btn-danger delete-btn" data-thread-id="{{ $thread->id }}">Eliminar</button>
                 @endif
             @endauth
