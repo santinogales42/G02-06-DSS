@@ -224,6 +224,7 @@ button.icon-link .fa-chevron-down {
 
 .title-container h1,
 .title-logo {
+    margin-right: 10px;
     display: inline-block;
     /* Hace que el logo y el título se muestren en línea */
     vertical-align: middle;
@@ -233,6 +234,7 @@ button.icon-link .fa-chevron-down {
 .title-logo {
     border: 2px solid red;
     margin-right: 20px;
+    margin-left: 10px;
     max-width: 100px; /* Tamaño máximo para logo */
     flex-shrink: 0;
     margin-left: 5px;

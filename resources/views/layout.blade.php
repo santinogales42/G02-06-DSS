@@ -59,11 +59,15 @@
 
         .openbtn {
             font-size: 20px;
+            width: 25px;
             cursor: pointer;
             background-color: transparent;
             color: white;
             padding: 10px 15px;
             border: none;
+            position: absolute;
+            top: 10px; /* Ajuste para mantener el botón en la parte superior */
+            left: 6px; /* Ajuste para mantener el botón en la parte izquierda */
         }
 
         .openbtn:hover {
@@ -101,13 +105,18 @@
         }
 
         .navbar-brand {
-            margin-left: 20px;
+            margin-left: 0px;
+            margin-top: 7px;
             transition: all 0.3s ease;
+            padding: 0.5em 3em;
         }
 
         .navbar-brand img {
             transition: all 0.3s ease;
+            margin-left: 0px;
             display: block;
+            max-width: 100px;
+            height: auto;
         }
 
         .common-btn-style {
@@ -181,6 +190,20 @@
             transition: filter 0.3s ease;
         }
 
+        .title-container h1,
+        .title-logo {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .title-logo {
+            border: 2px solid red;
+            margin-left: 0px; /* Distancia fija del menú de la hamburguesa */
+            margin-right: 20px;
+            max-width: 100px; /* Tamaño máximo para logo */
+            flex-shrink: 0;
+        }
+
         /* Overlay effect */
         .overlay {
             height: 100%;
@@ -215,11 +238,12 @@
             }
 
             .navbar-brand {
-                margin-left: 20px; /* Fixed distance from the hamburger menu */
+                margin-left: 0px; /* Fixed distance from the hamburger menu */
+                padding: 0.5em 2em;
             }
 
             .navbar-brand img {
-                width: 50px;
+                width: 90px;
                 height: auto;
             }
 
@@ -237,19 +261,17 @@
         }
 
         @media (max-width: 576px) {
-
-            
-
             .navbar {
                 height: auto;
             }
 
             .navbar-brand {
-                margin-left: 20px; /* Fixed distance from the hamburger menu */
+                margin-left: 0px; /* Fixed distance from the hamburger menu */
+                padding: 0.5em 2em;
             }
 
             .navbar-brand img {
-                width: 40px;
+                width: 70px;
                 height: auto;
             }
 
@@ -276,7 +298,7 @@
             }
 
             .navbar-brand img {
-                width: 30px;
+                width: 50px;
                 height: auto;
             }
 
@@ -345,11 +367,14 @@
     </div>
 
     <div id="main">
+        
         <nav class="navbar navbar-light">
-            <button class="openbtn" onclick="openNav()">&#9776;</button>
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo img-fluid">
-            </a>
+            <div style="width:27.5%">
+                <button class="openbtn" onclick="openNav()">&#9776;</button>
+                <a class="navbar-brand" href="#">
+                    <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo img-fluid">
+                </a>
+            </div>
             <h1 class="roboto-flex-title flex-grow-1 text-center d-none d-md-block">LALIGA EA SPORTS 2023-24</h1>
             <a href="{{ route('contacto') }}" style="padding: 1em;" class="btn common-btn-style ml-3">Contáctanos</a>
             @if($isUserLoggedIn)
