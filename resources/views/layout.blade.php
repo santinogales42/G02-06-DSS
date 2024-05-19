@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -250,56 +248,24 @@
         </map>
     </div>
 
-    <div class="w3-sidebar w3-card w3-animate-left" style="display:none" id="mySidebar">
-        <div class="SidebarSection">
-            <button class="w3-bar-item w3-button w3-large" style="text-decoration: none; margin-left: 20px; margin-right: 20px; margin-bottom: 40px;" onclick="w3_close()">Close &times;</button>
-
-            <a href="{{ route('home') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-house"></i> Inicio
-            </a>
-            <a href="{{ route('noticias') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-newspaper"></i> Noticias
-            </a>
-            <a href="{{ route('equipos.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-users"></i> Equipos
-            </a>
-            <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-user"></i> Jugadores
-            </a>
-            <a href="{{ route('calendario.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-regular fa-calendar fa-lg"></i> Calendario
-            </a>
-            <a href="{{ route('threads.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-hashtag"></i> Foro
-            </a>
-
-            <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-chart-line"></i> Clasificación
-            </a>
-
-            @auth
-            @if(Auth::check() && (Auth::user()->role->name === 'admin'||Auth::user()->role->name === 'noticiero'||Auth::user()->role->name === 'analista'))
-            <a href="{{ route('admin.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-wrench"></i> Admin
-            </a>
-            @endif
-            @endauth
-    
-            <!-- Enlaces en la parte inferior de la barra lateral -->
-            <div class="SidebarDownSection">
-                <div class="contenedor-imagenes">
-                    <a href="https://www.instagram.com/laliga/" target="_blank">
-                        <img src="{{ asset('images/insta.png') }}" alt="Instagram" class="img-fluid">
-                    </a>
-                    <a href="https://www.facebook.com/LALIGA/?locale=es_ES" target="_blank">
-                        <img src="{{ asset('images/face.png') }}" alt="Facebook" class="img-fluid">
-                    </a>
-                    <a href="https://x.com/LaLiga?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank">
-                        <img src="{{ asset('images/twit.png') }}" alt="Twitter" class="img-fluid">
-                    </a>
-                </div>
-            </div>
-
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="{{ route('home') }}"><i class="fa-solid fa-house"></i> Inicio</a>
+        <a href="{{ route('noticias') }}"><i class="fa-solid fa-newspaper"></i> Noticias</a>
+        <a href="{{ route('equipos.index') }}"><i class="fa-solid fa-users"></i> Equipos</a>
+        <a href="{{ route('jugadores') }}"><i class="fa-solid fa-user"></i> Jugadores</a>
+        <a href="{{ route('calendario.index') }}"><i class="fa-regular fa-calendar fa-lg"></i> Calendario</a>
+        <a href="{{ route('threads.index') }}"><i class="fa-solid fa-hashtag"></i> Foro</a>
+        <a href="{{ route('clasificacion') }}"><i class="fa-solid fa-chart-line"></i> Clasificación</a>
+        @auth
+        @if(Auth::user()->isAdmin)
+        <a href="{{ route('admin.index') }}"><i class="fa-solid fa-wrench"></i> Admin</a>
+        @endif
+        @endauth
+        <div class="contenedor-imagenes">
+            <img src="{{ asset('images/insta.png') }}" alt="Imagen 1" class="img-fluid">
+            <img src="{{ asset('images/face.png') }}" alt="Imagen 2" class="img-fluid">
+            <img src="{{ asset('images/twit.png') }}" alt="Imagen 3" class="img-fluid">
         </div>
     </div>
 
