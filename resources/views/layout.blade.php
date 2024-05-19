@@ -92,7 +92,7 @@
             </a>
             @endif
             @endauth
-    
+
             <!-- Enlaces en la parte inferior de la barra lateral -->
             <div class="SidebarDownSection">
                 <div class="contenedor-imagenes">
@@ -119,24 +119,29 @@
             <h1 class="roboto-flex-title" style="flex-grow: 1; text-align: center;">LALIGA EA SPORTS 2023-24</h1>
             <a href="{{ route('contacto') }}" class=" btn btn-outline-light mr-2 ">Contáctanos</a>
 
-            @if($isUserLoggedIn)
+            @if(Auth::check())
             <div class="navbar-text" style="display: flex; align-items: center;">
                 <div class="w3-dropdown-hover" id="userDropdown">
                     <button class="w3-button w3-bar-item" id="userButton">
-                        <span>{{ Session::get('userName') }}</span>
-                        <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" class="user-icon" class="img-fluid">
+                        <span>{{ Auth::user()->name }}</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="w3-dropdown-content w3-bar-block w3-card" id="dropdownContent-cerrarSesion">
                         <a href="{{ route('perfilUsuario.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Mi Perfil</a>
                         <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button">Favoritos</a>
                         <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button" id="logoutButton">Cerrar sesión</a>
-
                     </div>
+                </div>
+                <!-- Mueve la imagen de perfil fuera del dropdown y alinea el contenido a la derecha -->
+                <div style="margin-left: 10px;">
+                    @if(Auth::user()->profile_picture)
+                    <img src="{{ asset(Auth::user()->profile_picture) }}" alt="Perfil" class="user-icon img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">
+                    @else
+                    <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" class="user-icon img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">
+                    @endif
                 </div>
             </div>
             @else
-
             <div class="navbar-text" style="display: flex; align-items: center;">
                 <a class="btn btn-outline-light ml-auto" href="{{ route('register') }}">Registrarse</a>
                 <a class="btn btn-light ml-2" href="{{ route('login') }}">Iniciar Sesión</a>
