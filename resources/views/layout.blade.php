@@ -393,8 +393,8 @@
             </div>
             @else
             <div class="navbar-text d-flex align-items-center">
-                <a class="btn common-btn-style ml-auto" href="{{ route('register') }}">Registrarse</a>
-                <a class="btn common-btn-style ml-2" href="{{ route('login') }}">Iniciar Sesión</a>
+                <a class="btn common-btn-style ml-3" style="padding: 1em;" href="{{ route('register') }}">Registrarse</a>
+                <a class="btn common-btn-style ml-3" style="padding: 1em;" href="{{ route('login') }}">Iniciar Sesión</a>
             </div>
             @endif
         </nav>
