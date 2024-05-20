@@ -360,6 +360,15 @@
         <a href="{{ route('admin.index') }}"><i class="fa-solid fa-wrench"></i> Admin</a>
         @endif
         @endauth
+
+        @auth
+            @if(Auth::check() && (Auth::user()->role->name === 'admin'||Auth::user()->role->name === 'noticiero'||Auth::user()->role->name === 'analista'))
+            <a href="{{ route('admin.index') }}"  style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
+                <i class="fa-solid fa-wrench"></i> Admin
+            </a>
+            @endif
+        @endauth
+
         <div class="contenedor-imagenes">
             <img src="{{ asset('images/insta.png') }}" alt="Imagen 1" class="img-fluid">
             <img src="{{ asset('images/face.png') }}" alt="Imagen 2" class="img-fluid">
