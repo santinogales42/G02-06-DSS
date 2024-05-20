@@ -59,7 +59,7 @@
 
         .openbtn {
             font-size: 20px;
-            width: 25px;
+            width: 40px;
             cursor: pointer;
             background-color: transparent;
             color: white;
@@ -103,9 +103,11 @@
             display: flex;
             justify-content: space-between;
             padding: 0.5rem 1rem;
+            flex-wrap: wrap; /* Para permitir que los elementos se muevan a la siguiente línea */
         }
 
         .navbar-brand {
+            width: 35px;
             margin-left: 0px;
             margin-top: 7px;
             transition: all 0.3s ease;
@@ -121,6 +123,7 @@
         }
 
         .common-btn-style {
+            
             font-size: 15px;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -259,6 +262,15 @@
                 padding: 0.5em 1em;
                 height: auto;
             }
+
+            .navbar-text.d-flex {
+                flex-direction: column; /* Cambia la dirección del flex a columna */
+                align-items: flex-start; /* Alinea los elementos al inicio de la columna */
+            }
+
+            .navbar-text.d-flex .btn {
+                margin-top: 0.5rem; /* Espacio entre los botones en la columna */
+            }
         }
 
         @media (max-width: 576px) {
@@ -356,12 +368,6 @@
         <a href="{{ route('threads.index') }}"><i class="fa-solid fa-hashtag"></i> Foro</a>
         <a href="{{ route('clasificacion') }}"><i class="fa-solid fa-chart-line"></i> Clasificación</a>
         @auth
-        @if(Auth::user()->isAdmin)
-        <a href="{{ route('admin.index') }}"><i class="fa-solid fa-wrench"></i> Admin</a>
-        @endif
-        @endauth
-
-        @auth
             @if(Auth::check() && (Auth::user()->role->name === 'admin'||Auth::user()->role->name === 'noticiero'||Auth::user()->role->name === 'analista'))
             <a href="{{ route('admin.index') }}"  style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
                 <i class="fa-solid fa-wrench"></i> Admin
@@ -385,27 +391,29 @@
                 </a>
             </div>
             <h1 class="roboto-flex-title flex-grow-1 text-center d-none d-md-block">LALIGA EA SPORTS 2023-24</h1>
-            <a href="{{ route('contacto') }}" style="padding: 1em;"class="btn common-btn-style ml-3">Contáctanos</a>
-            @if($isUserLoggedIn)
-            <div class="navbar-text d-flex align-items-center dropdown-admin">
-                <div class="dropdown" id="userDropdown">
-                    <button class="btn common-btn-style dropdown-toggle" id="userButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>{{ Session::get('userName') }}</span>
-                        <img src="{{ asset('images/usuario_r.png') }} " alt="Perfil" class="user-icon img-fluid" style="margin-left: 5px; filter: invert(100%);">
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userButton">
-                        <a href="{{ route('perfilUsuario.index') }}" class="dropdown-item">Mi Perfil</a>
-                        <a href="{{ route('favoritos.index') }}" class="dropdown-item">Favoritos</a>
-                        <a href="{{ route('confirmar.cerrar.sesion') }}" class="dropdown-item" id="logoutButton">Cerrar sesión</a>
+            <div class="d-flex flex-column flex-md-row align-items-md-center">
+                <a href="{{ route('contacto') }}" style="padding: 1em;" class="btn common-btn-style ml-3">Contáctanos</a>
+                @if($isUserLoggedIn)
+                <div class="navbar-text d-flex align-items-center dropdown-admin">
+                    <div class="dropdown" id="userDropdown">
+                        <button class="btn common-btn-style dropdown-toggle" id="userButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>{{ Session::get('userName') }}</span>
+                            <img src="{{ asset('images/usuario_r.png') }} " alt="Perfil" class="user-icon img-fluid" style="margin-left: 5px; filter: invert(100%);">
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userButton">
+                            <a href="{{ route('perfilUsuario.index') }}" class="dropdown-item">Mi Perfil</a>
+                            <a href="{{ route('favoritos.index') }}" class="dropdown-item">Favoritos</a>
+                            <a href="{{ route('confirmar.cerrar.sesion') }}" class="dropdown-item" id="logoutButton">Cerrar sesión</a>
+                        </div>
                     </div>
                 </div>
+                @else
+                <div class="navbar-text d-flex align-items-center flex-column">
+                    <a class="btn common-btn-style ml-auto" href="{{ route('register') }}" style="padding: 1em;">Registrarse</a>
+                    <a class="btn common-btn-style ml-2" href="{{ route('login') }}" style="padding: 1em;">Iniciar Sesión</a>
+                </div>
+                @endif
             </div>
-            @else
-            <div class="navbar-text d-flex align-items-center">
-                <a class="btn common-btn-style ml-3" style="padding: 1em;" href="{{ route('register') }}">Registrarse</a>
-                <a class="btn common-btn-style ml-3" style="padding: 1em;" href="{{ route('login') }}">Iniciar Sesión</a>
-            </div>
-            @endif
         </nav>
 
         <div class="content container mt-4">
@@ -451,49 +459,3 @@
 </body>
 
 </html>
-
-
-
-
-
-    <script>
-        window.onload = function() {
-            var image = document.querySelector('.banner img');
-            var areas = document.querySelectorAll('map[name="equiposMap"] area');
-            var numLinks = areas.length;
-            var width = image.clientWidth;
-
-            areas.forEach(function(area, index) {
-                var x1 = Math.round(width * index / numLinks);
-                var x2 = Math.round(width * (index + 1) / numLinks);
-                area.coords = `${x1},0,${x2},47`; // Ajusta la coordenada Y según sea necesario
-            });
-        };
-
-        window.onresize = function() {
-            // Repite el código de ajuste cuando la ventana cambie de tamaño
-            var image = document.querySelector('.banner img');
-            var areas = document.querySelectorAll('map[name="equiposMap"] area');
-            var numLinks = areas.length;
-            var width = image.clientWidth;
-
-            areas.forEach(function(area, index) {
-                var x1 = Math.round(width * index / numLinks);
-                var x2 = Math.round(width * (index + 1) / numLinks);
-                area.coords = `${x1},0,${x2},47`;
-            });
-        };
-
-        function w3_open() {
-            document.getElementById("main").style.marginLeft = "15%";
-            document.getElementById("mySidebar").style.width = "15%";
-            document.getElementById("mySidebar").style.display = "block";
-            document.getElementById("openNav").style.display = 'none';
-        }
-
-        function w3_close() {
-            document.getElementById("main").style.marginLeft = "0%";
-            document.getElementById("mySidebar").style.display = "none";
-            document.getElementById("openNav").style.display = "inline-block";
-        }
-    </script>

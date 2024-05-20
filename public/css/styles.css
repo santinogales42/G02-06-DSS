@@ -27,6 +27,36 @@
     z-index: 1000; /* Asegura que el desplegable esté sobre otros elementos */
 }
 
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+    }
+    .title-logo, .roboto-flex-title, .navbar-text {
+        width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+        text-align: center;
+    }
+    .title-logo {
+        margin-bottom: 10px; /* Espacio adicional debajo del logo en pantallas pequeñas */
+    }
+}
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .icon-link i {
+        font-size: 1.2em; /* Tamaño más pequeño en dispositivos móviles */
+    }
+    .icon-link {
+        font-size: 16px; /* Tamaño de texto más pequeño en pantallas pequeñas */
+    }
+}
+
+@media (min-width: 769px) {
+    .icon-link i {
+        font-size: 1.5em; /* Tamaño más grande en pantallas grandes */
+    }
+    .icon-link {
+        font-size: 20px; /* Tamaño de texto más grande en pantallas grandes */
+    }
+}
 .w3-sidebar {
     background-color: #ff3823 !important;
     position: relative;
@@ -224,7 +254,6 @@ button.icon-link .fa-chevron-down {
 
 .title-container h1,
 .title-logo {
-    margin-right: 10px;
     display: inline-block;
     /* Hace que el logo y el título se muestren en línea */
     vertical-align: middle;
@@ -232,12 +261,10 @@ button.icon-link .fa-chevron-down {
 }
 
 .title-logo {
-    border: 2px solid red;
+    border: 2px solid #ff3823;
     margin-right: 20px;
-    margin-left: 10px;
     max-width: 100px; /* Tamaño máximo para logo */
     flex-shrink: 0;
-    margin-left: 5px;
 }
 
 .noticias-1 {
@@ -401,20 +428,15 @@ button.icon-link .fa-chevron-down {
 
 /*Estilo dropdown cerrar sesion*/
 #userDropdown {
-    background-color: #ff3823;
+    background-color: transparent;
     color: white;
 }
-/*
+
 #userButton {
-    display: flex;
-    align-items: center;
-    border: 1px solid #000000;
-    color: #000000;
-    background-color: #d9534f;
-    padding: 0.375rem 0.75rem;
-    border-radius: 0.25rem;
+    background-color: transparent;
+    color: rgb(0, 0, 0);
 }
-*/
+
 #dropdownContent-cerrarSesion {
     background-color: #ff3823;
 }
@@ -435,16 +457,15 @@ button.icon-link .fa-chevron-down {
 } 
 
 #userDropdown:hover {
-    background-color: #ff3823 ; 
-/*
-#userButton:hover,
-        #userButton:focus {
-            color: #ffffff;
-            background-color: #fd3c35;
-            border-color: #1b1e20;
-        }
+    background-color: #ff3823 ; /* Mantiene el color de fondo al pasar el ratón */
+}
 
-*/
+#userButton:hover {
+    background-color: transparent; /* Mantiene el color de fondo al pasar el ratón */
+    color: #ff3823;
+}
+
+
 /*CRUD USUARIOS*/
 .tarjeta-agregar-usuarios {
     border-color: #ff3823 !important;
@@ -933,4 +954,4 @@ button.icon-link .fa-chevron-down {
     font-size: x-large !important;
     margin-top: 25px;
     margin-left: 25px;
-}}
+}
