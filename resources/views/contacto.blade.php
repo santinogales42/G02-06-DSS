@@ -9,7 +9,7 @@
             <div class="tarjeta rounded-lg shadow-sm bg-rojo-pastel">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                             <h1 class="text-center mb-4">Cuéntanos tu problema</h1>
                             @if(session('success'))
                                 <div class="alert alert-success">
@@ -33,14 +33,11 @@
                                 <button type="submit" class="btn boton-enviar-mensaje">Enviar mensaje</button>
                             </form>
                         </div>
-                        <div class="col-md-6">
-                            <div class="d-md-none mb-3"></div>
-                            <div class="d-none d-md-block border-left ml-md-3 pl-md-3">
-                                <h2 class="text-center mb-4">Ubicación</h2>
-                                <p>123 Calle Principal, Ciudad, País</p>
-                                <div id="map" style="height: 300px; padding: 10px;"></div>
-                                <p class="mt-3">Nuestro correo: ejemplo@example.com</p> <!-- Correo electrónico -->
-                            </div>
+                        <div class="col-lg-6 d-flex flex-column justify-content-center border-left pl-lg-4 mt-4 mt-lg-0">
+                            <h2 class="text-center mb-4">Ubicación</h2>
+                            <p class="text-center">123 Calle Principal, Ciudad, País</p>
+                            <div id="map" style="height: 300px; padding: 10px;"></div>
+                            <p class="text-center mt-3">Nuestro correo: ejemplo@example.com</p>
                         </div>
                     </div>
                 </div>
