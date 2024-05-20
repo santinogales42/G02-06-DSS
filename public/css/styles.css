@@ -261,7 +261,7 @@ button.icon-link .fa-chevron-down {
 }
 
 .title-logo {
-    border: 2px solid red;
+    border: 2px solid #ff3823;
     margin-right: 20px;
     max-width: 100px; /* Tamaño máximo para logo */
     flex-shrink: 0;
@@ -428,13 +428,13 @@ button.icon-link .fa-chevron-down {
 
 /*Estilo dropdown cerrar sesion*/
 #userDropdown {
-    background-color: #ff3823;
+    background-color: transparent;
     color: white;
 }
 
 #userButton {
-    background-color: #ff3823;
-    color: white;
+    background-color: transparent;
+    color: rgb(0, 0, 0);
 }
 
 #dropdownContent-cerrarSesion {
@@ -461,7 +461,8 @@ button.icon-link .fa-chevron-down {
 }
 
 #userButton:hover {
-    background-color: #ff3823; /* Mantiene el color de fondo al pasar el ratón */
+    background-color: transparent; /* Mantiene el color de fondo al pasar el ratón */
+    color: #ff3823;
 }
 
 
