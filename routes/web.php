@@ -26,7 +26,7 @@ use App\Http\Controllers\ThreadController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
+
 Route::get('/calendario/{jornada?}', [CalendarioController::class, 'index'])->name('calendario.index');
 Route::get('/calendario/{equipo}/show', [CalendarioController::class, 'show'])->name('calendario.show');
 Route::get('/partidos/{id}', [CalendarioController::class, 'showEstadisticas'])->name('partidos');
@@ -166,5 +166,6 @@ Route::post('/equipos/{equipo}/favorito', [EquipoController::class, 'agregarFavo
 Route::delete('/equipos/{equipo}/favorito', [EquipoController::class, 'eliminarFavorito'])->name('equipos.eliminarFavorito');
 
 //Rutas noticias
-Route::get('/noticias/{id}', [AdminNoticiasController::class, 'getDatos'])->name('jugadores.show');
-Route::get('/noticias/equipo/{id}', [AdminNoticiasController::class, 'getEquipoName']);
+Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
+Route::get('/noticias/{id}', [NoticiasController::class, 'getDatos'])->name('noticias.show');
+Route::get('/noticias/equipo/{id}', [NoticiasController::class, 'getEquipoName'])->name('noticias.getEquipoName');
