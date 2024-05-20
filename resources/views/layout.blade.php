@@ -214,7 +214,7 @@
             </div>
             <h1 class="roboto-flex-title flex-grow-1 text-center d-none d-md-block">LALIGA EA SPORTS 2023-24</h1>
             <div class="d-flex flex-column flex-md-row align-items-md-center">
-                <a href="{{ route('contacto') }}" style="padding: 1em;" class="btn common-btn-style ml-3">Contáctanos</a>
+                <a href="{{ route('contacto') }}" style="padding: 1em; margin-top: 5px;" class="btn common-btn-style ml-3">Contáctanos</a>
                 @if($isUserLoggedIn)
                 <div class="navbar-text d-flex align-items-center dropdown-admin">
                     <div class="dropdown" id="userDropdown">
@@ -231,8 +231,8 @@
                 </div>
                 @else
                 <div class="navbar-text d-flex align-items-center flex-column">
-                    <a class="btn common-btn-style ml-auto" href="{{ route('register') }}" style="padding: 1em;">Registrarse</a>
-                    <a class="btn common-btn-style ml-2" href="{{ route('login') }}" style="padding: 1em;">Iniciar Sesión</a>
+                    <a class="btn common-btn-style ml-auto" href="{{ route('register') }}" style="padding: 1em; margin-top: 5px;">Registrarse</a>
+                    <a class="btn common-btn-style ml-2" href="{{ route('login') }}" style="padding: 1em; margin-top: 5px;">Iniciar Sesión</a>
                 </div>
                 @endif
             </div>
