@@ -1,5 +1,7 @@
 /* Estilos existentes */
 
+
+
 .w3-teal {
     background-color: #ff3823 !important;
     position: relative;
@@ -27,36 +29,7 @@
     z-index: 1000; /* Asegura que el desplegable esté sobre otros elementos */
 }
 
-@media (max-width: 600px) {
-    .header {
-        flex-direction: column;
-    }
-    .title-logo, .roboto-flex-title, .navbar-text {
-        width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
-        text-align: center;
-    }
-    .title-logo {
-        margin-bottom: 10px; /* Espacio adicional debajo del logo en pantallas pequeñas */
-    }
-}
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .icon-link i {
-        font-size: 1.2em; /* Tamaño más pequeño en dispositivos móviles */
-    }
-    .icon-link {
-        font-size: 16px; /* Tamaño de texto más pequeño en pantallas pequeñas */
-    }
-}
 
-@media (min-width: 769px) {
-    .icon-link i {
-        font-size: 1.5em; /* Tamaño más grande en pantallas grandes */
-    }
-    .icon-link {
-        font-size: 20px; /* Tamaño de texto más grande en pantallas grandes */
-    }
-}
 .w3-sidebar {
     background-color: #ff3823 !important;
     position: relative;
@@ -1090,109 +1063,35 @@ button.icon-link .fa-chevron-down {
     z-index: 1;
 }
 
-@media (min-width: 769px) {
-    .sidebar {
-        left: 0;
-        width: 250px;
-    }
 
-    #main {
-        margin-left: 250px;
-    }
 
-    .overlay {
-        display: none;
-    }
+.common-btn-style:before {
+    
+    transition: 0.5s all ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: '';
+    background-color: white;
+    z-index: -1;
 }
 
-@media (max-width: 768px) {
-    .navbar {
-        height: auto;
-    }
 
-    .navbar-brand {
-        margin-left: 0px; /* Fixed distance from the hamburger menu */
-        padding: 0.5em 2em;
-    }
 
-    .navbar-brand img {
-        width: 90px;
-        height: auto;
-    }
-
-    .common-btn-style {
-        font-size: 12px;
-        padding: 0.5em 1em;
-        height: auto;
-    }
-
-    .dropdown-admin .dropdown-toggle {
-        font-size: 12px;
-        padding: 0.5em 1em;
-        height: auto;
-    }
-
-    .navbar-text.d-flex {
-        flex-direction: column; /* Cambia la dirección del flex a columna */
-        align-items: flex-start; /* Alinea los elementos al inicio de la columna */
-    }
-
-    .navbar-text.d-flex .btn {
-        margin-top: 0.5rem; /* Espacio entre los botones en la columna */
-    }
+.common-btn-style:hover:before, .common-btn-style:focus:before {
+    
+    transition: 0.5s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
+    border-radius: 12px;
 }
 
-@media (max-width: 576px) {
-    .navbar {
-        height: auto;
-    }
-
-    .navbar-brand {
-        margin-left: 0px; /* Fixed distance from the hamburger menu */
-        padding: 0.5em 2em;
-    }
-
-    .navbar-brand img {
-        width: 70px;
-        height: auto;
-    }
-
-    .common-btn-style {
-        font-size: 10px;
-        padding: 0.4em 0.8em;
-        height: auto;
-    }
-
-    .dropdown-admin .dropdown-toggle {
-        font-size: 10px;
-        padding: 0.4em 0.8em;
-        height: auto;
-    }
+.common-btn-style:active {
+    transform: scale(0.9);
 }
 
-@media (max-width: 480px) {
-    .navbar {
-        height: auto;
-    }
 
-    .navbar-brand {
-        margin-left: 10px; /* Fixed distance from the hamburger menu */
-    }
-
-    .navbar-brand img {
-        width: 50px;
-        height: auto;
-    }
-
-    .common-btn-style {
-        font-size: 8px;
-        padding: 0.3em 0.6em;
-        height: auto;
-    }
-
-    .dropdown-admin .dropdown-toggle {
-        font-size: 8px;
-        padding: 0.3em 0.6em;
-        height: auto;
-    }
-}

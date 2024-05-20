@@ -19,10 +19,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
 
-
-
         .common-btn-style {
-            
             font-size: 15px;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -42,35 +39,9 @@
             height: 55px;
         }
 
-        .common-btn-style:before {
-            transition: 0.5s all ease;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            right: 50%;
-            bottom: 0;
-            opacity: 0;
-            content: '';
-            background-color: white;
-            z-index: -1;
-        }
-
         .common-btn-style:hover, .common-btn-style:focus {
             color: #ff3823;
         }
-
-        .common-btn-style:hover:before, .common-btn-style:focus:before {
-            transition: 0.5s all ease;
-            left: 0;
-            right: 0;
-            opacity: 1;
-            border-radius: 12px;
-        }
-
-        .common-btn-style:active {
-            transform: scale(0.9);
-        }
-
 
         @media (min-width: 769px) {
             .sidebar {
