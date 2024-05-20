@@ -15,8 +15,8 @@
                             <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
                         </div>
                         <div class="form-group">
-                            <label for="email">Nuevo email:</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" readonly style="background-color: white">
                         </div>
                         <div class="form-group">
                             <label for="password">Nueva Contraseña:</label>

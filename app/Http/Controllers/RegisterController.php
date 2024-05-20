@@ -30,7 +30,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', new CustomEmailRule],
             'password' => 'required|string|min:8',
             'password_confirmation' => 'required|string|same:password',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validar imagen
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar imagen
         ];
 
         $messages = [

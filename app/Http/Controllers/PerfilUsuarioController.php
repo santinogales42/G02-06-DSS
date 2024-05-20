@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Session;
 
 class PerfilUsuarioController extends Controller
 {
@@ -35,26 +35,26 @@ class PerfilUsuarioController extends Controller
             'password_confirmation' => 'nullable|string|same:password',
         ]);
 
+        // Redirecciona de vuelta con mensaje de éxito o errores de validación
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         // Asigna los valores al modelo User si se proporcionan
         if ($request->has('name')) {
             $user->name = $request->name;
         }
 
-        if ($request->has('email')) {
-            $user->email = $request->email;
-        }
 
-        if ($request->has('password')) {
+        if ($request->has('password') && $request->password != null) {
             $user->password = bcrypt($request->password);
         }
 
         // Guarda el usuario en la base de datos
         $user->save();
+        Session::put('userName', Auth::user()->name);
+        Auth::login($user);
 
-        // Redirecciona de vuelta con mensaje de éxito o errores de validación
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         return redirect()->route('perfilUsuario.index')->with('success', 'Perfil actualizado correctamente');
     }
