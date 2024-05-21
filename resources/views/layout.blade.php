@@ -4,194 +4,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LALIGA EA SPORTS 2023-24</title>
+    <title> LALIGA EA SPORTS 2023-24 </title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hurricane&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-
-    <!-- Incluir Bootstrap JS (asegúrate de que coincida con la versión de Bootstrap CSS) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .common-btn-style {
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            text-align: center;
+            font-weight: bold;
+            padding: 0.8em 1.3em;
+            border: 3px solid black;
+            border-radius: 2px;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+            color: black;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1;
+            border-radius: 15px;
+            height: 55px;
+        }
 
+        .common-btn-style:hover,
+        .common-btn-style:focus {
+            color: #ff3823;
+        }
+
+        @media (min-width: 769px) {
+            .sidebar {
+                left: 0;
+                width: 250px;
+            }
+
+            #main {
+                margin-left: 250px;
+            }
+
+            .overlay {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                height: auto;
+            }
+
+            .navbar-brand {
+                margin-left: 0px;
+                /* Fixed distance from the hamburger menu */
+                padding: 0.5em 2em;
+            }
+
+            .navbar-brand img {
+                width: 90px;
+                height: auto;
+            }
+
+            .common-btn-style {
+                font-size: 12px;
+                padding: 0.5em 1em;
+                height: auto;
+            }
+
+            .dropdown-admin .dropdown-toggle {
+                font-size: 12px;
+                padding: 0.5em 1em;
+                height: auto;
+            }
+
+            .navbar-text.d-flex {
+                flex-direction: column;
+                /* Cambia la dirección del flex a columna */
+                align-items: flex-start;
+                /* Alinea los elementos al inicio de la columna */
+            }
+
+            .navbar-text.d-flex .btn {
+                margin-top: 0.5rem;
+                /* Espacio entre los botones en la columna */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                height: auto;
+            }
+
+            .navbar-brand {
+                margin-left: 0px;
+                /* Fixed distance from the hamburger menu */
+                padding: 0.5em 2em;
+            }
+
+            .navbar-brand img {
+                width: 70px;
+                height: auto;
+            }
+
+            .common-btn-style {
+                font-size: 10px;
+                padding: 0.4em 0.8em;
+                height: auto;
+            }
+
+            .dropdown-admin .dropdown-toggle {
+                font-size: 10px;
+                padding: 0.4em 0.8em;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                height: auto;
+            }
+
+            .navbar-brand {
+                margin-left: 10px;
+                /* Fixed distance from the hamburger menu */
+            }
+
+            .navbar-brand img {
+                width: 50px;
+                height: auto;
+            }
+
+            .common-btn-style {
+                font-size: 8px;
+                padding: 0.3em 0.6em;
+                height: auto;
+            }
+
+            .dropdown-admin .dropdown-toggle {
+                font-size: 8px;
+                padding: 0.3em 0.6em;
+                height: auto;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="banner">
+    <div class="overlay" id="overlay" onclick="closeNav()"></div>
+    <div class="banner container-fluid p-0 map-container">
         <img src="{{ asset('images/tims.png') }}" alt="Banner" class="img-fluid" usemap="#equiposMap" style="width:100%;">
         <map name="equiposMap">
-            <area shape="rect" href="https://www.athletic-club.eus/" alt="AthleticClub" target="_blank">
-            <area shape="rect" href="https://www.atleticodemadrid.com/" alt="AtleticoMadrid" target="_blank">
-            <area shape="rect" href="https://www.osasuna.es/" alt="Osasuna" target="_blank">
-            <area shape="rect" href="https://www.cadizcf.com/" alt="Cadiz" target="_blank">
-            <area shape="rect" href="https://www.deportivoalaves.com/es/" alt="Alaves" target="_blank">
-            <area shape="rect" href="https://www.fcbarcelona.es/es/" alt="Bcn" target="_blank">
-            <area shape="rect" href="https://www.getafecf.com/" alt="Getafe" target="_blank">
-            <area shape="rect" href="https://www.gironafc.cat/es" alt="Girona" target="_blank">
-            <area shape="rect" href="https://www.granadacf.es/" alt="Granada" target="_blank">
-            <area shape="rect" href="https://www.rayovallecano.es" alt="Rayo" target="_blank">
-            <area shape="rect" href="https://rccelta.es/" alt="Celta" target="_blank">
-            <area shape="rect" href="https://www.rcdmallorca.es/" alt="Mallorca" target="_blank">
-            <area shape="rect" href="https://www.realbetisbalompie.es/" alt="Betis" target="_blank">
-            <area shape="rect" href="https://www.realmadrid.com/es-ES" alt="Madrid" target="_blank">
-            <area shape="rect" href="https://www.realsociedad.eus/" alt="RealSociedad" target="_blank">
-            <area shape="rect" href="https://sevillafc.es/" alt="Sevilla" target="_blank">
-            <area shape="rect" href="https://www.udalmeriasad.com/" alt="Almeria" target="_blank">
-            <area shape="rect" href="https://www.udlaspalmas.es/" alt="LasPalmas" target="_blank">
-            <area shape="rect" href="https://www.valenciacf.com/" alt="Valencia" target="_blank">
-            <area shape="rect" href="https://villarrealcf.es/" alt="Villarreal" target="_blank">
+            <area shape="rect" coords="50,50,150,150" href="https://www.athletic-club.eus/" alt="AthleticClub" target="_blank">
+            <area shape="rect" coords="160,50,260,150" href="https://www.atleticodemadrid.com/" alt="AtleticoMadrid" target="_blank">
+            <area shape="rect" coords="270,50,370,150" href="https://www.osasuna.es/" alt="Osasuna" target="_blank">
+            <area shape="rect" coords="380,50,480,150" href="https://www.cadizcf.com/" alt="Cadiz" target="_blank">
+            <area shape="rect" coords="490,50,590,150" href="https://www.deportivoalaves.com/es/" alt="Alaves" target="_blank">
+            <area shape="rect" coords="600,50,700,150" href="https://www.fcbarcelona.es/es/" alt="Bcn" target="_blank">
+            <area shape="rect" coords="710,50,810,150" href="https://www.getafecf.com/" alt="Getafe" target="_blank">
+            <area shape="rect" coords="820,50,920,150" href="https://www.gironafc.cat/es" alt="Girona" target="_blank">
+            <area shape="rect" coords="930,50,1030,150" href="https://www.granadacf.es/" alt="Granada" target="_blank">
+            <area shape="rect" coords="1040,50,1140,150" href="https://www.rayovallecano.es" target="_blank">
+            <area shape="rect" coords="1150,50,1250,150" href="https://rccelta.es/" alt="Celta" target="_blank">
+            <area shape="rect" coords="1260,50,1360,150" href="https://www.rcdmallorca.es/" alt="Mallorca" target="_blank">
+            <area shape="rect" coords="1370,50,1470,150" href="https://www.realbetisbalompie.es/" alt="Betis" target="_blank">
+            <area shape="rect" coords="1480,50,1580,150" href="https://www.realmadrid.com/es-ES" alt="Madrid" target="_blank">
+            <area shape="rect" coords="1590,50,1690,150" href="https://www.realsociedad.eus/" alt="RealSociedad" target="_blank">
+            <area shape="rect" coords="1700,50,1800,150" href="https://sevillafc.es/" alt="Sevilla" target="_blank">
+            <area shape="rect" coords="1810,50,1910,150" href="https://www.udalmeriasad.com/" alt="Almeria" target="_blank">
+            <area shape="rect" coords="1920,50,2020,150" href="https://www.udlaspalmas.es/" alt="LasPalmas" target="_blank">
+            <area shape="rect" coords="2030,50,2130,150" href="https://www.valenciacf.com/" alt="Valencia" target="_blank">
+            <area shape="rect" coords="2140,50,2240,150" href="https://villarrealcf.es/" alt="Villarreal" target="_blank">
         </map>
-
     </div>
 
-    <div class="w3-sidebar w3-card w3-animate-left" style="display:none" id="mySidebar">
-        <div class="SidebarSection">
-            <button class="w3-bar-item w3-button w3-large" style="text-decoration: none; margin-left: 20px; margin-right: 20px; margin-bottom: 40px;" onclick="w3_close()">Close &times;</button>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="{{ route('home') }}"><i class="fa-solid fa-house"></i> Inicio</a>
+        <a href="{{ route('noticias') }}"><i class="fa-solid fa-newspaper"></i> Noticias</a>
+        <a href="{{ route('equipos.index') }}"><i class="fa-solid fa-users"></i> Equipos</a>
+        <a href="{{ route('jugadores') }}"><i class="fa-solid fa-user"></i> Jugadores</a>
+        <a href="{{ route('calendario.index') }}"><i class="fa-regular fa-calendar fa-lg"></i> Calendario</a>
+        <a href="{{ route('threads.index') }}"><i class="fa-solid fa-hashtag"></i> Foro</a>
+        <a href="{{ route('clasificacion') }}"><i class="fa-solid fa-chart-line"></i> Clasificación</a>
+        @auth
+        @if(Auth::check() && (Auth::user()->role->name === 'admin'||Auth::user()->role->name === 'noticiero'||Auth::user()->role->name === 'analista'))
+        <a href="{{ route('admin.index') }}" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
+            <i class="fa-solid fa-wrench"></i> Admin
+        </a>
+        @endif
+        @endauth
 
-            <a href="{{ route('home') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-house"></i> Inicio
+        <div class="contenedor-imagenes">
+            <a href="https://www.instagram.com/laliga/" target="_blank">
+                <img src="{{ asset('images/insta.png') }}" altt"Instagram" class="img-fluid">
             </a>
-            <a href="{{ route('noticias') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-newspaper"></i> Noticias
+            <a href="https://www.facebook.com/LALIGA/?locale=es_ES" target="_blank">
+                <img src="{{ asset('images/face.png') }}" alt="Facebook" class="img-fluid">
             </a>
-            <a href="{{ route('equipos.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-users"></i> Equipos
+            <a href="https://x.com/LaLiga?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank">
+                <img src="{{ asset('images/twit.png') }}" alt="Twitter" class="img-fluid">
             </a>
-            <a href="{{ route('jugadores') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-user"></i> Jugadores
-            </a>
-            <a href="{{ route('calendario.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-regular fa-calendar fa-lg"></i> Calendario
-            </a>
-            <a href="{{ route('threads.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-hashtag"></i> Foro
-            </a>
-
-            <a href="{{ route('clasificacion') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-chart-line"></i> Clasificación
-            </a>
-
-            @auth
-            @if(Auth::check() && (Auth::user()->role->name === 'admin'||Auth::user()->role->name === 'noticiero'||Auth::user()->role->name === 'analista'))
-            <a href="{{ route('admin.index') }}" class="w3-bar-item w3-button icon-link" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-wrench"></i> Admin
-            </a>
-            @endif
-            @endauth
-
-            <!-- Enlaces en la parte inferior de la barra lateral -->
-            <div class="SidebarDownSection">
-                <div class="contenedor-imagenes">
-                    <a href="https://www.instagram.com/laliga/" target="_blank">
-                        <img src="{{ asset('images/insta.png') }}" alt="Instagram" class="img-fluid">
-                    </a>
-                    <a href="https://www.facebook.com/LALIGA/?locale=es_ES" target="_blank">
-                        <img src="{{ asset('images/face.png') }}" alt="Facebook" class="img-fluid">
-                    </a>
-                    <a href="https://x.com/LaLiga?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank">
-                        <img src="{{ asset('images/twit.png') }}" alt="Twitter" class="img-fluid">
-                    </a>
-                </div>
-            </div>
-
         </div>
-
     </div>
 
     <div id="main">
-        <header class="w3-teal" style="display: flex; align-items: center; padding: 0 15px;">
-            <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
-            <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo" style="border: 2px solid red; margin-right: 20px; flex-shrink: 0;">
-            <h1 class="roboto-flex-title" style="flex-grow: 1; text-align: center;">LALIGA EA SPORTS 2023-24</h1>
-            <a href="{{ route('contacto') }}" class=" btn btn-outline-light mr-2 ">Contáctanos</a>
-
-            @if(Auth::check())
-            <div class="navbar-text" style="display: flex; align-items: center;">
-                <div class="w3-dropdown-hover" id="userDropdown">
-                    <button class="w3-button w3-bar-item" id="userButton">
-                        <span>{{ Auth::user()->name }}</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="w3-dropdown-content w3-bar-block w3-card" id="dropdownContent-cerrarSesion">
-                        <a href="{{ route('perfilUsuario.index') }}" class="w3-bar-item w3-button" style="text-decoration: none;">Mi Perfil</a>
-                        <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button">Favoritos</a>
-                        <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button" id="logoutButton">Cerrar sesión</a>
+        <nav class="navbar navbar-light">
+            <div style="width:27.5%">
+                <button class="openbtn" onclick="openNav()">&#9776;</button>
+                <a class="navbar-brand" href="#">
+                    <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo img-fluid">
+                </a>
+            </div>
+            <h1 class="roboto-flex-title flex-grow-1 text-center d-none d-md-block" style="color:white" >LALIGA EA SPORTS 2023-24</h1>
+            <div class="d-flex flex-column flex-md-row align-items-md-center">
+                <a href="{{ route('contacto') }}" style="padding: 1em; margin-top: 5px;" class="btn common-btn-style ml-3">Contáctanos</a>
+                @if($isUserLoggedIn)
+                <div class="navbar-text d-flex align-items-center dropdown-admin">
+                    <div class="dropdown" id="userDropdown">
+                        <button class="btn common-btn-style dropdown-toggle" id="userButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>{{ Session::get('userName') }}</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userButton">
+                            <a href="{{ route('perfilUsuario.index') }}" class="dropdown-item">Mi Perfil</a>
+                            <a href="{{ route('favoritos.index') }}" class="dropdown-item">Favoritos</a>
+                            <a href="{{ route('confirmar.cerrar.sesion') }}" class="dropdown-item" id="logoutButton">Cerrar sesión</a>
+                        </div>
                     </div>
-                </div>
-                <!-- Mueve la imagen de perfil fuera del dropdown y alinea el contenido a la derecha -->
-                <div style="margin-left: 10px;">
+                    <div style="margin-left: 10px;">
                     @if(Auth::user()->profile_picture)
                     <img src="{{ asset(Auth::user()->profile_picture) }}" alt="Perfil" class="user-icon img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">
                     @else
                     <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" class="user-icon img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">
                     @endif
                 </div>
+                </div>
+                @else
+                <div class="navbar-text d-flex align-items-center flex-column">
+                    <a class="btn common-btn-style ml-auto" href="{{ route('register') }}" style="padding: 1em; margin-top: 5px;">Registrarse</a>
+                    <a class="btn common-btn-style ml-2" href="{{ route('login') }}" style="padding: 1em; margin-top: 5px;">Iniciar Sesión</a>
+                </div>
+                @endif
             </div>
-            @else
-            <div class="navbar-text" style="display: flex; align-items: center;">
-                <a class="btn btn-outline-light ml-auto" href="{{ route('register') }}">Registrarse</a>
-                <a class="btn btn-light ml-2" href="{{ route('login') }}">Iniciar Sesión</a>
-            </div>
-            @endif
-        </header>
-        <div class="content">
+        </nav>
+
+        <div class="content container mt-4">
             @yield('content')
         </div>
     </div>
 
-
     <script>
-        window.onload = function() {
-            var image = document.querySelector('.banner img');
-            var areas = document.querySelectorAll('map[name="equiposMap"] area');
-            var numLinks = areas.length;
-            var width = image.clientWidth;
-
-            areas.forEach(function(area, index) {
-                var x1 = Math.round(width * index / numLinks);
-                var x2 = Math.round(width * (index + 1) / numLinks);
-                area.coords = `${x1},0,${x2},47`; // Ajusta la coordenada Y según sea necesario
-            });
-        };
-
-        window.onresize = function() {
-            // Repite el código de ajuste cuando la ventana cambie de tamaño
-            var image = document.querySelector('.banner img');
-            var areas = document.querySelectorAll('map[name="equiposMap"] area');
-            var numLinks = areas.length;
-            var width = image.clientWidth;
-
-            areas.forEach(function(area, index) {
-                var x1 = Math.round(width * index / numLinks);
-                var x2 = Math.round(width * (index + 1) / numLinks);
-                area.coords = `${x1},0,${x2},47`;
-            });
-        };
-
-        function w3_open() {
-            document.getElementById("main").style.marginLeft = "15%";
-            document.getElementById("mySidebar").style.width = "15%";
-            document.getElementById("mySidebar").style.display = "block";
-            document.getElementById("openNav").style.display = 'none';
+        function openNav() {
+            if (window.innerWidth <= 768) {
+                document.getElementById("mySidebar").style.left = "0";
+                document.getElementById("overlay").style.width = "100%";
+            } else {
+                document.getElementById("mySidebar").style.width = "250px";
+                document.getElementById("main").style.marginLeft = "250px";
+                document.getElementById("overlay").style.width = "0";
+            }
         }
 
-        function w3_close() {
-            document.getElementById("main").style.marginLeft = "0%";
-            document.getElementById("mySidebar").style.display = "none";
-            document.getElementById("openNav").style.display = "inline-block";
+        function closeNav() {
+            if (window.innerWidth <= 768) {
+                document.getElementById("mySidebar").style.left = "-250px";
+                document.getElementById("overlay").style.width = "0";
+            } else {
+                document.getElementById("mySidebar").style.width = "0";
+                document.getElementById("main").style.marginLeft = "0";
+            }
         }
+
+        window.addEventListener("resize", function() {
+            if (window.innerWidth > 768) {
+                document.getElementById("mySidebar").style.left = "0";
+                document.getElementById("mySidebar").style.width = "250px";
+                document.getElementById("main").style.marginLeft = "250px";
+                document.getElementById("overlay").style.width = "0";
+            } else {
+                document.getElementById("mySidebar").style.left = "-250px";
+                document.getElementById("mySidebar").style.width = "250px";
+                document.getElementById("main").style.marginLeft = "0";
+            }
+        });
     </script>
+</body>
+
+</html>

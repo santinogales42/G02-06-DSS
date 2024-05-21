@@ -6,17 +6,17 @@
     <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
 </a>
 
-
 <div class="container">
-    <h1 style="text-align: center; margin: 1rem;">Administración de Noticias</h1>
+    <h1 class="text-center my-4">Administración de Noticias</h1>
     <input type="text" id="search" placeholder="Buscar noticias..." onkeyup="fetchData()" class="form-control mb-3">
     
-    <div style="display: flex; justify-content: space-between; margin: 1rem">
-    <button id="bulk-delete" class="btn btn-danger" onclick="deleteSelectedNoticias()">Eliminar Noticias Seleccionadas</button>
-    <button id="delete-all" class="btn btn-danger" onclick="deleteAllNoticias()">Eliminar todas las Noticias</button>
+    <div class="d-flex justify-content-between my-3">
+        <button id="bulk-delete" class="btn btn-danger" onclick="deleteSelectedNoticias()">Eliminar Noticias Seleccionadas</button>
+        <button id="delete-all" class="btn btn-danger" onclick="deleteAllNoticias()">Eliminar todas las Noticias</button>
     </div>
+    
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th></th>
@@ -81,56 +81,58 @@
         </div>
     </div>
 </div>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="tarjeta mb-3">
-                <div class="encabezado-tarjeta-usuarios">
+            <div class="card mb-3">
+                <div class="card-header">
                     Crear Nueva Noticia
                 </div>
                 <div class="card-body">
-                <form id="crearNoticiaForm" action="{{ route('admin.noticias.crear') }}" method="POST">
-                    
-                    <div class="mb-3">
-                        <label for="titulo" class="form-label">Título:</label>
-                        <input type="text" class="form-control" id="titulo" name="titulo" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="contenido" class="form-label">Contenido:</label>
-                        <textarea class="form-control" id="contenido" name="contenido" rows="5" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="autor" class="form-label">Autor:</label>
-                        <input type="text" class="form-control" id="autor" name="autor">
-                    </div>
-                    <div class="mb-3">
-                        <label for="fecha" class="form-label">Fecha y hora:</label>
-                        <input type="datetime-local" class="form-control" id="fecha" name="fecha">
-                    </div>
-                    <div class="mb-3">
-                        <label for="link_de_la_web" class="form-label">Link de la web:</label>
-                        <input type="text" class="form-control" id="link_de_la_web" name="link_de_la_web">
-                    </div>
-                    <div class="mb-3">
-                        <label for="enlace_de_la_foto" class="form-label">Enlace de la foto:</label>
-                        <input type="text" class="form-control" id="enlace_de_la_foto" name="enlace_de_la_foto">
-                    </div>
-                    <div class="mb-3">
-                        <label for="equipo_id" class="form-label">Equipo:</label>
-                        <select class="form-control" id="equipo_id" name="equipo_id" required>
-                            <option value="">Selecciona un equipo</option>
-                            @foreach ($equipos as $equipo)
-                                <option value="{{ $equipo->id }}">{{ $equipo->nombre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button type="submit" class="btn boton-actualizar-usuarios btn-outline-light ml-auto">Crear Noticia</button>
-                </form>
+                    <form id="crearNoticiaForm" action="{{ route('admin.noticias.crear') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="titulo" class="form-label">Título:</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contenido" class="form-label">Contenido:</label>
+                            <textarea class="form-control" id="contenido" name="contenido" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="autor" class="form-label">Autor:</label>
+                            <input type="text" class="form-control" id="autor" name="autor">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha" class="form-label">Fecha y hora:</label>
+                            <input type="datetime-local" class="form-control" id="fecha" name="fecha">
+                        </div>
+                        <div class="mb-3">
+                            <label for="link_de_la_web" class="form-label">Link de la web:</label>
+                            <input type="text" class="form-control" id="link_de_la_web" name="link_de_la_web">
+                        </div>
+                        <div class="mb-3">
+                            <label for="enlace_de_la_foto" class="form-label">Enlace de la foto:</label>
+                            <input type="text" class="form-control" id="enlace_de_la_foto" name="enlace_de_la_foto">
+                        </div>
+                        <div class="mb-3">
+                            <label for="equipo_id" class="form-label">Equipo:</label>
+                            <select class="form-control" id="equipo_id" name="equipo_id" required>
+                                <option value="">Selecciona un equipo</option>
+                                @foreach ($equipos as $equipo)
+                                    <option value="{{ $equipo->id }}">{{ $equipo->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Crear Noticia</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     //checkSelectedCheckboxes();
