@@ -10,5 +10,19 @@ return [
     'author' => 'Author',
     'date' => 'Date',
     'loading_data' => 'Loading data...',
+
+    'news' => 'News',
+    'homepage' => 'Homepage',
+    'teams' => 'Teams',
+    'players' => 'Football players',
+    'schedule' => 'Schedule',
+    'forum' => 'Forum',
+    'classification' => 'Classification',
+    'contact_us' => 'Contact us',
+    'profile' => 'My profile',
+    'favorites' => 'Favorites',
+    'sign_off' => 'Sign_off',
+    'check_in' => 'Check in',
+    'log_in' => 'Log in',
 ];
 
