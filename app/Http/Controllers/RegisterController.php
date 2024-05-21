@@ -68,7 +68,7 @@ class RegisterController extends Controller
 
         Session::put('userName', $user->name);
 
-        Mail::to($user->email)->send(new WelcomeMail($user));
+        //Mail::to($user->email)->send(new WelcomeMail($user));
 
         return redirect()->route('home');
     }

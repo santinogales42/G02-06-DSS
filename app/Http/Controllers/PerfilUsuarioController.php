@@ -41,12 +41,9 @@ class PerfilUsuarioController extends Controller
         }
 
         // Asigna los valores al modelo User si se proporcionan
-        if ($request->has('name')) {
-            $user->name = $request->name;
-        }
+        $user->name = $request->name;
 
-
-        if ($request->has('password') && $request->password != null) {
+        if ($request->password != null) {
             $user->password = bcrypt($request->password);
         }
 
