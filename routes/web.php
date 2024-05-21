@@ -169,3 +169,15 @@ Route::delete('/equipos/{equipo}/favorito', [EquipoController::class, 'eliminarF
 Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
 Route::get('/noticias/{id}', [NoticiasController::class, 'getDatos'])->name('noticias.show');
 Route::get('/noticias/equipo/{id}', [NoticiasController::class, 'getEquipoName'])->name('noticias.getEquipoName');
+
+
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+
+Route::get('/lang/{lang}', function ($lang) {
+    if (in_array($lang, ['en', 'es'])) {
+        Session::put('applocale', $lang);
+    }
+    return Redirect::back();
+});
