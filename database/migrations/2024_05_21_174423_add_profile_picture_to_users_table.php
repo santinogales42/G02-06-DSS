@@ -14,7 +14,7 @@ class AddProfilePictureToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('profile_picture')->nullable()->after('password'); // Define la columna profile_picture
+            $table->string('profile_picture')->nullable()->after('role_id'); // Añadir esta línea
         });
     }
 
@@ -26,7 +26,7 @@ class AddProfilePictureToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('profile_picture'); // Elimina la columna si se revierte la migración
+            $table->dropColumn('profile_picture'); // Añadir esta línea
         });
     }
 }
