@@ -18,8 +18,21 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
+    
+    body {
+        background: url('https://img.freepik.com/vector-premium/fondo-vector-monocromo-blanco-abstracto-folleto-diseno-folleto-sitio-web-fondo-pantalla-blanco-geometrico-pagina-inicio-presentacion-certificado_249611-5879.jpg?w=996') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    table {
+        background-color: white; 
+        border-collapse: collapse;
+        width: 100%;
+    }
 
         .common-btn-style {
+        
+    
             font-size: 15px;
             letter-spacing: 2px;
             text-transform: uppercase;

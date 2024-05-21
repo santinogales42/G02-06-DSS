@@ -20,7 +20,7 @@
 
 
             <!-- Tarjeta de agregar usuarios -->
-            <div class="tarjeta-agregar-usuarios mb-3">
+            <div class="tarjeta-agregar-usuarios mb-3 boton-insertar-usuarios">
                 <a href="{{ route('admin.usuarios.create') }}" class="btn boton-agregar">Agregar Usuario</a>
             </div>
 

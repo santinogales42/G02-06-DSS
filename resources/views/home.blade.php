@@ -31,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($equipos as $index => $equipo)
+                        @foreach ($equipos->take(4) as $index => $equipo)
                         <tr>
                             <td class="text-center">{{ $index + 1 }}</td>
                             <td>{{ $equipo->nombre }}</td>

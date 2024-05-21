@@ -227,6 +227,7 @@ button.icon-link .fa-chevron-down {
 
 
 .noticias-1 {
+    
     width: 132px;
     height: 31px;
     color: #EBEBEB;
@@ -297,6 +298,7 @@ button.icon-link .fa-chevron-down {
 }
 
 .noticia {
+    background-color:white;
     border: 2px solid #ccc; /* Borde alrededor de cada noticia */
     border-radius: 10px; /* Bordes redondeados */
     padding: 10px; /* Espacio interno */
@@ -355,6 +357,7 @@ button.icon-link .fa-chevron-down {
 
 /* Estilos para inicio de sesión */
 .tarjeta {
+    background-color: white;
     margin-top: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
