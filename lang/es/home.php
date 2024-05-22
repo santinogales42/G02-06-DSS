@@ -13,7 +13,6 @@ return [
 
     'news' => 'Noticias',
     'homepage' => 'Inicio',
-    'homepage' => 'Equipos',
     'players' => 'Jugadores',
     'schedule' => 'Calendario',
     'forum' => 'Foro',
@@ -24,5 +23,6 @@ return [
     'sign_off' => 'Cerrar sesión',
     'check_in' => 'Registrarse',
     'log_in' => 'Iniciar sesión',
+    'teams' => 'Equipos',
 ];
 
