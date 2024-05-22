@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('content')
+<a href="{{ route('jugadores') }}" class="btn boton-flecha">
+    <i class="fa-solid fa-arrow-left-long fa-2xl"></i> <!-- Ícono de flecha -->
+</a>
 <div class="container mt-5">
     <div class="row justify-content-center">
        

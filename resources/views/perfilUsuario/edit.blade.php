@@ -7,7 +7,7 @@
             <div class="tarjeta">
                 <div class="encabezado-tarjeta-usuarios">Actualizar información</div>
                 <div class="card-body">
-                    <form action="{{ route('perfilUsuario.update', $user->id) }}" method="POST">
+                    <form action="{{ route('perfilUsuario.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
@@ -40,6 +40,21 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Mostrar el campo de carga de foto de perfil solo si el usuario no tiene una foto -->
+
+                        <div class="form-group">
+                            <label for="profile_picture">Foto de Perfil (opcional)</label>
+                            <input id="profile_picture" type="file" class="form-control @error('profile_picture') is-invalid @enderror" name="profile_picture" accept="image/*">
+                            @error('profile_picture')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            <div class="mt-2">
+                                <img id="profilePicturePreview" src="#" alt="Vista previa de la foto de perfil" class="img-thumbnail" style="display: none; max-width: 150px;">
+                            </div>
+                        </div>
+
 
                         <div class="form-group d-flex justify-content-between">
                             <a href="{{ route('home') }}" class="btn boton-cancelar">Cancelar</a>

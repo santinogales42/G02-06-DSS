@@ -16,7 +16,13 @@
                 <div class="card-body">
                     <p class="card-text"><strong>Nombre:</strong> {{ $user->name }}</p>
                     <p class="card-text"><strong>Correo:</strong> {{ $user->email }}</p>
-                    <!-- <p class="card-text"><strong>Fecha de Registro:</strong> {{ $user }}</p> -->
+                    <!-- Mostrar la foto de perfil -->
+                    <p class="card-text"><strong>Foto de perfil:</strong></p>
+                    @if($user->profile_picture)
+                    <img src="{{ asset($user->profile_picture) }}" alt="Foto de perfil" class="img-fluid perfil-img">
+                    @else
+                    <img src="{{ asset('images/usuario_rojofinal.png') }}" alt="Foto de perfil" class="img-fluid perfil-img">
+                    @endif
                 </div>
             </div>
         </div>
@@ -24,20 +30,3 @@
 
 </div>
 @endsection
-
-<!-- <style>
-    .bg-danger {
-        background-color: #ff9688 !important; 
-    }
-    
-    .btn-danger {
-        background-color: #ff9688 !important; 
-        border-color: #ff9688 !important;
-    }
-
-    .btn-danger:hover {
-        background-color: #d32f2f !important;
-        border-color: #d32f2f !important; 
-    }
-</style>
- -->

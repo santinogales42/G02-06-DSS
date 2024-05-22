@@ -26,11 +26,11 @@
                 <!-- Contenido del equipo -->
                 <div class="cuerpo-tarjetas-favoritos">
                     <h5 class="tarjeta-favoritos-nombreEquipo">{{ $equipo->nombre }}</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Puntos: {{ $equipo->puntos }}</li>
-                        <li class="list-group-item">Partidos jugados: {{ $equipo->partidos_jugados }}</li>
-                        <li class="list-group-item">Goles a favor: {{ $equipo->goles_favor }}</li>
-                        <li class="list-group-item">Goles en contra: {{ $equipo->goles_contra }}</li>
+                    <ul class="list-group list-group-flush" style="align-items: center">
+                        <li class="tarjetas-fav list-group-item">Puntos: {{ $equipo->puntos }}</li>
+                        <li class="tarjetas-fav list-group-item">Partidos jugados: {{ $equipo->partidos_jugados }}</li>
+                        <li class="tarjetas-fav list-group-item">Goles a favor: {{ $equipo->goles_favor }}</li>
+                        <li class="tarjetas-fav list-group-item">Goles en contra: {{ $equipo->goles_contra }}</li>
                     </ul>
                 </div>
             </div>

@@ -26,6 +26,7 @@ class PerfilUsuarioController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
+        //dd($request->file('profile_picture'));
 
         // Validación de campos
         $validator = Validator::make($request->all(), [
@@ -33,6 +34,7 @@ class PerfilUsuarioController extends Controller
             'email' => 'sometimes|required|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8|confirmed',
             'password_confirmation' => 'nullable|string|same:password',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar imagen
         ]);
 
         // Redirecciona de vuelta con mensaje de éxito o errores de validación
@@ -45,6 +47,17 @@ class PerfilUsuarioController extends Controller
 
         if ($request->password != null) {
             $user->password = bcrypt($request->password);
+        }
+
+        if ($request->hasFile('profile_picture')) {
+            // Generar un nombre único para la imagen
+            $imageName = 'profile_' . str_replace('@', '_', $user->email) . '.' . $request->file('profile_picture')->getClientOriginalExtension();
+
+            // Guardar la imagen en public/images/users/
+            $request->file('profile_picture')->move(public_path('images/users'), $imageName);
+
+            // Guardar la ruta de la imagen en el modelo de usuario
+            $user->profile_picture = 'images/users/' . $imageName;
         }
 
         // Guarda el usuario en la base de datos

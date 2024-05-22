@@ -56,10 +56,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <a href="{{ route('threads.create') }}" class="btn btn-primary mb-3">Crear un Hilo</a>
+            <div class="d-flex justify-content-between">
+                <a href="{{ route('threads.create') }}" class="btn boton-insertar-usuarios mb-3">Crear un Hilo</a>
 
-            <button id="toggleMyThreads" class="btn btn-secondary mb-3" data-mine="false">Ver Mis Hilos</button>
-
+                <button id="toggleMyThreads" class="btn btn-secondary mb-3" data-mine="false">Ver Mis Hilos</button>
+            </div>
             <!-- Search bar -->
             <input type="text" id="search" placeholder="Buscar hilos o usuarios..." class="form-control search-bar">
 
