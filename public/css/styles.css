@@ -932,6 +932,7 @@ button.icon-link .fa-chevron-down {
 
 .sidebar a:hover {
     color: black;
+    text-decoration: none;
 }
 
 .sidebar .closebtn {
