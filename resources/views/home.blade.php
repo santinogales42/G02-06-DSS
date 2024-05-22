@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <!-- Carrusel de noticias que ocupa todo el ancho de la página -->
             <div id="noticias-carousel" class="slick-carousel-large">
-                @foreach ($noticias as $noticia)
+                @foreach ($noticias->take(3) as $noticia)
                 <div class="card">
                     <img src="{{ $noticia->enlace_de_la_foto }}" class="card-img-top" alt="{{ $noticia->titulo }}">
                     <div class="card-body">
