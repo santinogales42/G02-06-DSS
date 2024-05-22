@@ -9,16 +9,16 @@
                 <div class="encabezado-tarjeta">Registrar Usuario</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf <!-- Token CSRF -->
 
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                             @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
@@ -26,9 +26,9 @@
                             <label for="email">Correo Electrónico</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                             @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
@@ -44,9 +44,9 @@
                             </div>
                             <small id="passwordHelpBlock" class="form-text text-muted">La contraseña debe tener al menos 8 dígitos.</small>
                             @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
@@ -62,10 +62,22 @@
                             </div>
                             <small id="passwordHelpBlock" class="form-text text-muted">Ambas contraseñas deben coincidir.</small>
                             @error('password_confirmation')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="profile_picture">Foto de Perfil (opcional)</label>
+                            <input id="profile_picture" type="file" class="form-control @error('profile_picture') is-invalid @enderror" name="profile_picture" accept="image/*">
+                            @error('profile_picture')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            <div class="mt-2">
+                                <img id="profilePicturePreview" src="#" alt="Vista previa de la foto de perfil" class="img-thumbnail" style="display: none; max-width: 150px;">
+                            </div>
                         </div>
 
                         <div class="form-group d-flex justify-content-between">
@@ -86,7 +98,7 @@
     const togglePassword = document.getElementById('togglePassword');
     const password = document.getElementById('password');
 
-    togglePassword.addEventListener('click', function () {
+    togglePassword.addEventListener('click', function() {
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
         this.classList.toggle('fa-eye-slash');
@@ -95,10 +107,30 @@
     const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
     const confirmPassword = document.getElementById('password_confirmation');
 
-    toggleConfirmPassword.addEventListener('click', function () {
+    toggleConfirmPassword.addEventListener('click', function() {
         const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
         confirmPassword.setAttribute('type', type);
         this.classList.toggle('fa-eye-slash');
     });
 </script>
+
+<script>
+    const profilePictureInput = document.getElementById('profile_picture');
+    const profilePicturePreview = document.getElementById('profilePicturePreview');
+
+    profilePictureInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                profilePicturePreview.src = e.target.result;
+                profilePicturePreview.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            profilePicturePreview.style.display = 'none';
+        }
+    });
+</script>
+
 @endsection

@@ -17,7 +17,7 @@ class AdminUsuariosController extends Controller
         $query = $request->get('salida');
         $ordenNombre = $request->get('ordenNombre', 'asc');
         $usuariosQuery = User::query(); // Obtener la consulta base
-    
+
         // Verificar si el query contiene el símbolo '@'
         if ($query !== null && strpos($query, '@') !== false) {
             $usuariosQuery->where('email', 'like', '%' . $query . '%');
@@ -25,10 +25,10 @@ class AdminUsuariosController extends Controller
             // Si no contiene '@', buscar por nombre
             $usuariosQuery->where('name', 'like', $query . '%');
         }
-    
+
         // Aplicar la ordenación después del filtro de búsqueda
         $usuarios = $usuariosQuery->orderBy('name', $ordenNombre)->paginate(10); // Paginación con 10 usuarios por página
-    
+
         return view('admin.usuarios.index', compact('usuarios'));
     }
 
@@ -44,7 +44,7 @@ class AdminUsuariosController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8', // Verifica que la contraseña tenga al menos 8 caracteres
+            'password' => 'required|string|min:8', 
             'password_confirmation' => 'required|string|same:password', // Verifica que la confirmación de la contraseña coincida con la contraseña
             'role_id' => 'required|exists:roles,id', // Validar el role_id
         ]);
@@ -54,7 +54,7 @@ class AdminUsuariosController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role_id' => $request->role_id, // Asignar el role_id
+            'role_id' => $request->role_id,
         ]);
 
         Session::flash('success', 'Usuario creado exitosamente.');
@@ -74,7 +74,7 @@ class AdminUsuariosController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
-            'role_id' => 'required|exists:roles,id', // Validar el role_id
+            'role_id' => 'required|exists:roles,id',
         ]);
 
         if ($validator->fails()) {
@@ -100,8 +100,10 @@ class AdminUsuariosController extends Controller
 
     public function eliminarTodos()
     {
-        // Eliminar todos los usuarios excepto el administrador
-        User::where('isAdmin', false)->delete();
+        // Eliminar todos los usuarios excepto los administradores
+        User::whereHas('role', function ($query) {
+            $query->whereNotIn('name', ['admin', 'noticiero', 'analista']);
+        })->delete();
 
         return redirect()->route('admin.usuarios.index')->with('success', 'Todos los usuarios han sido eliminados.');
     }

@@ -5,6 +5,11 @@
 @section('content')
 
 <div class="container">
+<div class="jumbotron jumbotron-fluid">
+    <div class="container-fluid">
+        <h1 class="display-4 font-weight-bold text-center" style="font-size: 2rem; color:white;">Inicio</h1>
+    </div>
+</div>
     <div class="row">
         <div class="col-md-8">
             <h1>{{ __('home.news_title') }}</h1>

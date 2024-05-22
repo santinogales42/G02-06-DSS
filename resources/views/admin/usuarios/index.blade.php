@@ -57,7 +57,7 @@
                             @foreach($usuarios as $usuario)
                             <tr>
                                 <td>
-                                    @if (!$usuario->isAdmin)
+                                    @if (!in_array($usuario->role->name, ['admin', 'noticiero', 'analista']))
                                     <input type="checkbox" name="usuarios_seleccionados[]" value="{{ $usuario->id }}" class="checkbox-red">
                                     @endif
                                 </td>
@@ -67,6 +67,7 @@
                                     <a href="{{ route('admin.usuarios.edit', $usuario->id) }}" class="btn boton-editar">
                                         <i class="fas fa-pencil-alt"></i> <!-- Ícono de lápiz -->
                                     </a>
+                                    @if(!in_array($usuario->role->name, ['admin', 'noticiero', 'analista']))
                                     <form action="{{ route('admin.usuarios.destroy', ['id' => $usuario->id]) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
@@ -74,6 +75,7 @@
                                             <i class="fas fa-trash-alt"></i> <!-- Ícono de la papelera -->
                                         </button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -137,6 +139,8 @@
         const formEliminarSeleccionados = document.getElementById('formEliminarSeleccionados');
         const checkboxes = document.querySelectorAll('.checkbox-red');
 
+        let confirmacionMostrada = false;
+
         botonEliminarSeleccionados.addEventListener('click', function(event) {
             const usuariosSeleccionados = [];
             checkboxes.forEach(function(checkbox) {
@@ -152,11 +156,14 @@
                 return false;
             }
 
-            // Confirmar la eliminación si hay usuarios seleccionados
-            if (!confirm('¿Estás seguro de que deseas eliminar los usuarios seleccionados?')) {
-                event.preventDefault();
-                return false;
-            }
+            // Confirmar la eliminación solo si la confirmación no se ha mostrado
+            /* if (!confirmacionMostrada) {
+                if (!confirm('¿Estás seguro de que deseas eliminar los usuarios seleccionados?')) {
+                    event.preventDefault();
+                    return false;
+                }
+                confirmacionMostrada = true; // Marcar que la confirmación se ha mostrado
+            } */
 
             // Establecer los IDs seleccionados en el campo oculto
             document.getElementById('usuariosSeleccionados').value = usuariosSeleccionados.join(',');
@@ -166,5 +173,7 @@
         });
     });
 </script>
+
+
 
 @endsection
