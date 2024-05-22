@@ -128,12 +128,12 @@ button.icon-link .fa-chevron-down {
     margin-bottom: 25px;
     margin-left: 20px; 
     margin-right: 20px;
-    transition: border-color 1s; 
+    transition: border-color 2s; 
     transition: transform 1s;
   }
   
 .contenedor-imagenes img {
-    width: 50px; 
+    width: 60px; 
     height: 50px; 
     border: 2px solid black; 
     border-radius: 50%; 
@@ -396,6 +396,7 @@ button.icon-link .fa-chevron-down {
 #userButton {
     background-color: transparent;
     color: rgb(0, 0, 0);
+    border: none !important;
 }
 
 #dropdownContent-cerrarSesion {
@@ -439,9 +440,8 @@ button.icon-link .fa-chevron-down {
 .encabezado-tarjeta-usuarios {
     background-color: #ff9688;
     text-align: center !important;
-    color: #fff;
+    color: black;
     padding: 20px 0;
-    font-weight: bold;
 }
 
 .boton-agregar {
@@ -810,7 +810,7 @@ button.icon-link .fa-chevron-down {
 
 .tarjeta-editar-perfil {
     margin: 100px auto;
-    width: 50rem;
+    width: 60rem;
     border-color: #ff3823 !important;
     margin-top: 50px;
     border-radius: 10px;
@@ -911,7 +911,7 @@ button.icon-link .fa-chevron-down {
     position: fixed;
     top: 0;
     left: -250px; /* Initially hidden */
-    background-color: #ff3d36;
+    background-color: #ff3823;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -990,7 +990,7 @@ button.icon-link .fa-chevron-down {
 }
 
 .title-logo {
-    border: 2px solid red;
+    border: 2px solid #ff3823;
     margin-left: 0px; /* Distancia fija del menú de la hamburguesa */
     margin-right: 20px;
     max-width: 100px; /* Tamaño máximo para logo */
@@ -998,7 +998,7 @@ button.icon-link .fa-chevron-down {
 }
 
 .navbar {
-    background-color: #ff3d36;
+    background-color: #ff3823;
     transition: all 0.3s ease;
     align-items: center;
     display: flex;

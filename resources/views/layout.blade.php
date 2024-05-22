@@ -26,10 +26,10 @@
             text-align: center;
             font-weight: bold;
             padding: 0.8em 1.3em;
-            border: 3px solid black;
+            border: 2px solid black;
             border-radius: 2px;
             position: relative;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1); */
             color: black;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -205,7 +205,7 @@
 
         <div class="contenedor-imagenes">
             <a href="https://www.instagram.com/laliga/" target="_blank">
-                <img src="{{ asset('images/insta.png') }}" altt"Instagram" class="img-fluid">
+                <img src="{{ asset('images/insta.png') }}" alt="Instagram" class="img-fluid">
             </a>
             <a href="https://www.facebook.com/LALIGA/?locale=es_ES" target="_blank">
                 <img src="{{ asset('images/face.png') }}" alt="Facebook" class="img-fluid">
@@ -232,11 +232,13 @@
                     <div class="dropdown" id="userDropdown">
                         <button class="btn common-btn-style dropdown-toggle" id="userButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span>{{ Session::get('userName') }}</span>
+                            <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userButton">
-                            <a href="{{ route('perfilUsuario.index') }}" class="dropdown-item">Mi Perfil</a>
-                            <a href="{{ route('favoritos.index') }}" class="dropdown-item">Favoritos</a>
-                            <a href="{{ route('confirmar.cerrar.sesion') }}" class="dropdown-item" id="logoutButton">Cerrar sesión</a>
+
+                        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="userButton" id="dropdownContent-cerrarSesion">
+                            <a href="{{ route('perfilUsuario.index') }}" class="w3-bar-item w3-button dropdown-item" >Mi Perfil</a>
+                            <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button dropdown-item" >Favoritos</a>
+                            <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button dropdown-item" id="logoutButton">Cerrar sesión</a>
                         </div>
                     </div>
                     <div style="margin-left: 10px;">

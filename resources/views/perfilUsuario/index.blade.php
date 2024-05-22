@@ -3,16 +3,16 @@
 @section('content')
 <div class="container">
 
-    <div class="row mb-3">
-        <div class="col-12">
-            <a href="{{ route('perfilUsuario.edit') }}" class="btn btn-danger btn-block">Editar Información</a>
+    <div class="row mb-3 ">
+        <div class="col-12 tarjeta-editar-perfil">
+            <a href="{{ route('perfilUsuario.edit') }}" class="btn boton-editar-perfil btn-block">Editar Información</a>
         </div>
     </div>
 
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <div class="card-header bg-danger text-white">Datos Usuario</div>
+            <div class="tarjeta">
+                <div class="encabezado-tarjeta-usuarios">Datos Usuario</div>
                 <div class="card-body">
                     <p class="card-text"><strong>Nombre:</strong> {{ $user->name }}</p>
                     <p class="card-text"><strong>Correo:</strong> {{ $user->email }}</p>
@@ -25,7 +25,7 @@
 </div>
 @endsection
 
-<style>
+<!-- <style>
     .bg-danger {
         background-color: #ff9688 !important; 
     }
@@ -40,3 +40,4 @@
         border-color: #d32f2f !important; 
     }
 </style>
+ -->
