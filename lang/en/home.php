@@ -21,7 +21,7 @@ return [
     'contact_us' => 'Contact us',
     'profile' => 'My profile',
     'favorites' => 'Favorites',
-    'sign_off' => 'Sign_off',
+    'sign_off' => 'Sign off',
     'check_in' => 'Check in',
     'log_in' => 'Log in',
 ];
