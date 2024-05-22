@@ -12,8 +12,8 @@
 </div>
     <div class="row">
         <div class="col-md-8">
-            <h1>Noticias de actualidad</h1>
-            <input type="text" id="search" placeholder="Buscar noticias por equipo o título de la noticia ..." onkeyup="fetchData()" class="form-control mb-3">
+            <h1>{{ __('home.news_title') }}</h1>
+            <input type="text" id="search" placeholder="{{ __('home.search_placeholder') }}" onkeyup="fetchData()" class="form-control mb-3">
 
             <div id="noticias-list" class="row">
                 <!-- Las noticias se llenarán dinámicamente -->
@@ -25,18 +25,18 @@
         </div>
 
         <div class="col-md-4">
-            <h2 class="mt-4">Clasificación</h2>
+            <h2 class="mt-4">{{ __('home.classification_title') }}</h2>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
-                            <th class="text-center">Pos</th>
-                            <th>Equipo</th>
-                            <th class="text-center">Pts</th>
+                            <th class="text-center">{{ __('home.position') }}</th>
+                            <th>{{ __('home.team') }}</th>
+                            <th class="text-center">{{ __('home.points') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($equipos as $index => $equipo)
+                        @foreach ($equipos->take(4) as $index => $equipo)
                         <tr>
                             <td class="text-center">{{ $index + 1 }}</td>
                             <td>{{ $equipo->nombre }}</td>
@@ -77,10 +77,10 @@
                                 <a href="${noticia.link_de_la_web}">${noticia.titulo}</a>
                             </h3>
                             <p>${noticia.contenido}</p>
-                            <p class="text-muted">${noticia.fecha}</p>
+                            <p class="text-muted">{{ __('home.date') }}: ${noticia.fecha}</p>
                         </div>
                         <div class="card-footer">
-                            Autor: ${noticia.autor}
+                            {{ __('home.author') }}: ${noticia.autor}
                         </div>
                     </div>
                 </div>
@@ -105,5 +105,7 @@
         });
     }
 </script>
+
+<a href="{{ url('lang/en') }}">English</a> | <a href="{{ url('lang/es') }}">Español</a>
 
 @endsection

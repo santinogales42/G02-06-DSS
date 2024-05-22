@@ -18,7 +18,21 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
+    
+    body {
+        background: url('https://img.freepik.com/vector-premium/fondo-vector-monocromo-blanco-abstracto-folleto-diseno-folleto-sitio-web-fondo-pantalla-blanco-geometrico-pagina-inicio-presentacion-certificado_249611-5879.jpg?w=996') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    table {
+        background-color: white; 
+        border-collapse: collapse;
+        width: 100%;
+    }
+
         .common-btn-style {
+        
+    
             font-size: 15px;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -188,13 +202,13 @@
 
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="{{ route('home') }}"><i class="fa-solid fa-house"></i> Inicio</a>
-        <a href="{{ route('noticias') }}"><i class="fa-solid fa-newspaper"></i> Noticias</a>
-        <a href="{{ route('equipos.index') }}"><i class="fa-solid fa-users"></i> Equipos</a>
-        <a href="{{ route('jugadores') }}"><i class="fa-solid fa-user"></i> Jugadores</a>
-        <a href="{{ route('calendario.index') }}"><i class="fa-regular fa-calendar fa-lg"></i> Calendario</a>
-        <a href="{{ route('threads.index') }}"><i class="fa-solid fa-hashtag"></i> Foro</a>
-        <a href="{{ route('clasificacion') }}"><i class="fa-solid fa-chart-line"></i> Clasificación</a>
+        <a href="{{ route('home') }}"><i class="fa-solid fa-house"></i> {{ __('home.homepage') }}</a>
+        <a href="{{ route('noticias') }}"><i class="fa-solid fa-newspaper"></i> {{ __('home.news') }}</a>
+        <a href="{{ route('equipos.index') }}"><i class="fa-solid fa-users"></i> {{ __('home.teams') }}</a>
+        <a href="{{ route('jugadores') }}"><i class="fa-solid fa-user"></i> {{ __('home.players') }}</a>
+        <a href="{{ route('calendario.index') }}"><i class="fa-regular fa-calendar fa-lg"></i> {{ __('home.schedule') }}</a>
+        <a href="{{ route('threads.index') }}"><i class="fa-solid fa-hashtag"></i> {{ __('home.forum') }}</a>
+        <a href="{{ route('clasificacion') }}"><i class="fa-solid fa-chart-line"></i> {{ __('home.classification') }}</a>
         @auth
         @if(Auth::check() && (Auth::user()->role->name === 'admin'||Auth::user()->role->name === 'noticiero'||Auth::user()->role->name === 'analista'))
         <a href="{{ route('admin.index') }}" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
@@ -226,7 +240,7 @@
             </div>
             <h1 class="roboto-flex-title flex-grow-1 text-center d-none d-md-block" style="color:white" >LALIGA EA SPORTS 2023-24</h1>
             <div class="d-flex flex-column flex-md-row align-items-md-center">
-                <a href="{{ route('contacto') }}" style="padding: 1em; margin-top: 5px;" class="btn common-btn-style ml-3">Contáctanos</a>
+                <a href="{{ route('contacto') }}" style="padding: 1em; margin-top: 5px;" class="btn common-btn-style ml-3">{{ __('home.contact_us') }}</a>
                 @if($isUserLoggedIn)
                 <div class="navbar-text d-flex align-items-center dropdown-admin">
                     <div class="dropdown" id="userDropdown">
@@ -234,11 +248,10 @@
                             <span>{{ Session::get('userName') }}</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-
-                        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="userButton" id="dropdownContent-cerrarSesion">
-                            <a href="{{ route('perfilUsuario.index') }}" class="w3-bar-item w3-button dropdown-item" >Mi Perfil</a>
-                            <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button dropdown-item" >Favoritos</a>
-                            <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button dropdown-item" id="logoutButton">Cerrar sesión</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userButton" id="dropdownContent-cerrarSesion">
+                            <a href="{{ route('perfilUsuario.index') }}" class="w3-bar-item w3-button dropdown-item">{{ __('home.profile') }}</a>
+                            <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button dropdown-item">{{ __('home.favorites') }}</a>
+                            <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button dropdown-item" id="logoutButton">{{ __('home.sign_off') }}</a>
                         </div>
                     </div>
                     <div style="margin-left: 10px;">
@@ -251,8 +264,8 @@
                 </div>
                 @else
                 <div class="navbar-text d-flex align-items-center flex-column">
-                    <a class="btn common-btn-style ml-auto" href="{{ route('register') }}" style="padding: 1em; margin-top: 5px;">Registrarse</a>
-                    <a class="btn common-btn-style ml-2" href="{{ route('login') }}" style="padding: 1em; margin-top: 5px;">Iniciar Sesión</a>
+                    <a class="btn common-btn-style ml-auto" href="{{ route('register') }}" style="padding: 1em; margin-top: 5px;">{{ __('home.check_in') }}</a>
+                    <a class="btn common-btn-style ml-2" href="{{ route('login') }}" style="padding: 1em; margin-top: 5px;">{{ __('home.log_in') }}</a>
                 </div>
                 @endif
             </div>

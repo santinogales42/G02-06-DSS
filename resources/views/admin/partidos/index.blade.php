@@ -20,8 +20,8 @@
 </a>
 
 <div class="container mt-4" style="margin-bottom: 6rem;">
-    <div class="tarjeta-agregar-usuarios mb-3">
-        <a href="{{ route('admin.partidos.create') }}" class="btn boton-agregar">Crear Partido</a>
+    <div class="tarjeta-agregar-usuarios mb-3 boton-insertar-usuarios">
+        <a href="{{ route('admin.partidos.create') }}" class="btn boton-agregar ">Crear Partido</a>
     </div>
     <div class="d-flex justify-content-between mb-3">
         <form action="{{ route('admin.partidos.deleteSelected') }}" method="POST" id="formEliminarSeleccionados">
