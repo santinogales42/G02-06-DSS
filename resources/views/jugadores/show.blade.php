@@ -6,13 +6,12 @@
 </a>
 <div class="container mt-5">
     <div class="row justify-content-center">
-       
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4" style="overflow: hidden;">
-                        <img src="{{ asset($jugador->foto) }}" class="img-fluid" alt="Foto de {{ $jugador->nombre }}" style="height: 100%; object-fit: cover; margin-left: 10px;"> <!-- Añadir un pequeño margen izquierdo -->
-                     </div>
+                        <img src="{{ Storage::url($jugador->foto) }}" class="img-fluid" alt="Foto de {{ $jugador->nombre }}" style="height: 100%; object-fit: cover; margin-left: 10px;">
+                    </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h1 class="card-title">{{ $jugador->nombre }}</h1>
@@ -60,11 +59,7 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        
-        
-    </div>
-</div>
+            
+
 @endsection
-

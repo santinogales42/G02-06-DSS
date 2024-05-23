@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jugador;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 use App\ServiceLayer\OrderServices;
 
@@ -28,11 +29,8 @@ class JugadoresController extends Controller
 
     public function show($id)
     {
-        try {
-            $jugador = Jugador::with('estadisticas', 'equipo')->findOrFail($id);
-            return view('jugadores.show', compact('jugador'));
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Error al obtener el jugador: ' . $e->getMessage()], 500);
-        }
-    }
+        $equipos = Equipo::all();
+        $jugador = Jugador::findOrFail($id);
+        return view('jugadores.show', compact('jugador', 'equipos'));
+}
 }

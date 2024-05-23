@@ -59,7 +59,8 @@
                     Crear Nuevo Jugador
                 </div>
                 <div class="card-body">
-                    <form id="crearJugadorForm">
+                    <form id="crearJugadorForm" method="POST" action="{{ route('adminjugador.crear') }}" enctype="multipart/form-data">
+                        @csrf
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre:</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -86,8 +87,8 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="foto" class="form-label">Foto (URL):</label>
-                            <input type="text" class="form-control" id="foto" name="foto">
+                            <label for="foto" class="form-label">Foto:</label>
+                            <input type="file" class="form-control" id="foto" name="foto">
                         </div>
                         <div class="mb-3">
                             <label for="biografia" class="form-label">Biografía:</label>
@@ -240,7 +241,7 @@ document.getElementById('crearJugadorForm').addEventListener('submit', function(
     e.preventDefault();
 
     const formData = new FormData(this);
-    fetch('/adminjugadores/crear', {
+    fetch('{{ route('adminjugador.crear') }}', {
         method: 'POST',
         body: formData,
         headers: {
