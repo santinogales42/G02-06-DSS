@@ -65,7 +65,7 @@ class ThreadPolicy
      */
     public function delete(User $user, Thread $thread)
 {
-    return $user->id === $thread->user_id || $user->isAdmin;
+    return $user->id === $thread->user_id || $user->role->name === 'admin';
 }
 
 
