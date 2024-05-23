@@ -245,7 +245,7 @@
                     <img src="{{ asset('images/ligaicono.png') }}" alt="Logo La Liga" class="title-logo img-fluid">
                 </a>
             </div>
-            <h1 class="roboto-flex-title flex-grow-1 text-center d-none d-md-block">LALIGA EA SPORTS 2023-24</h1>
+            <h1 class="roboto-flex-title flex-grow-1 text-center d-none d-md-block" style="color:white">LALIGA EA SPORTS 2023-24</h1>
             <div class="d-flex flex-column flex-md-row align-items-md-center">
                 <a href="{{ route('contacto') }}" style="padding: 1em; margin-top: 5px;" class="btn common-btn-style ml-3">{{ __('home.contact_us') }}</a>
                 @if($isUserLoggedIn)

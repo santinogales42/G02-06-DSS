@@ -50,7 +50,7 @@ class PartidosTableSeeder extends Seeder
         $partidosPorJornada = 10;
 
         // Fecha de inicio para los partidos (antes del 18/04/2024)
-        $fechaInicio = Carbon::createFromFormat('Y-m-d', '2024-02-28');
+        $fechaInicio = Carbon::createFromFormat('Y-m-d', '2024-04-22');
         $horaBase = '15:00:00'; // Hora base para los partidos (puede ajustarse)
 
         // Mezclar los equipos de forma aleatoria

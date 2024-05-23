@@ -10,14 +10,14 @@
             <h1 class="display-4 font-weight-bold text-center" style="font-size: 2rem; color:white;">Inicio</h1>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <!-- Carrusel de noticias que ocupa todo el ancho de la página -->
             <div id="noticias-carousel" class="slick-carousel-large">
                 @foreach ($noticias->take(3) as $noticia)
                 <div class="card">
-                    <img src="{{ $noticia->enlace_de_la_foto }}" class="card-img-top" alt="{{ $noticia->titulo }}">
+                    <img src="{{ $noticia->enlace_de_la_foto }}" class="card-img-top noticia-img" alt="{{ $noticia->titulo }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $noticia->titulo }}</h5>
                     </div>
@@ -61,18 +61,18 @@
     </div>
 
     <div class="row mt-4">
-    <div class="col-md-12 text-center">
-        <h2 class="mt-4 mb-4 font-weight-bold">Próximos Partidos</h2>
-        <!-- Centrar tanto el texto como el carrusel -->
-        <div class="d-flex justify-content-center align-items-center">
-            <div id="partidos-carousel" class="slick-carousel-small" style="max-width:600px;">
-                @foreach ($partidos as $partido)
+        <div class="col-md-12 text-center">
+            <h2 class="mt-4 mb-4 font-weight-bold">Próximos Partidos</h2>
+            <!-- Centrar tanto el texto como el carrusel -->
+            <div class="d-flex justify-content-center align-items-center">
+                <div id="partidos-carousel" class="slick-carousel-small" style="max-width:600px;">
+                    @foreach ($partidos as $partido)
                     @php
-                        $nombreLimpioLocal = Str::ascii($partido->equipoLocal->nombre);
-                        $nombreArchivoLocal = strtolower(str_replace(' ', '', $nombreLimpioLocal)) . '.png';
+                    $nombreLimpioLocal = Str::ascii($partido->equipoLocal->nombre);
+                    $nombreArchivoLocal = strtolower(str_replace(' ', '', $nombreLimpioLocal)) . '.png';
 
-                        $nombreLimpioVisitante = Str::ascii($partido->equipoVisitante->nombre);
-                        $nombreArchivoVisitante = strtolower(str_replace(' ', '', $nombreLimpioVisitante)) . '.png';
+                    $nombreLimpioVisitante = Str::ascii($partido->equipoVisitante->nombre);
+                    $nombreArchivoVisitante = strtolower(str_replace(' ', '', $nombreLimpioVisitante)) . '.png';
                     @endphp
                     <!-- Quitar la clase card-body para eliminar el fondo blanco -->
                     <div class="card mb-3" style="background-color: transparent;">
@@ -88,100 +88,101 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<!-- Incluye los estilos y scripts de Slick Carousel -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!-- Incluye los estilos y scripts de Slick Carousel -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
-<script>
-    $(document).ready(function(){
-        $('#noticias-carousel').slick({
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            arrows: true,
-        });
+    <script>
+        $(document).ready(function() {
+            $('#noticias-carousel').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                arrows: true,
+            });
 
-        $('#partidos-carousel').slick({
-            infinite: true,
-            slidesToShow: 1, // Mostrar solo un partido a la vez
-            slidesToScroll: 1, // Desplazarse de a un partido a la vez
-            autoplay: true,
-            autoplaySpeed: 2000,
-            arrows: true,
-            responsive: [
-                {
+            $('#partidos-carousel').slick({
+                infinite: true,
+                slidesToShow: 1, // Mostrar solo un partido a la vez
+                slidesToScroll: 1, // Desplazarse de a un partido a la vez
+                autoplay: true,
+                autoplaySpeed: 2000,
+                arrows: true,
+                responsive: [{
                     breakpoint: 768, // Ajustar en pantallas más pequeñas
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1
                     }
-                }
-            ]
+                }]
+            });
+
+            $('#partidos-carousel').addClass('slick-carousel-small'); // Agregar clase para carrusel más pequeño
         });
+    </script>
 
-        $('#partidos-carousel').addClass('slick-carousel-small'); // Agregar clase para carrusel más pequeño
-    });
-</script>
+    <style>
+        .slick-carousel-small .slick-prev,
+        .slick-carousel-small .slick-next {
+            top: 30%;
+        }
 
-<style>
-    .slick-carousel-small .slick-prev, .slick-carousel-small .slick-next {
-        top: 30%;
-    }
+        .slick-carousel-large .slick-prev,
+        .slick-carousel-large .slick-next {
+            top: 40%;
+        }
 
-    .slick-carousel-large .slick-prev, .slick-carousel-large .slick-next {
-        top: 40%;
-    }
+        .card-title {
+            position: absolute;
+            top: 80%;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            font-size: 50px;
+            width: 900px;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5));
+            padding: 10px;
+        }
 
-    .card-title {
-        position: absolute;
-        top: 80%;
-        left: 55%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-weight: bold;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
-        font-size: 50px;
-        width:900px;
-        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5)); 
-        padding: 10px; 
-    }
+        #partidos-carousel .card {
+            width: 300px;
+        }
 
-    #partidos-carousel .card {
-        width: 300px; 
-    }
+        .card {
+            border: none;
+        }
+
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+            /* Cambia el color de las flechas a negro */
+        }
+
+
+        .card-title {
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
     
-    .card{
-    	border:none;
-    	}
-    	
-    
-	.slick-prev:before,
-	    .slick-next:before {
-		color: black; /* Cambia el color de las flechas a negro */
-	    }
+    <div class="red-links">
+        <a href="{{ url('lang/en') }}">English</a> | <a href="{{ url('lang/es') }}">Español</a>
+    </div>
 
-	
-.card-title {
-        max-width: 100%; 
-        white-space: nowrap; 
-        overflow: hidden; 
-        text-overflow: ellipsis;
-    }
-</style>
-
-
-<a href="{{ url('lang/en') }}">English</a> | <a href="{{ url('lang/es') }}">Español</a>
-
-@endsection
-
+    @endsection
