@@ -208,10 +208,10 @@ public function actualizar(Request $request, $id)
     public function insertarJugadores()
     {
         try {
-            Artisan::call('db:seed', ['--class' => 'JugadorsTableSeeder']);
+            \Artisan::call('db:seed', ['--class' => 'JugadorsTableSeeder']);
             return response()->json(['message' => 'Jugadores insertados correctamente'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al insertar jugadores: ' . $e->getMessage()], 500);
         }
-    }
+}
 }

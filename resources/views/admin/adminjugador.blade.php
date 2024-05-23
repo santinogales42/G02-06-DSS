@@ -279,16 +279,20 @@ function deleteAllJugadores() {
     }
 }
 
+function confirmarInsertarJugadores() {
+    if (confirm('¿Estás seguro de que quieres insertar jugadores aleatorios? Esta acción no se puede deshacer.')) {
+        insertarJugadores();
+    }
+}
+
 function insertarJugadores() {
-    fetch('/adminjugadores/admin/insertar-jugadores', {
+    fetch('/adminjugadores/insertar-jugadores', {
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            // Asegúrate de que si el servidor espera algún dato, lo envíes aquí.
-        })
+        body: JSON.stringify({})
     })
     .then(response => {
         if (!response.ok) {
@@ -300,6 +304,7 @@ function insertarJugadores() {
     .then(data => {
         if (typeof data === 'string') {
             console.error('Error message from server:', data);
+            alert('Error al insertar jugadores: ' + data);
         } else {
             alert(data.message);
             fetchData(); // Recargar la lista de jugadores
@@ -307,6 +312,7 @@ function insertarJugadores() {
     })
     .catch(error => {
         console.error('Error:', error);
+        alert('Error al insertar jugadores.');
     });
 }
 </script>
