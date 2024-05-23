@@ -18,14 +18,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
-
         body {
             background: url('https://img.freepik.com/vector-premium/fondo-vector-monocromo-blanco-abstracto-folleto-diseno-folleto-sitio-web-fondo-pantalla-blanco-geometrico-pagina-inicio-presentacion-certificado_249611-5879.jpg?w=996') no-repeat center center fixed;
             background-size: cover;
         }
 
         table {
-            background-color: white; 
+            background-color: white;
             border-collapse: collapse;
             width: 100%;
         }
@@ -39,10 +38,10 @@
             text-align: center;
             font-weight: bold;
             padding: 0.8em 1.3em;
-            border: 3px solid black;
+            border: 2px solid black; 
             border-radius: 2px;
             position: relative;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+            /*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);*/
             color: black;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -64,11 +63,13 @@
             z-index: -1;
         }
 
-        .common-btn-style:hover, .common-btn-style:focus {
+        .common-btn-style:hover,
+        .common-btn-style:focus {
             color: #ff3823;
         }
 
-        .common-btn-style:hover:before, .common-btn-style:focus:before {
+        .common-btn-style:hover:before,
+        .common-btn-style:focus:before {
             transition: 0.5s all ease;
             left: 0;
             right: 0;
@@ -102,7 +103,8 @@
             }
 
             .navbar-brand {
-                margin-left: 0px; /* Fixed distance from the hamburger menu */
+                margin-left: 0px;
+                /* Fixed distance from the hamburger menu */
                 padding: 0.5em 2em;
             }
 
@@ -130,7 +132,8 @@
             }
 
             .navbar-brand {
-                margin-left: 0px; /* Fixed distance from the hamburger menu */
+                margin-left: 0px;
+                /* Fixed distance from the hamburger menu */
                 padding: 0.5em 2em;
             }
 
@@ -158,7 +161,8 @@
             }
 
             .navbar-brand {
-                margin-left: 10px; /* Fixed distance from the hamburger menu */
+                margin-left: 10px;
+                /* Fixed distance from the hamburger menu */
             }
 
             .navbar-brand img {
@@ -219,11 +223,11 @@
         <a href="{{ route('threads.index') }}"><i class="fa-solid fa-hashtag"></i> {{ __('home.forum') }}</a>
         <a href="{{ route('clasificacion') }}"><i class="fa-solid fa-chart-line"></i> {{ __('home.classification') }}</a>
         @auth
-            @if(Auth::check() && (Auth::user()->role->name === 'admin'||Auth::user()->role->name === 'noticiero'||Auth::user()->role->name === 'analista'))
-            <a href="{{ route('admin.index') }}"  style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
-                <i class="fa-solid fa-wrench"></i> Admin
-            </a>
-            @endif
+        @if(Auth::check() && (Auth::user()->role->name === 'admin'||Auth::user()->role->name === 'noticiero'||Auth::user()->role->name === 'analista'))
+        <a href="{{ route('admin.index') }}" style="text-decoration: none; margin-left: 20px; margin-right: 20px;">
+            <i class="fa-solid fa-wrench"></i> Admin
+        </a>
+        @endif
         @endauth
 
         <div class="contenedor-imagenes">
@@ -249,13 +253,20 @@
                     <div class="dropdown" id="userDropdown">
                         <button class="btn common-btn-style dropdown-toggle" id="userButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span>{{ Session::get('userName') }}</span>
-                            <img src="{{ asset('images/usuario_r.png') }} " alt="Perfil" class="user-icon img-fluid" style="margin-left: 5px; filter: invert(100%);">
+                            <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userButton">
-                            <a href="{{ route('perfilUsuario.index') }}" class="dropdown-item">{{ __('home.profile') }}</a>
-                            <a href="{{ route('favoritos.index') }}" class="dropdown-item">{{ __('home.favorites') }}</a>
-                            <a href="{{ route('confirmar.cerrar.sesion') }}" class="dropdown-item" id="logoutButton">{{ __('home.sign_off') }}</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userButton" id="dropdownContent-cerrarSesion">
+                            <a href="{{ route('perfilUsuario.index') }}" class="w3-bar-item w3-button dropdown-item">{{ __('home.profile') }}</a>
+                            <a href="{{ route('favoritos.index') }}" class="w3-bar-item w3-button dropdown-item">{{ __('home.favorites') }}</a>
+                            <a href="{{ route('confirmar.cerrar.sesion') }}" class="w3-bar-item w3-button dropdown-item" id="logoutButton">{{ __('home.sign_off') }}</a>
                         </div>
+                    </div>
+                    <div style="margin-left: 10px;">
+                        @if(Auth::user()->profile_picture)
+                        <img src="{{ asset(Auth::user()->profile_picture) }}" alt="Perfil" class="user-icon img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">
+                        @else
+                        <img src="{{ asset('images/usuario_r.png') }}" alt="Perfil" class="user-icon img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">
+                        @endif
                     </div>
                 </div>
                 @else
@@ -315,44 +326,44 @@
 
 
 
-    <script>
-        window.onload = function() {
-            var image = document.querySelector('.banner img');
-            var areas = document.querySelectorAll('map[name="equiposMap"] area');
-            var numLinks = areas.length;
-            var width = image.clientWidth;
+<script>
+    window.onload = function() {
+        var image = document.querySelector('.banner img');
+        var areas = document.querySelectorAll('map[name="equiposMap"] area');
+        var numLinks = areas.length;
+        var width = image.clientWidth;
 
-            areas.forEach(function(area, index) {
-                var x1 = Math.round(width * index / numLinks);
-                var x2 = Math.round(width * (index + 1) / numLinks);
-                area.coords = `${x1},0,${x2},47`; // Ajusta la coordenada Y según sea necesario
-            });
-        };
+        areas.forEach(function(area, index) {
+            var x1 = Math.round(width * index / numLinks);
+            var x2 = Math.round(width * (index + 1) / numLinks);
+            area.coords = `${x1},0,${x2},47`; // Ajusta la coordenada Y según sea necesario
+        });
+    };
 
-        window.onresize = function() {
-            // Repite el código de ajuste cuando la ventana cambie de tamaño
-            var image = document.querySelector('.banner img');
-            var areas = document.querySelectorAll('map[name="equiposMap"] area');
-            var numLinks = areas.length;
-            var width = image.clientWidth;
+    window.onresize = function() {
+        // Repite el código de ajuste cuando la ventana cambie de tamaño
+        var image = document.querySelector('.banner img');
+        var areas = document.querySelectorAll('map[name="equiposMap"] area');
+        var numLinks = areas.length;
+        var width = image.clientWidth;
 
-            areas.forEach(function(area, index) {
-                var x1 = Math.round(width * index / numLinks);
-                var x2 = Math.round(width * (index + 1) / numLinks);
-                area.coords = `${x1},0,${x2},47`;
-            });
-        };
+        areas.forEach(function(area, index) {
+            var x1 = Math.round(width * index / numLinks);
+            var x2 = Math.round(width * (index + 1) / numLinks);
+            area.coords = `${x1},0,${x2},47`;
+        });
+    };
 
-        function w3_open() {
-            document.getElementById("main").style.marginLeft = "15%";
-            document.getElementById("mySidebar").style.width = "15%";
-            document.getElementById("mySidebar").style.display = "block";
-            document.getElementById("openNav").style.display = 'none';
-        }
+    function w3_open() {
+        document.getElementById("main").style.marginLeft = "15%";
+        document.getElementById("mySidebar").style.width = "15%";
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("openNav").style.display = 'none';
+    }
 
-        function w3_close() {
-            document.getElementById("main").style.marginLeft = "0%";
-            document.getElementById("mySidebar").style.display = "none";
-            document.getElementById("openNav").style.display = "inline-block";
-        }
-    </script>
+    function w3_close() {
+        document.getElementById("main").style.marginLeft = "0%";
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("openNav").style.display = "inline-block";
+    }
+</script>

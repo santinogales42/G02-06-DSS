@@ -399,6 +399,7 @@ button.icon-link .fa-chevron-down {
 #userButton {
     background-color: transparent;
     color: rgb(0, 0, 0);
+    border: none !important;
 }
 
 #dropdownContent-cerrarSesion {
@@ -1082,4 +1083,28 @@ button.icon-link .fa-chevron-down {
 
 .common-btn-style:active {
     transform: scale(0.9);
+}
+
+
+.perfil-img {
+    max-width: 200px;
+    /* Ajusta este valor según tus preferencias */
+    max-height: 200px;
+}
+
+.tarjetas-fav {
+    width: 100%;
+    background-color: white;
+    color: #ff3823;
+}
+
+.boton-crear-hilo {
+    background-color: #ff6961 !important;
+    color: white !important;
+    border: #ff3823;
+    font-size: 16px;
+}
+
+.boton-crear-hilo:hover {
+    color: black !important;
 }
