@@ -171,6 +171,7 @@ Route::get('/noticias/{id}', [NoticiasController::class, 'getDatos'])->name('not
 Route::get('/noticias/equipo/{id}', [NoticiasController::class, 'getEquipoName'])->name('noticias.getEquipoName');
 
 
+// Rutas traducción
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
