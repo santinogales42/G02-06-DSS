@@ -38,7 +38,7 @@ class JugadorsTableSeeder extends Seeder
                 'nacionalidad' => 'Argentina',
                 'edad' => 33,
                 'equipo_id' => 2,
-                'foto' => 'images/jugadores/messi.png',
+                'foto' => 'storage/images/messi.png',
                 'biografia' => 'Lionel Messi es ampliamente considerado como uno de los mejores jugadores de todos los tiempos, conocido por su habilidad, visión de juego y goles espectaculares. Ha pasado la mayor parte de su carrera en el FC Barcelona.',
                 'estadisticas' => [
                     'goles' => 70,

@@ -14,7 +14,7 @@ class JugadorFactory extends Factory
      */
     public function definition()
     {
-        $imagePath = 'images/jugadores/factory/' . $this->faker->unique()->word . '.jpg';
+        $imagePath = 'images/jugadores/default.jpg';
         $imageFullPath = public_path($imagePath);
 
         // Verificar y crear la carpeta si no existe
@@ -22,8 +22,10 @@ class JugadorFactory extends Factory
             mkdir(dirname($imageFullPath), 0777, true);
         }
 
-        // Descargar una imagen aleatoria y guardarla localmente
-        $this->downloadImage($imageFullPath, 640, 480);
+        // Descargar una imagen común y guardarla localmente si no existe
+        if (!file_exists($imageFullPath)) {
+            $this->downloadImage($imageFullPath, 640, 480);
+        }
 
         return [
             'nombre' => $this->faker->name,
@@ -37,7 +39,7 @@ class JugadorFactory extends Factory
     }
 
     /**
-     * Descargar una imagen aleatoria y guardarla localmente.
+     * Descargar una imagen común y guardarla localmente.
      *
      * @param string $path
      * @param int $width
@@ -47,21 +49,11 @@ class JugadorFactory extends Factory
     private function downloadImage($path, $width, $height)
     {
         $imageUrl = $this->faker->imageUrl($width, $height, 'sports');
-        $attempts = 5;
-        $success = false;
 
-        while ($attempts > 0 && !$success) {
-            try {
-                file_put_contents($path, file_get_contents($imageUrl));
-                $success = true;
-            } catch (\Exception $e) {
-                $attempts--;
-                sleep(1); // Espera un segundo antes de intentar de nuevo
-            }
-        }
-
-        if (!$success) {
-            throw new \Exception("No se pudo descargar la imagen después de varios intentos");
+        try {
+            file_put_contents($path, file_get_contents($imageUrl));
+        } catch (\Exception $e) {
+            throw new \Exception("No se pudo descargar la imagen.");
         }
     }
 }
