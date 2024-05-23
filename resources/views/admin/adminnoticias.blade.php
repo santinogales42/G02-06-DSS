@@ -67,6 +67,14 @@
                         <input type="text" class="form-control" id="edit_autor" name="autor">
                     </div>
                     <div class="mb-3">
+                        <label for="edit_link_de_la_web" class="form-label">Link de la web:</label>
+                        <input type="text" class="form-control" id="edit_link_de_la_web" name="link_de_la_web">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_enlace_de_la_foto" class="form-label">Enlace de la foto:</label>
+                        <input type="text" class="form-control" id="edit_enlace_de_la_foto" name="enlace_de_la_foto">
+                    </div>
+                    <div class="mb-3">
                         <label for="equipo_id" class="form-label">Equipo:</label>
                         <select class="form-control" id="equipo_id" name="equipo_id" required>
                             <option value="">Selecciona un equipo</option>
