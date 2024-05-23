@@ -1206,3 +1206,29 @@ button.icon-link .fa-chevron-down {
 .boton-crear-hilo:hover {
     color: black !important;
 }
+
+
+
+.proximos-partidos {
+    max-height: 400px; /* Ajusta según sea necesario /
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fff; / Fondo blanco para mejor visibilidad */
+}
+
+.partido {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.partido:last-child {
+    border-bottom: none;
+}
+
+.partido img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
