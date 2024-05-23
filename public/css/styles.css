@@ -6,37 +6,27 @@
     background-color: #ff3823 !important;
     position: relative;
 }
-
 .icon-link {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    color: white;
-    /* Cambia según tu esquema de color */
+    color: white; /* Cambia según tu esquema de color */
 }
-
 .header {
     display: flex;
     align-items: center;
     padding: 0 15px;
-    background-color: #008080;
-    /* Color Teal */
+    background-color: #008080; /* Color Teal */
 }
-
 .icon-link i {
-    margin-right: 10px;
-    /* Espacio entre el icono y el texto */
-    font-size: 1.5em;
-    /* Tamaño del icono */
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+    font-size: 1.5em; /* Tamaño del icono */
 }
-
 .w3-dropdown-content {
     position: absolute;
     top: 100%;
-    right: 0;
-    /* Alinea el contenido del desplegable a la derecha del botón */
-    z-index: 1000;
-    /* Asegura que el desplegable esté sobre otros elementos */
+    right: 0; /* Alinea el contenido del desplegable a la derecha del botón */
+    z-index: 1000; /* Asegura que el desplegable esté sobre otros elementos */
 }
 
 
@@ -75,46 +65,30 @@
 
 /* Nuevo estilo para los enlaces de la barra lateral */
 .w3-sidebar .w3-bar-item {
-    background-color: #ff3823;
-    /* Fondo del color de la página */
-    border: 2px solid white;
-    /* Bordes blancos */
-    border-radius: 15px;
-    /* Bordes redondeados */
-    padding: 10px;
-    /* Espaciado interno */
-    margin-bottom: 10px;
-    /* Aumenta el espacio entre elementos */
-    color: white;
-    /* Texto blanco para mayor legibilidad */
-    text-align: center;
-    /* Centrado de texto */
-    transition: background-color 0.3s ease;
-    /* Suaviza la transición del color de fondo */
+    background-color: #ff3823; /* Fondo del color de la página */
+    border: 2px solid white; /* Bordes blancos */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Aumenta el espacio entre elementos */
+    color: white; /* Texto blanco para mayor legibilidad */
+    text-align: center; /* Centrado de texto */
+    transition: background-color 0.3s ease; /* Suaviza la transición del color de fondo */
 }
-
 .w3-sidebar .w3-bar-item:hover {
-    background-color: #e63946;
-    /* Un tono más claro de rojo al hacer hover */
-    color: white;
-    /* Texto blanco al hacer hover */
+    background-color: #e63946; /* Un tono más claro de rojo al hacer hover */
+    color: white; /* Texto blanco al hacer hover */
 }
-
 .w3-bar-item.w3-button.w3-large {
-    margin-top: 10px;
-    /* Aumenta o disminuye según la cantidad de espacio que necesites */
+    margin-top: 10px; /* Aumenta o disminuye según la cantidad de espacio que necesites */
 }
-
 /* Asegurarse de que la barra lateral no tenga un fondo definido para mostrar correctamente los colores */
 .w3-sidebar {
     background: none;
 }
-
 button.icon-link .fa-chevron-down {
-    font-size: 0.8em;
+    font-size: 0.8em; 
     margin-left: 10px;
 }
-
 /* Continuación de los estilos existentes */
 .w3-bar-item,
 .rectangle-button {
@@ -130,7 +104,6 @@ button.icon-link .fa-chevron-down {
 }
 
 @media (max-width: 600px) {
-
     .w3-bar-item,
     .rectangle-button {
         font-size: 18px !important;
@@ -153,35 +126,34 @@ button.icon-link .fa-chevron-down {
     align-items: center;
     margin-top: 10px;
     margin-bottom: 25px;
-    margin-left: 20px;
+    margin-left: 20px; 
     margin-right: 20px;
-    transition: border-color 2s;
+    transition: border-color 1s; 
     transition: transform 1s;
-}
-
+  }
+  
 .contenedor-imagenes img {
-    width: 60px;
-    height: 50px;
-    border: 2px solid black;
-    border-radius: 50%;
-    padding: 5px;
-}
+    width: 50px; 
+    height: 50px; 
+    border: 2px solid black; 
+    border-radius: 50%; 
+    padding: 5px; 
+ }
 
-.contenedor-imagenes img:hover {
+ .contenedor-imagenes img:hover {
     border-color: white;
-    animation: tumbado 0.3s ease forwards;
-}
-
-@keyframes tumbado {
+    animation: tumbado 0.3s ease forwards; 
+  }
+  
+  @keyframes tumbado {
     0% {
-        transform: none;
+      transform: none;
     }
-
     100% {
-        transform: scale(1.2);
+      transform: scale(1.2);
     }
-}
-
+  }
+  
 
 /* Nuevo estilo para el contenedor de la barra lateral */
 /* Agrega esta regla para el estado hover */
@@ -255,7 +227,7 @@ button.icon-link .fa-chevron-down {
 
 
 .noticias-1 {
-
+    
     width: 132px;
     height: 31px;
     color: #EBEBEB;
@@ -316,96 +288,71 @@ button.icon-link .fa-chevron-down {
     background-color: #dc3545 !important;
 }
 
-.links-noticias a {
+.links-noticias a{
     color: #ff3823;
 }
 
 .links-noticias a:hover {
     color: #ff3823;
-    text-decoration: underline;
-    /* Subraya el texto al pasar el ratón */
+    text-decoration: underline; /* Subraya el texto al pasar el ratón */
 }
 
 .noticia {
-    background-color: white;
-    border: 2px solid #ccc;
-    /* Borde alrededor de cada noticia */
-    border-radius: 10px;
-    /* Bordes redondeados */
-    padding: 10px;
-    /* Espacio interno */
-    margin-bottom: 20px;
-    /* Margen inferior para separar noticias */
-    overflow: hidden;
-    /* Para limpiar el float de la imagen */
+    background-color:white;
+    border: 2px solid #ccc; /* Borde alrededor de cada noticia */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px; /* Espacio interno */
+    margin-bottom: 20px; /* Margen inferior para separar noticias */
+    overflow: hidden; /* Para limpiar el float de la imagen */
 }
 
 .noticia h2 {
-    margin-top: 0;
-    /* Elimina el margen superior del título */
+    margin-top: 0; /* Elimina el margen superior del título */
 }
 
-.noticia h2 a {
+.noticia h2 a{
     color: #ff3823;
 }
 
 .noticia img {
-    float: right;
-    /* Mover la imagen a la derecha */
+    float: right; /* Mover la imagen a la derecha */
     max-height: 100%;
-    float: right;
-    /* Mover la imagen a la derecha */
-    margin-left: 10px;
-    /* Espacio entre la imagen y el contenido */
-    width: 280px;
-    /* Ancho de la imagen */
-    border-radius: 5px;
-    /* Bordes redondeados */
+    float: right; /* Mover la imagen a la derecha */
+    margin-left: 10px; /* Espacio entre la imagen y el contenido */
+    width: 280px; /* Ancho de la imagen */
+    border-radius: 5px; /* Bordes redondeados */
 
 }
 
 .noticia p {
-    margin: 0;
-    /* Elimina los márgenes de los párrafos */
-    font-size: 1.1em;
-    /* Tamaño de letra para el contenido de la noticia */
+    margin: 0; /* Elimina los márgenes de los párrafos */
+    font-size: 1.1em; /* Tamaño de letra para el contenido de la noticia */
 }
 
 .noticia p:last-child {
-    font-size: 0.8em;
-    /* Tamaño de letra más pequeño para el autor y la fecha */
-    color: #888;
-    /* Color gris para el autor y la fecha */
+    font-size: 0.8em; /* Tamaño de letra más pequeño para el autor y la fecha */
+    color: #888; /* Color gris para el autor y la fecha */
 }
 
 .noticia .descripcion {
-    text-align: justify;
-    /* Justifica el texto de la descripción */
-    padding-bottom: 5px;
-    /* Espacio inferior para separar la línea de la descripción */
+    text-align: justify; /* Justifica el texto de la descripción */
+    padding-bottom: 5px; /* Espacio inferior para separar la línea de la descripción */
 }
 
 .noticia-info-extra {
-    display: flex;
-    /* Utilizar flexbox */
-    align-items: end;
-    /* Alinear los elementos en la línea base */
-    position: absolute;
-    /* Posicionamiento absoluto */
+    display: flex; /* Utilizar flexbox */
+    align-items: end; /* Alinear los elementos en la línea base */
+    position: absolute; /* Posicionamiento absoluto */
 }
 
 .noticia-info-extra p {
-    display: inline;
-    /* Alinear elementos en la misma línea */
-    font-size: 0.8em;
-    /* Tamaño de letra más pequeño */
-    color: #888;
-    /* Color gris */
+    display: inline; /* Alinear elementos en la misma línea */
+    font-size: 0.8em; /* Tamaño de letra más pequeño */
+    color: #888; /* Color gris */
 }
 
 .noticia-info-extra .noticia-autor::after {
-    content: " - ";
-    /* Agregar el guion como contenido después del autor */
+    content: " - "; /* Agregar el guion como contenido después del autor */
 }
 
 /* Estilos para inicio de sesión */
@@ -452,7 +399,6 @@ button.icon-link .fa-chevron-down {
 #userButton {
     background-color: transparent;
     color: rgb(0, 0, 0);
-    border: none !important;
 }
 
 #dropdownContent-cerrarSesion {
@@ -473,16 +419,14 @@ button.icon-link .fa-chevron-down {
 
 .user-icon:hover {
     color: #ff3823 !important;
-}
+} 
 
 #userDropdown:hover {
-    background-color: #ff3823;
-    /* Mantiene el color de fondo al pasar el ratón */
+    background-color: #ff3823 ; /* Mantiene el color de fondo al pasar el ratón */
 }
 
 #userButton:hover {
-    background-color: transparent;
-    /* Mantiene el color de fondo al pasar el ratón */
+    background-color: transparent; /* Mantiene el color de fondo al pasar el ratón */
     color: #ff3823;
 }
 
@@ -490,17 +434,17 @@ button.icon-link .fa-chevron-down {
 /*CRUD USUARIOS*/
 .tarjeta-agregar-usuarios {
     border-color: #ff3823 !important;
-    margin-top: 30px;
+    margin-top: 50px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
-
 .encabezado-tarjeta-usuarios {
     background-color: #ff9688;
     text-align: center !important;
-    color: black;
+    color: #fff;
     padding: 20px 0;
+    font-weight: bold;
 }
 
 .boton-agregar {
@@ -529,7 +473,7 @@ button.icon-link .fa-chevron-down {
 .boton-actualizar-usuarios {
     background-color: #ff9688 !important;
     color: white;
-
+    
 }
 
 .boton-actualizar-usuarios:hover {
@@ -538,7 +482,7 @@ button.icon-link .fa-chevron-down {
 }
 
 .btn-elliminar i {
-    color: #ff3823;
+    color: #ff3823; 
     font-size: 50px;
 }
 
@@ -551,9 +495,8 @@ button.icon-link .fa-chevron-down {
     background-color: #fff;
     color: #ff3823;
     border-color: #ff3823;
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
-
 .boton-buscar:hover {
     background-color: #f1706270;
     color: #fff;
@@ -561,10 +504,9 @@ button.icon-link .fa-chevron-down {
 }
 
 .buscador {
-    margin-top: 2rem;
+    margin-top: 3rem;
     width: auto;
 }
-
 .w3-dropdown-hover {
     position: relative;
 }
@@ -573,26 +515,20 @@ button.icon-link .fa-chevron-down {
     color: black;
     font-weight: bold;
 }
-
 .navbar-text {
     display: flex;
     align-items: center;
 }
-
 /* VISTA CALENDARIO */
 
 /* Estilos para la fila de navegación */
 .jornada-navegacion {
     display: flex;
-    justify-content: center;
-    /* Centra horizontalmente los elementos */
-    align-items: center;
-    /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
     padding: 10px;
-    margin: 0 auto;
-    /* Margen automático para centrar horizontalmente */
-    width: 61%;
-    /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Margen automático para centrar horizontalmente */
+    width: 61%; /* Ancho máximo del contenedor */
 }
 
 /* Estilos para "Jornada Anterior" */
@@ -604,8 +540,7 @@ button.icon-link .fa-chevron-down {
     background-color: #eaeaea;
     border: 2px solid #fff;
     transition: background-color 0.3s ease, border-color 0.3s ease;
-    margin-right: auto;
-    /* Alinea a la izquierda */
+    margin-right: auto; /* Alinea a la izquierda */
     display: inline-block;
 }
 
@@ -618,8 +553,7 @@ button.icon-link .fa-chevron-down {
     background-color: #eaeaea;
     border: 2px solid #fff;
     transition: background-color 0.3s ease, border-color 0.3s ease;
-    margin-left: auto;
-    /* Alinea a la derecha */
+    margin-left: auto; /* Alinea a la derecha */
     display: inline-block;
 }
 
@@ -633,7 +567,6 @@ button.icon-link .fa-chevron-down {
     border: 2px solid #fff;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-
 .jornada-actual:hover {
     background-color: #cccbcb;
     border-color: #c9c9c9;
@@ -651,15 +584,13 @@ button.icon-link .fa-chevron-down {
 }
 
 .fila-par {
-    background-color: #f8f9fa;
-    /* Color de fondo para filas pares */
+    background-color: #f8f9fa; /* Color de fondo para filas pares */
     vertical-align: middle;
     padding: 10px;
 }
 
 .fila-impar {
-    background-color: #e0e0e0;
-    /* Color de fondo para filas impares */
+    background-color: #e0e0e0; /* Color de fondo para filas impares */
     vertical-align: middle;
 }
 
@@ -708,8 +639,7 @@ button.icon-link .fa-chevron-down {
 }
 
 .barra-progreso {
-    width: 60%;
-    /* Ancho máximo de la barra de progreso */
+    width: 60%; /* Ancho máximo de la barra de progreso */
     height: 20px;
     background-color: #e0e0e0;
     border-radius: 5px;
@@ -721,8 +651,7 @@ button.icon-link .fa-chevron-down {
     height: 100%;
     border-radius: 5px;
     background-color: #ff3823;
-    transition: width 0.3s ease;
-    /* Transición suave al cambiar el ancho */
+    transition: width 0.3s ease; /* Transición suave al cambiar el ancho */
 }
 
 .porcentajeFinal {
@@ -738,30 +667,23 @@ button.icon-link .fa-chevron-down {
 }
 
 .tarjeta-favoritos {
-    border: 2px solid #ff3823;
-    /* Borde rojo de 2px */
-    border-radius: 8px;
-    /* Borde redondeado */
-    padding: 10px;
-    /* Espaciado interno */
-    margin-bottom: 20px;
-    /* Espaciado inferior */
-    position: relative;
-    /* Hace que los elementos posicionados dentro de esta tarjeta sean relativos a ella */
+    border: 2px solid #ff3823; /* Borde rojo de 2px */
+    border-radius: 8px; /* Borde redondeado */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 20px; /* Espaciado inferior */
+    position: relative; /* Hace que los elementos posicionados dentro de esta tarjeta sean relativos a ella */
 }
 
 .tarjeta-favoritos-nombreEquipo {
     font-weight: bold;
     margin-top: 2rem;
 }
-
 .cuerpo-tarjetas-favoritos {
     text-align: center;
 }
-
 .boton-favorito {
-    color: white;
-    background-color: transparent;
+    color: white; 
+    background-color: transparent; 
     border: none;
 }
 
@@ -770,14 +692,14 @@ button.icon-link .fa-chevron-down {
 }
 
 .corazon-lleno {
-    color: red;
+    color: red; 
     font-size: 34px;
     transition: transform 1s ease-in-out;
 }
 
 .corazon-vacio {
-    color: red;
-    border-color: red;
+    color: red; 
+    border-color: red; 
     font-size: 34px;
     transition: transform 1s ease-in-out;
 }
@@ -791,32 +713,22 @@ button.icon-link .fa-chevron-down {
 
 /*Estilos mejorados Calendario*/
 .jumbotron {
-    background-color: #444444 !important;
-    /* Color de fondo rosita */
-    padding: 2.5rem 2rem !important;
-    /* Ajusta el espacio interior del jumbotron */
+    background-color:#444444 !important; /* Color de fondo rosita */
+    padding: 2.5rem 2rem !important; /* Ajusta el espacio interior del jumbotron */
 }
 
 /* Estilo para las opciones del desplegable */
 .boton-seleccionar-equipo {
-    background-color: #f8817b;
-    /* Fondo rosita */
-    color: white;
-    /* Texto blanco */
-    border-color: #ff3823;
-    /* Borde rojizo */
-    font-size: 1rem;
-    /* Tamaño de fuente más grande */
-    padding: 0.5rem 1rem;
-    /* Ajuste de padding para hacer el botón más grande */
-    border-radius: 0.5rem;
-    /* Bordes redondeados */
+    background-color: #f8817b; /* Fondo rosita */
+    color: white; /* Texto blanco */
+    border-color: #ff3823; /* Borde rojizo */
+    font-size: 1rem; /* Tamaño de fuente más grande */
+    padding: 0.5rem 1rem; /* Ajuste de padding para hacer el botón más grande */
+    border-radius: 0.5rem; /* Bordes redondeados */
 }
-
 /* Anular estilos para las opciones del desplegable */
 .boton-seleccionar-equipo option {
-    background-color: white;
-    /* Fondo blanco */
+    background-color: white; /* Fondo blanco */
     color: black;
 }
 
@@ -844,9 +756,8 @@ button.icon-link .fa-chevron-down {
     text-align: center;
     padding: 2rem;
 }
-
 .boton-insertar-usuarios {
-    background-color: #ff4d36 !important;
+    background-color: #ff9688 !important;
     color: white !important;
 }
 
@@ -855,13 +766,12 @@ button.icon-link .fa-chevron-down {
 }
 
 #pagination-links {
-    color: #ff3823 !important;
+    color: #ff3823 !important; 
     margin-bottom: 1rem;
 }
 
 #pagination-links a {
-    color: black;
-    /* Cambiar el color del texto a negro */
+    color: black; /* Cambiar el color del texto a negro */
 }
 
 .boton-crear-jugador,
@@ -885,12 +795,11 @@ button.icon-link .fa-chevron-down {
 /*Mejora estilos AdminPartidos*/
 .row-crearPartido {
     align-items: center !important;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; 
 }
 
 .bg-rojo-pastel {
-    background-color: #f1f1f1;
-    /* Puedes ajustar este valor según el tono de rojo pastel que desees */
+    background-color: #f1f1f1; /* Puedes ajustar este valor según el tono de rojo pastel que desees */
 }
 
 /* ESTILOS PERFIL USUARIO */
@@ -904,7 +813,7 @@ button.icon-link .fa-chevron-down {
 
 .tarjeta-editar-perfil {
     margin: 100px auto;
-    width: 60rem;
+    width: 50rem;
     border-color: #ff3823 !important;
     margin-top: 50px;
     border-radius: 10px;
@@ -932,17 +841,14 @@ button.icon-link .fa-chevron-down {
 /* ESTILOS PANEL ADMINISTRADOR */
 .circle-container-wrapper {
     width: 100%;
-    padding: 0 20px;
-    /* Espacio a los lados */
+    padding: 0 20px; /* Espacio a los lados */
     display: flex;
-    justify-content: center;
-    /* Centrar el contenedor dentro del wrapper */
+    justify-content: center; /* Centrar el contenedor dentro del wrapper */
 }
 
 .circle-container {
     width: 80%;
-    max-width: 500px;
-    /* Limitar el ancho máximo del contenedor */
+    max-width: 500px; /* Limitar el ancho máximo del contenedor */
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -964,8 +870,7 @@ button.icon-link .fa-chevron-down {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-basis: calc(50% - 20px);
-    /* Para que los círculos ocupen la mitad del contenedor con espacio entre ellos */
+    flex-basis: calc(50% - 20px); /* Para que los círculos ocupen la mitad del contenedor con espacio entre ellos */
 }
 
 .circle:hover {
@@ -1008,9 +913,8 @@ button.icon-link .fa-chevron-down {
     width: 250px;
     position: fixed;
     top: 0;
-    left: -250px;
-    /* Initially hidden */
-    background-color: #ff3823;
+    left: -250px; /* Initially hidden */
+    background-color: #ff3d36;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -1054,10 +958,8 @@ button.icon-link .fa-chevron-down {
     border: 0px;
     border-color: 0px;
     position: absolute;
-    top: 10px;
-    /* Ajuste para mantener el botón en la parte superior */
-    left: 6px;
-    /* Ajuste para mantener el botón en la parte izquierda */
+    top: 10px; /* Ajuste para mantener el botón en la parte superior */
+    left: 6px; /* Ajuste para mantener el botón en la parte izquierda */
 }
 
 .openbtn:hover {
@@ -1092,24 +994,21 @@ button.icon-link .fa-chevron-down {
 }
 
 .title-logo {
-    border: 2px solid #ff3823;
-    margin-left: 0px;
-    /* Distancia fija del menú de la hamburguesa */
+    border: 2px solid red;
+    margin-left: 0px; /* Distancia fija del menú de la hamburguesa */
     margin-right: 20px;
-    max-width: 100px;
-    /* Tamaño máximo para logo */
+    max-width: 100px; /* Tamaño máximo para logo */
     flex-shrink: 0;
 }
 
 .navbar {
-    background-color: #ff3823;
+    background-color: #ff3d36;
     transition: all 0.3s ease;
     align-items: center;
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 1rem;
-    flex-wrap: wrap;
-    /* Para permitir que los elementos se muevan a la siguiente línea */
+    flex-wrap: wrap; /* Para permitir que los elementos se muevan a la siguiente línea */
 }
 
 .navbar-brand {
@@ -1148,15 +1047,16 @@ button.icon-link .fa-chevron-down {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0,0,0,0.5);
     overflow-x: hidden;
     transition: 0.5s;
     z-index: 1;
 }
 
 
-.common-btn-style:before {
 
+.common-btn-style:before {
+    
     transition: 0.5s all ease;
     position: absolute;
     top: 0;
@@ -1169,9 +1069,10 @@ button.icon-link .fa-chevron-down {
     z-index: -1;
 }
 
-.common-btn-style:hover:before,
-.common-btn-style:focus:before {
 
+
+.common-btn-style:hover:before, .common-btn-style:focus:before {
+    
     transition: 0.5s all ease;
     left: 0;
     right: 0;
@@ -1182,53 +1083,3 @@ button.icon-link .fa-chevron-down {
 .common-btn-style:active {
     transform: scale(0.9);
 }
-
-
-.perfil-img {
-    max-width: 200px;
-    /* Ajusta este valor según tus preferencias */
-    max-height: 200px;
-}
-
-.tarjetas-fav {
-    width: 100%;
-    background-color: white;
-    color: #ff3823;
-}
-
-.boton-crear-hilo {
-    background-color: #ff6961 !important;
-    color: white !important;
-    border: #ff3823;
-    font-size: 16px;
-}
-
-.boton-crear-hilo:hover {
-    color: black !important;
-}
-
-
-
-.proximos-partidos {
-    max-height: 400px; /* Ajusta según sea necesario /
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    padding: 10px;
-    background-color: #fff; / Fondo blanco para mejor visibilidad */
-}
-
-.partido {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.partido:last-child {
-    border-bottom: none;
-}
-
-.partido img {
-    width: 30px;
-    height: auto;
-    margin-right: 10px;
-}
-
