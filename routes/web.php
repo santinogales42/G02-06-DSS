@@ -171,6 +171,7 @@ Route::delete('/equipos/{equipo}/favorito', [EquipoController::class, 'eliminarF
 //Rutas noticias
 
 
+// Rutas traducción
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
