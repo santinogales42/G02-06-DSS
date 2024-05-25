@@ -53,10 +53,10 @@
         .common-btn-style:before {
             transition: 0.5s all ease;
             position: absolute;
-            top: 0;
+            top: 0%;
             left: 50%;
             right: 50%;
-            bottom: 0;
+            bottom: 0%;
             opacity: 0;
             content: '';
             background-color: white;
@@ -118,11 +118,28 @@
                 padding: 0.5em 1em;
                 height: auto;
             }
+            
+            #userButton {
+                font-size: 12px;
+                text-transform: uppercase;
+                font-weight: bold;
+                background-color: transparent;
+                color: rgb(0, 0, 0);
+                border: none !important;
+            }
 
             .dropdown-admin .dropdown-toggle {
                 font-size: 12px;
                 padding: 0.5em 1em;
                 height: auto;
+            }
+
+            .w3-bar-item,
+            .rectangle-button {
+                font-size: 12px !important;
+                padding: 12px 20px !important;
+                color: white !important;
+                font-weight: bold !important; 
             }
         }
 
@@ -142,6 +159,15 @@
                 height: auto;
             }
 
+            #userButton {
+                font-size: 10px;
+                text-transform: uppercase;
+                font-weight: bold;
+                background-color: transparent;
+                color: rgb(0, 0, 0);
+                border: none !important;
+            }
+
             .common-btn-style {
                 font-size: 10px;
                 padding: 0.4em 0.8em;
@@ -152,6 +178,14 @@
                 font-size: 10px;
                 padding: 0.4em 0.8em;
                 height: auto;
+            }
+
+            .w3-bar-item,
+            .rectangle-button {
+                font-size: 10px !important;
+                padding: 12px 20px !important;
+                color: white !important;
+                font-weight: bold !important; 
             }
         }
 
@@ -170,6 +204,15 @@
                 height: auto;
             }
 
+            #userButton {
+                font-size: 8px;
+                text-transform: uppercase;
+                font-weight: bold;
+                background-color: transparent;
+                color: rgb(0, 0, 0);
+                border: none !important;
+            }
+
             .common-btn-style {
                 font-size: 8px;
                 padding: 0.3em 0.6em;
@@ -180,6 +223,14 @@
                 font-size: 8px;
                 padding: 0.3em 0.6em;
                 height: auto;
+            }
+
+            .w3-bar-item,
+            .rectangle-button {
+                font-size: 8px !important;
+                padding: 12px 20px !important;
+                color: white !important;
+                font-weight: bold !important; 
             }
         }
     </style>
@@ -250,8 +301,8 @@
                 <a href="{{ route('contacto') }}" style="padding: 1em; margin-top: 5px;" class="btn common-btn-style ml-3">{{ __('home.contact_us') }}</a>
                 @if($isUserLoggedIn)
                 <div class="navbar-text d-flex align-items-center dropdown-admin">
-                    <div class="dropdown" id="userDropdown">
-                        <button class="btn common-btn-style dropdown-toggle" id="userButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="dropdown common-btn-style" id="userDropdown">
+                        <button class="btn dropdown-toggle" id="userButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span>{{ Session::get('userName') }}</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
