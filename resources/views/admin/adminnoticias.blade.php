@@ -253,6 +253,9 @@ function openEditModal(noticiaId) {
         document.getElementById('edit_contenido').value = data.contenido || '';
         document.getElementById('edit_fecha').value = data.fecha || '';
         document.getElementById('edit_autor').value = data.autor || '';
+        document.getElementById('edit_enlace_de_la_foto').value = data.enlace_de_la_foto || '';
+        document.getElementById('edit_link_de_la_web').value = data.link_de_la_web || '';
+        document.getElementById('equipo_id').value = data.equipo_id || '';
         $('#editNoticiaModal').modal('show');
     })
     .catch(error => console.error('Error:', error));

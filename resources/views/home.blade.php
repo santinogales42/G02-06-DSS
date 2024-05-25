@@ -7,7 +7,7 @@
 <div class="container">
     <div class="jumbotron jumbotron-fluid">
         <div class="container-fluid">
-            <h1 class="display-4 font-weight-bold text-center" style="font-size: 2rem; color:white;">Inicio</h1>
+            <h1 class="display-4 font-weight-bold text-center" style="font-size: 2rem; color:white;">{{ __('home.home') }}</h1>
         </div>
     </div>
     
@@ -29,7 +29,7 @@
 
     <div class="row mt-4">
         <div class="col-md-12 text-center">
-            <h2 class="mt-4 font-weight-bold">Los tres mejores</h2>
+            <h2 class="mt-4 font-weight-bold">{{ __('home.three_best') }}</h2>
         </div>
     </div>
 
@@ -62,7 +62,7 @@
 
     <div class="row mt-4">
     <div class="col-md-12 text-center">
-        <h2 class="mt-4 mb-4 font-weight-bold">Próximos Partidos</h2>
+        <h2 class="mt-4 mb-4 font-weight-bold">{{ __('home.next_matches') }}</h2>
         <!-- Centrar tanto el texto como el carrusel -->
         <div class="d-flex justify-content-center align-items-center">
             <div id="partidos-carousel" class="slick-carousel-small" style="max-width:600px;">
@@ -152,9 +152,37 @@
         font-weight: bold;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
         font-size: 50px;
-        width:900px;
+        width: 900px;
         background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5)); 
         padding: 10px; 
+    }
+
+    @media (max-width: 992px) {
+        .card-title {
+            font-size: 40px;
+            width: 700px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .card-title {
+            font-size: 30px;
+            width: 500px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card-title {
+            font-size: 20px;
+            width: 300px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .card-title {
+            font-size: 16px;
+            width: 250px;
+        }
     }
 
     #partidos-carousel .card {
@@ -162,26 +190,15 @@
     }
     
     .card{
-    	border:none;
-    	}
+    	border: none;
+    }
     	
-    
-	.slick-prev:before,
-	    .slick-next:before {
+    .slick-prev:before,
+    .slick-next:before {
 		color: black; /* Cambia el color de las flechas a negro */
-	    }
-
-	
-.card-title {
-        max-width: 100%; 
-        white-space: nowrap; 
-        overflow: hidden; 
-        text-overflow: ellipsis;
     }
 </style>
-
 
 <a href="{{ url('lang/en') }}">English</a> | <a href="{{ url('lang/es') }}">Español</a>
 
 @endsection
-
