@@ -186,35 +186,7 @@
             width: 250px;
         }
     }
-
-    @media (max-width: 992px) {
-        .card-title {
-            font-size: 40px;
-            width: 700px;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .card-title {
-            font-size: 30px;
-            width: 500px;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .card-title {
-            font-size: 20px;
-            width: 300px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .card-title {
-            font-size: 16px;
-            width: 250px;
-        }
-    }
-
+    
     #partidos-carousel .card {
         width: 300px; 
     }
