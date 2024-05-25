@@ -10,6 +10,9 @@ return [
     'author' => 'Author',
     'date' => 'Date',
     'loading_data' => 'Loading data...',
+    'home' => 'Home',
+    'three_best' => 'The three best teams',
+    'next_matches' => 'Next matches',
 
     'news' => 'News',
     'homepage' => 'Homepage',

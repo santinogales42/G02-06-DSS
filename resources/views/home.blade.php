@@ -7,7 +7,7 @@
 <div class="container">
     <div class="jumbotron jumbotron-fluid">
         <div class="container-fluid">
-            <h1 class="display-4 font-weight-bold text-center" style="font-size: 2rem; color:white;">Inicio</h1>
+            <h1 class="display-4 font-weight-bold text-center" style="font-size: 2rem; color:white;">{{ __('home.home') }}</h1>
         </div>
     </div>
 
@@ -29,7 +29,7 @@
 
     <div class="row mt-4">
         <div class="col-md-12 text-center">
-            <h2 class="mt-4 font-weight-bold">Los tres mejores</h2>
+            <h2 class="mt-4 font-weight-bold">{{ __('home.three_best') }}</h2>
         </div>
     </div>
 
@@ -61,12 +61,12 @@
     </div>
 
     <div class="row mt-4">
-        <div class="col-md-12 text-center">
-            <h2 class="mt-4 mb-4 font-weight-bold">Próximos Partidos</h2>
-            <!-- Centrar tanto el texto como el carrusel -->
-            <div class="d-flex justify-content-center align-items-center">
-                <div id="partidos-carousel" class="slick-carousel-small" style="max-width:600px;">
-                    @foreach ($partidos as $partido)
+    <div class="col-md-12 text-center">
+        <h2 class="mt-4 mb-4 font-weight-bold">{{ __('home.next_matches') }}</h2>
+        <!-- Centrar tanto el texto como el carrusel -->
+        <div class="d-flex justify-content-center align-items-center">
+            <div id="partidos-carousel" class="slick-carousel-small" style="max-width:600px;">
+                @foreach ($partidos as $partido)
                     @php
                     $nombreLimpioLocal = Str::ascii($partido->equipoLocal->nombre);
                     $nombreArchivoLocal = strtolower(str_replace(' ', '', $nombreLimpioLocal)) . '.png';
@@ -157,32 +157,50 @@
             padding: 10px;
         }
 
-        #partidos-carousel .card {
+    
+
+    @media (max-width: 992px) {
+        .card-title {
+            font-size: 40px;
+            width: 700px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .card-title {
+            font-size: 30px;
+            width: 500px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card-title {
+            font-size: 20px;
             width: 300px;
         }
+    }
 
-        .card {
-            border: none;
-        }
-
-
-        .slick-prev:before,
-        .slick-next:before {
-            color: black;
-            /* Cambia el color de las flechas a negro */
-        }
-
-
+    @media (max-width: 480px) {
         .card-title {
-            max-width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 16px;
+            width: 250px;
         }
-    </style>
-    
-    <div class="red-links">
-        <a href="{{ url('lang/en') }}">English</a> | <a href="{{ url('lang/es') }}">Español</a>
-    </div>
+    }
 
-    @endsection
+    #partidos-carousel .card {
+        width: 300px; 
+    }
+    
+    .card{
+    	border: none;
+    }
+    	
+    .slick-prev:before,
+    .slick-next:before {
+		color: black; /* Cambia el color de las flechas a negro */
+    }
+</style>
+
+<a href="{{ url('lang/en') }}">English</a> | <a href="{{ url('lang/es') }}">Español</a>
+
+@endsection

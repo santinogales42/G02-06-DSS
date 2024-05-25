@@ -10,6 +10,9 @@ return [
     'author' => 'Autor',
     'date' => 'Fecha',
     'loading_data' => 'Cargando datos...',
+    'home' => 'Inicio',
+    'three_best' => 'Los tres mejores equipos',
+    'next_matches' => 'Próximos partidos',
 
     'news' => 'Noticias',
     'homepage' => 'Inicio',
