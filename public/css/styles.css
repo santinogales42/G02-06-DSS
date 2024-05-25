@@ -57,6 +57,7 @@
     color: #ff3823 !important;
     background-color: white;
     display: block;
+    padding: 0 15px;
 }
 
 .dropdownButton:hover {
@@ -68,7 +69,7 @@
     background-color: #ff3823; /* Fondo del color de la página */
     border: 2px solid white; /* Bordes blancos */
     border-radius: 15px; /* Bordes redondeados */
-    padding: 10px; /* Espaciado interno */
+    padding: 1px; /* Espaciado interno */
     margin-bottom: 10px; /* Aumenta el espacio entre elementos */
     color: white; /* Texto blanco para mayor legibilidad */
     text-align: center; /* Centrado de texto */
@@ -92,9 +93,10 @@ button.icon-link .fa-chevron-down {
 /* Continuación de los estilos existentes */
 .w3-bar-item,
 .rectangle-button {
-    font-size: 20px !important;
+    font-size: 15px !important;
     padding: 12px 20px !important;
     color: white !important;
+    font-weight: bold !important; 
 }
 
 .w3-bar-item:hover,
@@ -375,7 +377,7 @@ button.icon-link .fa-chevron-down {
 .boton-inicio,
 .boton-registro,
 .boton-cancelar {
-    background-color: #fff;
+    background-color: #ffffff;
     color: #ff3823;
     border-color: #ff3823;
 }
@@ -384,7 +386,7 @@ button.icon-link .fa-chevron-down {
 .boton-registro:hover,
 .boton-cancelar:hover {
     background-color: #f1706270;
-    color: #fff;
+    color: #ffffff;
     border-color: #ff3823;
 }
 
@@ -394,9 +396,14 @@ button.icon-link .fa-chevron-down {
     color: black;
     margin-left: 15px;
     margin-top: 5px;
+    border: 2px solid black;
+    border-radius: 15px;
 }
 
 #userButton {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
     background-color: transparent;
     color: rgb(0, 0, 0);
     border: none !important;
@@ -404,6 +411,8 @@ button.icon-link .fa-chevron-down {
 
 #dropdownContent-cerrarSesion {
     background-color: #ff3823;
+    border: 2px solid black;
+    margin-top: 10px;
 }
 
 #logoutButton {
@@ -443,7 +452,7 @@ button.icon-link .fa-chevron-down {
 .encabezado-tarjeta-usuarios {
     background-color: #ff9688;
     text-align: center !important;
-    color: #fff;
+    color: #ffffff;
     padding: 20px 0;
     font-weight: bold;
 }
@@ -926,7 +935,7 @@ button.icon-link .fa-chevron-down {
     padding: 10px 15px;
     text-decoration: none;
     font-size: 18px;
-    color: white;
+    color: rgb(255, 255, 255);
     display: block;
     transition: 0.3s;
 }
@@ -954,7 +963,7 @@ button.icon-link .fa-chevron-down {
     width: 40px;
     cursor: pointer;
     background-color: transparent;
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 10px 15px;
     border: 0px;
     border-color: 0px;
@@ -1053,38 +1062,6 @@ button.icon-link .fa-chevron-down {
     transition: 0.5s;
     z-index: 1;
 }
-
-
-
-.common-btn-style:before {
-    
-    transition: 0.5s all ease;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    right: 50%;
-    bottom: 0;
-    opacity: 0;
-    content: '';
-    background-color: white;
-    z-index: -1;
-}
-
-
-
-.common-btn-style:hover:before, .common-btn-style:focus:before {
-    
-    transition: 0.5s all ease;
-    left: 0;
-    right: 0;
-    opacity: 1;
-    border-radius: 12px;
-}
-
-.common-btn-style:active {
-    transform: scale(0.9);
-}
-
 
 .perfil-img {
     max-width: 200px;
