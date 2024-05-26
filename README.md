@@ -19,7 +19,7 @@ La BBDD, los Mockups y las Presentaciones Audio se encuentran en la carpeta [BBD
 
 [BBDD](BBDD/BBDD-DSS.pdf)
 
-[Mockups](BBDD/Mockups)
+[Mockups](BBDD/mockups.pdf)
 
 [Presentación Audios](https://docs.google.com/presentation/d/1rb4mBCH1AOJ6H6mFgC_oY5Yt8W5-Zn9qcK0PIKaXZI4/edit?usp=sharing)
 
